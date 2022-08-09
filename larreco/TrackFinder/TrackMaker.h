@@ -16,8 +16,8 @@ namespace art {
 #include "lardataobj/RecoBase/Trajectory.h"
 #include "lardataobj/RecoBase/TrajectoryPointFlags.h"
 
-#include <stdexcept>
 #include <memory>
+#include <stdexcept>
 #include <utility>
 #include <vector>
 

@@ -1,6 +1,6 @@
-#include "larreco/HitFinder/HitFinderTools/IPeakFitter.h"
-#include "larreco/RecoAlg/GausFitCache.h" // hit::GausFitCache
 #include "larcore/CoreUtils/ServiceUtil.h"
+#include "larreco/HitFinder/HitFinderTools/IPeakFitter.h"
+#include "larreco/RecoAlg/GausFitCache.h"      // hit::GausFitCache
 #include "larvecutils/MarqFitAlg/MarqFitAlg.h" //marqfit functions
 
 #include "art/Utilities/ToolMacros.h"

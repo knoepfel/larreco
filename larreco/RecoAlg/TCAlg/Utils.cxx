@@ -35,13 +35,21 @@
 #include <utility>
 #include <vector>
 
-bool tca::detail::valsDecreasing (const SortEntry& c1, const SortEntry& c2) { return c1.val > c2.val;}
-bool tca::detail::valsIncreasing (const SortEntry& c1, const SortEntry& c2) { return c1.val < c2.val;}
+bool
+tca::detail::valsDecreasing(const SortEntry& c1, const SortEntry& c2)
+{
+  return c1.val > c2.val;
+}
+bool
+tca::detail::valsIncreasing(const SortEntry& c1, const SortEntry& c2)
+{
+  return c1.val < c2.val;
+}
 
 namespace tca {
 
   using namespace detail;
-  
+
   // dressed muons
   void
   MakeHaloTj(TCSlice& slc, Trajectory& muTj, bool prt)

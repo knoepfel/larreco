@@ -13,7 +13,6 @@
 #include "canvas/Utilities/Exception.h"
 #include "messagefacility/MessageLogger/MessageLogger.h"
 
-#include "larreco/RecoAlg/SpacePointAlg.h"
 #include "larcore/Geometry/Geometry.h"
 #include "larcorealg/Geometry/PlaneGeo.h"
 #include "lardata/DetectorInfoServices/DetectorPropertiesService.h"
@@ -21,6 +20,7 @@
 #include "lardataobj/RecoBase/Seed.h"
 #include "lardataobj/RecoBase/SpacePoint.h"
 #include "larreco/RecoAlg/SeedFinderAlgorithm.h"
+#include "larreco/RecoAlg/SpacePointAlg.h"
 
 namespace trkf {
 

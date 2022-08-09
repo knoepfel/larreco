@@ -29,8 +29,8 @@
 
 #include "canvas/Persistency/Common/FindManyP.h"
 
-#include "larcore/Geometry/Geometry.h"
 #include "larcore/CoreUtils/ServiceUtil.h"
+#include "larcore/Geometry/Geometry.h"
 #include "lardata/DetectorInfoServices/DetectorClocksService.h"
 #include "lardataobj/RecoBase/Cluster.h"
 #include "lardataobj/RecoBase/Hit.h"

@@ -9,11 +9,11 @@
 #include "fhiclcpp/types/Name.h"
 #include "fhiclcpp/types/Table.h"
 
-#include "larreco/RecoAlg/VertexWrapper.h"
 #include "lardata/RecoObjects/TrackStatePropagator.h"
 #include "lardataobj/RecoBase/PFParticle.h"
 #include "lardataobj/RecoBase/TrackingTypes.h"
 #include "lardataobj/RecoBase/VertexAssnMeta.h"
+#include "larreco/RecoAlg/VertexWrapper.h"
 
 namespace detinfo {
   class DetectorPropertiesData;

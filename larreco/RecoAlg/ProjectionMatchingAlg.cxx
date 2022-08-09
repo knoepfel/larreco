@@ -4,7 +4,6 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #include "larreco/RecoAlg/ProjectionMatchingAlg.h"
-#include "larreco/RecoAlg/ImagePatternAlgs/DataProvider/DataProviderAlg.h"
 #include "larcore/CoreUtils/ServiceUtil.h" // lar::providerFrom<>()
 #include "larcore/Geometry/Geometry.h"
 #include "larcorealg/CoreUtils/NumericUtils.h" // util::absDiff()
@@ -12,6 +11,7 @@
 #include "lardata/DetectorInfoServices/DetectorPropertiesService.h"
 #include "larevt/CalibrationDBI/Interface/ChannelStatusProvider.h"
 #include "larevt/CalibrationDBI/Interface/ChannelStatusService.h"
+#include "larreco/RecoAlg/ImagePatternAlgs/DataProvider/DataProviderAlg.h"
 #include "larreco/RecoAlg/PMAlg/PmaSegment3D.h"
 
 #include "messagefacility/MessageLogger/MessageLogger.h"

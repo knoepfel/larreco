@@ -45,8 +45,13 @@ namespace calo {
                            double const pitch,
                            double const T0) const
   {
-    return dEdx_AMP(
-      clock_data, det_prop, hit.PeakAmplitude() / pitch, hit.PeakTime(), hit.WireID().Plane, T0, det_prop.Efield());
+    return dEdx_AMP(clock_data,
+                    det_prop,
+                    hit.PeakAmplitude() / pitch,
+                    hit.PeakTime(),
+                    hit.WireID().Plane,
+                    T0,
+                    det_prop.Efield());
   }
 
   ///\todo The plane argument should really be for a view instead
@@ -89,8 +94,13 @@ namespace calo {
                            double const T0,
                            double const EField) const
   {
-    return dEdx_AMP(
-      clock_data, det_prop, hit.PeakAmplitude() / pitch, hit.PeakTime(), hit.WireID().Plane, T0, EField);
+    return dEdx_AMP(clock_data,
+                    det_prop,
+                    hit.PeakAmplitude() / pitch,
+                    hit.PeakTime(),
+                    hit.WireID().Plane,
+                    T0,
+                    EField);
   }
 
   ///\todo The plane argument should really be for a view instead
@@ -134,8 +144,13 @@ namespace calo {
                             double const pitch,
                             double const T0) const
   {
-    return dEdx_AREA(
-      clock_data, det_prop, hit.Integral() / pitch, hit.PeakTime(), hit.WireID().Plane, T0, det_prop.Efield());
+    return dEdx_AREA(clock_data,
+                     det_prop,
+                     hit.Integral() / pitch,
+                     hit.PeakTime(),
+                     hit.WireID().Plane,
+                     T0,
+                     det_prop.Efield());
   }
 
   // ----------------------------------------------------------------------------------//

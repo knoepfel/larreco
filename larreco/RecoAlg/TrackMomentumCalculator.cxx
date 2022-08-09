@@ -2,8 +2,8 @@
 //
 // \author sowjanyag@phys.ksu.edu
 
-#include "cetlib/pow.h"
 #include "larreco/RecoAlg/TrackMomentumCalculator.h"
+#include "cetlib/pow.h"
 #include "messagefacility/MessageLogger/MessageLogger.h"
 
 #include <array>
@@ -38,13 +38,13 @@ using std::endl;
 
 namespace {
 
-  constexpr auto range_gramper_cm()
+  constexpr auto
+  range_gramper_cm()
   {
-    std::array<float, 29> Range_grampercm{{
-      9.833E-1, 1.786E0, 3.321E0, 6.598E0, 1.058E1, 3.084E1, 4.250E1, 6.732E1,
-      1.063E2,  1.725E2, 2.385E2, 4.934E2, 6.163E2, 8.552E2, 1.202E3, 1.758E3,
-      2.297E3,  4.359E3, 5.354E3, 7.298E3, 1.013E4, 1.469E4, 1.910E4, 3.558E4,
-      4.326E4,  5.768E4, 7.734E4, 1.060E5, 1.307E5}};
+    std::array<float, 29> Range_grampercm{
+      {9.833E-1, 1.786E0, 3.321E0, 6.598E0, 1.058E1, 3.084E1, 4.250E1, 6.732E1, 1.063E2, 1.725E2,
+       2.385E2,  4.934E2, 6.163E2, 8.552E2, 1.202E3, 1.758E3, 2.297E3, 4.359E3, 5.354E3, 7.298E3,
+       1.013E4,  1.469E4, 1.910E4, 3.558E4, 4.326E4, 5.768E4, 7.734E4, 1.060E5, 1.307E5}};
     for (float& value : Range_grampercm) {
       value /= 1.396; // convert to cm
     }
@@ -52,13 +52,12 @@ namespace {
   }
 
   constexpr auto Range_grampercm = range_gramper_cm();
-  constexpr std::array<float, 29> KE_MeV{{
-    10,    14,    20,    30,    40,     80,     100,    140,    200,   300,
-    400,   800,   1000,  1400,  2000,   3000,   4000,   8000,   10000, 14000,
-    20000, 30000, 40000, 80000, 100000, 140000, 200000, 300000, 400000}};
+  constexpr std::array<float, 29> KE_MeV{
+    {10,    14,    20,    30,    40,     80,     100,    140,    200,   300,
+     400,   800,   1000,  1400,  2000,   3000,   4000,   8000,   10000, 14000,
+     20000, 30000, 40000, 80000, 100000, 140000, 200000, 300000, 400000}};
   TGraph const KEvsR{29, Range_grampercm.data(), KE_MeV.data()};
   TSpline3 const KEvsR_spline3{"KEvsRS", &KEvsR};
-
 
   TVector3 const basex{1, 0, 0};
   TVector3 const basey{0, 1, 0};
@@ -70,9 +69,7 @@ namespace {
     explicit FcnWrapper(std::vector<double>&& xmeas,
                         std::vector<double>&& ymeas,
                         std::vector<double>&& eymeas)
-      : xmeas_{xmeas}
-      , ymeas_{ymeas}
-      , eymeas_{eymeas}
+      : xmeas_{xmeas}, ymeas_{ymeas}, eymeas_{eymeas}
     {}
 
     double
@@ -101,8 +98,7 @@ namespace {
         double const l0 = xx / rad_length;
         double res1 = 0.0;
 
-        if (xx > 0 && p > 0)
-          res1 = (13.6 / p) * std::sqrt(l0) * (1.0 + 0.038 * std::log(l0));
+        if (xx > 0 && p > 0) res1 = (13.6 / p) * std::sqrt(l0) * (1.0 + 0.038 * std::log(l0));
 
         res1 = std::sqrt(res1 * res1 + theta0 * theta0);
 
@@ -130,10 +126,8 @@ namespace {
 
 namespace trkf {
 
-  TrackMomentumCalculator::TrackMomentumCalculator(double const min,
-                                                   double const max)
-    : minLength{min}
-    , maxLength{max}
+  TrackMomentumCalculator::TrackMomentumCalculator(double const min, double const max)
+    : minLength{min}, maxLength{max}
   {
     for (int i = 1; i <= n_steps; i++) {
       steps.push_back(steps_size * i);
@@ -205,8 +199,7 @@ namespace trkf {
     ///////////////////////////////////////////////////////////////////////////
 
     if (trkrange < 0 || std::isnan(trkrange)) {
-      mf::LogError("TrackMomentumCalculator")
-        << "Invalid track range " << trkrange << " return -1";
+      mf::LogError("TrackMomentumCalculator") << "Invalid track range " << trkrange << " return -1";
       return -1.;
     }
 
@@ -216,21 +209,21 @@ namespace trkf {
     if (abs(pdg) == 13) {
       M = Muon_M;
       KE = KEvsR_spline3.Eval(trkrange);
-    } else if (abs(pdg) == 2212) {
+    }
+    else if (abs(pdg) == 2212) {
       M = Proton_M;
       if (trkrange > 0 && trkrange <= 80)
         KE = 29.9317 * std::pow(trkrange, 0.586304);
       else if (trkrange > 80 && trkrange <= 3.022E3)
-        KE =
-          149.904 + (3.34146 * trkrange) + (-0.00318856 * trkrange * trkrange) +
-          (4.34587E-6 * trkrange * trkrange * trkrange) +
-          (-3.18146E-9 * trkrange * trkrange * trkrange * trkrange) +
-          (1.17854E-12 * trkrange * trkrange * trkrange * trkrange * trkrange) +
-          (-1.71763E-16 * trkrange * trkrange * trkrange * trkrange * trkrange *
-           trkrange);
+        KE = 149.904 + (3.34146 * trkrange) + (-0.00318856 * trkrange * trkrange) +
+             (4.34587E-6 * trkrange * trkrange * trkrange) +
+             (-3.18146E-9 * trkrange * trkrange * trkrange * trkrange) +
+             (1.17854E-12 * trkrange * trkrange * trkrange * trkrange * trkrange) +
+             (-1.71763E-16 * trkrange * trkrange * trkrange * trkrange * trkrange * trkrange);
       else
         KE = -999;
-    } else
+    }
+    else
       KE = -999;
 
     if (KE < 0)
@@ -250,8 +243,7 @@ namespace trkf {
   // email: kalousis@vt.edu
 
   double
-  TrackMomentumCalculator::GetMomentumMultiScatterLLHD(
-    const art::Ptr<recob::Track>& trk)
+  TrackMomentumCalculator::GetMomentumMultiScatterLLHD(const art::Ptr<recob::Track>& trk)
   {
     std::vector<float> recoX;
     std::vector<float> recoY;
@@ -266,32 +258,26 @@ namespace trkf {
       recoZ.push_back(pos.Z());
     }
 
-    if (recoX.size() < 2)
-      return -1.0;
+    if (recoX.size() < 2) return -1.0;
 
-    if (!plotRecoTracks_(recoX, recoY, recoZ))
-      return -1.0;
+    if (!plotRecoTracks_(recoX, recoY, recoZ)) return -1.0;
 
     constexpr double seg_size{10.};
 
     auto const segments = getSegTracks_(recoX, recoY, recoZ, seg_size);
-    if (!segments.has_value())
-      return -1.0;
+    if (!segments.has_value()) return -1.0;
 
     auto const seg_steps = segments->x.size();
-    if (seg_steps < 2)
-      return -1;
+    if (seg_steps < 2) return -1;
 
     double const recoL = segments->L.at(seg_steps - 1);
-    if (recoL < minLength || recoL > maxLength)
-      return -1;
+    if (recoL < minLength || recoL > maxLength) return -1;
 
     std::vector<float> dEi;
     std::vector<float> dEj;
     std::vector<float> dthij;
     std::vector<float> ind;
-    if (getDeltaThetaij_(dEi, dEj, dthij, ind, *segments, seg_size) != 0)
-      return -1.0;
+    if (getDeltaThetaij_(dEi, dEj, dthij, ind, *segments, seg_size) != 0) return -1.0;
 
     double logL = 1e+16;
     double bf = -666.0; // double errs = -666.0;
@@ -319,8 +305,7 @@ namespace trkf {
   }
 
   TVector3
-  TrackMomentumCalculator::GetMultiScatterStartingPoint(
-    const art::Ptr<recob::Track>& trk)
+  TrackMomentumCalculator::GetMultiScatterStartingPoint(const art::Ptr<recob::Track>& trk)
   {
     double const LLHDp = GetMuMultiScatterLLHD3(trk, true);
     double const LLHDm = GetMuMultiScatterLLHD3(trk, false);
@@ -328,7 +313,8 @@ namespace trkf {
     if (LLHDp != -1 && LLHDm != -1 && LLHDp > LLHDm) {
       int const n_points = trk->NumberTrajectoryPoints();
       return trk->LocationAtPoint<TVector3>(n_points - 1);
-    } else {
+    }
+    else {
       return trk->LocationAtPoint<TVector3>(0);
     }
 
@@ -337,9 +323,7 @@ namespace trkf {
   }
 
   double
-  TrackMomentumCalculator::GetMuMultiScatterLLHD3(
-    art::Ptr<recob::Track> const& trk,
-    bool const dir)
+  TrackMomentumCalculator::GetMuMultiScatterLLHD3(art::Ptr<recob::Track> const& trk, bool const dir)
   {
     std::vector<float> recoX;
     std::vector<float> recoY;
@@ -354,31 +338,25 @@ namespace trkf {
       recoZ.push_back(pos.Z());
     }
 
-    if (recoX.size() < 2)
-      return -1.0;
+    if (recoX.size() < 2) return -1.0;
 
-    if (!plotRecoTracks_(recoX, recoY, recoZ))
-      return -1.0;
+    if (!plotRecoTracks_(recoX, recoY, recoZ)) return -1.0;
 
     constexpr double seg_size{5.0};
     auto const segments = getSegTracks_(recoX, recoY, recoZ, seg_size);
-    if (!segments.has_value())
-      return -1.0;
+    if (!segments.has_value()) return -1.0;
 
     auto const seg_steps = segments->x.size();
-    if (seg_steps < 2)
-      return -1;
+    if (seg_steps < 2) return -1;
 
     double const recoL = segments->L.at(seg_steps - 1);
-    if (recoL < 15.0 || recoL > maxLength)
-      return -1;
+    if (recoL < 15.0 || recoL > maxLength) return -1;
 
     std::vector<float> dEi;
     std::vector<float> dEj;
     std::vector<float> dthij;
     std::vector<float> ind;
-    if (getDeltaThetaij_(dEi, dEj, dthij, ind, *segments, seg_size) != 0)
-      return -1.0;
+    if (getDeltaThetaij_(dEi, dEj, dthij, ind, *segments, seg_size) != 0) return -1.0;
 
     double const p_range = recoL * kcal;
     double const logL = my_mcs_llhd(dEi, dEj, dthij, ind, p_range, 5.65);
@@ -450,8 +428,7 @@ namespace trkf {
           double const here_dz = segnz.at(j);
 
           TVector3 const here_vec{here_dx, here_dy, here_dz};
-          TVector3 const rot_here{
-            Rx.Dot(here_vec), Ry.Dot(here_vec), Rz.Dot(here_vec)};
+          TVector3 const rot_here{Rx.Dot(here_vec), Ry.Dot(here_vec), Rz.Dot(here_vec)};
 
           double const scx = rot_here.X();
           double const scy = rot_here.Y();
@@ -490,8 +467,8 @@ namespace trkf {
   }
 
   double
-  TrackMomentumCalculator::GetMomentumMultiScatterChi2(
-    const art::Ptr<recob::Track>& trk, const bool checkValidPoints)
+  TrackMomentumCalculator::GetMomentumMultiScatterChi2(const art::Ptr<recob::Track>& trk,
+                                                       const bool checkValidPoints)
   {
     std::vector<float> recoX;
     std::vector<float> recoY;
@@ -507,24 +484,19 @@ namespace trkf {
       recoZ.push_back(pos.Z());
     }
 
-    if (recoX.size() < 2)
-      return -1.0;
+    if (recoX.size() < 2) return -1.0;
 
-    if (!plotRecoTracks_(recoX, recoY, recoZ))
-      return -1.0;
+    if (!plotRecoTracks_(recoX, recoY, recoZ)) return -1.0;
 
     double const seg_size{steps_size};
     auto const segments = getSegTracks_(recoX, recoY, recoZ, seg_size);
-    if (!segments.has_value())
-      return -1.0;
+    if (!segments.has_value()) return -1.0;
 
     auto const seg_steps = segments->x.size();
-    if (seg_steps < 2)
-      return -1;
+    if (seg_steps < 2) return -1;
 
     double const recoL = segments->L.at(seg_steps - 1);
-    if (recoL < minLength || recoL > maxLength)
-      return -1;
+    if (recoL < minLength || recoL > maxLength) return -1;
 
     double ymax = -999.0;
     double ymin = +999.0;
@@ -554,19 +526,16 @@ namespace trkf {
 
       xmeas.push_back(trial); // Is this what is intended?
       ymeas.push_back(rms);
-      eymeas.push_back(std::sqrt(cet::sum_of_squares(rmse, 0.05 * rms))); // <--- conservative syst. error to fix chi^{2} behaviour !!!
+      eymeas.push_back(std::sqrt(cet::sum_of_squares(
+        rmse, 0.05 * rms))); // <--- conservative syst. error to fix chi^{2} behaviour !!!
 
-      if (ymin > rms)
-        ymin = rms;
-      if (ymax < rms)
-        ymax = rms;
+      if (ymin > rms) ymin = rms;
+      if (ymax < rms) ymax = rms;
     }
 
     assert(xmeas.size() == ymeas.size());
     assert(xmeas.size() == eymeas.size());
-    if (xmeas.empty()) {
-      return -1.0;
-    }
+    if (xmeas.empty()) { return -1.0; }
 
     TGraphErrors gr_meas{n_steps, xmeas.data(), ymeas.data(), nullptr, eymeas.data()};
 
@@ -578,8 +547,7 @@ namespace trkf {
     gr_meas.SetMarkerStyle(20);
     gr_meas.SetMarkerSize(1.2);
 
-    gr_meas.GetXaxis()->SetLimits(steps.at(0) - steps.at(0),
-                                  steps.at(n_steps - 1) + steps.at(0));
+    gr_meas.GetXaxis()->SetLimits(steps.at(0) - steps.at(0), steps.at(n_steps - 1) + steps.at(0));
     gr_meas.SetMinimum(0.0);
     gr_meas.SetMaximum(1.80 * ymax);
 
@@ -631,8 +599,7 @@ namespace trkf {
     auto ys = const_cast<float*>(yyy.data());
     auto zs = const_cast<float*>(zzz.data());
 
-    auto const narrowed_size =
-      static_cast<int>(n); // ROOT requires a signed integral type
+    auto const narrowed_size = static_cast<int>(n); // ROOT requires a signed integral type
     delete gr_reco_xyz;
     gr_reco_xyz = new TPolyLine3D{narrowed_size, zs, xs, ys};
     gr_reco_yz = TGraph{narrowed_size, zzz.data(), yyy.data()};
@@ -689,8 +656,7 @@ namespace trkf {
       y0 = yyy.at(i);
       z0 = zzz.at(i);
 
-      double const RR0 =
-        std::sqrt(cet::sum_of_squares(x00 - x0, y00 - y0, z00 - z0));
+      double const RR0 = std::sqrt(cet::sum_of_squares(x00 - x0, y00 - y0, z00 - z0));
 
       if (RR0 >= stag) {
         segx.push_back(x0);
@@ -749,8 +715,7 @@ namespace trkf {
           return std::nullopt;
         }
 
-        double const beta =
-          2.0 * ((x1 - x0) * dx + (y1 - y0) * dy + (z1 - z0) * dz) / (dr * dr);
+        double const beta = 2.0 * ((x1 - x0) * dx + (y1 - y0) * dy + (z1 - z0) * dz) / (dr * dr);
 
         double const gamma = (dr1 * dr1 - seg_size * seg_size) / (dr * dr);
         double const delta = beta * beta - 4.0 * gamma;
@@ -1036,8 +1001,7 @@ namespace trkf {
         ntot++;
       }
 
-      if (n_seg >= (stopper + 1.0) && seg_stop != -1)
-        break;
+      if (n_seg >= (stopper + 1.0) && seg_stop != -1) break;
     }
 
     delete gr_seg_xyz;
@@ -1050,8 +1014,7 @@ namespace trkf {
   }
 
   std::tuple<double, double, double>
-  TrackMomentumCalculator::getDeltaThetaRMS_(Segments const& segments,
-                                             double const thick) const
+  TrackMomentumCalculator::getDeltaThetaRMS_(Segments const& segments, double const thick) const
   {
     auto const& segnx = segments.nx;
     auto const& segny = segments.ny;
@@ -1127,9 +1090,7 @@ namespace trkf {
           double const ULim = 10000.0;
           double const LLim = -10000.0;
 
-          if (azx <= ULim && azx >= LLim) {
-            buf0.push_back(azx);
-          }
+          if (azx <= ULim && azx >= LLim) { buf0.push_back(azx); }
 
           break; // of course !
         }
@@ -1213,9 +1174,7 @@ namespace trkf {
       thetayz = 3.0 * TMath::Pi() / 2.0;
     }
 
-    if (thetayz > TMath::Pi()) {
-      thetayz = thetayz - 2.0 * TMath::Pi();
-    }
+    if (thetayz > TMath::Pi()) { thetayz = thetayz - 2.0 * TMath::Pi(); }
 
     return 1000.0 * thetayz;
   }
@@ -1229,8 +1188,7 @@ namespace trkf {
     }
 
     double const arg = (xx - Q) / s;
-    double const result =
-        -0.5 * std::log(2.0 * TMath::Pi()) - std::log(s) - 0.5 * arg * arg;
+    double const result = -0.5 * std::log(2.0 * TMath::Pi()) - std::log(s) - 0.5 * arg * arg;
 
     if (std::isnan(result) || std::isinf(result)) {
       cout << " Is nan ! my_g ! " << -std::log(s) << ", " << s << endl;
@@ -1260,14 +1218,13 @@ namespace trkf {
       double Ei = p - dEi.at(i);
       double Ej = p - dEj.at(i);
 
-      if (Ei > 0 && Ej < 0)
-        addth = 3.14 * 1000.0;
+      if (Ei > 0 && Ej < 0) addth = 3.14 * 1000.0;
 
       Ei = std::abs(Ei);
       Ej = std::abs(Ej);
 
-      double tH0 = (13.6 / std::sqrt(Ei * Ej)) *
-                   (1.0 + 0.038 * std::log(red_length)) * std::sqrt(red_length);
+      double tH0 =
+        (13.6 / std::sqrt(Ei * Ej)) * (1.0 + 0.038 * std::log(red_length)) * std::sqrt(red_length);
 
       double rms = -1.0;
 

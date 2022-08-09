@@ -46,8 +46,8 @@ shower::ShowerEnergyAlg::ShowerEnergy(detinfo::DetectorClocksData const& clockDa
   };
 
   double const totalCharge =
-    ranges::accumulate(hits | ranges::views::transform(to_element) | ranges::views::filter(in_plane) |
-                         ranges::views::transform(charge),
+    ranges::accumulate(hits | ranges::views::transform(to_element) |
+                         ranges::views::filter(in_plane) | ranges::views::transform(charge),
                        0.);
 
   return fLinearFunctions[plane].energy_from(totalCharge);

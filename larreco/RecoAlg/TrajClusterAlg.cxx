@@ -10,19 +10,19 @@
 ////////////////////////////////////////////////////////////////////////
 
 #include "larreco/RecoAlg/TrajClusterAlg.h"
+#include "larcore/CoreUtils/ServiceUtil.h"
+#include "larcore/Geometry/Geometry.h"
+#include "lardata/DetectorInfoServices/DetectorClocksService.h"
+#include "lardata/DetectorInfoServices/DetectorPropertiesService.h"
 #include "larreco/RecoAlg/TCAlg/DebugStruct.h"
 #include "larreco/RecoAlg/TCAlg/PFPUtils.h"
 #include "larreco/RecoAlg/TCAlg/StepUtils.h"
 #include "larreco/RecoAlg/TCAlg/TCShower.h"
 #include "larreco/RecoAlg/TCAlg/TCVertex.h"
 #include "larreco/RecoAlg/TCAlg/Utils.h"
-#include "lardata/DetectorInfoServices/DetectorClocksService.h"
-#include "lardata/DetectorInfoServices/DetectorPropertiesService.h"
-#include "larcore/CoreUtils/ServiceUtil.h"
-#include "larcore/Geometry/Geometry.h"
 
-#include "messagefacility/MessageLogger/MessageLogger.h"
 #include "fhiclcpp/ParameterSet.h"
+#include "messagefacility/MessageLogger/MessageLogger.h"
 
 #include <iostream>
 #include <string>
@@ -798,7 +798,7 @@ namespace tca {
       unsigned int jfirsthit = slc.wireHitRange[plane][jwire].first;
       unsigned int jlasthit = slc.wireHitRange[plane][jwire].second;
       for (unsigned int iht = ifirsthit; iht <= ilasthit; ++iht) {
-        if(iht >= slc.slHits.size()) break;
+        if (iht >= slc.slHits.size()) break;
         auto& islHit = slc.slHits[iht];
         if (islHit.InTraj != 0) continue;
         std::vector<unsigned int> iHits;
@@ -808,7 +808,7 @@ namespace tca {
         if (prt) mf::LogVerbatim("TC") << "FJT: debug iht multiplet size " << iHits.size();
         if (iHits.empty()) continue;
         for (unsigned int jht = jfirsthit; jht <= jlasthit; ++jht) {
-          if(jht >= slc.slHits.size()) break;
+          if (jht >= slc.slHits.size()) break;
           auto& jslHit = slc.slHits[jht];
           if (jslHit.InTraj != 0) continue;
           if (prt && HitSep2(slc, iht, jht) < 100)
@@ -844,7 +844,7 @@ namespace tca {
               unsigned int kfirsthit = slc.wireHitRange[plane][kwire].first;
               unsigned int klasthit = slc.wireHitRange[plane][kwire].second;
               for (unsigned int kht = kfirsthit; kht <= klasthit; ++kht) {
-                if(kht >= slc.slHits.size()) continue;
+                if (kht >= slc.slHits.size()) continue;
                 if (slc.slHits[kht].InTraj != 0) continue;
                 // this shouldn't be needed but do it anyway
                 if (std::find(tHits.begin(), tHits.end(), kht) != tHits.end()) continue;

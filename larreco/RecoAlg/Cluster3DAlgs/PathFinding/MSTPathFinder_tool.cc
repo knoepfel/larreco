@@ -39,8 +39,8 @@
 #include <functional>
 #include <iostream>
 #include <memory>
-#include <string>
 #include <numeric> // std::accumulate
+#include <string>
 
 //------------------------------------------------------------------------------------------------------------------------------------------
 // implementation follows

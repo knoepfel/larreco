@@ -36,8 +36,8 @@
 #include "TTree.h"
 
 // ### LArSoft includes ###
-#include "larcore/Geometry/Geometry.h"
 #include "larcore/CoreUtils/ServiceUtil.h"
+#include "larcore/Geometry/Geometry.h"
 #include "larcorealg/Geometry/PlaneGeo.h"
 #include "lardata/ArtDataHelper/ToElement.h"
 #include "lardata/DetectorInfoServices/DetectorClocksService.h"

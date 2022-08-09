@@ -26,9 +26,9 @@ namespace fhicl {
 namespace recob {
   class Cluster;
 }
+#include "larcoreobj/SimpleTypesAndConstants/geo_types.h"
 #include "lardataobj/RecoBase/Hit.h"
 #include "lardataobj/RecoBase/SpacePoint.h"
-#include "larcoreobj/SimpleTypesAndConstants/geo_types.h"
 
 namespace detinfo {
   class DetectorClocksData;

@@ -9,7 +9,9 @@
 #define SeedFinderAlgBase_h
 
 // Framework Includes
-namespace fhicl { class ParameterSet; }
+namespace fhicl {
+  class ParameterSet;
+}
 #include "lardataobj/RecoBase/Seed.h"
 
 // Algorithm includes

@@ -18,13 +18,13 @@
 #include "fhiclcpp/ParameterSet.h"
 #include "messagefacility/MessageLogger/MessageLogger.h"
 
+#include "RStarTree/RStarBoundingBox.h"
 #include "larcore/CoreUtils/ServiceUtil.h"
 #include "larcore/Geometry/Geometry.h"
 #include "larcorealg/CoreUtils/NumericUtils.h" // util::absDiff()
 #include "lardataalg/DetectorInfo/DetectorClocksData.h"
 #include "lardataalg/DetectorInfo/DetectorPropertiesData.h"
 #include "lardataobj/RecoBase/Hit.h"
-#include "RStarTree/RStarBoundingBox.h"
 #include "larreco/RecoAlg/DBScanAlg.h"
 
 #include <cmath>

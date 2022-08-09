@@ -3,8 +3,8 @@
 #include "fhiclcpp/types/Atom.h"
 #include "fhiclcpp/types/Sequence.h"
 
-#include "art/Framework/Principal/Handle.h"
 #include "art/Framework/Principal/Event.h"
+#include "art/Framework/Principal/Handle.h"
 
 #include "larreco/RecoAlg/TrackCreationBookKeeper.h"
 #include "larreco/RecoAlg/TrackKalmanFitter.h"

@@ -15,7 +15,9 @@
 #include <vector>
 
 // framework libraries
-namespace fhicl { class ParameterSet; }
+namespace fhicl {
+  class ParameterSet;
+}
 
 // LArSoft libraries
 #include "lardataobj/RecoBase/Hit.h"

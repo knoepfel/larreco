@@ -23,7 +23,9 @@
 #include "fhiclcpp/types/Table.h"
 
 // LArSoft includes
-namespace geo { class GeometryCore; }
+namespace geo {
+  class GeometryCore;
+}
 #include "lardataobj/RecoBase/Wire.h"
 #include "larreco/Calorimetry/CalorimetryAlg.h"
 
@@ -104,7 +106,6 @@ public:
 
   virtual ~DataProviderAlg();
 
-
   bool setWireDriftData(const detinfo::DetectorClocksData& clock_data,
                         const detinfo::DetectorPropertiesData& det_prop,
                         const std::vector<recob::Wire>&
@@ -134,8 +135,7 @@ public:
       ok = patchFromOriginalView(wire, drift, patchSizeW, patchSizeD, patch);
     }
 
-    if (ok)
-      return patch;
+    if (ok) return patch;
     throw cet::exception("img::DataProviderAlg") << "Patch filling failed." << std::endl;
   }
 
@@ -149,7 +149,7 @@ public:
     if ((widx < fAlgView.fWireDriftData.size()) && (didx < fAlgView.fNCachedDrifts)) {
       return fAlgView.fWireDriftData[widx][didx];
     }
-      return 0;
+    return 0;
   }
 
   double
@@ -274,9 +274,9 @@ protected:
                              std::vector<std::vector<float>>& patch) const;
 
   virtual DataProviderAlgView resizeView(detinfo::DetectorClocksData const& clock_data,
-                          detinfo::DetectorPropertiesData const& det_prop,
-                          size_t wires,
-                          size_t drifts);
+                                         detinfo::DetectorPropertiesData const& det_prop,
+                                         size_t wires,
+                                         size_t drifts);
 
   // Calorimetry needed to equalize ADC amplitude along drift:
   calo::CalorimetryAlg fCalorimetryAlg;

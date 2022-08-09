@@ -13,8 +13,8 @@
 #include "larreco/RecoAlg/PMAlg/PmaSegment3D.h"
 #include "larreco/RecoAlg/PMAlg/Utilities.h"
 
-#include "larcore/Geometry/Geometry.h"
 #include "larcore/CoreUtils/ServiceUtil.h"
+#include "larcore/Geometry/Geometry.h"
 #include "lardataalg/DetectorInfo/DetectorClocksData.h"
 #include "lardataalg/DetectorInfo/DetectorPropertiesData.h"
 

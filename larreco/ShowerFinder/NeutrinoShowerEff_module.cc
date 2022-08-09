@@ -1,6 +1,6 @@
 // LArSoft includes
-#include "larcore/Geometry/Geometry.h"
 #include "larcore/CoreUtils/ServiceUtil.h"
+#include "larcore/Geometry/Geometry.h"
 #include "lardata/ArtDataHelper/MVAReader.h"
 #include "lardata/DetectorInfoServices/DetectorClocksService.h"
 #include "lardataobj/RecoBase/Cluster.h"

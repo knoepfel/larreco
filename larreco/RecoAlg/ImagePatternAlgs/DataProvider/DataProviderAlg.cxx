@@ -6,13 +6,13 @@
 #include "larreco/RecoAlg/ImagePatternAlgs/DataProvider/DataProviderAlg.h"
 
 #include "art/Framework/Services/Registry/ServiceHandle.h"
-#include "messagefacility/MessageLogger/MessageLogger.h"
 #include "cetlib_except/exception.h"
+#include "messagefacility/MessageLogger/MessageLogger.h"
 
-#include "larevt/CalibrationDBI/Interface/ChannelStatusProvider.h"
-#include "larevt/CalibrationDBI/Interface/ChannelStatusService.h"
 #include "larcore/Geometry/Geometry.h"
 #include "lardataalg/DetectorInfo/DetectorPropertiesData.h"
+#include "larevt/CalibrationDBI/Interface/ChannelStatusProvider.h"
+#include "larevt/CalibrationDBI/Interface/ChannelStatusService.h"
 namespace detinfo {
   class DetectorClocksData;
 }
@@ -25,8 +25,8 @@ namespace geo {
 #include "CLHEP/Random/RandGauss.h"
 
 #include <algorithm>
-#include <string>
 #include <optional>
+#include <string>
 #include <vector>
 
 img::DataProviderAlg::DataProviderAlg(const Config& config)

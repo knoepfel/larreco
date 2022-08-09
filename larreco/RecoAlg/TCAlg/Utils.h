@@ -39,7 +39,6 @@ namespace tca {
     bool valsIncreasing(const SortEntry& c1, const SortEntry& c2);
   }
 
-
   typedef enum {
     kAllHits,
     kUsedHits,

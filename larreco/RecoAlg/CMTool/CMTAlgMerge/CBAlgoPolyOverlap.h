@@ -22,10 +22,9 @@ namespace cmtool {
      \class CMalgoPolyContain
      Merge Polygons if the two overlap even partially
   */
-  class CBAlgoPolyOverlap : public CBoolAlgoBase{
+  class CBAlgoPolyOverlap : public CBoolAlgoBase {
 
   public:
-
     /// Default constructor
     CBAlgoPolyOverlap();
 
@@ -36,19 +35,26 @@ namespace cmtool {
        Core function: given the ClusterParamsAlg input, return whether a cluster should be
        merged or not.
     */
-    virtual bool Bool(const ::cluster::ClusterParamsAlg &cluster1,
-		      const ::cluster::ClusterParamsAlg &cluster2);
+    virtual bool Bool(const ::cluster::ClusterParamsAlg& cluster1,
+                      const ::cluster::ClusterParamsAlg& cluster2);
 
-    void SetDebug(bool debug) { _debug = debug; }
+    void
+    SetDebug(bool debug)
+    {
+      _debug = debug;
+    }
 
     //both clusters must have > this # of hits to be considered for merging
-    void SetMinNumHits(size_t nhits) { _min_hits = nhits; }
+    void
+    SetMinNumHits(size_t nhits)
+    {
+      _min_hits = nhits;
+    }
 
     /// Method to re-configure the instance
     void reconfigure();
 
   private:
-
     bool _debug;
     size_t _min_hits;
   };

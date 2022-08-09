@@ -37,8 +37,8 @@
 // std includes
 #include <iostream>
 #include <memory>
-#include <string>
 #include <numeric> // std::accumulate
+#include <string>
 
 // Ack!
 #include "TH1F.h"

@@ -15,38 +15,68 @@
  * Output: Guassian means and sigmas
 */
 
-#include <vector>
 #include <set>
+#include <vector>
 
 #include "GaussianEliminationAlg.h"
 
-namespace hit{
+namespace hit {
 
-  struct SignalSetComp{
-    bool operator() (const std::pair<float,float>& lhs,
-		     const std::pair<float,float>& rhs) const
-    { return lhs.first < rhs.first; }
+  struct SignalSetComp {
+    bool
+    operator()(const std::pair<float, float>& lhs, const std::pair<float, float>& rhs) const
+    {
+      return lhs.first < rhs.first;
+    }
   };
 
   class RFFHitFitter {
 
-    typedef std::pair<float,float> MeanSigmaPair;
+    typedef std::pair<float, float> MeanSigmaPair;
 
   public:
-    RFFHitFitter(float,unsigned int,float,float step=0.1,float max=5.0);
-    RFFHitFitter(float step=0.1,float max=5.0);
+    RFFHitFitter(float, unsigned int, float, float step = 0.1, float max = 5.0);
+    RFFHitFitter(float step = 0.1, float max = 5.0);
 
-    void SetFitterParams(float,unsigned int,float);
+    void SetFitterParams(float, unsigned int, float);
 
     void RunFitter(const std::vector<float>& signal);
 
-    const std::vector<float>& MeanVector() { return fMeanVector; }
-    const std::vector<float>& SigmaVector() { return fSigmaVector; }
-    const std::vector<float>& MeanErrorVector() { return fMeanErrorVector; }
-    const std::vector<float>& SigmaErrorVector() { return fSigmaErrorVector; }
-    const std::vector<float>& AmplitudeVector() { return fAmpVector; }
-    const std::vector<float>& AmplitudeErrorVector() { return fAmpErrorVector; }
-    unsigned int NHits() { return fMeanVector.size(); }
+    const std::vector<float>&
+    MeanVector()
+    {
+      return fMeanVector;
+    }
+    const std::vector<float>&
+    SigmaVector()
+    {
+      return fSigmaVector;
+    }
+    const std::vector<float>&
+    MeanErrorVector()
+    {
+      return fMeanErrorVector;
+    }
+    const std::vector<float>&
+    SigmaErrorVector()
+    {
+      return fSigmaErrorVector;
+    }
+    const std::vector<float>&
+    AmplitudeVector()
+    {
+      return fAmpVector;
+    }
+    const std::vector<float>&
+    AmplitudeErrorVector()
+    {
+      return fAmpErrorVector;
+    }
+    unsigned int
+    NHits()
+    {
+      return fMeanVector.size();
+    }
 
     void ClearResults();
 
@@ -58,8 +88,8 @@ namespace hit{
     float fFinalAmpThreshold;
 
     // Clang: private field is not used (x2):
-  //  float fGEAlgStepSize;
-  //  float fGEAlgMax;
+    //  float fGEAlgStepSize;
+    //  float fGEAlgMax;
     util::GaussianEliminationAlg fGEAlg;
 
     std::vector<float> fMeanVector;
@@ -69,9 +99,8 @@ namespace hit{
     std::vector<float> fAmpVector;
     std::vector<float> fAmpErrorVector;
 
-    std::multiset< MeanSigmaPair, SignalSetComp > fSignalSet;
-    std::vector< std::vector< std::multiset<MeanSigmaPair>::iterator > >
-      fMergeVector;
+    std::multiset<MeanSigmaPair, SignalSetComp> fSignalSet;
+    std::vector<std::vector<std::multiset<MeanSigmaPair>::iterator>> fMergeVector;
 
     void CalculateAllMeansAndSigmas(const std::vector<float>& signal);
     void CalculateMergedMeansAndSigmas(std::size_t signal_size);
@@ -79,7 +108,6 @@ namespace hit{
     void CreateMergeVector();
 
     bool HitsBelowThreshold();
-
   };
 
 }

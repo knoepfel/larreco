@@ -34,7 +34,7 @@
 #include "lardata/DetectorInfoServices/DetectorPropertiesService.h"
 #include "lardataobj/RecoBase/Hit.h"
 #include "larsim/MCCheater/BackTrackerService.h"
-#include "nug4/MagneticFieldServices/MagneticFieldService.h" 
+#include "nug4/MagneticFieldServices/MagneticFieldService.h"
 
 /// Detector simulation of raw signals on wires
 namespace hit {

@@ -31,8 +31,8 @@ namespace fhicl {
 }
 
 // LArSoft includes
-#include "lardataobj/RecoBase/Hit.h"
 #include "larcoreobj/SimpleTypesAndConstants/geo_types.h"
+#include "lardataobj/RecoBase/Hit.h"
 #include "larreco/RecoAlg/PMAlg/PmaTrack3D.h"
 #include "larreco/RecoAlg/PMAlg/Utilities.h"
 namespace detinfo {
@@ -44,7 +44,7 @@ namespace geo {
 }
 namespace img {
   class DataProviderAlg;
-} 
+}
 namespace lariov {
   class ChannelStatusProvider;
 }

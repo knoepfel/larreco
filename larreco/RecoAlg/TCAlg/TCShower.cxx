@@ -29,7 +29,7 @@
 namespace tca {
 
   using namespace detail;
-  
+
   ////////////////////////////////////////////////
   void
   ConfigureMVA(TCConfig& tcc, std::string fMVAShowerParentWeights)
