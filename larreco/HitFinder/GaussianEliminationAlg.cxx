@@ -26,8 +26,7 @@ util::GaussianEliminationAlg::GaussianEliminationAlg(float step, float max)
   FillDistanceLookupTable();
 }
 
-void
-util::GaussianEliminationAlg::FillDistanceLookupTable()
+void util::GaussianEliminationAlg::FillDistanceLookupTable()
 {
 
   fDistanceLookupTable.clear();
@@ -43,8 +42,7 @@ util::GaussianEliminationAlg::FillDistanceLookupTable()
   fDistanceLookupTable.push_back(std::exp(x_val * x_val * 0.5 * -1));
 }
 
-double
-util::GaussianEliminationAlg::GetDistance(float d) const
+double util::GaussianEliminationAlg::GetDistance(float d) const
 {
   double d_abs = std::abs(d);
   if (d_abs > fDistanceMax) return 0.0;
@@ -55,10 +53,10 @@ util::GaussianEliminationAlg::GetDistance(float d) const
            (fDistanceLookupTable[low_bin] - fDistanceLookupTable[low_bin + 1]);
 }
 
-const std::vector<float>&
-util::GaussianEliminationAlg::SolveEquations(const std::vector<float>& meanVector,
-                                             const std::vector<float>& sigmaVector,
-                                             const std::vector<float>& heightVector)
+const std::vector<float>& util::GaussianEliminationAlg::SolveEquations(
+  const std::vector<float>& meanVector,
+  const std::vector<float>& sigmaVector,
+  const std::vector<float>& heightVector)
 {
 
   if (meanVector.size() != sigmaVector.size() || meanVector.size() != heightVector.size())
@@ -70,10 +68,9 @@ util::GaussianEliminationAlg::SolveEquations(const std::vector<float>& meanVecto
   return fSolutions;
 }
 
-void
-util::GaussianEliminationAlg::FillAugmentedMatrix(const std::vector<float>& meanVector,
-                                                  const std::vector<float>& sigmaVector,
-                                                  const std::vector<float>& heightVector)
+void util::GaussianEliminationAlg::FillAugmentedMatrix(const std::vector<float>& meanVector,
+                                                       const std::vector<float>& sigmaVector,
+                                                       const std::vector<float>& heightVector)
 {
 
   fMatrix.resize(meanVector.size());
@@ -94,8 +91,7 @@ util::GaussianEliminationAlg::FillAugmentedMatrix(const std::vector<float>& mean
   }
 }
 
-void
-util::GaussianEliminationAlg::GaussianElimination()
+void util::GaussianEliminationAlg::GaussianElimination()
 {
 
   fSolutions.resize(fMatrix.size(), 0.0);
@@ -120,8 +116,7 @@ util::GaussianEliminationAlg::GaussianElimination()
   }
 }
 
-void
-util::GaussianEliminationAlg::Print()
+void util::GaussianEliminationAlg::Print()
 {
   std::cout << "GaussianEliminationAlg." << std::endl;
 

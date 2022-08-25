@@ -66,9 +66,8 @@ namespace lar_cluster3d {
     void Cluster3DHits(reco::HitPairList& hitPairList,
                        reco::ClusterParametersList& clusterParametersList) const override;
 
-    void
-    Cluster3DHits(reco::HitPairListPtr& hitPairList,
-                  reco::ClusterParametersList& clusterParametersList) const override
+    void Cluster3DHits(reco::HitPairListPtr& hitPairList,
+                       reco::ClusterParametersList& clusterParametersList) const override
     {
       return;
     }
@@ -76,11 +75,7 @@ namespace lar_cluster3d {
     /**
      *  @brief If monitoring, recover the time to execute a particular function
      */
-    float
-    getTimeToExecute(TimeValues index) const override
-    {
-      return m_timeVector.at(index);
-    }
+    float getTimeToExecute(TimeValues index) const override { return m_timeVector.at(index); }
 
   private:
     /**
@@ -176,8 +171,7 @@ namespace lar_cluster3d {
 
   //------------------------------------------------------------------------------------------------------------------------------------------
 
-  void
-  MinSpanTreeAlg::configure(fhicl::ParameterSet const& pset)
+  void MinSpanTreeAlg::configure(fhicl::ParameterSet const& pset)
   {
     m_enableMonitoring = pset.get<bool>("EnableMonitoring", true);
 
@@ -223,9 +217,8 @@ namespace lar_cluster3d {
     return;
   }
 
-  void
-  MinSpanTreeAlg::Cluster3DHits(reco::HitPairList& hitPairList,
-                                reco::ClusterParametersList& clusterParametersList) const
+  void MinSpanTreeAlg::Cluster3DHits(reco::HitPairList& hitPairList,
+                                     reco::ClusterParametersList& clusterParametersList) const
   {
     /**
      *  @brief Driver for processing input 2D hits, transforming to 3D hits and building lists
@@ -271,10 +264,9 @@ namespace lar_cluster3d {
   }
 
   //------------------------------------------------------------------------------------------------------------------------------------------
-  void
-  MinSpanTreeAlg::RunPrimsAlgorithm(reco::HitPairList& hitPairList,
-                                    kdTree::KdTreeNode& topNode,
-                                    reco::ClusterParametersList& clusterParametersList) const
+  void MinSpanTreeAlg::RunPrimsAlgorithm(reco::HitPairList& hitPairList,
+                                         kdTree::KdTreeNode& topNode,
+                                         reco::ClusterParametersList& clusterParametersList) const
   {
     // If no hits then no work
     if (hitPairList.empty()) return;
@@ -399,8 +391,7 @@ namespace lar_cluster3d {
     return;
   }
 
-  void
-  MinSpanTreeAlg::FindBestPathInCluster(reco::ClusterParameters& curCluster) const
+  void MinSpanTreeAlg::FindBestPathInCluster(reco::ClusterParameters& curCluster) const
   {
     reco::HitPairListPtr longestCluster;
     float bestQuality(0.);
@@ -465,9 +456,8 @@ namespace lar_cluster3d {
     return;
   }
 
-  void
-  MinSpanTreeAlg::FindBestPathInCluster(reco::ClusterParameters& clusterParams,
-                                        kdTree::KdTreeNode& topNode) const
+  void MinSpanTreeAlg::FindBestPathInCluster(reco::ClusterParameters& clusterParams,
+                                             kdTree::KdTreeNode& topNode) const
   {
     // Set up for timing the function
     cet::cpu_timer theClockPathFinding;
@@ -562,12 +552,11 @@ namespace lar_cluster3d {
     return;
   }
 
-  void
-  MinSpanTreeAlg::AStar(const reco::ClusterHit3D* startNode,
-                        const reco::ClusterHit3D* goalNode,
-                        float alpha,
-                        kdTree::KdTreeNode& topNode,
-                        reco::ClusterParameters& clusterParams) const
+  void MinSpanTreeAlg::AStar(const reco::ClusterHit3D* startNode,
+                             const reco::ClusterHit3D* goalNode,
+                             float alpha,
+                             kdTree::KdTreeNode& topNode,
+                             reco::ClusterParameters& clusterParams) const
   {
     // Recover the list of hits and edges
     reco::HitPairListPtr& pathNodeList = clusterParams.getBestHitPairListPtr();
@@ -649,11 +638,10 @@ namespace lar_cluster3d {
     return;
   }
 
-  void
-  MinSpanTreeAlg::ReconstructBestPath(const reco::ClusterHit3D* goalNode,
-                                      BestNodeMap& bestNodeMap,
-                                      reco::HitPairListPtr& pathNodeList,
-                                      reco::EdgeList& bestEdgeList) const
+  void MinSpanTreeAlg::ReconstructBestPath(const reco::ClusterHit3D* goalNode,
+                                           BestNodeMap& bestNodeMap,
+                                           reco::HitPairListPtr& pathNodeList,
+                                           reco::EdgeList& bestEdgeList) const
   {
     while (std::get<0>(bestNodeMap.at(goalNode)) != goalNode) {
       const reco::ClusterHit3D* nextNode = std::get<0>(bestNodeMap[goalNode]);
@@ -671,11 +659,10 @@ namespace lar_cluster3d {
     return;
   }
 
-  void
-  MinSpanTreeAlg::LeastCostPath(const reco::EdgeTuple& curEdge,
-                                const reco::ClusterHit3D* goalNode,
-                                reco::ClusterParameters& clusterParams,
-                                float& showMeTheMoney) const
+  void MinSpanTreeAlg::LeastCostPath(const reco::EdgeTuple& curEdge,
+                                     const reco::ClusterHit3D* goalNode,
+                                     reco::ClusterParameters& clusterParams,
+                                     float& showMeTheMoney) const
   {
     // Recover the mapping between hits and edges
     reco::Hit3DToEdgeMap& curEdgeMap = clusterParams.getHit3DToEdgeMap();
@@ -720,9 +707,8 @@ namespace lar_cluster3d {
     return;
   }
 
-  float
-  MinSpanTreeAlg::DistanceBetweenNodes(const reco::ClusterHit3D* node1,
-                                       const reco::ClusterHit3D* node2) const
+  float MinSpanTreeAlg::DistanceBetweenNodes(const reco::ClusterHit3D* node1,
+                                             const reco::ClusterHit3D* node2) const
   {
     const Eigen::Vector3f& node1Pos = node1->getPosition();
     const Eigen::Vector3f& node2Pos = node2->getPosition();
@@ -752,10 +738,9 @@ namespace lar_cluster3d {
  */
   }
 
-  reco::HitPairListPtr
-  MinSpanTreeAlg::DepthFirstSearch(const reco::EdgeTuple& curEdge,
-                                   const reco::Hit3DToEdgeMap& hitToEdgeMap,
-                                   float& bestTreeQuality) const
+  reco::HitPairListPtr MinSpanTreeAlg::DepthFirstSearch(const reco::EdgeTuple& curEdge,
+                                                        const reco::Hit3DToEdgeMap& hitToEdgeMap,
+                                                        float& bestTreeQuality) const
   {
     reco::HitPairListPtr hitPairListPtr;
     float bestQuality(0.);
@@ -799,9 +784,8 @@ namespace lar_cluster3d {
     return hitPairListPtr;
   }
 
-  void
-  MinSpanTreeAlg::PruneAmbiguousHits(reco::ClusterParameters& clusterParams,
-                                     reco::Hit2DToClusterMap& hit2DToClusterMap) const
+  void MinSpanTreeAlg::PruneAmbiguousHits(reco::ClusterParameters& clusterParams,
+                                          reco::Hit2DToClusterMap& hit2DToClusterMap) const
   {
 
     // Recover the HitPairListPtr from the input clusterParams (which will be the
@@ -878,9 +862,8 @@ namespace lar_cluster3d {
   }
 
   struct HitPairClusterOrder {
-    bool
-    operator()(const reco::ClusterParametersList::iterator& left,
-               const reco::ClusterParametersList::iterator& right)
+    bool operator()(const reco::ClusterParametersList::iterator& left,
+                    const reco::ClusterParametersList::iterator& right)
     {
       // Watch out for the case where two clusters can have the same number of hits!
       return (*left).getHitPairListPtr().size() > (*right).getHitPairListPtr().size();
@@ -891,8 +874,7 @@ namespace lar_cluster3d {
   public:
     SetCheckHitOrder(const std::vector<size_t>& plane) : m_plane(plane) {}
 
-    bool
-    operator()(const reco::ClusterHit3D* left, const reco::ClusterHit3D* right) const
+    bool operator()(const reco::ClusterHit3D* left, const reco::ClusterHit3D* right) const
     {
       // Check if primary view's hit is on the same wire
       if (left->getWireIDs()[m_plane[0]] == right->getWireIDs()[m_plane[0]]) {
@@ -927,8 +909,7 @@ namespace lar_cluster3d {
     const std::vector<size_t>& m_plane;
   };
 
-  void
-  MinSpanTreeAlg::CheckHitSorting(reco::ClusterParameters& clusterParams) const
+  void MinSpanTreeAlg::CheckHitSorting(reco::ClusterParameters& clusterParams) const
   {
     reco::HitPairListPtr& curCluster = clusterParams.getHitPairListPtr();
 

@@ -76,8 +76,7 @@ namespace genf {
    * @sa SpacepointHitPolicy
    * @sa WirepointHitPolicy
    */
-    virtual const GFDetPlane&
-    getDetPlane(GFAbsTrackRep* rep)
+    virtual const GFDetPlane& getDetPlane(GFAbsTrackRep* rep)
     {
       return fPolicy.detPlane(this, rep);
     }
@@ -86,13 +85,11 @@ namespace genf {
    *
    * Implementation in the HitPolicy
    */
-    virtual TMatrixT<Double_t>
-    getHitCoord(const GFDetPlane& plane, const GFDetPlane& planePrev)
+    virtual TMatrixT<Double_t> getHitCoord(const GFDetPlane& plane, const GFDetPlane& planePrev)
     {
       return fPolicy.hitCoord(this, plane, planePrev);
     }
-    virtual TMatrixT<Double_t>
-    getHitCoord(const GFDetPlane& plane)
+    virtual TMatrixT<Double_t> getHitCoord(const GFDetPlane& plane)
     {
       return fPolicy.hitCoord(this, plane);
     }
@@ -101,25 +98,19 @@ namespace genf {
    *
    * Implementation in the HitPolicy
    */
-    virtual TMatrixT<Double_t>
-    getHitCov(const GFDetPlane& plane)
+    virtual TMatrixT<Double_t> getHitCov(const GFDetPlane& plane)
     {
       return fPolicy.hitCov(this, plane);
     }
-    virtual TMatrixT<Double_t>
-    getHitCov(const GFDetPlane& plane,
-              const GFDetPlane& planePrev,
-              const TMatrixT<Double_t>& state,
-              const Double_t& mass)
+    virtual TMatrixT<Double_t> getHitCov(const GFDetPlane& plane,
+                                         const GFDetPlane& planePrev,
+                                         const TMatrixT<Double_t>& state,
+                                         const Double_t& mass)
     {
       return fPolicy.hitCov(this, plane, planePrev, state, mass);
     }
 
-    const std::string&
-    getPolicyName()
-    {
-      return fPolicy.getName();
-    }
+    const std::string& getPolicyName() { return fPolicy.getName(); }
 
     //public:
     //  ClassDef(GFRecoHitIfc,1);

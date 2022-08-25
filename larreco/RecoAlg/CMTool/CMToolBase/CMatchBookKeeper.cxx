@@ -4,20 +4,14 @@ namespace cmtool {
 
   CMatchBookKeeper::CMatchBookKeeper() { Reset(); }
 
-  void
-  CMatchBookKeeper::Reset()
-  {
-    _register.clear();
-  }
+  void CMatchBookKeeper::Reset() { _register.clear(); }
 
-  void
-  CMatchBookKeeper::Match(const std::vector<unsigned int>& matched_indexes, const float& score)
+  void CMatchBookKeeper::Match(const std::vector<unsigned int>& matched_indexes, const float& score)
   {
     _register.insert(std::make_pair(score, matched_indexes));
   }
 
-  std::vector<std::vector<unsigned int>>
-  CMatchBookKeeper::GetResult() const
+  std::vector<std::vector<unsigned int>> CMatchBookKeeper::GetResult() const
   {
     std::vector<std::vector<unsigned int>> res;
 
@@ -27,8 +21,7 @@ namespace cmtool {
   }
 
   /// Method to pass result
-  void
-  CMatchBookKeeper::PassResult(std::vector<std::vector<unsigned int>>& result) const
+  void CMatchBookKeeper::PassResult(std::vector<std::vector<unsigned int>>& result) const
   {
     result.clear();
 

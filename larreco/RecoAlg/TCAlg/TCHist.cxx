@@ -8,8 +8,7 @@
 
 namespace tca {
 
-  void
-  HistStuff::CreateHists(art::ServiceHandle<art::TFileService const>& tfs)
+  void HistStuff::CreateHists(art::ServiceHandle<art::TFileService const>& tfs)
   {
 
     fTruT[0] = tfs->make<TH1F>("TruT_El", "True KE (MeV) - Electrons", 100, 0, 1000);

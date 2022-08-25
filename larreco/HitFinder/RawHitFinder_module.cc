@@ -97,8 +97,7 @@ namespace hit {
   }
 
   //-------------------------------------------------
-  void
-  RawHitFinder::produce(art::Event& evt)
+  void RawHitFinder::produce(art::Event& evt)
   {
     //GET THE GEOMETRY.
     art::ServiceHandle<geo::Geometry const> geom;

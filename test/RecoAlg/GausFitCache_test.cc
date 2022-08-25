@@ -36,8 +36,7 @@ using cet::square;
 using tolerance_t = decltype(0.001 % tolerance());
 
 namespace {
-  double
-  gaus(double x, double mean, double sigma, double amplitude)
+  double gaus(double x, double mean, double sigma, double amplitude)
   {
     double const z = (x - mean) / sigma;
     return amplitude * std::exp(-0.5 * square(z));
@@ -94,8 +93,7 @@ struct RootGausFuncWrapper {
 
   RootGausFuncWrapper(Func_t f) : func(f) {}
 
-  Double_t
-  operator()(Double_t const x, Double_t mean, Double_t sigma, Double_t amplitude) const
+  Double_t operator()(Double_t const x, Double_t mean, Double_t sigma, Double_t amplitude) const
   {
     // BUG the double brace syntax is required to work around clang bug 21629
     // (https://bugs.llvm.org/show_bug.cgi?id=21629)
@@ -220,8 +218,7 @@ BOOST_AUTO_TEST_CASE(GaussianTrunc4Test)
 // test the multi-gaussian functions
 
 /// Expect for each Gaussian ROOT-like parameters: amplitude, mean, sigma
-Double_t
-multi_gaus(Double_t x, const unsigned int nGaus, Double_t const* params)
+Double_t multi_gaus(Double_t x, const unsigned int nGaus, Double_t const* params)
 {
 
   Double_t res = 0.;
@@ -234,8 +231,7 @@ multi_gaus(Double_t x, const unsigned int nGaus, Double_t const* params)
 } // multi_gaus()
 
 // Returns the parameters in pFunc sorted to follow the expected ones in Params
-std::vector<Double_t>
-SortGaussianResults(TF1 const* pFunc, Double_t const* Params)
+std::vector<Double_t> SortGaussianResults(TF1 const* pFunc, Double_t const* Params)
 {
   assert(pFunc->GetNpar() % 3 == 0); // Sorting non-Gaussian function!
 
@@ -275,8 +271,7 @@ SortGaussianResults(TF1 const* pFunc, Double_t const* Params)
 } // SortGaussianResults()
 
 // Test a fit with a three-Gaussian function from the compiled cache
-void
-ThreeGaussianFitTest(hit::GausFitCache& GausCache, tolerance_t tol)
+void ThreeGaussianFitTest(hit::GausFitCache& GausCache, tolerance_t tol)
 {
   std::string name = GausCache.GetName();
 

@@ -75,8 +75,7 @@ namespace shwf {
   //-------------------------------------------------
   /// \todo This method appears to produce a recob::Cluster really as it is
   /// \todo a collection of 2D clusters from single planes
-  void
-  ShowerFinder::produce(art::Event& evt)
+  void ShowerFinder::produce(art::Event& evt)
   {
 
     std::unique_ptr<std::vector<recob::Shower>> showercol(new std::vector<recob::Shower>);

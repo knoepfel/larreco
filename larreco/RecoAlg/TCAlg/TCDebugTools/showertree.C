@@ -28,8 +28,7 @@
 
 using namespace std;
 
-int
-getColor(int showerID)
+int getColor(int showerID)
 {
   int showerColor = 2 + showerID;
   if (showerColor == 10)
@@ -39,8 +38,7 @@ getColor(int showerID)
   return showerColor;
 }
 
-void
-showertree::Loop()
+void showertree::Loop()
 {
   gROOT->SetBatch();
   gStyle->SetOptStat(0);
@@ -192,8 +190,7 @@ showertree::Loop()
 
 } // Loop
 
-int
-main(int argc, char* argv[])
+int main(int argc, char* argv[])
 {
 
   if (!argv[1]) {

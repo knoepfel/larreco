@@ -47,8 +47,7 @@ namespace lar_cluster3d {
 
   //------------------------------------------------------------------------------------------------------------------------------------------
 
-  bool
-  ConvexHull::isLeft(const Point& p0, const Point& p1, const Point& pCheck) const
+  bool ConvexHull::isLeft(const Point& p0, const Point& p1, const Point& pCheck) const
   {
     // Use the cross product to determine if the check point lies to the left, on or right
     // of the line defined by points p0 and p1
@@ -57,8 +56,7 @@ namespace lar_cluster3d {
 
   //------------------------------------------------------------------------------------------------------------------------------------------
 
-  float
-  ConvexHull::crossProduct(const Point& p0, const Point& p1, const Point& p2) const
+  float ConvexHull::crossProduct(const Point& p0, const Point& p1, const Point& p2) const
   {
     // Define a quick 2D cross product here since it will used quite a bit!
     float deltaX = std::get<0>(p1) - std::get<0>(p0);
@@ -71,8 +69,7 @@ namespace lar_cluster3d {
 
   //------------------------------------------------------------------------------------------------------------------------------------------
 
-  float
-  ConvexHull::Area() const
+  float ConvexHull::Area() const
   {
     float area(0.);
 
@@ -106,8 +103,7 @@ namespace lar_cluster3d {
 
   //------------------------------------------------------------------------------------------------------------------------------------------
 
-  void
-  ConvexHull::getConvexHull(const PointList& pointList)
+  void ConvexHull::getConvexHull(const PointList& pointList)
   {
     // Start by identifying the min/max points
     Point pMinMin = pointList.front();
@@ -207,8 +203,7 @@ namespace lar_cluster3d {
     return;
   }
 
-  const ConvexHull::PointList&
-  ConvexHull::getExtremePoints()
+  const ConvexHull::PointList& ConvexHull::getExtremePoints()
   {
     PointList::const_iterator nextPointItr = fConvexHull.begin();
     PointList::const_iterator firstPointItr = nextPointItr++;
@@ -276,8 +271,7 @@ namespace lar_cluster3d {
     return fExtremePoints;
   }
 
-  const reco::ConvexHullKinkTupleList&
-  ConvexHull::getKinkPoints()
+  const reco::ConvexHullKinkTupleList& ConvexHull::getKinkPoints()
   {
     // Goal here is to isolate the points where we see a large deviation in the contour defined by the
     // convex hull. The complications are numerous, chief is that some deviations can be artificially
@@ -332,8 +326,8 @@ namespace lar_cluster3d {
     return fKinkPoints;
   }
 
-  ConvexHull::PointPair
-  ConvexHull::findNearestEdge(const Point& point, float& closestDistance) const
+  ConvexHull::PointPair ConvexHull::findNearestEdge(const Point& point,
+                                                    float& closestDistance) const
   {
     // The idea is to find the nearest edge of the convex hull, defined by
     // two adjacent vertices of the hull, to the input point.
@@ -392,8 +386,7 @@ namespace lar_cluster3d {
     return closestEdge;
   }
 
-  float
-  ConvexHull::findNearestDistance(const Point& point) const
+  float ConvexHull::findNearestDistance(const Point& point) const
   {
     float closestDistance;
 

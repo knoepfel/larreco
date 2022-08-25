@@ -10,15 +10,13 @@ namespace cmtool {
   }
 
   //-----------------------------
-  void
-  CBAlgoProhibitBigClusters::Reset()
+  void CBAlgoProhibitBigClusters::Reset()
   //-----------------------------
   {}
 
   //----------------------------------------------------------------
-  bool
-  CBAlgoProhibitBigClusters::Bool(const ::cluster::ClusterParamsAlg& cluster1,
-                                  const ::cluster::ClusterParamsAlg& cluster2)
+  bool CBAlgoProhibitBigClusters::Bool(const ::cluster::ClusterParamsAlg& cluster1,
+                                       const ::cluster::ClusterParamsAlg& cluster2)
   //----------------------------------------------------------------
   {
     //if both clusters are big enough, prohibit merging
@@ -29,8 +27,7 @@ namespace cmtool {
   }
 
   //------------------------------
-  void
-  CBAlgoProhibitBigClusters::Report()
+  void CBAlgoProhibitBigClusters::Report()
   //------------------------------
   {}
 

@@ -29,11 +29,10 @@ shower::ShowerEnergyAlg::ShowerEnergyAlg(fhicl::ParameterSet const& pset)
                       {pset.get<double>("ZGradient"), pset.get<double>("ZIntercept")}}}
 {}
 
-double
-shower::ShowerEnergyAlg::ShowerEnergy(detinfo::DetectorClocksData const& clockData,
-                                      detinfo::DetectorPropertiesData const& detprop,
-                                      std::vector<art::Ptr<recob::Hit>> const& hits,
-                                      geo::PlaneID::PlaneID_t const plane) const
+double shower::ShowerEnergyAlg::ShowerEnergy(detinfo::DetectorClocksData const& clockData,
+                                             detinfo::DetectorPropertiesData const& detprop,
+                                             std::vector<art::Ptr<recob::Hit>> const& hits,
+                                             geo::PlaneID::PlaneID_t const plane) const
 {
   // Should we throw instead if the plane is not in the range [0,3)?
   if (plane >= fLinearFunctions.size()) { return 0.; }

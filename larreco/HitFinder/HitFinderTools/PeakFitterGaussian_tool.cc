@@ -36,8 +36,7 @@ namespace reco_tool {
     /// Creates and returns the function with specified number of Gaussians.
     ///
     /// The formula is `gaus(0) + gaus(3) + ... + gaus(3*(nFunc-1)) + [nFunc*3]`.
-    virtual TF1*
-    CreateFunction(size_t nFunc) const
+    virtual TF1* CreateFunction(size_t nFunc) const
     {
       // add the Gaussians first
       std::string formula;
@@ -132,8 +131,7 @@ namespace reco_tool {
   }
 
   // --------------------------------------------------------------------------------------------
-  void
-  PeakFitterGaussian::findPeakParameters(
+  void PeakFitterGaussian::findPeakParameters(
     const std::vector<float>& roiSignalVec,
     const ICandidateHitFinder::HitCandidateVec& hitCandidateVec,
     PeakParamsVec& peakParamsVec,

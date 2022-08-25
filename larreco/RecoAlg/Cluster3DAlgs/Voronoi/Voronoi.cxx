@@ -31,8 +31,7 @@ namespace boost {
     struct point_traits<dcel2d::Point> {
       typedef int coordinate_type;
 
-      static inline coordinate_type
-      get(const dcel2d::Point& point, orientation_2d orient)
+      static inline coordinate_type get(const dcel2d::Point& point, orientation_2d orient)
       {
         return (orient == HORIZONTAL) ? std::get<1>(point) : std::get<0>(point);
       }
@@ -76,10 +75,9 @@ namespace voronoi2d {
 
   //------------------------------------------------------------------------------------------------------------------------------------------
 
-  bool
-  VoronoiDiagram::isLeft(const dcel2d::Point& p0,
-                         const dcel2d::Point& p1,
-                         const dcel2d::Point& pCheck) const
+  bool VoronoiDiagram::isLeft(const dcel2d::Point& p0,
+                              const dcel2d::Point& p1,
+                              const dcel2d::Point& pCheck) const
   {
     // Use the cross product to determine if the check point lies to the left, on or right
     // of the line defined by points p0 and p1
@@ -88,10 +86,9 @@ namespace voronoi2d {
 
   //------------------------------------------------------------------------------------------------------------------------------------------
 
-  double
-  VoronoiDiagram::crossProduct(const dcel2d::Point& p0,
-                               const dcel2d::Point& p1,
-                               const dcel2d::Point& p2) const
+  double VoronoiDiagram::crossProduct(const dcel2d::Point& p0,
+                                      const dcel2d::Point& p1,
+                                      const dcel2d::Point& p2) const
   {
     // Define a quick 2D cross product here since it will used quite a bit!
     double deltaX = std::get<0>(p1) - std::get<0>(p0);
@@ -104,8 +101,7 @@ namespace voronoi2d {
 
   //------------------------------------------------------------------------------------------------------------------------------------------
 
-  double
-  VoronoiDiagram::Area() const
+  double VoronoiDiagram::Area() const
   {
     double area(0.);
 
@@ -129,16 +125,11 @@ namespace voronoi2d {
 
   //------------------------------------------------------------------------------------------------------------------------------------------
 
-  bool
-  compareSiteEventPtrs(const IEvent* left, const IEvent* right)
-  {
-    return *left < *right;
-  }
+  bool compareSiteEventPtrs(const IEvent* left, const IEvent* right) { return *left < *right; }
 
   //------------------------------------------------------------------------------------------------------------------------------------------
 
-  void
-  VoronoiDiagram::buildVoronoiDiagram(const dcel2d::PointList& pointList)
+  void VoronoiDiagram::buildVoronoiDiagram(const dcel2d::PointList& pointList)
   {
     // Insure all the local data structures have been cleared
     fHalfEdgeList.clear();
@@ -285,8 +276,7 @@ namespace voronoi2d {
 
   //------------------------------------------------------------------------------------------------------------------------------------------
 
-  void
-  VoronoiDiagram::buildVoronoiDiagramBoost(const dcel2d::PointList& pointList)
+  void VoronoiDiagram::buildVoronoiDiagramBoost(const dcel2d::PointList& pointList)
   {
     // Insure all the local data structures have been cleared
     fHalfEdgeList.clear();
@@ -359,13 +349,12 @@ namespace voronoi2d {
     return;
   }
 
-  void
-  VoronoiDiagram::boostTranslation(const dcel2d::PointList& pointList,
-                                   const boost::polygon::voronoi_edge<double>* edge,
-                                   const boost::polygon::voronoi_edge<double>* twin,
-                                   BoostEdgeToEdgeMap& boostEdgeToEdgeMap,
-                                   BoostVertexToVertexMap& boostVertexToVertexMap,
-                                   BoostCellToFaceMap& boostCellToFaceMap)
+  void VoronoiDiagram::boostTranslation(const dcel2d::PointList& pointList,
+                                        const boost::polygon::voronoi_edge<double>* edge,
+                                        const boost::polygon::voronoi_edge<double>* twin,
+                                        BoostEdgeToEdgeMap& boostEdgeToEdgeMap,
+                                        BoostVertexToVertexMap& boostVertexToVertexMap,
+                                        BoostCellToFaceMap& boostCellToFaceMap)
   {
     dcel2d::HalfEdge* halfEdge = NULL;
     dcel2d::HalfEdge* twinEdge = NULL;
@@ -450,8 +439,9 @@ namespace voronoi2d {
     return;
   }
 
-  void
-  VoronoiDiagram::handleSiteEvents(BeachLine& beachLine, EventQueue& eventQueue, IEvent* siteEvent)
+  void VoronoiDiagram::handleSiteEvents(BeachLine& beachLine,
+                                        EventQueue& eventQueue,
+                                        IEvent* siteEvent)
   {
     // Insert the new site event into the beach line and recover the leaf for the
     // new arc in the beach line
@@ -507,10 +497,9 @@ namespace voronoi2d {
     return;
   }
 
-  void
-  VoronoiDiagram::handleCircleEvents(BeachLine& beachLine,
-                                     EventQueue& eventQueue,
-                                     IEvent* circleEvent)
+  void VoronoiDiagram::handleCircleEvents(BeachLine& beachLine,
+                                          EventQueue& eventQueue,
+                                          IEvent* circleEvent)
   {
     BSTNode* circleNode = circleEvent->getBSTNode();
     BSTNode* arcNode = circleNode->getAssociated();
@@ -596,8 +585,7 @@ namespace voronoi2d {
     return;
   }
 
-  void
-  VoronoiDiagram::makeLeftCircleEvent(EventQueue& eventQueue, BSTNode* leaf, double beachLine)
+  void VoronoiDiagram::makeLeftCircleEvent(EventQueue& eventQueue, BSTNode* leaf, double beachLine)
   {
 
     // Check status of triplet of site events to the left of this new leaf
@@ -639,8 +627,7 @@ namespace voronoi2d {
     return;
   }
 
-  void
-  VoronoiDiagram::makeRightCircleEvent(EventQueue& eventQueue, BSTNode* leaf, double beachLine)
+  void VoronoiDiagram::makeRightCircleEvent(EventQueue& eventQueue, BSTNode* leaf, double beachLine)
   {
     // Check status of triplet of site events to the left of this new leaf
     if (leaf->getSuccessor()) {
@@ -680,8 +667,10 @@ namespace voronoi2d {
     return;
   }
 
-  IEvent*
-  VoronoiDiagram::makeCircleEvent(BSTNode* arc1, BSTNode* arc2, BSTNode* arc3, double beachLinePos)
+  IEvent* VoronoiDiagram::makeCircleEvent(BSTNode* arc1,
+                                          BSTNode* arc2,
+                                          BSTNode* arc3,
+                                          double beachLinePos)
   {
     // It might be that we don't create a new circle
     IEvent* circle = 0;
@@ -719,13 +708,12 @@ namespace voronoi2d {
     return circle;
   }
 
-  bool
-  VoronoiDiagram::computeCircleCenter(const dcel2d::Coords& p1,
-                                      const dcel2d::Coords& p2,
-                                      const dcel2d::Coords& p3,
-                                      dcel2d::Coords& center,
-                                      double& radius,
-                                      double& delta) const
+  bool VoronoiDiagram::computeCircleCenter(const dcel2d::Coords& p1,
+                                           const dcel2d::Coords& p2,
+                                           const dcel2d::Coords& p3,
+                                           dcel2d::Coords& center,
+                                           double& radius,
+                                           double& delta) const
   {
     // The method is to translate the three points to a system where the first point is at the origin. Then we
     // are looking for a circle that passes through the origin and the two remaining (translated) points. In
@@ -791,13 +779,12 @@ namespace voronoi2d {
     return true;
   }
 
-  bool
-  VoronoiDiagram::computeCircleCenter2(const dcel2d::Coords& p1,
-                                       const dcel2d::Coords& p2,
-                                       const dcel2d::Coords& p3,
-                                       dcel2d::Coords& center,
-                                       double& radius,
-                                       double& delta) const
+  bool VoronoiDiagram::computeCircleCenter2(const dcel2d::Coords& p1,
+                                            const dcel2d::Coords& p2,
+                                            const dcel2d::Coords& p3,
+                                            dcel2d::Coords& center,
+                                            double& radius,
+                                            double& delta) const
   {
     // Compute the circle center as the intersection of the two perpendicular bisectors of rays between the points
     double slope12 = (p2[1] - p1[1]) / (p2[0] - p1[0]);
@@ -826,13 +813,12 @@ namespace voronoi2d {
     return true;
   }
 
-  bool
-  VoronoiDiagram::computeCircleCenter3(const dcel2d::Coords& p1,
-                                       const dcel2d::Coords& p2,
-                                       const dcel2d::Coords& p3,
-                                       dcel2d::Coords& center,
-                                       double& radius,
-                                       double& delta) const
+  bool VoronoiDiagram::computeCircleCenter3(const dcel2d::Coords& p1,
+                                            const dcel2d::Coords& p2,
+                                            const dcel2d::Coords& p3,
+                                            dcel2d::Coords& center,
+                                            double& radius,
+                                            double& delta) const
   {
     // Yet another bisector method to calculate the circle center...
     double temp = p2[0] * p2[0] + p2[1] * p2[1];
@@ -864,8 +850,7 @@ namespace voronoi2d {
     return true;
   }
 
-  void
-  VoronoiDiagram::terminateInfiniteEdges(BeachLine& beachLine, double beachLinePos)
+  void VoronoiDiagram::terminateInfiniteEdges(BeachLine& beachLine, double beachLinePos)
   {
     // Need to complete processing of the beachline, the remaning leaves represent the site points with "infinite"
     // edges which we need to terminate at our bounding box.
@@ -1020,8 +1005,7 @@ namespace voronoi2d {
     return;
   }
 
-  void
-  VoronoiDiagram::getConvexHull(const BSTNode* topNode)
+  void VoronoiDiagram::getConvexHull(const BSTNode* topNode)
   {
     // Assume the input node is the top of the binary search tree and represents
     // the beach line at the end of the sweep algorithm
@@ -1109,8 +1093,7 @@ namespace voronoi2d {
     return;
   }
 
-  VoronoiDiagram::PointPair
-  VoronoiDiagram::getExtremePoints() const
+  VoronoiDiagram::PointPair VoronoiDiagram::getExtremePoints() const
   {
     dcel2d::PointList::const_iterator nextPointItr = fConvexHullList.begin();
     dcel2d::PointList::const_iterator firstPointItr = nextPointItr++;
@@ -1171,8 +1154,7 @@ namespace voronoi2d {
     return extremePoints;
   }
 
-  bool
-  VoronoiDiagram::isInsideConvexHull(const dcel2d::Vertex& vertex) const
+  bool VoronoiDiagram::isInsideConvexHull(const dcel2d::Vertex& vertex) const
   {
     bool insideHull(true);
     dcel2d::Point vertexPos(vertex.getCoords()[0], vertex.getCoords()[1], NULL);
@@ -1199,11 +1181,10 @@ namespace voronoi2d {
     return insideHull;
   }
 
-  bool
-  VoronoiDiagram::isOutsideConvexHull(const dcel2d::Vertex& vertex,
-                                      dcel2d::PointList::const_iterator firstHullPointItr,
-                                      dcel2d::Coords& intersection,
-                                      double& distToConvexHull) const
+  bool VoronoiDiagram::isOutsideConvexHull(const dcel2d::Vertex& vertex,
+                                           dcel2d::PointList::const_iterator firstHullPointItr,
+                                           dcel2d::Coords& intersection,
+                                           double& distToConvexHull) const
   {
     bool outsideHull(false);
     dcel2d::Point vertexPos(vertex.getCoords()[0], vertex.getCoords()[1], NULL);
@@ -1255,8 +1236,7 @@ namespace voronoi2d {
     return outsideHull;
   }
 
-  void
-  VoronoiDiagram::mergeDegenerateVertices()
+  void VoronoiDiagram::mergeDegenerateVertices()
   {
     dcel2d::HalfEdgeList::iterator edgeItr = fHalfEdgeList.begin();
 
@@ -1286,8 +1266,7 @@ namespace voronoi2d {
     return;
   }
 
-  double
-  VoronoiDiagram::ComputeFaceArea()
+  double VoronoiDiagram::ComputeFaceArea()
   {
     // Compute the area by taking advantage of
     // 1) the ability to decompose a convex hull into triangles,
@@ -1425,8 +1404,7 @@ namespace voronoi2d {
     return totalArea;
   }
 
-  void
-  VoronoiDiagram::findBoundingBox(const dcel2d::VertexList& vertexList)
+  void VoronoiDiagram::findBoundingBox(const dcel2d::VertexList& vertexList)
   {
     // Find extremes in x to start
     std::pair<dcel2d::VertexList::const_iterator, dcel2d::VertexList::const_iterator> minMaxItrX =
@@ -1451,8 +1429,8 @@ namespace voronoi2d {
     return;
   }
 
-  VoronoiDiagram::PointPair
-  VoronoiDiagram::findNearestEdge(const dcel2d::Point& point, double& closestDistance) const
+  VoronoiDiagram::PointPair VoronoiDiagram::findNearestEdge(const dcel2d::Point& point,
+                                                            double& closestDistance) const
   {
     // The idea is to find the nearest edge of the convex hull, defined by
     // two adjacent vertices of the hull, to the input point.
@@ -1512,8 +1490,7 @@ namespace voronoi2d {
     return closestEdge;
   }
 
-  double
-  VoronoiDiagram::findNearestDistance(const dcel2d::Point& point) const
+  double VoronoiDiagram::findNearestDistance(const dcel2d::Point& point) const
   {
     double closestDistance;
 

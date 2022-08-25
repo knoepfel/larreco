@@ -11,17 +11,15 @@ namespace cmtool {
     this->reconfigure();
   }
 
-  void
-  CBAlgoPolyOverlap::reconfigure()
+  void CBAlgoPolyOverlap::reconfigure()
   {
 
     //not sure what needs to be reset/reconfigured for this algo
 
   } //end reconfigure function
 
-  bool
-  CBAlgoPolyOverlap::Bool(const ::cluster::ClusterParamsAlg& cluster1,
-                          const ::cluster::ClusterParamsAlg& cluster2)
+  bool CBAlgoPolyOverlap::Bool(const ::cluster::ClusterParamsAlg& cluster1,
+                               const ::cluster::ClusterParamsAlg& cluster2)
   {
 
     if ((cluster1.GetParams().N_Hits < _min_hits) || (cluster2.GetParams().N_Hits < _min_hits))

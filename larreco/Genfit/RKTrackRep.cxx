@@ -38,11 +38,10 @@
 
 #define MINSTEP 0.001 // minimum step [cm] for Runge Kutta and iteration to POCA
 
-void
-genf::RKTrackRep::setData(const TMatrixT<Double_t>& st,
-                          const GFDetPlane& pl,
-                          const TMatrixT<Double_t>* cov,
-                          const TMatrixT<double>* aux)
+void genf::RKTrackRep::setData(const TMatrixT<Double_t>& st,
+                               const GFDetPlane& pl,
+                               const TMatrixT<Double_t>* cov,
+                               const TMatrixT<double>* aux)
 {
   if (aux != NULL) { fCacheSpu = (*aux)(0, 0); }
   else {
@@ -59,8 +58,7 @@ genf::RKTrackRep::setData(const TMatrixT<Double_t>& st,
   fSpu = fCacheSpu;
 }
 
-const TMatrixT<double>*
-genf::RKTrackRep::getAuxInfo(const GFDetPlane& pl)
+const TMatrixT<double>* genf::RKTrackRep::getAuxInfo(const GFDetPlane& pl)
 {
 
   if (pl != fCachePlane) {
@@ -283,8 +281,7 @@ genf::RKTrackRep::RKTrackRep(const GFDetPlane& pl, const TVector3& mom, const in
                pow((v.Z() / pw - w.Z() * pv / (pw * pw)), 2.) * stdMomErr2.Z() * stdMomErr2.Z();
 }
 
-void
-genf::RKTrackRep::setPDG(int i)
+void genf::RKTrackRep::setPDG(int i)
 {
   fPdg = i;
   TParticlePDG* part = TDatabasePDG::Instance()->GetParticle(fPdg);
@@ -297,14 +294,12 @@ genf::RKTrackRep::setPDG(int i)
   fCharge = part->Charge() / (3.);
 }
 
-int
-genf::RKTrackRep::getPDG()
+int genf::RKTrackRep::getPDG()
 {
   return fPdg;
 }
 
-TVector3
-genf::RKTrackRep::getPos(const GFDetPlane& pl)
+TVector3 genf::RKTrackRep::getPos(const GFDetPlane& pl)
 {
   if (pl != fRefPlane) {
     TMatrixT<Double_t> s(5, 1);
@@ -314,8 +309,7 @@ genf::RKTrackRep::getPos(const GFDetPlane& pl)
   return fRefPlane.getO() + fState[3][0] * fRefPlane.getU() + fState[4][0] * fRefPlane.getV();
 }
 
-TVector3
-genf::RKTrackRep::getMom(const GFDetPlane& pl)
+TVector3 genf::RKTrackRep::getMom(const GFDetPlane& pl)
 {
   TMatrixT<Double_t> statePred(fState);
   TVector3 retmom;
@@ -331,8 +325,7 @@ genf::RKTrackRep::getMom(const GFDetPlane& pl)
   return retmom;
 }
 
-TVector3
-genf::RKTrackRep::getMomLast(const GFDetPlane& pl)
+TVector3 genf::RKTrackRep::getMomLast(const GFDetPlane& pl)
 {
   TMatrixT<Double_t> statePred(fLastState);
   TVector3 retmom;
@@ -342,8 +335,7 @@ genf::RKTrackRep::getMomLast(const GFDetPlane& pl)
   return retmom;
 }
 
-void
-genf::RKTrackRep::getPosMom(const GFDetPlane& pl, TVector3& pos, TVector3& mom)
+void genf::RKTrackRep::getPosMom(const GFDetPlane& pl, TVector3& pos, TVector3& mom)
 {
   TMatrixT<Double_t> statePred(fState);
   if (pl != fRefPlane) {
@@ -357,8 +349,7 @@ genf::RKTrackRep::getPosMom(const GFDetPlane& pl, TVector3& pos, TVector3& mom)
   pos = pl.getO() + (statePred[3][0] * pl.getU()) + (statePred[4][0] * pl.getV());
 }
 
-void
-genf::RKTrackRep::extrapolateToPoint(const TVector3& pos, TVector3& poca, TVector3& dirInPoca)
+void genf::RKTrackRep::extrapolateToPoint(const TVector3& pos, TVector3& poca, TVector3& dirInPoca)
 {
 
   static const int maxIt(30);
@@ -404,10 +395,9 @@ genf::RKTrackRep::extrapolateToPoint(const TVector3& pos, TVector3& poca, TVecto
   dirInPoca.SetXYZ(state7[3][0], state7[4][0], state7[5][0]);
 }
 
-TVector3
-genf::RKTrackRep::poca2Line(const TVector3& extr1,
-                            const TVector3& extr2,
-                            const TVector3& point) const
+TVector3 genf::RKTrackRep::poca2Line(const TVector3& extr1,
+                                     const TVector3& extr2,
+                                     const TVector3& point) const
 {
 
   TVector3 theWire = extr2 - extr1;
@@ -422,12 +412,11 @@ genf::RKTrackRep::poca2Line(const TVector3& extr1,
   return (extr1 + t * theWire);
 }
 
-void
-genf::RKTrackRep::extrapolateToLine(const TVector3& point1,
-                                    const TVector3& point2,
-                                    TVector3& poca,
-                                    TVector3& dirInPoca,
-                                    TVector3& poca_onwire)
+void genf::RKTrackRep::extrapolateToLine(const TVector3& point1,
+                                         const TVector3& point2,
+                                         TVector3& poca,
+                                         TVector3& dirInPoca,
+                                         TVector3& poca_onwire)
 {
   static const int maxIt(30);
 
@@ -476,10 +465,9 @@ genf::RKTrackRep::extrapolateToLine(const TVector3& point1,
   poca_onwire = poca2Line(point1, point2, poca);
 }
 
-double
-genf::RKTrackRep::extrapolate(const GFDetPlane& pl,
-                              TMatrixT<Double_t>& statePred,
-                              TMatrixT<Double_t>& covPred)
+double genf::RKTrackRep::extrapolate(const GFDetPlane& pl,
+                                     TMatrixT<Double_t>& statePred,
+                                     TMatrixT<Double_t>& covPred)
 {
 
   TMatrixT<Double_t> cov7x7(7, 7);
@@ -605,8 +593,7 @@ genf::RKTrackRep::extrapolate(const GFDetPlane& pl,
   return coveredDistance;
 }
 
-double
-genf::RKTrackRep::extrapolate(const GFDetPlane& pl, TMatrixT<Double_t>& statePred)
+double genf::RKTrackRep::extrapolate(const GFDetPlane& pl, TMatrixT<Double_t>& statePred)
 {
 
   TVector3 o = fRefPlane.getO();
@@ -692,14 +679,13 @@ genf::RKTrackRep::extrapolate(const GFDetPlane& pl, TMatrixT<Double_t>& statePre
 //
 // Authors: R.Brun, M.Hansroul, V.Perevoztchikov (Geant3)
 //
-bool
-genf::RKTrackRep::RKutta(const GFDetPlane& plane,
-                         double* P,
-                         double& coveredDistance,
-                         std::vector<TVector3>& points,
-                         std::vector<double>& pointPaths,
-                         const double& /* maxLen */, // currently not used
-                         bool calcCov) const
+bool genf::RKTrackRep::RKutta(const GFDetPlane& plane,
+                              double* P,
+                              double& coveredDistance,
+                              std::vector<TVector3>& points,
+                              std::vector<double>& pointPaths,
+                              const double& /* maxLen */, // currently not used
+                              bool calcCov) const
 {
 
   static const double EC = .000149896229; // c/(2*10^12) resp. c/2Tera
@@ -1145,10 +1131,9 @@ genf::RKTrackRep::RKutta(const GFDetPlane& plane,
   return (true);
 }
 
-double
-genf::RKTrackRep::Extrap(const GFDetPlane& plane,
-                         TMatrixT<Double_t>* state,
-                         TMatrixT<Double_t>* cov) const
+double genf::RKTrackRep::Extrap(const GFDetPlane& plane,
+                                TMatrixT<Double_t>* state,
+                                TMatrixT<Double_t>* cov) const
 {
 
   static const int maxNumIt(2000);
@@ -1325,8 +1310,7 @@ genf::RKTrackRep::Extrap(const GFDetPlane& plane,
   return sumDistance;
 }
 
-void
-genf::RKTrackRep::rescaleCovOffDiags()
+void genf::RKTrackRep::rescaleCovOffDiags()
 {
 
   for (int i = 0; i < fCov.GetNrows(); ++i) {

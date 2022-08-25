@@ -73,11 +73,7 @@ namespace apa {
     uint32_t FirstChannelInView(geo::View_t geoview, uint32_t chan) const;
     uint32_t FirstChannelInView(uint32_t chan) const;
     unsigned int ChannelsInAPAView(APAView_t apaview) const;
-    unsigned int
-    ChannelsPerAPA() const
-    {
-      return fChannelsPerAPA;
-    };
+    unsigned int ChannelsPerAPA() const { return fChannelsPerAPA; };
 
   private:
     art::ServiceHandle<geo::Geometry const> fGeom; // handle to geometry service

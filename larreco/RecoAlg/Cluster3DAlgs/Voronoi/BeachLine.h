@@ -69,108 +69,32 @@ namespace voronoi2d {
     /**
      *  @brief recover the data members
      */
-    int
-    getDepth() const
-    {
-      return m_depth;
-    }
-    IEvent*
-    getEvent() const
-    {
-      return m_event;
-    }
-    BSTNode*
-    getParent() const
-    {
-      return m_parent;
-    }
-    BSTNode*
-    getLeftChild() const
-    {
-      return m_leftChild;
-    }
-    BSTNode*
-    getRightChild() const
-    {
-      return m_rightChild;
-    }
-    BSTNode*
-    getPredecessor() const
-    {
-      return m_predecessor;
-    }
-    BSTNode*
-    getSuccessor() const
-    {
-      return m_successor;
-    }
-    BSTNode*
-    getAssociated() const
-    {
-      return m_associated;
-    }
+    int getDepth() const { return m_depth; }
+    IEvent* getEvent() const { return m_event; }
+    BSTNode* getParent() const { return m_parent; }
+    BSTNode* getLeftChild() const { return m_leftChild; }
+    BSTNode* getRightChild() const { return m_rightChild; }
+    BSTNode* getPredecessor() const { return m_predecessor; }
+    BSTNode* getSuccessor() const { return m_successor; }
+    BSTNode* getAssociated() const { return m_associated; }
 
-    dcel2d::HalfEdge*
-    getHalfEdge() const
-    {
-      return m_halfEdge;
-    }
-    dcel2d::Face*
-    getFace() const
-    {
-      return m_face;
-    }
+    dcel2d::HalfEdge* getHalfEdge() const { return m_halfEdge; }
+    dcel2d::Face* getFace() const { return m_face; }
 
     /**
      *  @brief Allow setting of the points
      */
-    void
-    setParent(BSTNode* node)
-    {
-      m_parent = node;
-    }
-    void
-    setLeftChild(BSTNode* node)
-    {
-      m_leftChild = node;
-    }
-    void
-    setRightChild(BSTNode* node)
-    {
-      m_rightChild = node;
-    }
-    void
-    setPredecessor(BSTNode* node)
-    {
-      m_predecessor = node;
-    }
-    void
-    setSuccessor(BSTNode* node)
-    {
-      m_successor = node;
-    }
-    void
-    setAssociated(BSTNode* node)
-    {
-      m_associated = node;
-    }
+    void setParent(BSTNode* node) { m_parent = node; }
+    void setLeftChild(BSTNode* node) { m_leftChild = node; }
+    void setRightChild(BSTNode* node) { m_rightChild = node; }
+    void setPredecessor(BSTNode* node) { m_predecessor = node; }
+    void setSuccessor(BSTNode* node) { m_successor = node; }
+    void setAssociated(BSTNode* node) { m_associated = node; }
 
-    void
-    setHalfEdge(dcel2d::HalfEdge* half)
-    {
-      m_halfEdge = half;
-    }
-    void
-    setFace(dcel2d::Face* face)
-    {
-      m_face = face;
-    }
+    void setHalfEdge(dcel2d::HalfEdge* half) { m_halfEdge = half; }
+    void setFace(dcel2d::Face* face) { m_face = face; }
 
-    void
-    setDepth(int depth)
-    {
-      m_depth = depth;
-    }
+    void setDepth(int depth) { m_depth = depth; }
     void setDepth();
 
     /**
@@ -202,33 +126,13 @@ namespace voronoi2d {
   public:
     BeachLine() : m_root(NULL) { m_nodeVec.clear(); }
 
-    bool
-    isEmpty() const
-    {
-      return m_root == NULL;
-    }
-    void
-    setEmpty()
-    {
-      m_root = NULL;
-    }
-    const BSTNode*
-    getTopNode() const
-    {
-      return m_root;
-    }
-    BSTNode*
-    findBestLeaf(const IEvent* event) const
-    {
-      return findBestLeaf(event, m_root);
-    }
+    bool isEmpty() const { return m_root == NULL; }
+    void setEmpty() { m_root = NULL; }
+    const BSTNode* getTopNode() const { return m_root; }
+    BSTNode* findBestLeaf(const IEvent* event) const { return findBestLeaf(event, m_root); }
     BSTNode* insertNewLeaf(IEvent*);
     BSTNode* removeLeaf(BSTNode*);
-    int
-    getHeight() const
-    {
-      return getTreeDepth(m_root);
-    }
+    int getHeight() const { return getTreeDepth(m_root); }
     int countNodes() const;
     int countLeaves() const;
     int traverseBeach() const;

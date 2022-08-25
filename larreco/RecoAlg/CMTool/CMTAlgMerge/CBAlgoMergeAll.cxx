@@ -8,9 +8,8 @@ namespace cmtool {
   {}
 
   //--------------------------------------------------------
-  bool
-  CBAlgoMergeAll::Bool(const ::cluster::ClusterParamsAlg& cluster1,
-                       const ::cluster::ClusterParamsAlg& cluster2)
+  bool CBAlgoMergeAll::Bool(const ::cluster::ClusterParamsAlg& cluster1,
+                            const ::cluster::ClusterParamsAlg& cluster2)
   //--------------------------------------------------------
   {
     if (cluster1.GetNHits() && cluster2.GetNHits())

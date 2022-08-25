@@ -90,11 +90,7 @@ namespace hit {
     void RunCCHitFinder(std::vector<recob::Wire> const& Wires);
 
     /// Returns (and loses) the collection of reconstructed hits
-    std::vector<recob::Hit>&&
-    YieldHits()
-    {
-      return std::move(allhits);
-    }
+    std::vector<recob::Hit>&& YieldHits() { return std::move(allhits); }
 
     /// Print the fit statistics
     template <typename Stream>
@@ -188,11 +184,7 @@ namespace hit {
 
       void AddMultiGaus(unsigned int nGaus);
 
-      void
-      AddFast()
-      {
-        ++FastFits;
-      }
+      void AddFast() { ++FastFits; }
 
     } FitStats_t;
 
@@ -233,8 +225,7 @@ namespace hit {
 //===  Template implementation
 //===
 template <typename Stream>
-void
-hit::CCHitFinderAlg::PrintStats(Stream& out) const
+void hit::CCHitFinderAlg::PrintStats(Stream& out) const
 {
 
   out << "CCHitFinderAlg fit statistics:";

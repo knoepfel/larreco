@@ -71,8 +71,7 @@ namespace cluster {
     double trackness;    ///< got soul
     double offaxis_hits; ///< got brain
 
-    void
-    Clear()
+    void Clear()
     {
       start_point.Clear();
       end_point.Clear();
@@ -117,8 +116,7 @@ namespace cluster {
     }
 
     template <typename Stream>
-    void
-    Report(Stream& os) const
+    void Report(Stream& os) const
     {
 
       os << "ClusterParams report: \n"

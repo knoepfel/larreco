@@ -9,8 +9,7 @@ namespace quad {
   {}
 
   // -------------------------------------------------------------------------
-  std::unique_ptr<TH2F>
-  HeatMap::AsTH2() const
+  std::unique_ptr<TH2F> HeatMap::AsTH2() const
   {
     auto h = std::make_unique<TH2F>("", "", Nz, minz, maxz, Nx, minx, maxx);
     for (unsigned int i = 0; i < map.size(); ++i) {

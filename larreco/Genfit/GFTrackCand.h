@@ -90,8 +90,7 @@ namespace genf {
     // Accessors -----------------------
     /** @brief Get detector ID and cluster index (hitId) for hit number i
      */
-    void
-    getHit(unsigned int i, unsigned int& detId, unsigned int& hitId) const
+    void getHit(unsigned int i, unsigned int& detId, unsigned int& hitId) const
     {
       if (i >= getNHits())
         throw GFException(
@@ -103,8 +102,7 @@ namespace genf {
     /** @brief Get detector ID and cluster index (hitId) for
      * hit number i with ordering parameter rho
      */
-    void
-    getHit(unsigned int i, unsigned int& detId, unsigned int& hitId, double& rho) const
+    void getHit(unsigned int i, unsigned int& detId, unsigned int& hitId, double& rho) const
     {
       if (i >= getNHits())
         throw GFException(
@@ -119,11 +117,10 @@ namespace genf {
     /** @brief Get detector ID and cluster index (hitId) for
      * hit number i with plane id
      */
-    void
-    getHitWithPlane(unsigned int i,
-                    unsigned int& detId,
-                    unsigned int& hitId,
-                    unsigned int& planeId) const
+    void getHitWithPlane(unsigned int i,
+                         unsigned int& detId,
+                         unsigned int& hitId,
+                         unsigned int& planeId) const
     {
       if (i >= getNHits())
         throw GFException(
@@ -134,39 +131,14 @@ namespace genf {
       planeId = fPlaneId.at(i);
     }
 
-    unsigned int
-    getNHits() const
-    {
-      return fDetId.size();
-    }
-    double
-    getCurv() const
-    {
-      return fCurv;
-    }
-    double
-    getDip() const
-    {
-      return fDip;
-    }
-    bool
-    inverted() const
-    {
-      return fInv;
-    }
+    unsigned int getNHits() const { return fDetId.size(); }
+    double getCurv() const { return fCurv; }
+    double getDip() const { return fDip; }
+    bool inverted() const { return fInv; }
     std::vector<unsigned int> GetHitIDs(int detId = -1);
-    std::vector<unsigned int>
-    GetDetIDs() const
-    {
-      return fDetId;
-    }
-    std::vector<double>
-    GetRhos() const
-    {
-      return fRho;
-    }
-    std::set<unsigned int>
-    GetUniqueDetIDs() const
+    std::vector<unsigned int> GetDetIDs() const { return fDetId; }
+    std::vector<double> GetRhos() const { return fRho; }
+    std::set<unsigned int> GetUniqueDetIDs() const
     {
       std::set<unsigned int> retVal;
       for (unsigned int i = 0; i < fDetId.size(); ++i) {
@@ -176,78 +148,33 @@ namespace genf {
     }
     /** @brief get the MCT track id, for MC simulations - def. value -1
      */
-    int
-    getMcTrackId() const
-    {
-      return fMcTrackId;
-    }
+    int getMcTrackId() const { return fMcTrackId; }
     /** @brief get the seed value for track: pos */
-    TVector3
-    getPosSeed() const
-    {
-      return fPosSeed;
-    }
+    TVector3 getPosSeed() const { return fPosSeed; }
     /** @brief get the seed value for track: direction */
-    TVector3
-    getDirSeed() const
-    {
-      return fDirSeed;
-    }
+    TVector3 getDirSeed() const { return fDirSeed; }
     /** @brief get the seed value for track: qoverp */
-    double
-    getQoverPseed() const
-    {
-      return fQoverpSeed;
-    }
-    TVector3
-    getPosError() const
-    {
-      return fPosError;
-    }
+    double getQoverPseed() const { return fQoverpSeed; }
+    TVector3 getPosError() const { return fPosError; }
     /** @brief get the seed value for track: error on direction (standard deviation)*/
-    TVector3
-    getDirError() const
-    {
-      return fDirError;
-    }
+    TVector3 getDirError() const { return fDirError; }
     /** @brief get the PDG code*/
-    int
-    getPdgCode() const
-    {
-      return fPdg;
-    }
+    int getPdgCode() const { return fPdg; }
 
     // Modifiers -----------------------
     void addHit(unsigned int detId, unsigned int hitId, double rho = 0., unsigned int planeId = 0);
-    void
-    setCurv(double c)
-    {
-      fCurv = c;
-    }
-    void
-    setDip(double d)
-    {
-      fDip = d;
-    }
-    void
-    setInverted(bool f = true)
-    {
-      fInv = f;
-    }
+    void setCurv(double c) { fCurv = c; }
+    void setDip(double d) { fDip = d; }
+    void setInverted(bool f = true) { fInv = f; }
     /** @brief set the MCT track id, for MC simulations
      */
-    void
-    setMcTrackId(int i)
-    {
-      fMcTrackId = i;
-    }
+    void setMcTrackId(int i) { fMcTrackId = i; }
     /** @brief Test if hit already is part of this track candidate
      */
     bool HitInTrack(unsigned int detId, unsigned int hitId);
     /** @brief set the seed values for track: pos, direction, q/p
      */
-    void
-    setTrackSeed(const TVector3& p, const TVector3& d, double qop)
+    void setTrackSeed(const TVector3& p, const TVector3& d, double qop)
     {
       fPosSeed = p;
       fDirSeed = d;
@@ -261,11 +188,7 @@ namespace genf {
                            TVector3 dirError = TVector3(1.0, 1.0, 1.0));
     /** @brief set a particle hypothesis in form of a PDG code
      */
-    void
-    setPdgCode(int pdgCode)
-    {
-      fPdg = pdgCode;
-    }
+    void setPdgCode(int pdgCode) { fPdg = pdgCode; }
 
     void append(const GFTrackCand&);
 
@@ -294,8 +217,7 @@ namespace genf {
     int fMcTrackId; //if MC simulation, store the mct track id here
     // Private Methods -----------------
 
-    virtual void
-    Print(Option_t*) const
+    virtual void Print(Option_t*) const
     {
       throw GFException(
         std::string(__func__) + "::Print(Option_t*) not available", __LINE__, __FILE__)

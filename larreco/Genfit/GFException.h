@@ -72,18 +72,13 @@ public:
   virtual ~GFException() throw();
 
   /** @brief set fatal flag. if this is true, the fit stops for this current track repr. */
-  GFException&
-  setFatal(bool b = true)
+  GFException& setFatal(bool b = true)
   {
     fFatal = b;
     return *this;
   }
   /** @brief get fatal flag. */
-  bool
-  isFatal()
-  {
-    return fFatal;
-  }
+  bool isFatal() { return fFatal; }
   /** @brief set list of numbers with description */
   GFException& setNumbers(std::string, const std::vector<double>&);
   /** @brief set list of matrices with description */
@@ -95,17 +90,9 @@ public:
   //! standard error message handling for exceptions. use like "std::cerr << e.what();"
   virtual const char* what() const throw();
 
-  std::string
-  getExcString()
-  {
-    return fExcString;
-  }
+  std::string getExcString() { return fExcString; }
 
-  static void
-  quiet(bool b = true)
-  {
-    fQuiet = b;
-  }
+  static void quiet(bool b = true) { fQuiet = b; }
 };
 
 namespace genf {
@@ -124,8 +111,7 @@ namespace genf {
 
   /// Shortcut to write one ROOT object into a string
   template <class ROOTOBJ>
-  std::string
-  ROOTobjectToString(const ROOTOBJ& obj)
+  std::string ROOTobjectToString(const ROOTOBJ& obj)
   {
     std::ostringstream sstr;
     PrintROOTobject(sstr, obj);
@@ -138,15 +124,13 @@ namespace genf {
 // template definitions
 //
 template <class ROOTOBJ>
-void
-genf::PrintROOTobject(std::ostream&, const ROOTOBJ& obj)
+void genf::PrintROOTobject(std::ostream&, const ROOTOBJ& obj)
 {
   obj.Print();
 }
 
 template <typename T>
-void
-genf::PrintROOTmatrix(std::ostream& out, const TMatrixT<T>& m)
+void genf::PrintROOTmatrix(std::ostream& out, const TMatrixT<T>& m)
 {
 
   constexpr std::streamsize fw = 11;

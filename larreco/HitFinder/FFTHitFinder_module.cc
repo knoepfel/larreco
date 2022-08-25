@@ -80,8 +80,7 @@ namespace hit {
   //  and looks for hits as areas between local minima that have signal above
   //  threshold.
   //-------------------------------------------------
-  void
-  FFTHitFinder::produce(art::Event& evt)
+  void FFTHitFinder::produce(art::Event& evt)
   {
 
     // this object contains the hit collection

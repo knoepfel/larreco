@@ -24,24 +24,21 @@ pma::Segment3D::Segment3D(pma::Track3D* trk, pma::Node3D* vstart, pma::Node3D* v
   if (vstart->Cryo() == vstop->Cryo()) fCryo = vstart->Cryo();
 }
 
-double
-pma::Segment3D::GetDistance2To(const TVector3& p3d) const
+double pma::Segment3D::GetDistance2To(const TVector3& p3d) const
 {
   pma::Node3D* v0 = static_cast<pma::Node3D*>(prev);
   pma::Node3D* v1 = static_cast<pma::Node3D*>(next);
   return GetDist2(p3d, v0->Point3D(), v1->Point3D());
 }
 
-double
-pma::Segment3D::GetDistance2To(const TVector2& p2d, unsigned int view) const
+double pma::Segment3D::GetDistance2To(const TVector2& p2d, unsigned int view) const
 {
   pma::Node3D* v0 = static_cast<pma::Node3D*>(prev);
   pma::Node3D* v1 = static_cast<pma::Node3D*>(next);
   return GetDist2(p2d, v0->Projection2D(view), v1->Projection2D(view));
 }
 
-double
-pma::Segment3D::SumDist2Hits(void) const
+double pma::Segment3D::SumDist2Hits(void) const
 {
   pma::Node3D* v0 = static_cast<pma::Node3D*>(prev);
   pma::Node3D* v1 = static_cast<pma::Node3D*>(next);
@@ -58,8 +55,7 @@ pma::Segment3D::SumDist2Hits(void) const
   return sum;
 }
 
-pma::Vector3D
-pma::Segment3D::GetDirection3D(void) const
+pma::Vector3D pma::Segment3D::GetDirection3D(void) const
 {
   pma::Node3D* v0 = static_cast<pma::Node3D*>(prev);
   pma::Node3D* v1 = static_cast<pma::Node3D*>(next);
@@ -69,8 +65,7 @@ pma::Segment3D::GetDirection3D(void) const
   return dir.Unit();
 }
 
-TVector3
-pma::Segment3D::GetProjection(const TVector2& p, unsigned int view) const
+TVector3 pma::Segment3D::GetProjection(const TVector2& p, unsigned int view) const
 {
   pma::Node3D* vStart = static_cast<pma::Node3D*>(prev);
   pma::Node3D* vStop = static_cast<pma::Node3D*>(next);
@@ -116,8 +111,7 @@ pma::Segment3D::GetProjection(const TVector2& p, unsigned int view) const
   return result;
 }
 
-TVector3
-pma::Segment3D::GetUnconstrainedProj3D(const TVector2& p2d, unsigned int view) const
+TVector3 pma::Segment3D::GetUnconstrainedProj3D(const TVector2& p2d, unsigned int view) const
 {
   pma::Node3D* vStart = static_cast<pma::Node3D*>(prev);
   pma::Node3D* vStop = static_cast<pma::Node3D*>(next);
@@ -152,8 +146,7 @@ pma::Segment3D::GetUnconstrainedProj3D(const TVector2& p2d, unsigned int view) c
   }
 }
 
-void
-pma::Segment3D::SetProjection(pma::Hit3D& h) const
+void pma::Segment3D::SetProjection(pma::Hit3D& h) const
 {
   pma::Node3D* vStart = static_cast<pma::Node3D*>(prev);
   pma::Node3D* vStop = static_cast<pma::Node3D*>(next);
@@ -198,8 +191,7 @@ pma::Segment3D::SetProjection(pma::Hit3D& h) const
   }
 }
 
-double
-pma::Segment3D::Length2(void) const
+double pma::Segment3D::Length2(void) const
 {
   if (prev && next)
     return pma::Dist2(((pma::Node3D*)prev)->Point3D(), ((pma::Node3D*)next)->Point3D());
@@ -209,8 +201,7 @@ pma::Segment3D::Length2(void) const
   }
 }
 
-double
-pma::Segment3D::GetDist2(const TVector3& psrc, const TVector3& p0, const TVector3& p1)
+double pma::Segment3D::GetDist2(const TVector3& psrc, const TVector3& p0, const TVector3& p1)
 {
   pma::Vector3D v0(psrc.X() - p0.X(), psrc.Y() - p0.Y(), psrc.Z() - p0.Z());
   pma::Vector3D v1(p1.X() - p0.X(), p1.Y() - p0.Y(), p1.Z() - p0.Z());
@@ -254,8 +245,7 @@ pma::Segment3D::GetDist2(const TVector3& psrc, const TVector3& p0, const TVector
   }
 }
 
-double
-pma::Segment3D::GetDist2(const TVector2& psrc, const TVector2& p0, const TVector2& p1)
+double pma::Segment3D::GetDist2(const TVector2& psrc, const TVector2& p0, const TVector2& p1)
 {
   pma::Vector2D v0(psrc.X() - p0.X(), psrc.Y() - p0.Y());
   pma::Vector2D v1(p1.X() - p0.X(), p1.Y() - p0.Y());

@@ -50,19 +50,14 @@ namespace reco {
     m_hit = toCopy.m_hit;
   }
 
-  std::ostream&
-  operator<<(std::ostream& o, const ClusterHit2D& c)
+  std::ostream& operator<<(std::ostream& o, const ClusterHit2D& c)
   {
     o << c.getHit();
 
     return o;
   }
 
-  bool
-  operator<(const ClusterHit2D& a, const ClusterHit2D& b)
-  {
-    return a.getHit() < b.getHit();
-  }
+  bool operator<(const ClusterHit2D& a, const ClusterHit2D& b) { return a.getHit() < b.getHit(); }
 
   ClusterHit3D::ClusterHit3D()
     : fID(std::numeric_limits<size_t>::max())
@@ -139,22 +134,21 @@ namespace reco {
     fWireIDVector = toCopy.fWireIDVector;
   }
 
-  void
-  ClusterHit3D::initialize(size_t id,
-                           unsigned int statusBits,
-                           const Eigen::Vector3f& position,
-                           float totalCharge,
-                           float avePeakTime,
-                           float deltaPeakTime,
-                           float sigmaPeakTime,
-                           float hitChiSquare,
-                           float overlapFraction,
-                           float chargeAsymmetry,
-                           float docaToAxis,
-                           float arclenToPoca,
-                           const ClusterHit2DVec& hitVec,
-                           const std::vector<float>& hitDelTSigVec,
-                           const std::vector<geo::WireID>& wireIDs)
+  void ClusterHit3D::initialize(size_t id,
+                                unsigned int statusBits,
+                                const Eigen::Vector3f& position,
+                                float totalCharge,
+                                float avePeakTime,
+                                float deltaPeakTime,
+                                float sigmaPeakTime,
+                                float hitChiSquare,
+                                float overlapFraction,
+                                float chargeAsymmetry,
+                                float docaToAxis,
+                                float arclenToPoca,
+                                const ClusterHit2DVec& hitVec,
+                                const std::vector<float>& hitDelTSigVec,
+                                const std::vector<geo::WireID>& wireIDs)
   {
     fID = id;
     fStatusBits = statusBits;
@@ -175,14 +169,9 @@ namespace reco {
     return;
   }
 
-  void
-  ClusterHit3D::setWireID(const geo::WireID& wid) const
-  {
-    fWireIDVector[wid.Plane] = wid;
-  }
+  void ClusterHit3D::setWireID(const geo::WireID& wid) const { fWireIDVector[wid.Plane] = wid; }
 
-  std::ostream&
-  operator<<(std::ostream& o, const ClusterHit3D& c)
+  std::ostream& operator<<(std::ostream& o, const ClusterHit3D& c)
   {
     o << "ClusterHit3D has " << c.getHits().size() << " hits associated";
 
@@ -218,16 +207,14 @@ namespace reco {
     , m_aveHitDoca(aveHitDoca)
   {}
 
-  void
-  PrincipalComponents::flipAxis(size_t axisDir)
+  void PrincipalComponents::flipAxis(size_t axisDir)
   {
     m_eigenVectors.row(axisDir) = -m_eigenVectors.row(axisDir);
 
     return;
   }
 
-  std::ostream&
-  operator<<(std::ostream& o, const PrincipalComponents& a)
+  std::ostream& operator<<(std::ostream& o, const PrincipalComponents& a)
   {
     if (a.m_svdOK) {
       o << std::setiosflags(std::ios::fixed) << std::setprecision(2);
@@ -250,8 +237,7 @@ namespace reco {
     return o;
   }
 
-  bool
-  operator<(const PrincipalComponents& a, const PrincipalComponents& b)
+  bool operator<(const PrincipalComponents& a, const PrincipalComponents& b)
   {
     if (a.m_svdOK && b.m_svdOK) return a.m_eigenValues(0) > b.m_eigenValues(0);
 
@@ -284,8 +270,7 @@ namespace reco {
   //----------------------------------------------------------------------
   //  Addition operator.
   //
-  Cluster3D
-  Cluster3D::operator+(Cluster3D a)
+  Cluster3D Cluster3D::operator+(Cluster3D a)
   {
     /*
     // throw exception if the clusters are not from the same plane
@@ -339,8 +324,7 @@ namespace reco {
   //----------------------------------------------------------------------
   // ostream operator.
   //
-  std::ostream&
-  operator<<(std::ostream& o, const Cluster3D& c)
+  std::ostream& operator<<(std::ostream& o, const Cluster3D& c)
   {
     o << std::setiosflags(std::ios::fixed) << std::setprecision(2);
     o << "Cluster ID " << std::setw(5) << std::right << c.getClusterIdx();
@@ -359,8 +343,7 @@ namespace reco {
   //----------------------------------------------------------------------
   // < operator.
   //
-  bool
-  operator<(const Cluster3D& a, const Cluster3D& b)
+  bool operator<(const Cluster3D& a, const Cluster3D& b)
   {
     /*
     if(a.View() != b.View())
@@ -379,8 +362,7 @@ namespace reco {
 
   //------------------------------------------------------------------------------------------------------------------------------------------
 
-  void
-  RecobClusterParameters::UpdateParameters(const reco::ClusterHit2D* clusterHit)
+  void RecobClusterParameters::UpdateParameters(const reco::ClusterHit2D* clusterHit)
   {
     /**
      *  @brief a utility routine for building 3D clusters to keep basic info up to date

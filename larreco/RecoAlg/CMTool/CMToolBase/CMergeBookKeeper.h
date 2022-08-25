@@ -68,8 +68,7 @@ namespace cmtool {
     */
     void PassResult(std::vector<std::vector<unsigned short>>& result) const;
 
-    std::vector<std::vector<unsigned short>>
-    GetResult() const
+    std::vector<std::vector<unsigned short>> GetResult() const
     {
       std::vector<std::vector<unsigned short>> result;
       PassResult(result);

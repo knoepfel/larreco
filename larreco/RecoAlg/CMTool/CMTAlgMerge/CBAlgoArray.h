@@ -33,8 +33,7 @@ namespace cmtool {
     virtual ~CBAlgoArray(){};
 
     /// A simple method to add a one merging step
-    void
-    AddAlgo(CBoolAlgoBase* algo, bool ask_and = true)
+    void AddAlgo(CBoolAlgoBase* algo, bool ask_and = true)
     {
       if (ask_and) _last_and_algo_index = _algo_array.size();
       _algo_array.push_back(algo);
@@ -75,8 +74,7 @@ namespace cmtool {
     virtual void Report();
 
     /// Function to set verbosity
-    virtual void
-    SetVerbose(bool doit = true)
+    virtual void SetVerbose(bool doit = true)
     {
       for (auto& algo : _algo_array)
         algo->SetVerbose(doit);

@@ -50,8 +50,7 @@ genf::GFDaf::~GFDaf()
   ;
 }
 
-void
-genf::GFDaf::processTrack(GFTrack* trk)
+void genf::GFDaf::processTrack(GFTrack* trk)
 {
   trk->clearBookkeeping();
 
@@ -352,8 +351,7 @@ genf::GFDaf::processTrack(GFTrack* trk)
   return;
 }
 
-void
-genf::GFDaf::blowUpCovs(GFTrack* trk)
+void genf::GFDaf::blowUpCovs(GFTrack* trk)
 {
   int nreps = trk->getNumReps();
   for (int irep = 0; irep < nreps; ++irep) {
@@ -376,8 +374,7 @@ genf::GFDaf::blowUpCovs(GFTrack* trk)
   }
 }
 
-void
-genf::GFDaf::invertMatrix(const TMatrixT<Double_t>& mat, TMatrixT<Double_t>& inv)
+void genf::GFDaf::invertMatrix(const TMatrixT<Double_t>& mat, TMatrixT<Double_t>& inv)
 {
   inv.ResizeTo(mat);
   inv = (mat);
@@ -395,11 +392,10 @@ genf::GFDaf::invertMatrix(const TMatrixT<Double_t>& mat, TMatrixT<Double_t>& inv
   }
 }
 
-TMatrixT<Double_t>
-genf::GFDaf::calcGain(const TMatrixT<Double_t>& C,
-                      const TMatrixT<Double_t>& V,
-                      const TMatrixT<Double_t>& H,
-                      const double& p)
+TMatrixT<Double_t> genf::GFDaf::calcGain(const TMatrixT<Double_t>& C,
+                                         const TMatrixT<Double_t>& V,
+                                         const TMatrixT<Double_t>& H,
+                                         const double& p)
 {
 
   //get C^-1
@@ -418,8 +414,7 @@ genf::GFDaf::calcGain(const TMatrixT<Double_t>& C,
   return (covsumInv * Htransp * Vinv);
 }
 
-void
-genf::GFDaf::setProbCut(double val)
+void genf::GFDaf::setProbCut(double val)
 {
 
   if (fabs(val - 0.01) < 1.E-10) {
@@ -451,17 +446,16 @@ genf::GFDaf::setProbCut(double val)
   }
 }
 
-void
-genf::GFDaf::setBetas(double b1,
-                      double b2,
-                      double b3 /* = -1. */,
-                      double b4 /* = -1. */,
-                      double b5 /* = -1. */,
-                      double b6 /* = -1. */,
-                      double b7 /* = -1. */,
-                      double b8 /* = -1. */,
-                      double b9 /* = -1. */,
-                      double b10 /* = -1. */
+void genf::GFDaf::setBetas(double b1,
+                           double b2,
+                           double b3 /* = -1. */,
+                           double b4 /* = -1. */,
+                           double b5 /* = -1. */,
+                           double b6 /* = -1. */,
+                           double b7 /* = -1. */,
+                           double b8 /* = -1. */,
+                           double b9 /* = -1. */,
+                           double b10 /* = -1. */
 )
 {
 

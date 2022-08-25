@@ -25,8 +25,7 @@ hit::RFFHitFinderAlg::RFFHitFinderAlg(fhicl::ParameterSet const& p)
   fAmpThresholdVec = p.get<std::vector<float>>("AmplitudeThreshold", std::vector<float>(1, 0.0));
 }
 
-void
-hit::RFFHitFinderAlg::SetFitterParamsVectors(geo::Geometry const& geo)
+void hit::RFFHitFinderAlg::SetFitterParamsVectors(geo::Geometry const& geo)
 {
   const unsigned int n_planes = geo.Nplanes();
 
@@ -50,16 +49,14 @@ hit::RFFHitFinderAlg::SetFitterParamsVectors(geo::Geometry const& geo)
   if (fAmpThresholdVec.size() == 1) fAmpThresholdVec.resize(n_planes, fAmpThresholdVec[0]);
 }
 
-void
-hit::RFFHitFinderAlg::SetFitterParams(unsigned int p)
+void hit::RFFHitFinderAlg::SetFitterParams(unsigned int p)
 {
   fFitter.SetFitterParams(fMatchThresholdVec[p], fMergeMultiplicityVec[p], fAmpThresholdVec[p]);
 }
 
-void
-hit::RFFHitFinderAlg::Run(std::vector<recob::Wire> const& wireVector,
-                          std::vector<recob::Hit>& hitVector,
-                          geo::Geometry const& geo)
+void hit::RFFHitFinderAlg::Run(std::vector<recob::Wire> const& wireVector,
+                               std::vector<recob::Hit>& hitVector,
+                               geo::Geometry const& geo)
 {
   hitVector.reserve(wireVector.size());
   for (auto const& wire : wireVector) {
@@ -81,14 +78,13 @@ hit::RFFHitFinderAlg::Run(std::vector<recob::Wire> const& wireVector,
   } //end loop over wires
 }
 
-void
-hit::RFFHitFinderAlg::EmplaceHit(std::vector<recob::Hit>& hitVector,
-                                 recob::Wire const& wire,
-                                 float const& summedADCTotal,
-                                 raw::TDCtick_t const& startTick,
-                                 raw::TDCtick_t const& endTick,
-                                 geo::SigType_t const& sigtype,
-                                 geo::WireID const& wireID)
+void hit::RFFHitFinderAlg::EmplaceHit(std::vector<recob::Hit>& hitVector,
+                                      recob::Wire const& wire,
+                                      float const& summedADCTotal,
+                                      raw::TDCtick_t const& startTick,
+                                      raw::TDCtick_t const& endTick,
+                                      geo::SigType_t const& sigtype,
+                                      geo::WireID const& wireID)
 {
 
   float totalArea = 0.0;

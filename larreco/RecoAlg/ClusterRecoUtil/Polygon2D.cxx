@@ -4,30 +4,27 @@
 #include <math.h>
 
 //------------------------------------------------
-float
-FindSlope(const std::pair<float, float>& p1, const std::pair<float, float>& p2)
+float FindSlope(const std::pair<float, float>& p1, const std::pair<float, float>& p2)
 {
   float slope = (p2.second - p1.second) / (p2.first - p1.first);
   return slope;
 }
 
 //-------------------------------------------------------------------------
-bool
-Clockwise(double Ax, double Ay, double Bx, double By, double Cx, double Cy)
+bool Clockwise(double Ax, double Ay, double Bx, double By, double Cx, double Cy)
 {
   return (Cy - Ay) * (Bx - Ax) > (By - Ay) * (Cx - Ax);
 }
 
 //------------------------------------------------------------
-bool
-SegmentOverlap(double Ax,
-               double Ay,
-               double Bx,
-               double By,
-               double Cx,
-               double Cy,
-               double Dx,
-               double Dy)
+bool SegmentOverlap(double Ax,
+                    double Ay,
+                    double Bx,
+                    double By,
+                    double Cx,
+                    double Cy,
+                    double Dx,
+                    double Dy)
 {
 
   bool overlap = ((Clockwise(Ax, Ay, Cx, Cy, Dx, Dy) != Clockwise(Bx, By, Cx, Cy, Dx, Dy)) and
@@ -36,15 +33,14 @@ SegmentOverlap(double Ax,
 }
 
 //---------------------------------------------------------------------------------
-std::pair<float, float>
-GetIntersection(double Ax,
-                double Ay,
-                double Bx,
-                double By,
-                double Cx,
-                double Cy,
-                double Dx,
-                double Dy)
+std::pair<float, float> GetIntersection(double Ax,
+                                        double Ay,
+                                        double Bx,
+                                        double By,
+                                        double Cx,
+                                        double Cy,
+                                        double Dx,
+                                        double Dy)
 {
 
   //get equations for two lines
@@ -119,8 +115,7 @@ Polygon2D::Polygon2D(const Polygon2D& poly1, const Polygon2D& poly2)
 }
 
 //---------------------------
-float
-Polygon2D::Area() const
+float Polygon2D::Area() const
 {
   //how? here:
   //http://www.mathsisfun.com/geometry/area-irregular-polygons.html
@@ -138,8 +133,7 @@ Polygon2D::Area() const
 }
 
 //--------------------------------
-float
-Polygon2D::Perimeter() const
+float Polygon2D::Perimeter() const
 {
 
   float perimeter = 0.;
@@ -161,8 +155,7 @@ Polygon2D::Perimeter() const
 }
 
 //------------------------------------------------------------------
-const std::pair<float, float>&
-Polygon2D::Point(unsigned int p) const
+const std::pair<float, float>& Polygon2D::Point(unsigned int p) const
 {
   //This function returns the vertex under consideration
   //as a std::pair<float,float> Returns vertex for argument
@@ -179,8 +172,7 @@ Polygon2D::Point(unsigned int p) const
 }
 
 //------------------------------------------------------------------------
-std::pair<float, float>
-Polygon2D::Project(const std::pair<float, float>& p, float theta) const
+std::pair<float, float> Polygon2D::Project(const std::pair<float, float>& p, float theta) const
 {
 
   std::pair<float, float> range(10000, 0);
@@ -204,8 +196,9 @@ Polygon2D::Project(const std::pair<float, float>& p, float theta) const
 }
 
 //---------------------------------------------------------------
-bool
-Polygon2D::Overlap(float slope, const Polygon2D& poly2, const std::pair<float, float>& origin) const
+bool Polygon2D::Overlap(float slope,
+                        const Polygon2D& poly2,
+                        const std::pair<float, float>& origin) const
 {
   //translate and rotate both polygons
   float theta = tan(slope);
@@ -225,8 +218,7 @@ Polygon2D::Overlap(float slope, const Polygon2D& poly2, const std::pair<float, f
 }
 
 //-------------------------------------------------------
-bool
-Polygon2D::PolyOverlap(const Polygon2D& poly2) const
+bool Polygon2D::PolyOverlap(const Polygon2D& poly2) const
 {
 
   //start from first pair in vector then check all edges.
@@ -252,8 +244,7 @@ Polygon2D::PolyOverlap(const Polygon2D& poly2) const
 }
 
 //---------------------------------------------------------------
-bool
-Polygon2D::PolyOverlapSegments(const Polygon2D& poly2) const
+bool Polygon2D::PolyOverlapSegments(const Polygon2D& poly2) const
 {
   //if contained in one another then they also overlap:
   if ((this->Contained(poly2)) or (poly2.Contained(*this))) { return true; }
@@ -277,8 +268,7 @@ Polygon2D::PolyOverlapSegments(const Polygon2D& poly2) const
 }
 
 //--------------------------------------------------------------------
-bool
-Polygon2D::PointInside(const std::pair<float, float>& point) const
+bool Polygon2D::PointInside(const std::pair<float, float>& point) const
 {
 
   //any ray originating at point will cross polygon
@@ -303,8 +293,7 @@ Polygon2D::PointInside(const std::pair<float, float>& point) const
 }
 
 //-----------------------------------------------------
-bool
-Polygon2D::Contained(const Polygon2D& poly2) const
+bool Polygon2D::Contained(const Polygon2D& poly2) const
 {
 
   //loop over poly2 checking wehther
@@ -317,8 +306,7 @@ Polygon2D::Contained(const Polygon2D& poly2) const
 }
 
 //-------------------------------
-void
-Polygon2D::UntanglePolygon()
+void Polygon2D::UntanglePolygon()
 {
 
   //loop over edges

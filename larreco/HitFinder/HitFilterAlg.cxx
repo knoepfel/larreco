@@ -13,8 +13,7 @@ namespace hit {
     , fMinPulseSigma(p.get<std::vector<float>>("MinPulseSigma"))
   {}
 
-  bool
-  HitFilterAlg::IsGoodHit(const recob::Hit& hit) const
+  bool HitFilterAlg::IsGoodHit(const recob::Hit& hit) const
   {
 
     const float hitPH = hit.PeakAmplitude();

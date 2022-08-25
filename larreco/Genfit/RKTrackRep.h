@@ -70,16 +70,8 @@ namespace genf {
 
     virtual ~RKTrackRep();
 
-    virtual GFAbsTrackRep*
-    clone() const
-    {
-      return new RKTrackRep(*this);
-    }
-    virtual GFAbsTrackRep*
-    prototype() const
-    {
-      return new RKTrackRep();
-    }
+    virtual GFAbsTrackRep* clone() const { return new RKTrackRep(*this); }
+    virtual GFAbsTrackRep* prototype() const { return new RKTrackRep(); }
 
     //! returns the tracklength spanned in this extrapolation
     /** The covariance matrix is transformed from the plane coordinate system to the master reference system (for the propagation) and, after propagation, back to the plane coordinate system.\n
@@ -138,17 +130,9 @@ namespace genf {
     */
     void getPosMom(const GFDetPlane&, TVector3& pos, TVector3& mom);
     //! Returns charge
-    double
-    getCharge() const
-    {
-      return fCharge;
-    }
+    double getCharge() const { return fCharge; }
     //! deprecated
-    void
-    switchDirection()
-    {
-      fDirection = (!fDirection);
-    }
+    void switchDirection() { fDirection = (!fDirection); }
     //! Set PDG particle code
     void setPDG(int);
     int getPDG();
@@ -170,11 +154,7 @@ namespace genf {
 
     const TMatrixT<double>* getAuxInfo(const GFDetPlane& pl);
 
-    bool
-    hasAuxInfo()
-    {
-      return true;
-    }
+    bool hasAuxInfo() { return true; }
 
   private:
     GFDetPlane fCachePlane;
@@ -182,11 +162,7 @@ namespace genf {
     double fSpu;
     TMatrixT<double> fAuxInfo;
 
-    RKTrackRep&
-    operator=(const RKTrackRep* /* rhs */)
-    {
-      return *this;
-    }
+    RKTrackRep& operator=(const RKTrackRep* /* rhs */) { return *this; }
     RKTrackRep(const RKTrackRep& /* rhs */) : GFAbsTrackRep() {}
     bool fDirection;
 

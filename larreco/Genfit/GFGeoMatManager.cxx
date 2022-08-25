@@ -29,12 +29,11 @@
 float MeanExcEnergy_get(int Z);
 float MeanExcEnergy_get(TGeoMaterial*);
 
-void
-genf::GFGeoMatManager::getMaterialParameters(double& matDensity,
-                                             double& matZ,
-                                             double& matA,
-                                             double& radiationLength,
-                                             double& mEE)
+void genf::GFGeoMatManager::getMaterialParameters(double& matDensity,
+                                                  double& matZ,
+                                                  double& matA,
+                                                  double& radiationLength,
+                                                  double& mEE)
 {
   if (!gGeoManager->GetCurrentVolume()->GetMedium())
     throw GFException(
@@ -53,19 +52,17 @@ genf::GFGeoMatManager::getMaterialParameters(double& matDensity,
   mEE = MeanExcEnergy_get(mat);
 }
 
-void
-genf::GFGeoMatManager::initTrack(const double& posx,
-                                 const double& posy,
-                                 const double& posz,
-                                 const double& dirx,
-                                 const double& diry,
-                                 const double& dirz)
+void genf::GFGeoMatManager::initTrack(const double& posx,
+                                      const double& posy,
+                                      const double& posz,
+                                      const double& dirx,
+                                      const double& diry,
+                                      const double& dirz)
 {
   gGeoManager->InitTrack(posx, posy, posz, dirx, diry, dirz);
 }
 
-double
-genf::GFGeoMatManager::stepOrNextBoundary(const double& maxStep)
+double genf::GFGeoMatManager::stepOrNextBoundary(const double& maxStep)
 {
   gGeoManager->FindNextBoundaryAndStep(maxStep);
   return gGeoManager->GetStep();
@@ -88,16 +85,14 @@ const float MeanExcEnergy_vals[MeanExcEnergy_NELEMENTS] = {
   694.0, 705.0, 718.0, 727.0, 736.0, 746.0, 757.0, 790.0, 790.0, 800.0, 810.0, 823.0, 823.0, 830.0,
   825.0, 794.0, 827.0, 826.0, 841.0, 847.0, 878.0, 890.0};
 
-float
-MeanExcEnergy_get(int Z)
+float MeanExcEnergy_get(int Z)
 {
   if ((Z <= 0) || (Z > MeanExcEnergy_NELEMENTS))
     throw GFException("MeanExcEnergy_get(): Z out of range", __LINE__, __FILE__).setFatal();
   return MeanExcEnergy_vals[Z - 1];
 }
 
-float
-MeanExcEnergy_get(TGeoMaterial* mat)
+float MeanExcEnergy_get(TGeoMaterial* mat)
 {
   if (mat->IsMixture()) {
     double logMEE = 0.;

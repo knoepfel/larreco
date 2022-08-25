@@ -49,29 +49,17 @@ namespace lar_cluster3d {
     /**
      *  @brief recover the list of points used to build convex hull
      */
-    const PointList&
-    getPointsList()
-    {
-      return fPoints;
-    }
+    const PointList& getPointsList() { return fPoints; }
 
     /**
      *  @brief recover the list of convex hull vertices
      */
-    const PointList&
-    getConvexHull() const
-    {
-      return fConvexHull;
-    }
+    const PointList& getConvexHull() const { return fConvexHull; }
 
     /**
      *  @brief find the ends of the convex hull (along its x axis)
      */
-    const MinMaxPointPair&
-    getMinMaxPointPair() const
-    {
-      return fMinMaxPointPair;
-    }
+    const MinMaxPointPair& getMinMaxPointPair() const { return fMinMaxPointPair; }
 
     /**
      *  @brief Find the two points on the hull which are furthest apart
@@ -86,11 +74,7 @@ namespace lar_cluster3d {
     /**
      *  @brief recover the area of the convex hull
      */
-    float
-    getConvexHullArea() const
-    {
-      return fConvexHullArea;
-    }
+    float getConvexHullArea() const { return fConvexHullArea; }
 
     /**
      *  @brief Given an input Point, find the nearest edge

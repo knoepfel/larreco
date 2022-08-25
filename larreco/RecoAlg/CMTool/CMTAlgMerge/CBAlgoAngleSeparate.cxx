@@ -16,9 +16,8 @@ namespace cmtool {
   }
 
   //--------------------------------------------------------
-  bool
-  CBAlgoAngleSeparate::Bool(const ::cluster::ClusterParamsAlg& cluster1,
-                            const ::cluster::ClusterParamsAlg& cluster2)
+  bool CBAlgoAngleSeparate::Bool(const ::cluster::ClusterParamsAlg& cluster1,
+                                 const ::cluster::ClusterParamsAlg& cluster2)
   //--------------------------------------------------------
   {
 
@@ -98,8 +97,7 @@ namespace cmtool {
   }
 
   //-----------------------
-  void
-  CBAlgoAngleSeparate::Report()
+  void CBAlgoAngleSeparate::Report()
   //-----------------------
   {}
 

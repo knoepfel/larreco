@@ -40,68 +40,20 @@ namespace voronoi2d {
       m_coords = dcel2d::Coords(std::get<0>(point), std::get<1>(point), 0.);
     }
 
-    void
-    setInvalid() const override
-    {
-      m_valid = false;
-    }
-    void
-    setBSTNode(BSTNode* node) override
-    {
-      m_node = node;
-    }
+    void setInvalid() const override { m_valid = false; }
+    void setBSTNode(BSTNode* node) override { m_node = node; }
 
-    bool
-    isSite() const override
-    {
-      return std::get<2>(*this) != NULL;
-    }
-    bool
-    isCircle() const override
-    {
-      return std::get<2>(*this) == NULL;
-    }
-    bool
-    isValid() const override
-    {
-      return m_valid;
-    }
-    const dcel2d::Point&
-    getPoint() const override
-    {
-      return *this;
-    }
-    double
-    xPos() const override
-    {
-      return m_coords[0];
-    }
-    double
-    yPos() const override
-    {
-      return m_coords[1];
-    }
-    const dcel2d::Coords&
-    getCoords() const override
-    {
-      return m_coords;
-    }
-    const dcel2d::Coords&
-    circleCenter() const override
-    {
-      return m_coords;
-    }
-    BSTNode*
-    getBSTNode() const override
-    {
-      return m_node;
-    }
+    bool isSite() const override { return std::get<2>(*this) != NULL; }
+    bool isCircle() const override { return std::get<2>(*this) == NULL; }
+    bool isValid() const override { return m_valid; }
+    const dcel2d::Point& getPoint() const override { return *this; }
+    double xPos() const override { return m_coords[0]; }
+    double yPos() const override { return m_coords[1]; }
+    const dcel2d::Coords& getCoords() const override { return m_coords; }
+    const dcel2d::Coords& circleCenter() const override { return m_coords; }
+    BSTNode* getBSTNode() const override { return m_node; }
 
-    bool
-    operator<(const IEvent& right) const override
-    {
-      return xPos() < right.xPos();
-    }
+    bool operator<(const IEvent& right) const override { return xPos() < right.xPos(); }
 
   private:
     dcel2d::Coords m_coords;
@@ -123,68 +75,20 @@ namespace voronoi2d {
     }
     ~CircleEvent() {}
 
-    void
-    setInvalid() const override
-    {
-      m_valid = false;
-    }
-    void
-    setBSTNode(BSTNode* node) override
-    {
-      m_node = node;
-    }
+    void setInvalid() const override { m_valid = false; }
+    void setBSTNode(BSTNode* node) override { m_node = node; }
 
-    bool
-    isSite() const override
-    {
-      return std::get<2>(*this) != NULL;
-    }
-    bool
-    isCircle() const override
-    {
-      return std::get<2>(*this) == NULL;
-    }
-    bool
-    isValid() const override
-    {
-      return m_valid;
-    }
-    const dcel2d::Point&
-    getPoint() const override
-    {
-      return *this;
-    }
-    double
-    xPos() const override
-    {
-      return std::get<0>(*this);
-    }
-    double
-    yPos() const override
-    {
-      return std::get<1>(*this);
-    }
-    const dcel2d::Coords&
-    getCoords() const override
-    {
-      return m_circleCenter;
-    }
-    const dcel2d::Coords&
-    circleCenter() const override
-    {
-      return m_circleCenter;
-    }
-    BSTNode*
-    getBSTNode() const override
-    {
-      return m_node;
-    }
+    bool isSite() const override { return std::get<2>(*this) != NULL; }
+    bool isCircle() const override { return std::get<2>(*this) == NULL; }
+    bool isValid() const override { return m_valid; }
+    const dcel2d::Point& getPoint() const override { return *this; }
+    double xPos() const override { return std::get<0>(*this); }
+    double yPos() const override { return std::get<1>(*this); }
+    const dcel2d::Coords& getCoords() const override { return m_circleCenter; }
+    const dcel2d::Coords& circleCenter() const override { return m_circleCenter; }
+    BSTNode* getBSTNode() const override { return m_node; }
 
-    bool
-    operator<(const IEvent& right) const override
-    {
-      return xPos() < right.xPos();
-    }
+    bool operator<(const IEvent& right) const override { return xPos() < right.xPos(); }
 
   private:
     dcel2d::Coords m_circleCenter;

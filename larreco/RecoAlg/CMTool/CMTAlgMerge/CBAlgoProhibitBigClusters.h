@@ -76,11 +76,7 @@ namespace cmtool {
      */
     //virtual void IterationEnd();
 
-    void
-    SetMinHits(size_t nhits)
-    {
-      _min_hits = nhits;
-    }
+    void SetMinHits(size_t nhits) { _min_hits = nhits; }
 
   protected:
     size_t _min_hits;

@@ -79,11 +79,7 @@ namespace genf {
                             const Double_t& mass);
     virtual ~GFSpacepointHitPolicy() { ; }
 
-    const std::string&
-    getName()
-    {
-      return fPolicyName;
-    }
+    const std::string& getName() { return fPolicyName; }
 
   private:
     static const std::string fPolicyName;

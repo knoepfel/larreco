@@ -54,8 +54,7 @@ namespace genf {
     virtual ~GFAbsFinitePlane();
 
   private:
-    virtual void
-    Print(Option_t*) const
+    virtual void Print(Option_t*) const
     {
       throw std::logic_error(std::string(__func__) + "::Print(Option_t*) not available");
     }

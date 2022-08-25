@@ -81,8 +81,7 @@ namespace hit {
   }
 
   //-------------------------------------------------
-  void
-  TTHitFinder::produce(art::Event& evt)
+  void TTHitFinder::produce(art::Event& evt)
   {
 
     // these objects contain the hit collections
@@ -218,8 +217,9 @@ namespace hit {
   } // End of produce()
 
   //-------------------------------------------------
-  float
-  TTHitFinder::getTotalCharge(const float* signal_vector, int width = 3, float threshold = -99)
+  float TTHitFinder::getTotalCharge(const float* signal_vector,
+                                    int width = 3,
+                                    float threshold = -99)
   {
 
     float totalCharge = 0;

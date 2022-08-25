@@ -36,8 +36,7 @@ namespace voronoi2d {
     setDepth();
   }
 
-  void
-  BSTNode::setDepth()
+  void BSTNode::setDepth()
   {
     if (m_leftChild && m_rightChild) {
       int maxDepth = std::max(m_leftChild->getDepth(), m_rightChild->getDepth());
@@ -53,8 +52,7 @@ namespace voronoi2d {
     return;
   }
 
-  BSTNode*
-  BeachLine::insertNewLeaf(IEvent* event)
+  BSTNode* BeachLine::insertNewLeaf(IEvent* event)
   {
     // Find the insertion point for the new event
     BSTNode* node = findBestLeaf(event, m_root);
@@ -71,8 +69,7 @@ namespace voronoi2d {
     return node;
   }
 
-  BSTNode*
-  BeachLine::findBestLeaf(const IEvent* event, BSTNode* topNode) const
+  BSTNode* BeachLine::findBestLeaf(const IEvent* event, BSTNode* topNode) const
   {
     // Assumption: a leaf will have NULL child pointers so the idea is to
     // follow the left or right child pointers until we get to a leaf
@@ -95,8 +92,7 @@ namespace voronoi2d {
     return node;
   }
 
-  BSTNode*
-  BeachLine::insertNewLeaf(IEvent* event, BSTNode* node)
+  BSTNode* BeachLine::insertNewLeaf(IEvent* event, BSTNode* node)
   {
     // The idea of this function is to insert a new Site Event into the beach line
     // where it is assumed that the input node is the matched arc into which we
@@ -205,8 +201,7 @@ namespace voronoi2d {
     return newLeaf;
   }
 
-  BSTNode*
-  BeachLine::removeLeaf(BSTNode* node)
+  BSTNode* BeachLine::removeLeaf(BSTNode* node)
   {
     // The input node is assumed to be a leaf (arc) and is the disappearing arc
     // between a leaf (arc) to the left and one to the right. There are breakpoints
@@ -294,8 +289,7 @@ namespace voronoi2d {
     return arcLeft->getSuccessor();
   }
 
-  int
-  BeachLine::countNodes() const
+  int BeachLine::countNodes() const
   {
     int nodeCount(0);
 
@@ -304,8 +298,7 @@ namespace voronoi2d {
     return nodeCount;
   }
 
-  int
-  BeachLine::countLeaves() const
+  int BeachLine::countLeaves() const
   {
     int leafCount(0);
 
@@ -314,8 +307,7 @@ namespace voronoi2d {
     return leafCount;
   }
 
-  void
-  BeachLine::countNodes(const BSTNode* node, int& nodeCount) const
+  void BeachLine::countNodes(const BSTNode* node, int& nodeCount) const
   {
     if (node) {
       if (node->getLeftChild()) countNodes(node->getLeftChild(), nodeCount);
@@ -331,8 +323,7 @@ namespace voronoi2d {
     return;
   }
 
-  void
-  BeachLine::countLeaves(const BSTNode* node, int& leafCount) const
+  void BeachLine::countLeaves(const BSTNode* node, int& leafCount) const
   {
     // If not a leaf then still have children to search
     if (node->getLeftChild() && node->getRightChild()) {
@@ -345,8 +336,7 @@ namespace voronoi2d {
     return;
   }
 
-  int
-  BeachLine::traverseBeach() const
+  int BeachLine::traverseBeach() const
   {
     int leafCount(0);
 
@@ -370,8 +360,7 @@ namespace voronoi2d {
     return leafCount;
   }
 
-  void
-  BeachLine::checkBeachLine(double beachLine) const
+  void BeachLine::checkBeachLine(double beachLine) const
   {
     // Starting with the root, dive down until we find the leftmost leaf
     BSTNode* node = m_root;
@@ -498,8 +487,7 @@ namespace voronoi2d {
     return;
   }
 
-  int
-  BeachLine::traverseBeachLeft(BSTNode* node) const
+  int BeachLine::traverseBeachLeft(BSTNode* node) const
   {
     int leafCount(0);
 
@@ -514,8 +502,7 @@ namespace voronoi2d {
     return leafCount;
   }
 
-  int
-  BeachLine::traverseBeachRight(BSTNode* node) const
+  int BeachLine::traverseBeachRight(BSTNode* node) const
   {
     int leafCount(0);
 
@@ -530,8 +517,7 @@ namespace voronoi2d {
     return leafCount;
   }
 
-  int
-  BeachLine::getTreeDepth(const BSTNode* node) const
+  int BeachLine::getTreeDepth(const BSTNode* node) const
   {
     int depth(0);
 
@@ -549,8 +535,7 @@ namespace voronoi2d {
     return depth;
   }
 
-  void
-  BeachLine::rebalance(BSTNode* node)
+  void BeachLine::rebalance(BSTNode* node)
   {
     // The idea is to rebalance starting with the current node and the walking back up the branch
     // until we reach the ultimate parent.
@@ -584,8 +569,7 @@ namespace voronoi2d {
     return;
   }
 
-  BSTNode*
-  BeachLine::rotateWithLeftChild(BSTNode* node)
+  BSTNode* BeachLine::rotateWithLeftChild(BSTNode* node)
   {
     // Here we rebalance by rotating the root node with its left child
     BSTNode* newTopNode = node->getLeftChild();
@@ -619,8 +603,7 @@ namespace voronoi2d {
     return newTopNode;
   }
 
-  BSTNode*
-  BeachLine::rotateWithRightChild(BSTNode* node)
+  BSTNode* BeachLine::rotateWithRightChild(BSTNode* node)
   {
     // Here we rebalance by rotating the root node with its left child
     BSTNode* newTopNode = node->getRightChild();

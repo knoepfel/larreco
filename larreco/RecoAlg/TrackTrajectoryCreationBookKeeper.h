@@ -49,19 +49,17 @@ namespace trkmkr {
     //
     //@{
     /// Add a single point; different version of the functions are provided using const references or rvalue references.
-    void
-    addPoint(const Point_t& point,
-             const Vector_t& vect,
-             art::Ptr<recob::Hit> hit,
-             const PointFlags_t& flag)
+    void addPoint(const Point_t& point,
+                  const Vector_t& vect,
+                  art::Ptr<recob::Hit> hit,
+                  const PointFlags_t& flag)
     {
       positions.push_back(point);
       momenta.push_back(vect);
       hits->push_back(hit);
       flags.push_back(flag);
     }
-    void
-    addPoint(Point_t&& point, Vector_t&& vect, art::Ptr<recob::Hit> hit, PointFlags_t&& flag)
+    void addPoint(Point_t&& point, Vector_t&& vect, art::Ptr<recob::Hit> hit, PointFlags_t&& flag)
     {
       positions.push_back(std::move(point));
       momenta.push_back(std::move(vect));
@@ -71,8 +69,7 @@ namespace trkmkr {
     //@}
     //
     /// Get the finalized recob::TrackTrajectory object; internal data vectors are moved so no more points should be added.
-    recob::TrackTrajectory
-    finalizeTrackTrajectory()
+    recob::TrackTrajectory finalizeTrackTrajectory()
     {
       return recob::TrackTrajectory(
         std::move(positions), std::move(momenta), std::move(flags), hasMomenta_);

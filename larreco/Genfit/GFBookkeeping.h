@@ -44,8 +44,7 @@ namespace genf {
 
   public:
     void reset();
-    void
-    setNhits(int n)
+    void setNhits(int n)
     {
       fNhits = n;
       reset();
@@ -85,8 +84,7 @@ namespace genf {
     //protect from call of net yet defined assignement operator
     GFBookkeeping& operator=(const GFBookkeeping& /* rhs */) = delete; // {return *this;}
 
-    virtual void
-    Print(Option_t*) const
+    virtual void Print(Option_t*) const
     {
       throw GFException(
         std::string(__func__) + "::Print(Option_t*) not available", __LINE__, __FILE__)

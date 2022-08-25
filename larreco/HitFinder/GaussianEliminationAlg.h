@@ -31,11 +31,7 @@ namespace util {
                              const std::vector<float>& sigmaVector,
                              const std::vector<float>& heightVector);
     void GaussianElimination();
-    const std::vector<float>&
-    GetSolutions()
-    {
-      return fSolutions;
-    }
+    const std::vector<float>& GetSolutions() { return fSolutions; }
     void Print();
 
   private:

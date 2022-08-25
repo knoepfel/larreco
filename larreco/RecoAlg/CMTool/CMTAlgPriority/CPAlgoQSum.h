@@ -38,11 +38,7 @@ namespace cmtool {
     virtual float Priority(const ::cluster::ClusterParamsAlg& cluster);
 
     /// Setter for minimum charge
-    void
-    SetMinQ(double v)
-    {
-      _qsum_cut = v;
-    }
+    void SetMinQ(double v) { _qsum_cut = v; }
 
   protected:
     double _qsum_cut;

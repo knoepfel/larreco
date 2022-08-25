@@ -76,35 +76,15 @@ namespace cmtool {
 
     bool IsOverlappingBlob(const ::cluster::ClusterParamsAlg& cluster);
 
-    void
-    SetMinWidth(double value)
-    {
-      _min_width = value;
-    }
+    void SetMinWidth(double value) { _min_width = value; }
 
-    void
-    SetMinOpeningAngle(double value)
-    {
-      _min_opening_angle = value;
-    }
+    void SetMinOpeningAngle(double value) { _min_opening_angle = value; }
 
-    void
-    SetMinEP(double value)
-    {
-      _min_EP = value;
-    }
+    void SetMinEP(double value) { _min_EP = value; }
 
-    void
-    SetMinHits(size_t value)
-    {
-      _min_hits = value;
-    }
+    void SetMinHits(size_t value) { _min_hits = value; }
 
-    void
-    SetDebug(bool flag)
-    {
-      _debug = flag;
-    }
+    void SetDebug(bool flag) { _debug = flag; }
 
   protected:
     size_t _min_hits;

@@ -58,8 +58,7 @@ namespace vertex {
   }
 
   //--------------------------------------------------------------------
-  void
-  VertexCheater::produce(art::Event& evt)
+  void VertexCheater::produce(art::Event& evt)
   {
     art::ServiceHandle<cheat::ParticleInventoryService const> pi_serv;
 

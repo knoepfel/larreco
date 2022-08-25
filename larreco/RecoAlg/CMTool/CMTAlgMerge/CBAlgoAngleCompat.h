@@ -39,39 +39,19 @@ namespace cmtool {
                       const ::cluster::ClusterParamsAlg& cluster2);
 
     /// Method to set debug mode
-    void
-    SetDebug(bool on)
-    {
-      _debug = on;
-    }
+    void SetDebug(bool on) { _debug = on; }
 
     /// Method to set whether you allow angles to match with +/- 180 deg difference
-    void
-    SetAllow180Ambig(bool on)
-    {
-      _allow_180_ambig = on;
-    }
+    void SetAllow180Ambig(bool on) { _allow_180_ambig = on; }
 
     /// Method to set cut value in degrees for angle compatibility test
-    void
-    SetAngleCut(double angle)
-    {
-      _max_allowed_2D_angle_diff = angle;
-    }
+    void SetAngleCut(double angle) { _max_allowed_2D_angle_diff = angle; }
 
     /// Method to set angle cut value to be based on opening angle
-    void
-    SetUseOpeningAngle(bool on)
-    {
-      _use_opening_angle = on;
-    }
+    void SetUseOpeningAngle(bool on) { _use_opening_angle = on; }
 
     /// Set Minimum Number of Hits to consider Cluster
-    void
-    SetMinHits(size_t n)
-    {
-      _minHits = n;
-    }
+    void SetMinHits(size_t n) { _minHits = n; }
 
     //    TH1F* GetAngleDistHisto() const{ return angle_dist_histo; };
 

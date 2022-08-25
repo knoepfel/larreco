@@ -77,8 +77,7 @@ namespace vertex {
   AggregateVertexAna::~AggregateVertexAna() {}
 
   //-----------------------------------------------
-  void
-  AggregateVertexAna::beginJob()
+  void AggregateVertexAna::beginJob()
   {
     art::ServiceHandle<art::TFileService const> tfs;
 
@@ -91,8 +90,7 @@ namespace vertex {
   }
 
   //-----------------------------------------------
-  void
-  AggregateVertexAna::analyze(const art::Event& evt)
+  void AggregateVertexAna::analyze(const art::Event& evt)
   {
     art::Handle<std::vector<recob::Hit>> hitListHandle;
     evt.getByLabel(fHitModuleLabel, hitListHandle);

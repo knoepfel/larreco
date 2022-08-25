@@ -36,17 +36,9 @@ namespace calib {
     // virtual double GeV(double PE, int opchannel, TVector3 pos) = 0;
 
     /// Convenience
-    double
-    PE(const recob::OpHit& oh) const
-    {
-      return oh.PE();
-    }
+    double PE(const recob::OpHit& oh) const { return oh.PE(); }
 
-    double
-    PE(const recob::OpFlash& of) const
-    {
-      return of.TotalPE();
-    }
+    double PE(const recob::OpFlash& of) const { return of.TotalPE(); }
 
     // double GeV(const recob::OpHit& oh, TVector3 pos)
     //{

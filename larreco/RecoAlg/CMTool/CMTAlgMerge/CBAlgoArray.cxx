@@ -11,8 +11,7 @@ namespace cmtool {
   }
 
   //-----------------------
-  void
-  CBAlgoArray::Reset()
+  void CBAlgoArray::Reset()
   //-----------------------
   {
     for (auto& algo : _algo_array)
@@ -20,8 +19,7 @@ namespace cmtool {
   }
 
   //-------------------------------------------------------------------------------------
-  void
-  CBAlgoArray::EventBegin(const std::vector<cluster::ClusterParamsAlg>& clusters)
+  void CBAlgoArray::EventBegin(const std::vector<cluster::ClusterParamsAlg>& clusters)
   //-------------------------------------------------------------------------------------
   {
     for (auto& algo : _algo_array)
@@ -29,8 +27,7 @@ namespace cmtool {
   }
 
   //--------------------------
-  void
-  CBAlgoArray::EventEnd()
+  void CBAlgoArray::EventEnd()
   //--------------------------
   {
     for (auto& algo : _algo_array)
@@ -38,8 +35,7 @@ namespace cmtool {
   }
 
   //-------------------------------------------------------------------------------------
-  void
-  CBAlgoArray::IterationBegin(const std::vector<cluster::ClusterParamsAlg>& clusters)
+  void CBAlgoArray::IterationBegin(const std::vector<cluster::ClusterParamsAlg>& clusters)
   //-------------------------------------------------------------------------------------
   {
     for (auto& algo : _algo_array)
@@ -47,8 +43,7 @@ namespace cmtool {
   }
 
   //--------------------------
-  void
-  CBAlgoArray::IterationEnd()
+  void CBAlgoArray::IterationEnd()
   //--------------------------
   {
     for (auto& algo : _algo_array)
@@ -56,9 +51,8 @@ namespace cmtool {
   }
 
   //--------------------------------------------------------------------
-  bool
-  CBAlgoArray::Bool(const ::cluster::ClusterParamsAlg& cluster1,
-                    const ::cluster::ClusterParamsAlg& cluster2)
+  bool CBAlgoArray::Bool(const ::cluster::ClusterParamsAlg& cluster1,
+                         const ::cluster::ClusterParamsAlg& cluster2)
   //--------------------------------------------------------------------
   {
     bool status = true;
@@ -100,8 +94,7 @@ namespace cmtool {
   }
 
   //------------------------
-  void
-  CBAlgoArray::Report()
+  void CBAlgoArray::Report()
   //------------------------
   {
     for (auto& algo : _algo_array)

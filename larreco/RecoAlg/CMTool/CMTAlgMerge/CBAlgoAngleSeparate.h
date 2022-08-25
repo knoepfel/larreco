@@ -40,37 +40,19 @@ namespace cmtool {
                       const ::cluster::ClusterParamsAlg& cluster2);
 
     /// Set Debug Mode on or off
-    void
-    SetDebug(bool on)
-    {
-      _debug = on;
-    }
+    void SetDebug(bool on) { _debug = on; }
 
     /// Set Max Angle Separation for separation
-    void
-    SetMaxAngleSep(float angle)
-    {
-      _MaxAngle = angle;
-    }
+    void SetMaxAngleSep(float angle) { _MaxAngle = angle; }
 
     /// Set Minimum length for "big" cluster
-    void
-    SetMinLength(float len)
-    {
-      _MinLen = len;
-    }
+    void SetMinLength(float len) { _MinLen = len; }
 
     /// SetMinimum number of hits for small cluster
-    void
-    SetMinHits(size_t n)
-    {
-      _minHits = n;
-    }
+    void SetMinHits(size_t n) { _minHits = n; }
 
     /// Function to reset the algorithm instance ... maybe implemented via child class
-    virtual void
-    Reset()
-    {}
+    virtual void Reset() {}
 
     /// Function to report what's going on per merging
     virtual void Report();

@@ -71,11 +71,7 @@ namespace lar_cluster3d {
     /**
      *  @brief If monitoring, recover the time to execute a particular function
      */
-    float
-    getTimeToExecute() const override
-    {
-      return fTimeToProcess;
-    }
+    float getTimeToExecute() const override { return fTimeToProcess; }
 
   private:
     /**
@@ -211,8 +207,7 @@ namespace lar_cluster3d {
 
   //------------------------------------------------------------------------------------------------------------------------------------------
 
-  void
-  ConvexHullPathFinder::configure(fhicl::ParameterSet const& pset)
+  void ConvexHullPathFinder::configure(fhicl::ParameterSet const& pset)
   {
     fEnableMonitoring = pset.get<bool>("EnableMonitoring", true);
     fMinTinyClusterSize = pset.get<size_t>("MinTinyClusterSize", 40);
@@ -228,8 +223,7 @@ namespace lar_cluster3d {
     return;
   }
 
-  void
-  ConvexHullPathFinder::initializeHistograms(art::TFileDirectory& histDir)
+  void ConvexHullPathFinder::initializeHistograms(art::TFileDirectory& histDir)
   {
     // It is assumed that the input TFileDirectory has been set up to group histograms into a common
     // folder at the calling routine's level. Here we create one more level of indirection to keep
@@ -268,8 +262,8 @@ namespace lar_cluster3d {
     return;
   }
 
-  void
-  ConvexHullPathFinder::ModifyClusters(reco::ClusterParametersList& clusterParametersList) const
+  void ConvexHullPathFinder::ModifyClusters(
+    reco::ClusterParametersList& clusterParametersList) const
   {
     /**
      *  @brief Top level interface for algorithm to consider pairs of clusters from the input
@@ -368,12 +362,12 @@ namespace lar_cluster3d {
     return;
   }
 
-  reco::ClusterParametersList::iterator
-  ConvexHullPathFinder::subDivideCluster(reco::ClusterParameters& clusterToBreak,
-                                         reco::PrincipalComponents& lastPCA,
-                                         reco::ClusterParametersList::iterator positionItr,
-                                         reco::ClusterParametersList& outputClusterList,
-                                         int level) const
+  reco::ClusterParametersList::iterator ConvexHullPathFinder::subDivideCluster(
+    reco::ClusterParameters& clusterToBreak,
+    reco::PrincipalComponents& lastPCA,
+    reco::ClusterParametersList::iterator positionItr,
+    reco::ClusterParametersList& outputClusterList,
+    int level) const
   {
     // This is a recursive routine to divide an input cluster, according to the maximum defect point of
     // the convex hull until we reach the point of no further improvement.
@@ -535,12 +529,11 @@ namespace lar_cluster3d {
     return positionItr;
   }
 
-  bool
-  ConvexHullPathFinder::makeCandidateCluster(Eigen::Vector3f& primaryPCA,
-                                             reco::ClusterParameters& candCluster,
-                                             reco::HitPairListPtr::iterator firstHitItr,
-                                             reco::HitPairListPtr::iterator lastHitItr,
-                                             int level) const
+  bool ConvexHullPathFinder::makeCandidateCluster(Eigen::Vector3f& primaryPCA,
+                                                  reco::ClusterParameters& candCluster,
+                                                  reco::HitPairListPtr::iterator firstHitItr,
+                                                  reco::HitPairListPtr::iterator lastHitItr,
+                                                  int level) const
   {
     std::string indent(level / 2, ' ');
 
@@ -581,11 +574,10 @@ namespace lar_cluster3d {
     return keepThisCluster;
   }
 
-  bool
-  ConvexHullPathFinder::makeCandidateCluster(Eigen::Vector3f& primaryPCA,
-                                             reco::ClusterParameters& candCluster,
-                                             HitOrderTupleList& orderedList,
-                                             int level) const
+  bool ConvexHullPathFinder::makeCandidateCluster(Eigen::Vector3f& primaryPCA,
+                                                  reco::ClusterParameters& candCluster,
+                                                  HitOrderTupleList& orderedList,
+                                                  int level) const
   {
     std::string indent(level / 2, ' ');
 
@@ -624,10 +616,9 @@ namespace lar_cluster3d {
     return keepThisCluster;
   }
 
-  bool
-  ConvexHullPathFinder::completeCandidateCluster(Eigen::Vector3f& primaryPCA,
-                                                 reco::ClusterParameters& candCluster,
-                                                 int level) const
+  bool ConvexHullPathFinder::completeCandidateCluster(Eigen::Vector3f& primaryPCA,
+                                                      reco::ClusterParameters& candCluster,
+                                                      int level) const
   {
     // First stage of feature extraction runs here
     fPCAAlg.PCAAnalysis_3D(candCluster.getHitPairListPtr(), candCluster.getFullPCA());
@@ -661,10 +652,9 @@ namespace lar_cluster3d {
     return keepThisCluster;
   }
 
-  bool
-  ConvexHullPathFinder::breakClusterByKinks(reco::ClusterParameters& clusterToBreak,
-                                            reco::ClusterParametersList& outputClusterList,
-                                            int level) const
+  bool ConvexHullPathFinder::breakClusterByKinks(reco::ClusterParameters& clusterToBreak,
+                                                 reco::ClusterParametersList& outputClusterList,
+                                                 int level) const
   {
     // Set up container to keep track of edges
     using HitKinkTuple = std::tuple<int, reco::HitPairListPtr::iterator>;
@@ -730,10 +720,10 @@ namespace lar_cluster3d {
     return !outputClusterList.empty();
   }
 
-  bool
-  ConvexHullPathFinder::breakClusterByKinksTrial(reco::ClusterParameters& clusterToBreak,
-                                                 reco::ClusterParametersList& outputClusterList,
-                                                 int level) const
+  bool ConvexHullPathFinder::breakClusterByKinksTrial(
+    reco::ClusterParameters& clusterToBreak,
+    reco::ClusterParametersList& outputClusterList,
+    int level) const
   {
     // Set up container to keep track of edges
     KinkTupleVec kinkTupleVec;
@@ -817,11 +807,10 @@ namespace lar_cluster3d {
     return !outputClusterList.empty();
   }
 
-  void
-  ConvexHullPathFinder::orderHitsAlongEdge(const reco::ProjectedPointList& hitList,
-                                           const reco::ProjectedPoint& point,
-                                           const Eigen::Vector2f& edge,
-                                           HitOrderTupleList& orderedList) const
+  void ConvexHullPathFinder::orderHitsAlongEdge(const reco::ProjectedPointList& hitList,
+                                                const reco::ProjectedPoint& point,
+                                                const Eigen::Vector2f& edge,
+                                                HitOrderTupleList& orderedList) const
   {
     // Use the input kink point as the start point of the edge
     Eigen::Vector2f kinkPos(std::get<0>(point), std::get<1>(point));
@@ -860,9 +849,8 @@ namespace lar_cluster3d {
     return;
   }
 
-  void
-  ConvexHullPathFinder::pruneHitOrderTupleLists(HitOrderTupleList& shortList,
-                                                HitOrderTupleList& longList) const
+  void ConvexHullPathFinder::pruneHitOrderTupleLists(HitOrderTupleList& shortList,
+                                                     HitOrderTupleList& longList) const
   {
     // Assume the first list is the short one, so we loop through the elements of that list..
     HitOrderTupleList::iterator shortItr = shortList.begin();
@@ -893,10 +881,9 @@ namespace lar_cluster3d {
     return;
   }
 
-  bool
-  ConvexHullPathFinder::breakClusterByMaxDefect(reco::ClusterParameters& clusterToBreak,
-                                                reco::ClusterParametersList& outputClusterList,
-                                                int level) const
+  bool ConvexHullPathFinder::breakClusterByMaxDefect(reco::ClusterParameters& clusterToBreak,
+                                                     reco::ClusterParametersList& outputClusterList,
+                                                     int level) const
   {
     // Set up container to keep track of edges
     using DistEdgeTuple = std::tuple<float, const reco::EdgeTuple*>;
@@ -1001,10 +988,9 @@ namespace lar_cluster3d {
     return !outputClusterList.empty();
   }
 
-  bool
-  ConvexHullPathFinder::breakClusterInHalf(reco::ClusterParameters& clusterToBreak,
-                                           reco::ClusterParametersList& outputClusterList,
-                                           int level) const
+  bool ConvexHullPathFinder::breakClusterInHalf(reco::ClusterParameters& clusterToBreak,
+                                                reco::ClusterParametersList& outputClusterList,
+                                                int level) const
   {
     reco::PrincipalComponents& fullPCA(clusterToBreak.getFullPCA());
     Eigen::Vector3f fullPrimaryVec(fullPCA.getEigenVectors().row(2));
@@ -1042,10 +1028,9 @@ namespace lar_cluster3d {
     return !outputClusterList.empty();
   }
 
-  bool
-  ConvexHullPathFinder::breakClusterAtBigGap(reco::ClusterParameters& clusterToBreak,
-                                             reco::ClusterParametersList& outputClusterList,
-                                             int level) const
+  bool ConvexHullPathFinder::breakClusterAtBigGap(reco::ClusterParameters& clusterToBreak,
+                                                  reco::ClusterParametersList& outputClusterList,
+                                                  int level) const
   {
     // Idea here is to scan the input hit list (assumed ordered along the current PCA) and look for "large" gaps
     // Here a gap is determined when the hits were ordered by their distance along the primary PCA to their doca to it.
@@ -1106,8 +1091,8 @@ namespace lar_cluster3d {
     return !outputClusterList.empty();
   }
 
-  void
-  ConvexHullPathFinder::buildConvexHull(reco::ClusterParameters& clusterParameters, int level) const
+  void ConvexHullPathFinder::buildConvexHull(reco::ClusterParameters& clusterParameters,
+                                             int level) const
   {
     // set an indention string
     std::string minuses(level / 2, '-');
@@ -1241,9 +1226,8 @@ namespace lar_cluster3d {
     return;
   }
 
-  void
-  ConvexHullPathFinder::fillConvexHullHists(reco::ClusterParameters& clusterParameters,
-                                            bool top) const
+  void ConvexHullPathFinder::fillConvexHullHists(reco::ClusterParameters& clusterParameters,
+                                                 bool top) const
   {
     reco::ProjectedPointList& convexHullPoints =
       clusterParameters.getConvexHull().getConvexHullPointList();
@@ -1294,13 +1278,12 @@ namespace lar_cluster3d {
     return;
   }
 
-  float
-  ConvexHullPathFinder::closestApproach(const Eigen::Vector3f& P0,
-                                        const Eigen::Vector3f& u0,
-                                        const Eigen::Vector3f& P1,
-                                        const Eigen::Vector3f& u1,
-                                        Eigen::Vector3f& poca0,
-                                        Eigen::Vector3f& poca1) const
+  float ConvexHullPathFinder::closestApproach(const Eigen::Vector3f& P0,
+                                              const Eigen::Vector3f& u0,
+                                              const Eigen::Vector3f& P1,
+                                              const Eigen::Vector3f& u1,
+                                              Eigen::Vector3f& poca0,
+                                              Eigen::Vector3f& poca1) const
   {
     // Technique is to compute the arclength to each point of closest approach
     Eigen::Vector3f w0 = P0 - P1;
@@ -1320,10 +1303,9 @@ namespace lar_cluster3d {
     return (poca0 - poca1).norm();
   }
 
-  float
-  ConvexHullPathFinder::findConvexHullEndPoints(const reco::EdgeList& convexHull,
-                                                const reco::ClusterHit3D* first3D,
-                                                const reco::ClusterHit3D* last3D) const
+  float ConvexHullPathFinder::findConvexHullEndPoints(const reco::EdgeList& convexHull,
+                                                      const reco::ClusterHit3D* first3D,
+                                                      const reco::ClusterHit3D* last3D) const
   {
     float largestDistance(0.);
 

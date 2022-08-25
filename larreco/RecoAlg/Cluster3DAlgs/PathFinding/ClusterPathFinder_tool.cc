@@ -68,11 +68,7 @@ namespace lar_cluster3d {
     /**
      *  @brief If monitoring, recover the time to execute a particular function
      */
-    float
-    getTimeToExecute() const override
-    {
-      return m_timeToProcess;
-    }
+    float getTimeToExecute() const override { return m_timeToProcess; }
 
   private:
     /**
@@ -125,8 +121,7 @@ namespace lar_cluster3d {
 
   //------------------------------------------------------------------------------------------------------------------------------------------
 
-  void
-  ClusterPathFinder::configure(fhicl::ParameterSet const& pset)
+  void ClusterPathFinder::configure(fhicl::ParameterSet const& pset)
   {
     m_enableMonitoring = pset.get<bool>("EnableMonitoring", true);
     m_minTinyClusterSize = pset.get<size_t>("MinTinyClusterSize", 40);
@@ -138,14 +133,9 @@ namespace lar_cluster3d {
     return;
   }
 
-  void
-  ClusterPathFinder::initializeHistograms(art::TFileDirectory&)
-  {
-    return;
-  }
+  void ClusterPathFinder::initializeHistograms(art::TFileDirectory&) { return; }
 
-  void
-  ClusterPathFinder::ModifyClusters(reco::ClusterParametersList& clusterParametersList) const
+  void ClusterPathFinder::ModifyClusters(reco::ClusterParametersList& clusterParametersList) const
   {
     /**
      *  @brief Top level interface for algorithm to consider pairs of clusters from the input
@@ -226,11 +216,11 @@ namespace lar_cluster3d {
     return;
   }
 
-  reco::ClusterParametersList::iterator
-  ClusterPathFinder::breakIntoTinyBits(reco::ClusterParameters& clusterToBreak,
-                                       reco::ClusterParametersList::iterator positionItr,
-                                       reco::ClusterParametersList& outputClusterList,
-                                       int level) const
+  reco::ClusterParametersList::iterator ClusterPathFinder::breakIntoTinyBits(
+    reco::ClusterParameters& clusterToBreak,
+    reco::ClusterParametersList::iterator positionItr,
+    reco::ClusterParametersList& outputClusterList,
+    int level) const
   {
     // This needs to be a recursive routine...
     // Idea is to take the input cluster and order 3D hits by arclength along PCA primary axis
@@ -426,8 +416,8 @@ namespace lar_cluster3d {
     return positionItr;
   }
 
-  void
-  ClusterPathFinder::buildConvexHull(reco::ClusterParameters& clusterParameters, int level) const
+  void ClusterPathFinder::buildConvexHull(reco::ClusterParameters& clusterParameters,
+                                          int level) const
   {
     // set an indention string
     std::string minuses(level / 2, '-');
@@ -563,9 +553,8 @@ namespace lar_cluster3d {
     return;
   }
 
-  void
-  ClusterPathFinder::buildVoronoiDiagram(reco::ClusterParameters& clusterParameters,
-                                         int level) const
+  void ClusterPathFinder::buildVoronoiDiagram(reco::ClusterParameters& clusterParameters,
+                                              int level) const
   {
     // The plan is to build the enclosing 2D polygon around the points in the PCA plane of most spread for this cluster
     // To do so we need to start by building a list of 2D projections onto the plane of most spread...
@@ -668,13 +657,12 @@ namespace lar_cluster3d {
     return;
   }
 
-  float
-  ClusterPathFinder::closestApproach(const Eigen::Vector3f& P0,
-                                     const Eigen::Vector3f& u0,
-                                     const Eigen::Vector3f& P1,
-                                     const Eigen::Vector3f& u1,
-                                     Eigen::Vector3f& poca0,
-                                     Eigen::Vector3f& poca1) const
+  float ClusterPathFinder::closestApproach(const Eigen::Vector3f& P0,
+                                           const Eigen::Vector3f& u0,
+                                           const Eigen::Vector3f& P1,
+                                           const Eigen::Vector3f& u1,
+                                           Eigen::Vector3f& poca0,
+                                           Eigen::Vector3f& poca1) const
   {
     // Technique is to compute the arclength to each point of closest approach
     Eigen::Vector3f w0 = P0 - P1;

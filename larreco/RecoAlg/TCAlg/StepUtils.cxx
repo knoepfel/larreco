@@ -27,8 +27,7 @@ namespace tca {
   using namespace detail; // SortEntry, valsDecreasing(), valsIncreasing();
 
   //////////////////////////////////////////
-  void
-  StepAway(TCSlice& slc, Trajectory& tj)
+  void StepAway(TCSlice& slc, Trajectory& tj)
   {
     // Step along the direction specified in the traj vector in steps of size step
     // (wire spacing equivalents). Find hits between the last trajectory point and
@@ -286,8 +285,7 @@ namespace tca {
   } // StepAway
 
   //////////////////////////////////////////
-  bool
-  StopShort(TCSlice& slc, Trajectory& tj, bool prt)
+  bool StopShort(TCSlice& slc, Trajectory& tj, bool prt)
   {
     // Analyze the trajectory when it is short (~6 points) to look for a pattern like
     // this QQQqqq, where Q is a large charge hit and q is a low charge hit. If this
@@ -351,8 +349,7 @@ namespace tca {
   } // StopShort
 
   //////////////////////////////////////////
-  void
-  SetStrategy(TCSlice& slc, Trajectory& tj)
+  void SetStrategy(TCSlice& slc, Trajectory& tj)
   {
     // Determine if the tracking strategy is appropriate and make some tweaks if it isn't
     if (tjfs.empty()) return;
@@ -460,8 +457,7 @@ namespace tca {
   } // SetStrategy
 
   //////////////////////////////////////////
-  void
-  Forecast(TCSlice& slc, const Trajectory& tj)
+  void Forecast(TCSlice& slc, const Trajectory& tj)
   {
     // Extrapolate the last TP of tj by many steps and return a forecast of what is ahead
     // -1       error or not sure
@@ -685,8 +681,7 @@ namespace tca {
   } // Forecast
 
   //////////////////////////////////////////
-  void
-  UpdateStiffEl(TCSlice& slc, Trajectory& tj)
+  void UpdateStiffEl(TCSlice& slc, Trajectory& tj)
   {
     // A different stategy for updating a high energy electron trajectories
     if (!tj.Strategy[kStiffEl]) return;
@@ -709,8 +704,7 @@ namespace tca {
   } // UpdateStiffTj
 
   //////////////////////////////////////////
-  void
-  UpdateTraj(TCSlice& slc, Trajectory& tj)
+  void UpdateTraj(TCSlice& slc, Trajectory& tj)
   {
     // Updates the last added trajectory point fit, average hit rms, etc.
 
@@ -989,8 +983,7 @@ namespace tca {
   } // UpdateTraj
 
   ////////////////////////////////////////////////
-  void
-  CheckStiffEl(TCSlice& slc, Trajectory& tj)
+  void CheckStiffEl(TCSlice& slc, Trajectory& tj)
   {
     if (!tj.Strategy[kStiffEl]) return;
     if (tcc.dbgStp) {
@@ -1004,8 +997,7 @@ namespace tca {
   } // CheckStiffTj
 
   ////////////////////////////////////////////////
-  void
-  CheckTraj(TCSlice& slc, Trajectory& tj)
+  void CheckTraj(TCSlice& slc, Trajectory& tj)
   {
     // Check the quality of the trajectory and possibly trim it or flag it for deletion
 
@@ -1121,8 +1113,7 @@ namespace tca {
   } // CheckTraj
 
   ////////////////////////////////////////////////
-  void
-  AddHits(TCSlice& slc, Trajectory& tj, unsigned short ipt, bool& sigOK)
+  void AddHits(TCSlice& slc, Trajectory& tj, unsigned short ipt, bool& sigOK)
   {
     // Try to add hits to the trajectory point ipt on the supplied
     // trajectory
@@ -1318,8 +1309,7 @@ namespace tca {
   } // AddHits
 
   ////////////////////////////////////////////////
-  void
-  AddLAHits(TCSlice& slc, Trajectory& tj, unsigned short ipt, bool& sigOK)
+  void AddLAHits(TCSlice& slc, Trajectory& tj, unsigned short ipt, bool& sigOK)
   {
     // Very Large Angle version of AddHits to be called for the last angle range
 
@@ -1427,8 +1417,7 @@ namespace tca {
   } // AddLAHits
 
   //////////////////////////////////////////
-  void
-  ReversePropagate(TCSlice& slc, Trajectory& tj)
+  void ReversePropagate(TCSlice& slc, Trajectory& tj)
   {
     // Reverse the trajectory and step in the opposite direction. The
     // updated trajectory is returned if this process is successful
@@ -1533,11 +1522,10 @@ namespace tca {
   } // ReversePropagate
 
   ////////////////////////////////////////////////
-  void
-  GetHitMultiplet(const TCSlice& slc,
-                  unsigned int theHit,
-                  std::vector<unsigned int>& hitsInMultiplet,
-                  bool useLongPulseHits)
+  void GetHitMultiplet(const TCSlice& slc,
+                       unsigned int theHit,
+                       std::vector<unsigned int>& hitsInMultiplet,
+                       bool useLongPulseHits)
   {
     // This function attempts to return a list of hits in the current slice that are close to the
     // hit specified by theHit and that are similar to it. If theHit is a high-pulseheight hit (aka imTall)
@@ -1667,8 +1655,7 @@ namespace tca {
   } // GetHitMultiplet
 
   //////////////////////////////////////////
-  float
-  HitTimeErr(const TCSlice& slc, unsigned int iht)
+  float HitTimeErr(const TCSlice& slc, unsigned int iht)
   {
     if (iht > slc.slHits.size() - 1) return 0;
     auto& hit = (*evt.allHits)[slc.slHits[iht].allHitsIndex];
@@ -1676,8 +1663,7 @@ namespace tca {
   } // HitTimeErr
 
   //////////////////////////////////////////
-  float
-  HitsTimeErr2(const TCSlice& slc, const std::vector<unsigned int>& hitVec)
+  float HitsTimeErr2(const TCSlice& slc, const std::vector<unsigned int>& hitVec)
   {
     // Estimates the error^2 of the time using all hits in hitVec
     if (hitVec.empty()) return 0;
@@ -1686,8 +1672,7 @@ namespace tca {
   } // HitsTimeErr2
 
   ////////////////////////////////////////////////
-  void
-  ChkStopEndPts(TCSlice& slc, Trajectory& tj, bool prt)
+  void ChkStopEndPts(TCSlice& slc, Trajectory& tj, bool prt)
   {
     // Analyze the end of the Tj after crawling has stopped to see if any of the points
     // should be used
@@ -1807,8 +1792,7 @@ namespace tca {
   } // ChkStopEndPts
 
   //////////////////////////////////////////
-  void
-  DefineHitPos(TCSlice& slc, TrajPoint& tp)
+  void DefineHitPos(TCSlice& slc, TrajPoint& tp)
   {
     // defines HitPos, HitPosErr2 and Chg for the used hits in the trajectory point
 
@@ -1899,8 +1883,7 @@ namespace tca {
   } // DefineHitPos
 
   //////////////////////////////////////////
-  void
-  FindUseHits(TCSlice& slc, Trajectory& tj, unsigned short ipt, float maxDelta, bool useChg)
+  void FindUseHits(TCSlice& slc, Trajectory& tj, unsigned short ipt, float maxDelta, bool useChg)
   {
     // Hits have been associated with trajectory point ipt but none are used. Here we will
     // decide which hits to use.
@@ -2223,8 +2206,7 @@ namespace tca {
   } // FindUseHits
 
   ////////////////////////////////////////////////
-  void
-  FillGaps(TCSlice& slc, Trajectory& tj)
+  void FillGaps(TCSlice& slc, Trajectory& tj)
   {
     // Fill in any gaps in the trajectory with close hits regardless of charge (well maybe not quite that)
 
@@ -2365,8 +2347,7 @@ namespace tca {
   } // FillGaps
 
   ////////////////////////////////////////////////
-  void
-  CheckHiMultUnusedHits(TCSlice& slc, Trajectory& tj)
+  void CheckHiMultUnusedHits(TCSlice& slc, Trajectory& tj)
   {
     // Check for many unused hits in high multiplicity TPs in work and try to use them
 
@@ -2522,8 +2503,7 @@ namespace tca {
   } // CheckHiMultUnusedHits
 
   ////////////////////////////////////////////////
-  void
-  CheckHiMultEndHits(TCSlice& slc, Trajectory& tj)
+  void CheckHiMultEndHits(TCSlice& slc, Trajectory& tj)
   {
     // mask off high multiplicity TPs at the end
     if (!tcc.useAlg[kCHMEH]) return;
@@ -2565,8 +2545,7 @@ namespace tca {
   } // CheckHiMultEndHits
 
   //////////////////////////////////////////
-  void
-  UpdateDeltaRMS(TCSlice& slc, Trajectory& tj)
+  void UpdateDeltaRMS(TCSlice& slc, Trajectory& tj)
   {
     // Estimate the Delta RMS of the TPs on the end of tj.
 
@@ -2596,8 +2575,7 @@ namespace tca {
   } // UpdateDeltaRMS
 
   //////////////////////////////////////////
-  void
-  MaskBadTPs(TCSlice& slc, Trajectory& tj, float const& maxChi)
+  void MaskBadTPs(TCSlice& slc, Trajectory& tj, float const& maxChi)
   {
     // Remove TPs that have the worst values of delta until the fit chisq < maxChi
 
@@ -2644,8 +2622,7 @@ namespace tca {
   } // MaskBadTPs
 
   ////////////////////////////////////////////////
-  bool
-  MaskedHitsOK(TCSlice& slc, Trajectory& tj)
+  bool MaskedHitsOK(TCSlice& slc, Trajectory& tj)
   {
     // The hits in the TP at the end of the trajectory were masked off. Decide whether to continue stepping with the
     // current configuration (true) or whether to stop and possibly try with the next pass settings (false)
@@ -2755,8 +2732,7 @@ namespace tca {
   } // MaskedHitsOK
 
   ////////////////////////////////////////////////
-  bool
-  StopIfBadFits(TCSlice& slc, Trajectory& tj)
+  bool StopIfBadFits(TCSlice& slc, Trajectory& tj)
   {
     // Returns true if there are a number of Tps that were not used in the trajectory because the fit was poor and the
     // charge pull is not really high. This
@@ -2784,8 +2760,7 @@ namespace tca {
   } // StopIfBadFits
 
   ////////////////////////////////////////////////
-  bool
-  GottaKink(TCSlice& slc, Trajectory& tj, bool doTrim)
+  bool GottaKink(TCSlice& slc, Trajectory& tj, bool doTrim)
   {
     // This function returns true if it detects a kink in the trajectory
     // This function trims the points after a kink if one is found if doTrim is true.
@@ -2911,8 +2886,7 @@ namespace tca {
   } // GottaKink
 
   ////////////////////////////////////////////////
-  void
-  ChkBegin(TCSlice& slc, Trajectory& tj)
+  void ChkBegin(TCSlice& slc, Trajectory& tj)
   {
     // Check the parameters at the start of the trajectory. The first
     // points may not belong to this trajectory since they were added when there was
@@ -3044,8 +3018,7 @@ namespace tca {
   } // ChkBegin
 
   ////////////////////////////////////////////////
-  void
-  FixBegin(TCSlice& slc, Trajectory& tj, unsigned short atPt)
+  void FixBegin(TCSlice& slc, Trajectory& tj, unsigned short atPt)
   {
     // Update the parameters at the beginning of the trajectory starting at point atPt
 
@@ -3117,8 +3090,7 @@ namespace tca {
   } // FixBegin
 
   ////////////////////////////////////////////////
-  bool
-  IsGhost(TCSlice& slc, Trajectory& tj)
+  bool IsGhost(TCSlice& slc, Trajectory& tj)
   {
     // Sees if trajectory tj shares many hits with another trajectory and if so merges them.
 
@@ -3291,8 +3263,7 @@ namespace tca {
   } // IsGhost
 
   ////////////////////////////////////////////////
-  bool
-  IsGhost(TCSlice& slc, std::vector<unsigned int>& tHits)
+  bool IsGhost(TCSlice& slc, std::vector<unsigned int>& tHits)
   {
     // Called by FindJunkTraj to see if the passed hits are close to an existing
     // trajectory and if so, they will be used in that other trajectory
@@ -3374,8 +3345,7 @@ namespace tca {
   } // IsGhost
 
   ////////////////////////////////////////////////
-  void
-  LastEndMerge(TCSlice& slc, CTP_t inCTP)
+  void LastEndMerge(TCSlice& slc, CTP_t inCTP)
   {
     // last ditch attempt to merge long straight broken trajectories by averaging
     // all points in the trajectory and applying tight angle and separation cuts.
@@ -3486,8 +3456,7 @@ namespace tca {
   } // LastEndMerge
 
   ////////////////////////////////////////////////
-  TrajPoint
-  CreateTPFromTj(TCSlice& slc, const Trajectory& tj)
+  TrajPoint CreateTPFromTj(TCSlice& slc, const Trajectory& tj)
   {
     // Create a trajectory point by averaging the position and direction of all
     // TPs in the trajectory. This is used in LastEndMerge
@@ -3523,8 +3492,7 @@ namespace tca {
   } // CreateTjTP
 
   ////////////////////////////////////////////////
-  void
-  EndMerge(TCSlice& slc, CTP_t inCTP, bool lastPass)
+  void EndMerge(TCSlice& slc, CTP_t inCTP, bool lastPass)
   {
     // Merges trajectories end-to-end or makes vertices. Does a more careful check on the last pass
 
@@ -3937,8 +3905,7 @@ namespace tca {
   } // EndMerge
 
   //////////////////////////////////////////
-  void
-  MaskTrajEndPoints(TCSlice& slc, Trajectory& tj, unsigned short nPts)
+  void MaskTrajEndPoints(TCSlice& slc, Trajectory& tj, unsigned short nPts)
   {
 
     // Masks off (sets all hits not-Used) nPts trajectory points at the leading edge of the
@@ -4002,8 +3969,7 @@ namespace tca {
   } // MaskTrajEndPoints
 
   ////////////////////////////////////////////////
-  void
-  ChkStop(TCSlice& slc, Trajectory& tj)
+  void ChkStop(TCSlice& slc, Trajectory& tj)
   {
     // Sets the EndFlag[kBragg] bits on the trajectory by identifying the Bragg peak
     // at each end. This function checks both ends, finding the point with the highest charge nearest the
@@ -4118,8 +4084,7 @@ namespace tca {
   } // ChkStop
 
   //////////////////////TY://////////////////////////
-  bool
-  ChkMichel(TCSlice& slc, Trajectory& tj, unsigned short& lastGoodPt)
+  bool ChkMichel(TCSlice& slc, Trajectory& tj, unsigned short& lastGoodPt)
   {
 
     if (!tcc.useAlg[kMichel]) return false;
@@ -4178,8 +4143,7 @@ namespace tca {
   }
 
   //////////////////////////////////////////
-  bool
-  MakeJunkTraj(TCSlice& slc, std::vector<unsigned int> tHits)
+  bool MakeJunkTraj(TCSlice& slc, std::vector<unsigned int> tHits)
   {
     if (!tcc.useAlg[kJunkTj]) return false;
     // Make a crummy trajectory using the provided hits

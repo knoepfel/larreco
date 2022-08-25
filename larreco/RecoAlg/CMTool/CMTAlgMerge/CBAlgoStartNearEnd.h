@@ -37,31 +37,17 @@ namespace cmtool {
        merged or not.
     */
 
-    void
-    SetMaxStartEndSeparation(double d)
-    {
-      _separation = d;
-    }
+    void SetMaxStartEndSeparation(double d) { _separation = d; }
 
-    void
-    SetMaxAngle(double a)
-    {
-      _maxopeningangle = a;
-    }
+    void SetMaxAngle(double a) { _maxopeningangle = a; }
 
-    void
-    SetMinHits(size_t n)
-    {
-      _MinHits = n;
-    }
+    void SetMinHits(size_t n) { _MinHits = n; }
 
     virtual bool Bool(const ::cluster::ClusterParamsAlg& cluster1,
                       const ::cluster::ClusterParamsAlg& cluster2);
 
     /// Function to reset the algorithm instance ... maybe implemented via child class
-    virtual void
-    Reset()
-    {}
+    virtual void Reset() {}
 
     /// Function to report what's going on per merging
     virtual void Report();

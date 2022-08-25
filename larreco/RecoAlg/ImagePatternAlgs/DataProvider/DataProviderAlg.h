@@ -114,17 +114,15 @@ public:
                         unsigned int tpc,
                         unsigned int cryo);
 
-  std::vector<float> const&
-  wireData(size_t widx) const
-  {
-    return fAlgView.fWireDriftData[widx];
-  }
+  std::vector<float> const& wireData(size_t widx) const { return fAlgView.fWireDriftData[widx]; }
 
   /// Return patch of data centered on the wire and drift, witht the size in (downscaled) pixels givent
   /// with patchSizeW and patchSizeD.  Pad with the zero-level calue if patch extends beyond the event
   /// projection.
-  std::vector<std::vector<float>>
-  getPatch(size_t wire, float drift, size_t patchSizeW, size_t patchSizeD) const
+  std::vector<std::vector<float>> getPatch(size_t wire,
+                                           float drift,
+                                           size_t patchSizeW,
+                                           size_t patchSizeD) const
   {
     bool ok = false;
     std::vector<std::vector<float>> patch;
@@ -141,8 +139,7 @@ public:
 
   /// Return value from the ADC buffer, or zero if coordinates are out of the view;
   /// will scale the drift according to the downscale settings.
-  float
-  getPixelOrZero(int wire, int drift) const
+  float getPixelOrZero(int wire, int drift) const
   {
     size_t didx = getDriftIndex(drift), widx = (size_t)wire;
 
@@ -152,16 +149,8 @@ public:
     return 0;
   }
 
-  double
-  getAdcSum() const
-  {
-    return fAdcSumOverThr;
-  }
-  size_t
-  getAdcArea() const
-  {
-    return fAdcAreaOverThr;
-  }
+  double getAdcSum() const { return fAdcSumOverThr; }
+  size_t getAdcArea() const { return fAdcAreaOverThr; }
 
   /// Pool max value in a patch around the wire/drift pixel.
   float poolMax(int wire, int drift, size_t r = 0) const;
@@ -169,54 +158,21 @@ public:
   /// Pool sum of pixels in a patch around the wire/drift pixel.
   //float poolSum(int wire, int drift, size_t r = 0) const;
 
-  unsigned int
-  Cryo() const
-  {
-    return fCryo;
-  }
-  unsigned int
-  TPC() const
-  {
-    return fTPC;
-  }
-  unsigned int
-  Plane() const
-  {
-    return fPlane;
-  }
+  unsigned int Cryo() const { return fCryo; }
+  unsigned int TPC() const { return fTPC; }
+  unsigned int Plane() const { return fPlane; }
 
-  unsigned int
-  NWires() const
-  {
-    return fAlgView.fNWires;
-  }
-  unsigned int
-  NScaledDrifts() const
-  {
-    return fAlgView.fNScaledDrifts;
-  }
-  unsigned int
-  NCachedDrifts() const
-  {
-    return fAlgView.fNCachedDrifts;
-  }
-  unsigned int
-  DriftWindow() const
-  {
-    return fDriftWindow;
-  }
+  unsigned int NWires() const { return fAlgView.fNWires; }
+  unsigned int NScaledDrifts() const { return fAlgView.fNScaledDrifts; }
+  unsigned int NCachedDrifts() const { return fAlgView.fNCachedDrifts; }
+  unsigned int DriftWindow() const { return fDriftWindow; }
 
   /// Level of zero ADC after scaling.
-  float
-  ZeroLevel() const
-  {
-    return fAdcZero;
-  }
+  float ZeroLevel() const { return fAdcZero; }
 
-  double
-  LifetimeCorrection(detinfo::DetectorClocksData const& clock_data,
-                     detinfo::DetectorPropertiesData const& det_prop,
-                     double tick) const
+  double LifetimeCorrection(detinfo::DetectorClocksData const& clock_data,
+                            detinfo::DetectorPropertiesData const& det_prop,
+                            double tick) const
   {
     return fCalorimetryAlg.LifetimeCorrection(clock_data, det_prop, tick);
   }
@@ -239,8 +195,9 @@ protected:
   std::vector<float> downscaleMean(std::size_t dst_size,
                                    std::vector<float> const& adc,
                                    size_t tick0) const;
-  std::vector<float>
-  downscale(std::size_t dst_size, std::vector<float> const& adc, size_t tick0) const
+  std::vector<float> downscale(std::size_t dst_size,
+                               std::vector<float> const& adc,
+                               size_t tick0) const
   {
     switch (fDownscaleMode) {
     case img::DataProviderAlg::kMean: return downscaleMean(dst_size, adc, tick0);
@@ -250,8 +207,7 @@ protected:
     throw cet::exception("img::DataProviderAlg") << "Downscale mode not supported." << std::endl;
   }
 
-  size_t
-  getDriftIndex(float drift) const
+  size_t getDriftIndex(float drift) const
   {
     if (fDownscaleFullView)
       return (size_t)(drift * fDriftWindowInv);

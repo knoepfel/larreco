@@ -74,15 +74,13 @@ genf::GFMaterialEffects::GFMaterialEffects()
   , fmass(0)
 {}
 
-genf::GFMaterialEffects*
-genf::GFMaterialEffects::getInstance()
+genf::GFMaterialEffects* genf::GFMaterialEffects::getInstance()
 {
   if (finstance == NULL) finstance = new GFMaterialEffects();
   return finstance;
 }
 
-void
-genf::GFMaterialEffects::destruct()
+void genf::GFMaterialEffects::destruct()
 {
   if (finstance != NULL) {
     delete finstance;
@@ -90,16 +88,15 @@ genf::GFMaterialEffects::destruct()
   }
 }
 
-double
-genf::GFMaterialEffects::effects(const std::vector<TVector3>& points,
-                                 const std::vector<double>& pointPaths,
-                                 const double& mom,
-                                 const int& pdg,
-                                 const bool& doNoise,
-                                 TMatrixT<Double_t>* noise,
-                                 const TMatrixT<Double_t>* jacobian,
-                                 const TVector3* directionBefore,
-                                 const TVector3* directionAfter)
+double genf::GFMaterialEffects::effects(const std::vector<TVector3>& points,
+                                        const std::vector<double>& pointPaths,
+                                        const double& mom,
+                                        const int& pdg,
+                                        const bool& doNoise,
+                                        TMatrixT<Double_t>* noise,
+                                        const TMatrixT<Double_t>* jacobian,
+                                        const TVector3* directionBefore,
+                                        const TVector3* directionAfter)
 {
 
   //assert(points.size()==pointPaths.size());
@@ -180,16 +177,15 @@ genf::GFMaterialEffects::effects(const std::vector<TVector3>& points,
   return momLoss;
 }
 
-double
-genf::GFMaterialEffects::stepper(const double& maxDist,
-                                 const double& posx,
-                                 const double& posy,
-                                 const double& posz,
-                                 const double& dirx,
-                                 const double& diry,
-                                 const double& dirz,
-                                 const double& mom,
-                                 const int& /* pdg */)
+double genf::GFMaterialEffects::stepper(const double& maxDist,
+                                        const double& posx,
+                                        const double& posy,
+                                        const double& posz,
+                                        const double& dirx,
+                                        const double& diry,
+                                        const double& dirz,
+                                        const double& mom,
+                                        const int& /* pdg */)
 {
 
   static const double maxPloss = .005; // maximum relative momentum loss allowed
@@ -252,8 +248,7 @@ genf::GFMaterialEffects::stepper(const double& maxDist,
   return X;
 }
 
-void
-genf::GFMaterialEffects::getParameters()
+void genf::GFMaterialEffects::getParameters()
 {
   if (!gGeoManager->GetCurrentVolume()->GetMedium())
     throw GFException(std::string(__func__) + ": no medium", __LINE__, __FILE__).setFatal();
@@ -277,8 +272,7 @@ genf::GFMaterialEffects::getParameters()
   fmass = part->Mass();
 }
 
-void
-genf::GFMaterialEffects::calcBeta(double mom)
+void genf::GFMaterialEffects::calcBeta(double mom)
 {
   fbeta = mom / sqrt(fmass * fmass + mom * mom);
 
@@ -293,8 +287,7 @@ genf::GFMaterialEffects::calcBeta(double mom)
 
 //---- Energy-loss and Noise calculations -----------------------------------------
 
-double
-genf::GFMaterialEffects::energyLossBetheBloch(const double& mom)
+double genf::GFMaterialEffects::energyLossBetheBloch(const double& mom)
 {
 
   // calc fdedx, also needed in noiseBetheBloch!
@@ -333,8 +326,7 @@ genf::GFMaterialEffects::energyLossBetheBloch(const double& mom)
   return momLoss;
 }
 
-void
-genf::GFMaterialEffects::noiseBetheBloch(const double& mom, TMatrixT<double>* noise) const
+void genf::GFMaterialEffects::noiseBetheBloch(const double& mom, TMatrixT<double>* noise) const
 {
 
   // ENERGY LOSS FLUCTUATIONS; calculate sigma^2(E);
@@ -399,12 +391,11 @@ genf::GFMaterialEffects::noiseBetheBloch(const double& mom, TMatrixT<double>* no
   (*noise)[6][6] += (mom * mom + fmass * fmass) / pow(mom, 6.) * sigma2E;
 }
 
-void
-genf::GFMaterialEffects::noiseCoulomb(const double& mom,
-                                      TMatrixT<double>* noise,
-                                      const TMatrixT<double>* jacobian,
-                                      const TVector3* directionBefore,
-                                      const TVector3* directionAfter) const
+void genf::GFMaterialEffects::noiseCoulomb(const double& mom,
+                                           TMatrixT<double>* noise,
+                                           const TMatrixT<double>* jacobian,
+                                           const TVector3* directionBefore,
+                                           const TVector3* directionAfter) const
 {
 
   // MULTIPLE SCATTERING; calculate sigma^2
@@ -514,8 +505,7 @@ genf::GFMaterialEffects::noiseCoulomb(const double& mom,
   (*noise) += 0.5 * noiseBefore + 0.5 * noiseAfter;
 }
 
-double
-genf::GFMaterialEffects::energyLossBrems(const double& mom) const
+double genf::GFMaterialEffects::energyLossBrems(const double& mom) const
 {
 
   if (fabs(fpdg) != 11) return 0; // only for electrons and positrons
@@ -724,8 +714,7 @@ genf::GFMaterialEffects::energyLossBrems(const double& mom) const
   return momLoss;
 }
 
-void
-genf::GFMaterialEffects::noiseBrems(const double& mom, TMatrixT<double>* noise) const
+void genf::GFMaterialEffects::noiseBrems(const double& mom, TMatrixT<double>* noise) const
 {
 
   if (fabs(fpdg) != 11) return; // only for electrons and positrons
@@ -755,16 +744,14 @@ const float MeanExcEnergy_vals[MeanExcEnergy_NELEMENTS] = {
   684.0, 694.0, 705.0, 718.0, 727.0, 736.0, 746.0, 757.0, 790.0, 790.0, 800.0, 810.0, 823.0, 823.0,
   830.0, 825.0, 794.0, 827.0, 826.0, 841.0, 847.0, 878.0, 890.0};
 
-double
-genf::GFMaterialEffects::MeanExcEnergy_get(int Z)
+double genf::GFMaterialEffects::MeanExcEnergy_get(int Z)
 {
   if ((Z < 0) || (Z > MeanExcEnergy_NELEMENTS))
     throw GFException(std::string(__func__) + ": unsupported Z", __LINE__, __FILE__).setFatal();
   return MeanExcEnergy_vals[Z];
 }
 
-double
-genf::GFMaterialEffects::MeanExcEnergy_get(TGeoMaterial* mat)
+double genf::GFMaterialEffects::MeanExcEnergy_get(TGeoMaterial* mat)
 {
   if (mat->IsMixture()) {
     double logMEE = 0.;

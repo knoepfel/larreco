@@ -25,9 +25,8 @@ namespace cmtool {
 
   } //end constructor
 
-  bool
-  CBAlgoAngleCompat::Bool(const ::cluster::ClusterParamsAlg& cluster1,
-                          const ::cluster::ClusterParamsAlg& cluster2)
+  bool CBAlgoAngleCompat::Bool(const ::cluster::ClusterParamsAlg& cluster1,
+                               const ::cluster::ClusterParamsAlg& cluster2)
   {
 
     //if number of hits not large enough skip

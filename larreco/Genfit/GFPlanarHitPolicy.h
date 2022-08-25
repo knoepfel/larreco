@@ -69,11 +69,7 @@ namespace genf {
    * detector hardware. This method should be called in the constructor of
    * any derived RecoHit in order to setup the geometry of this hit.
    */
-    void
-    setDetPlane(const GFDetPlane& p)
-    {
-      fPhysicalDetPlane = p;
-    }
+    void setDetPlane(const GFDetPlane& p) { fPhysicalDetPlane = p; }
 
     // Operations ----------------------
     /** @brief Hit coordinates in detector plane.
@@ -86,11 +82,7 @@ namespace genf {
 
     virtual ~GFPlanarHitPolicy() { ; }
 
-    const std::string&
-    getName()
-    {
-      return fPolicyName;
-    }
+    const std::string& getName() { return fPolicyName; }
 
   private:
     static const std::string fPolicyName;

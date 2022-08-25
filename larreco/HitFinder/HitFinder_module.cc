@@ -74,8 +74,7 @@ namespace hit {
   } // HitFinder::HitFinder()
 
   //----------------------------------------------------------------------------
-  void
-  HitFinder::produce(art::Event& evt)
+  void HitFinder::produce(art::Event& evt)
   {
     // fetch the wires needed by HitFinder
 
@@ -105,8 +104,7 @@ namespace hit {
   } // produce()
 
   //----------------------------------------------------------------------------
-  void
-  HitFinder::endJob()
+  void HitFinder::endJob()
   {
     // print the statistics about fits
     mf::LogInfo log("HitFinder"); // messages are printed on "log" destruction

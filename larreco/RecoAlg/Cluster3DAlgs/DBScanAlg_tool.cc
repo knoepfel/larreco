@@ -68,8 +68,7 @@ namespace lar_cluster3d {
     /**
      *  @brief If monitoring, recover the time to execute a particular function
      */
-    float
-    getTimeToExecute(IClusterAlg::TimeValues index) const override
+    float getTimeToExecute(IClusterAlg::TimeValues index) const override
     {
       return m_timeVector[index];
     }
@@ -103,8 +102,7 @@ namespace lar_cluster3d {
 
   //------------------------------------------------------------------------------------------------------------------------------------------
 
-  void
-  DBScanAlg::configure(fhicl::ParameterSet const& pset)
+  void DBScanAlg::configure(fhicl::ParameterSet const& pset)
   {
     m_enableMonitoring = pset.get<bool>("EnableMonitoring", true);
     m_minPairPts = pset.get<size_t>("MinPairPts", 2);
@@ -132,9 +130,8 @@ namespace lar_cluster3d {
     m_kdTree = kdTree(kdTreeParams);
   }
 
-  void
-  DBScanAlg::Cluster3DHits(reco::HitPairList& hitPairList,
-                           reco::ClusterParametersList& clusterParametersList) const
+  void DBScanAlg::Cluster3DHits(reco::HitPairList& hitPairList,
+                                reco::ClusterParametersList& clusterParametersList) const
   {
     /**
      *  @brief Driver for processing input 2D hits, transforming to 3D hits and building lists
@@ -212,9 +209,8 @@ namespace lar_cluster3d {
     return;
   }
 
-  void
-  DBScanAlg::Cluster3DHits(reco::HitPairListPtr& hitPairList,
-                           reco::ClusterParametersList& clusterParametersList) const
+  void DBScanAlg::Cluster3DHits(reco::HitPairListPtr& hitPairList,
+                                reco::ClusterParametersList& clusterParametersList) const
   {
     /**
      *  @brief Driver for processing input 2D hits, transforming to 3D hits and building lists
@@ -292,11 +288,10 @@ namespace lar_cluster3d {
     return;
   }
 
-  void
-  DBScanAlg::expandCluster(const kdTree::KdTreeNode& topNode,
-                           kdTree::CandPairList& candPairList,
-                           reco::ClusterParameters& cluster,
-                           size_t minPts) const
+  void DBScanAlg::expandCluster(const kdTree::KdTreeNode& topNode,
+                                kdTree::CandPairList& candPairList,
+                                reco::ClusterParameters& cluster,
+                                size_t minPts) const
   {
     // This is the main inside loop for the DBScan based clustering algorithm
 

@@ -72,8 +72,7 @@ genf::GFBookkeeping::GFBookkeeping(const GFBookkeeping& bk) : TObject(bk)
   }
 }
 
-void
-genf::GFBookkeeping::Streamer(TBuffer& R__b)
+void genf::GFBookkeeping::Streamer(TBuffer& R__b)
 {
 
   // Stream an object of class GFBookkeeping.
@@ -191,8 +190,7 @@ genf::GFBookkeeping::Streamer(TBuffer& R__b)
   }
 }
 
-void
-genf::GFBookkeeping::bookMatrices(std::string key)
+void genf::GFBookkeeping::bookMatrices(std::string key)
 {
   if (fNhits < 0) {
     GFException exc("fNhits not defined", __LINE__, __FILE__);
@@ -207,8 +205,7 @@ genf::GFBookkeeping::bookMatrices(std::string key)
   fMatrices[key] = new TMatrixT<Double_t>[fNhits];
 }
 
-void
-genf::GFBookkeeping::bookGFDetPlanes(std::string key)
+void genf::GFBookkeeping::bookGFDetPlanes(std::string key)
 {
   if (fNhits < 0) {
     GFException exc("fNhits not defined", __LINE__, __FILE__);
@@ -224,8 +221,7 @@ genf::GFBookkeeping::bookGFDetPlanes(std::string key)
 }
 
 //val is default set to 0.
-void
-genf::GFBookkeeping::bookNumbers(std::string key, double val)
+void genf::GFBookkeeping::bookNumbers(std::string key, double val)
 {
   if (fNhits < 0) {
     GFException exc("fNhits not defined", __LINE__, __FILE__);
@@ -244,8 +240,9 @@ genf::GFBookkeeping::bookNumbers(std::string key, double val)
   }
 }
 
-void
-genf::GFBookkeeping::setMatrix(std::string key, unsigned int index, const TMatrixT<Double_t>& mat)
+void genf::GFBookkeeping::setMatrix(std::string key,
+                                    unsigned int index,
+                                    const TMatrixT<Double_t>& mat)
 {
   if (fMatrices[key] == NULL) {
     std::ostringstream ostr;
@@ -262,8 +259,9 @@ genf::GFBookkeeping::setMatrix(std::string key, unsigned int index, const TMatri
   (fMatrices[key])[index].ResizeTo(mat);
   (fMatrices[key])[index] = mat;
 }
-void
-genf::GFBookkeeping::setDetPlane(std::string key, unsigned int index, const genf::GFDetPlane& pl)
+void genf::GFBookkeeping::setDetPlane(std::string key,
+                                      unsigned int index,
+                                      const genf::GFDetPlane& pl)
 {
   if (fPlanes[key] == NULL) {
     std::ostringstream ostr;
@@ -279,8 +277,7 @@ genf::GFBookkeeping::setDetPlane(std::string key, unsigned int index, const genf
   }
   (fPlanes[key])[index] = pl;
 }
-void
-genf::GFBookkeeping::setNumber(std::string key, unsigned int index, const double& num)
+void genf::GFBookkeeping::setNumber(std::string key, unsigned int index, const double& num)
 {
   if (fNumbers[key] == NULL) {
     std::ostringstream ostr;
@@ -297,8 +294,9 @@ genf::GFBookkeeping::setNumber(std::string key, unsigned int index, const double
   ((fNumbers[key])[index])[0][0] = num;
 }
 
-bool
-genf::GFBookkeeping::getMatrix(std::string key, unsigned int index, TMatrixT<Double_t>& mat) const
+bool genf::GFBookkeeping::getMatrix(std::string key,
+                                    unsigned int index,
+                                    TMatrixT<Double_t>& mat) const
 {
   auto iMatrix = fMatrices.find(key);
   if (iMatrix == fMatrices.end()) {
@@ -317,8 +315,9 @@ genf::GFBookkeeping::getMatrix(std::string key, unsigned int index, TMatrixT<Dou
   mat = iMatrix->second[index];
   return true;
 }
-bool
-genf::GFBookkeeping::getDetPlane(std::string key, unsigned int index, genf::GFDetPlane& pl) const
+bool genf::GFBookkeeping::getDetPlane(std::string key,
+                                      unsigned int index,
+                                      genf::GFDetPlane& pl) const
 {
 
   auto iPlane = fPlanes.find(key);
@@ -337,8 +336,7 @@ genf::GFBookkeeping::getDetPlane(std::string key, unsigned int index, genf::GFDe
   pl = iPlane->second[index];
   return true;
 }
-bool
-genf::GFBookkeeping::getNumber(std::string key, unsigned int index, double& num) const
+bool genf::GFBookkeeping::getNumber(std::string key, unsigned int index, double& num) const
 {
   auto iNumber = fNumbers.find(key);
   if (iNumber == fNumbers.end()) {
@@ -357,20 +355,17 @@ genf::GFBookkeeping::getNumber(std::string key, unsigned int index, double& num)
   return true;
 }
 
-void
-genf::GFBookkeeping::addFailedHit(unsigned int id)
+void genf::GFBookkeeping::addFailedHit(unsigned int id)
 {
   fFailedHits.push_back(id);
 }
 
-unsigned int
-genf::GFBookkeeping::getNumFailed()
+unsigned int genf::GFBookkeeping::getNumFailed()
 {
   return fFailedHits.size();
 }
 
-unsigned int
-genf::GFBookkeeping::hitFailed(unsigned int id)
+unsigned int genf::GFBookkeeping::hitFailed(unsigned int id)
 {
   unsigned int retVal = 0;
   for (unsigned int i = 0; i < fFailedHits.size(); ++i) {
@@ -379,14 +374,12 @@ genf::GFBookkeeping::hitFailed(unsigned int id)
   return retVal;
 }
 
-void
-genf::GFBookkeeping::clearFailedHits()
+void genf::GFBookkeeping::clearFailedHits()
 {
   fFailedHits.clear();
 }
 
-void
-genf::GFBookkeeping::reset()
+void genf::GFBookkeeping::reset()
 {
   std::vector<std::string> matKeys = getMatrixKeys();
   std::vector<std::string> planeKeys = getGFDetPlaneKeys();
@@ -406,8 +399,7 @@ genf::GFBookkeeping::reset()
   }
 }
 
-void
-genf::GFBookkeeping::clearAll()
+void genf::GFBookkeeping::clearAll()
 {
   std::map<std::string, TMatrixT<Double_t>*>::iterator itMat;
   for (itMat = fMatrices.begin(); itMat != fMatrices.end(); itMat++) {
@@ -426,8 +418,7 @@ genf::GFBookkeeping::clearAll()
   fNumbers.clear();
 }
 
-std::vector<std::string>
-genf::GFBookkeeping::getMatrixKeys() const
+std::vector<std::string> genf::GFBookkeeping::getMatrixKeys() const
 {
   std::vector<std::string> keys;
   std::map<std::string, TMatrixT<Double_t>*>::const_iterator it;
@@ -436,8 +427,7 @@ genf::GFBookkeeping::getMatrixKeys() const
   }
   return keys;
 }
-std::vector<std::string>
-genf::GFBookkeeping::getGFDetPlaneKeys() const
+std::vector<std::string> genf::GFBookkeeping::getGFDetPlaneKeys() const
 {
   std::vector<std::string> keys;
   std::map<std::string, genf::GFDetPlane*>::const_iterator it;
@@ -446,8 +436,7 @@ genf::GFBookkeeping::getGFDetPlaneKeys() const
   }
   return keys;
 }
-std::vector<std::string>
-genf::GFBookkeeping::getNumberKeys() const
+std::vector<std::string> genf::GFBookkeeping::getNumberKeys() const
 {
   std::vector<std::string> keys;
   std::map<std::string, TMatrixT<Double_t>*>::const_iterator it;
@@ -457,8 +446,7 @@ genf::GFBookkeeping::getNumberKeys() const
   return keys;
 }
 
-void
-genf::GFBookkeeping::Print(std::ostream& out /* = std::cout */) const
+void genf::GFBookkeeping::Print(std::ostream& out /* = std::cout */) const
 {
   out << "=============genf::GFBookkeeping::print()==============" << std::endl;
   out << "-----printing all matrices:------" << std::endl;

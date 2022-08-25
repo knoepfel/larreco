@@ -23,8 +23,7 @@
 namespace hit {
 
   struct SignalSetComp {
-    bool
-    operator()(const std::pair<float, float>& lhs, const std::pair<float, float>& rhs) const
+    bool operator()(const std::pair<float, float>& lhs, const std::pair<float, float>& rhs) const
     {
       return lhs.first < rhs.first;
     }
@@ -42,41 +41,13 @@ namespace hit {
 
     void RunFitter(const std::vector<float>& signal);
 
-    const std::vector<float>&
-    MeanVector()
-    {
-      return fMeanVector;
-    }
-    const std::vector<float>&
-    SigmaVector()
-    {
-      return fSigmaVector;
-    }
-    const std::vector<float>&
-    MeanErrorVector()
-    {
-      return fMeanErrorVector;
-    }
-    const std::vector<float>&
-    SigmaErrorVector()
-    {
-      return fSigmaErrorVector;
-    }
-    const std::vector<float>&
-    AmplitudeVector()
-    {
-      return fAmpVector;
-    }
-    const std::vector<float>&
-    AmplitudeErrorVector()
-    {
-      return fAmpErrorVector;
-    }
-    unsigned int
-    NHits()
-    {
-      return fMeanVector.size();
-    }
+    const std::vector<float>& MeanVector() { return fMeanVector; }
+    const std::vector<float>& SigmaVector() { return fSigmaVector; }
+    const std::vector<float>& MeanErrorVector() { return fMeanErrorVector; }
+    const std::vector<float>& SigmaErrorVector() { return fSigmaErrorVector; }
+    const std::vector<float>& AmplitudeVector() { return fAmpVector; }
+    const std::vector<float>& AmplitudeErrorVector() { return fAmpErrorVector; }
+    unsigned int NHits() { return fMeanVector.size(); }
 
     void ClearResults();
 

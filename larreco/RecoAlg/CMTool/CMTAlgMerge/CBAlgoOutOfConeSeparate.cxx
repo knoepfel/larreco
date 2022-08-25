@@ -17,9 +17,8 @@ namespace cmtool {
   }
 
   //--------------------------------------------------------
-  bool
-  CBAlgoOutOfConeSeparate::Bool(const ::cluster::ClusterParamsAlg& cluster1,
-                                const ::cluster::ClusterParamsAlg& cluster2)
+  bool CBAlgoOutOfConeSeparate::Bool(const ::cluster::ClusterParamsAlg& cluster1,
+                                     const ::cluster::ClusterParamsAlg& cluster2)
   //--------------------------------------------------------
   {
 

@@ -57,31 +57,11 @@ namespace genf {
     static GFMaterialEffects* getInstance();
     static void destruct();
 
-    void
-    setEnergyLossBetheBloch(bool opt = true)
-    {
-      fEnergyLossBetheBloch = opt;
-    }
-    void
-    setNoiseBetheBloch(bool opt = true)
-    {
-      fNoiseBetheBloch = opt;
-    }
-    void
-    setNoiseCoulomb(bool opt = true)
-    {
-      fNoiseCoulomb = opt;
-    }
-    void
-    setEnergyLossBrems(bool opt = true)
-    {
-      fEnergyLossBrems = opt;
-    }
-    void
-    setNoiseBrems(bool opt = true)
-    {
-      fNoiseBrems = opt;
-    }
+    void setEnergyLossBetheBloch(bool opt = true) { fEnergyLossBetheBloch = opt; }
+    void setNoiseBetheBloch(bool opt = true) { fNoiseBetheBloch = opt; }
+    void setNoiseCoulomb(bool opt = true) { fNoiseCoulomb = opt; }
+    void setEnergyLossBrems(bool opt = true) { fEnergyLossBrems = opt; }
+    void setNoiseBrems(bool opt = true) { fNoiseBrems = opt; }
 
     //! Calculates energy loss in the travelled path, optional calculation of noise matrix
     double effects(const std::vector<TVector3>& points,
@@ -106,12 +86,11 @@ namespace genf {
                    const double& dirz,
                    const double& mom,
                    const int& pdg);
-    double
-    stepper(const double& maxDist,
-            const TVector3& pos,
-            const TVector3& dir,
-            const double& mom,
-            const int& pdg)
+    double stepper(const double& maxDist,
+                   const TVector3& pos,
+                   const TVector3& dir,
+                   const double& mom,
+                   const int& pdg)
     {
       return stepper(maxDist, pos.X(), pos.Y(), pos.Z(), dir.X(), dir.Y(), dir.Z(), mom, pdg);
     };

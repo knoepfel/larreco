@@ -47,8 +47,7 @@ calo::PrintCalorimetry::PrintCalorimetry(fhicl::ParameterSet const& p)
   , fCaloModuleLabels(p.get<std::vector<std::string>>("CaloModuleLabels"))
 {}
 
-void
-calo::PrintCalorimetry::analyze(art::Event const& e)
+void calo::PrintCalorimetry::analyze(art::Event const& e)
 {
   art::Handle<std::vector<recob::Track>> trackHandle;
   e.getByLabel(fTrackModuleLabel, trackHandle);

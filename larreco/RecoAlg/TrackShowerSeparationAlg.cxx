@@ -20,8 +20,7 @@ shower::TrackShowerSeparationAlg::TrackShowerSeparationAlg(fhicl::ParameterSet c
   this->reconfigure(pset);
 }
 
-void
-shower::TrackShowerSeparationAlg::reconfigure(fhicl::ParameterSet const& pset)
+void shower::TrackShowerSeparationAlg::reconfigure(fhicl::ParameterSet const& pset)
 {
   fConeAngle = pset.get<double>("ConeAngle");
   fCylinderRadius = pset.get<double>("CylinderRadius");
@@ -32,8 +31,7 @@ shower::TrackShowerSeparationAlg::reconfigure(fhicl::ParameterSet const& pset)
   fDebug = pset.get<int>("Debug", 0);
 }
 
-std::vector<art::Ptr<recob::Hit>>
-shower::TrackShowerSeparationAlg::SelectShowerHits(
+std::vector<art::Ptr<recob::Hit>> shower::TrackShowerSeparationAlg::SelectShowerHits(
   int event,
   const std::vector<art::Ptr<recob::Hit>>& hits,
   const std::vector<art::Ptr<recob::Track>>& tracks,
@@ -326,8 +324,7 @@ shower::TrackShowerSeparationAlg::SelectShowerHits(
   return showerHits;
 }
 
-std::vector<int>
-shower::TrackShowerSeparationAlg::InitialTrackLikeSegment(
+std::vector<int> shower::TrackShowerSeparationAlg::InitialTrackLikeSegment(
   std::map<int, std::unique_ptr<ReconTrack>>& reconTracks) const
 {
 
@@ -406,9 +403,8 @@ shower::TrackShowerSeparationAlg::InitialTrackLikeSegment(
   return showerTracks;
 }
 
-TVector3
-shower::TrackShowerSeparationAlg::Gradient(const std::vector<TVector3>& points,
-                                           const std::unique_ptr<TVector3>& dir) const
+TVector3 shower::TrackShowerSeparationAlg::Gradient(const std::vector<TVector3>& points,
+                                                    const std::unique_ptr<TVector3>& dir) const
 {
 
   int nhits = 0;
@@ -441,8 +437,7 @@ shower::TrackShowerSeparationAlg::Gradient(const std::vector<TVector3>& points,
   return direction;
 }
 
-TVector3
-shower::TrackShowerSeparationAlg::Gradient(const art::Ptr<recob::Track>& track) const
+TVector3 shower::TrackShowerSeparationAlg::Gradient(const art::Ptr<recob::Track>& track) const
 {
 
   std::vector<TVector3> points;
@@ -455,8 +450,7 @@ shower::TrackShowerSeparationAlg::Gradient(const art::Ptr<recob::Track>& track) 
   return Gradient(points, dir);
 }
 
-TVector3
-shower::TrackShowerSeparationAlg::Gradient(
+TVector3 shower::TrackShowerSeparationAlg::Gradient(
   const std::vector<art::Ptr<recob::SpacePoint>>& spacePoints) const
 {
 
@@ -471,23 +465,21 @@ shower::TrackShowerSeparationAlg::Gradient(
   return Gradient(points, dir);
 }
 
-TVector3
-shower::TrackShowerSeparationAlg::ProjPoint(const TVector3& point,
-                                            const TVector3& direction,
-                                            const TVector3& origin) const
+TVector3 shower::TrackShowerSeparationAlg::ProjPoint(const TVector3& point,
+                                                     const TVector3& direction,
+                                                     const TVector3& origin) const
 {
   return (point - origin).Dot(direction) * direction + origin;
 }
 
-TVector3
-shower::TrackShowerSeparationAlg::SpacePointPos(const art::Ptr<recob::SpacePoint>& spacePoint) const
+TVector3 shower::TrackShowerSeparationAlg::SpacePointPos(
+  const art::Ptr<recob::SpacePoint>& spacePoint) const
 {
   const double* xyz = spacePoint->XYZ();
   return TVector3(xyz[0], xyz[1], xyz[2]);
 }
 
-double
-shower::TrackShowerSeparationAlg::SpacePointsRMS(
+double shower::TrackShowerSeparationAlg::SpacePointsRMS(
   const std::vector<art::Ptr<recob::SpacePoint>>& spacePoints) const
 {
 

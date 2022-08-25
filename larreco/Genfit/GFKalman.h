@@ -64,22 +64,14 @@ namespace genf {
    * This operator allows to use the std::foreach algorithm with an
    * STL container o GFTrack* objects.
    */
-    inline void
-    operator()(GFTrack* track)
-    {
-      processTrack(track);
-    }
+    inline void operator()(GFTrack* track) { processTrack(track); }
 
     /** @brief Operator for use with STL.
    *
    * This operator allows to use the std::foreach algorithm with an
    * STL container o GFTrack* objects.
    */
-    inline void
-    operator()(std::pair<int, GFTrack*> tr)
-    {
-      processTrack(tr.second);
-    }
+    inline void operator()(std::pair<int, GFTrack*> tr) { processTrack(tr.second); }
 
     // Operations ----------------------
 
@@ -96,11 +88,7 @@ namespace genf {
    *
    * One iteration is one forward pass plus one backward pass
    */
-    void
-    setNumIterations(Int_t i)
-    {
-      fNumIt = i;
-    }
+    void setNumIterations(Int_t i) { fNumIt = i; }
 
     /** @brief Performs fit on a GFTrack.
    *
@@ -121,44 +109,16 @@ namespace genf {
     /** @brief Sets the inital direction of the track fit (1 for inner to outer,
    * or -1 for outer to inner). The standard is 1 and is set in the ctor
    */
-    void
-    setInitialDirection(int d)
-    {
-      fInitialDirection = d;
-    }
+    void setInitialDirection(int d) { fInitialDirection = d; }
 
     /** @brief Set the blowup factor (see blowUpCovs() )
    */
-    void
-    setBlowUpFactor(double f)
-    {
-      fBlowUpFactor = f;
-    }
-    void
-    setMomLow(Double_t f)
-    {
-      fMomLow = f;
-    }
-    void
-    setMomHigh(Double_t f)
-    {
-      fMomHigh = f;
-    }
-    void
-    setMaxUpdate(Double_t f)
-    {
-      fMaxUpdate = f;
-    }
-    void
-    setErrorScaleSTh(Double_t f)
-    {
-      fErrScaleSTh = f;
-    }
-    void
-    setErrorScaleMTh(Double_t f)
-    {
-      fErrScaleMTh = f;
-    }
+    void setBlowUpFactor(double f) { fBlowUpFactor = f; }
+    void setMomLow(Double_t f) { fMomLow = f; }
+    void setMomHigh(Double_t f) { fMomHigh = f; }
+    void setMaxUpdate(Double_t f) { fMaxUpdate = f; }
+    void setErrorScaleSTh(Double_t f) { fErrScaleSTh = f; }
+    void setErrorScaleMTh(Double_t f) { fErrScaleMTh = f; }
 
     // Private Methods -----------------
   private:

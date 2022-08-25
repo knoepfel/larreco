@@ -71,8 +71,7 @@ genf::GFTrack::GFTrack(const GFTrack& _tr) : TObject()
   fRepAtHit = _tr.fRepAtHit;
 }
 
-genf::GFTrack&
-genf::GFTrack::operator=(const GFTrack& _tr)
+genf::GFTrack& genf::GFTrack::operator=(const GFTrack& _tr)
 {
   if (fTrackReps != NULL) {
     for (unsigned int i = 0; i < getNumReps(); i++) {
@@ -110,8 +109,7 @@ genf::GFTrack::operator=(const GFTrack& _tr)
   return *this;
 }
 
-void
-genf::GFTrack::reset()
+void genf::GFTrack::reset()
 {
   if (fTrackReps != NULL) {
     for (unsigned int i = 0; i < getNumReps(); i++) {
@@ -126,8 +124,7 @@ genf::GFTrack::reset()
   fRepAtHit.clear();
 }
 
-void
-genf::GFTrack::mergeHits(GFTrack* trk)
+void genf::GFTrack::mergeHits(GFTrack* trk)
 {
   unsigned int nhits = trk->getNumHits();
   for (unsigned int i = 0; i < nhits; ++i) {
@@ -140,8 +137,7 @@ genf::GFTrack::mergeHits(GFTrack* trk)
   trk->fHits.clear();
 }
 
-void
-genf::GFTrack::setCandidate(const GFTrackCand& cand, bool doreset)
+void genf::GFTrack::setCandidate(const GFTrackCand& cand, bool doreset)
 {
   fCand = cand;
   // reset fits
@@ -152,8 +148,7 @@ genf::GFTrack::setCandidate(const GFTrackCand& cand, bool doreset)
   }
 }
 
-void
-genf::GFTrack::fillGeoTrack(TVirtualGeoTrack* geotrk, unsigned int repid) const
+void genf::GFTrack::fillGeoTrack(TVirtualGeoTrack* geotrk, unsigned int repid) const
 {
   GFAbsTrackRep* rep = getTrackRep(repid);
   unsigned int n = fCand.getNHits();
@@ -168,11 +163,10 @@ genf::GFTrack::fillGeoTrack(TVirtualGeoTrack* geotrk, unsigned int repid) const
   } // end loop over hits
 }
 
-void
-genf::GFTrack::getResiduals(unsigned int detId, // which detector?
-                            unsigned int dim,   // which projection?
-                            unsigned int repid, // which trackrep ?
-                            std::vector<double>& result)
+void genf::GFTrack::getResiduals(unsigned int detId, // which detector?
+                                 unsigned int dim,   // which projection?
+                                 unsigned int repid, // which trackrep ?
+                                 std::vector<double>& result)
 {
   unsigned int nhits = getNumHits();
   if (repid >= getNumReps()) return;
@@ -200,8 +194,7 @@ genf::GFTrack::getResiduals(unsigned int detId, // which detector?
   }
 }
 
-void
-genf::GFTrack::printBookkeeping(std::ostream& out /* = std::cout */) const
+void genf::GFTrack::printBookkeeping(std::ostream& out /* = std::cout */) const
 {
   out << "GFTrack::printBookkeeping()" << std::endl;
   for (unsigned int i = 0; i < getNumReps(); ++i) {
@@ -210,8 +203,7 @@ genf::GFTrack::printBookkeeping(std::ostream& out /* = std::cout */) const
   }
 }
 
-void
-genf::GFTrack::Print(std::ostream& out /* = std::cout */) const
+void genf::GFTrack::Print(std::ostream& out /* = std::cout */) const
 {
   for (unsigned int i = 0; i < getNumReps(); ++i) {
     getTrackRep(i)->Print(out);
@@ -220,8 +212,7 @@ genf::GFTrack::Print(std::ostream& out /* = std::cout */) const
   out << "GFTrack has " << getNumHits() << " detector hits." << std::endl;
 }
 
-void
-genf::GFTrack::getHitsByPlane(std::vector<std::vector<int>*>& retVal)
+void genf::GFTrack::getHitsByPlane(std::vector<std::vector<int>*>& retVal)
 {
   for (int i = 0; retVal.size(); ++i) {
     delete retVal.at(i);

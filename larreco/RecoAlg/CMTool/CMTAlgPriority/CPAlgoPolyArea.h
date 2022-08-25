@@ -35,11 +35,7 @@ namespace cmtool {
     virtual float Priority(const ::cluster::ClusterParamsAlg& cluster);
 
     /// Setter for minimum area
-    void
-    SetMinArea(double area)
-    {
-      _area_cut = area;
-    }
+    void SetMinArea(double area) { _area_cut = area; }
 
   private:
     double _area_cut;

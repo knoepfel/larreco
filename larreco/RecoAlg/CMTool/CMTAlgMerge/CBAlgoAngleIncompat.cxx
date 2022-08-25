@@ -22,9 +22,8 @@ namespace cmtool {
   }
 
   //----------------------------------------------------------------
-  bool
-  CBAlgoAngleIncompat::Bool(const ::cluster::ClusterParamsAlg& cluster1,
-                            const ::cluster::ClusterParamsAlg& cluster2)
+  bool CBAlgoAngleIncompat::Bool(const ::cluster::ClusterParamsAlg& cluster1,
+                                 const ::cluster::ClusterParamsAlg& cluster2)
   //----------------------------------------------------------------
   {
     //if either cluster is too small, do not prohibit them

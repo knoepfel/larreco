@@ -38,18 +38,10 @@ namespace cmtool {
     virtual bool Bool(const ::cluster::ClusterParamsAlg& cluster1,
                       const ::cluster::ClusterParamsAlg& cluster2);
 
-    void
-    SetDebug(bool debug)
-    {
-      _debug = debug;
-    }
+    void SetDebug(bool debug) { _debug = debug; }
 
     //both clusters must have > this # of hits to be considered for merging
-    void
-    SetMinNumHits(size_t nhits)
-    {
-      _min_hits = nhits;
-    }
+    void SetMinNumHits(size_t nhits) { _min_hits = nhits; }
 
     /// Method to re-configure the instance
     void reconfigure();

@@ -80,26 +80,10 @@ namespace cmtool {
     bool IsTrack(const ::cluster::ClusterParamsAlg& cluster);
 
     /// Setter for track-like parameters
-    void
-    SetMinHits(size_t BAKA)
-    {
-      _min_hits = BAKA;
-    }
-    void
-    SetMinModHitDens(Double_t AHO)
-    {
-      _min_mod_hit_dens = AHO;
-    }
-    void
-    SetMinMHitWires(Double_t BOKE)
-    {
-      _min_multihit_wires = BOKE;
-    }
-    void
-    SetMinPrincipal(Double_t HEKOKI)
-    {
-      _min_principal = HEKOKI;
-    }
+    void SetMinHits(size_t BAKA) { _min_hits = BAKA; }
+    void SetMinModHitDens(Double_t AHO) { _min_mod_hit_dens = AHO; }
+    void SetMinMHitWires(Double_t BOKE) { _min_multihit_wires = BOKE; }
+    void SetMinPrincipal(Double_t HEKOKI) { _min_principal = HEKOKI; }
 
   protected:
     size_t _min_hits;

@@ -54,8 +54,7 @@ genf::GFKalman::~GFKalman()
   ;
 }
 
-void
-genf::GFKalman::processTrack(GFTrack* trk)
+void genf::GFKalman::processTrack(GFTrack* trk)
 {
   int direction = fInitialDirection;
   if ((direction != 1) && (direction != -1))
@@ -125,8 +124,7 @@ genf::GFKalman::processTrack(GFTrack* trk)
   return;
 }
 
-void
-genf::GFKalman::switchDirection(GFTrack* trk)
+void genf::GFKalman::switchDirection(GFTrack* trk)
 {
   int nreps = trk->getNumReps();
   for (int i = 0; i < nreps; ++i) {
@@ -134,8 +132,7 @@ genf::GFKalman::switchDirection(GFTrack* trk)
   }
 }
 
-void
-genf::GFKalman::blowUpCovsDiag(GFTrack* trk)
+void genf::GFKalman::blowUpCovsDiag(GFTrack* trk)
 {
   int nreps = trk->getNumReps();
   for (int irep = 0; irep < nreps; ++irep) {
@@ -158,8 +155,7 @@ genf::GFKalman::blowUpCovsDiag(GFTrack* trk)
     }
   }
 }
-void
-genf::GFKalman::blowUpCovs(GFTrack* trk)
+void genf::GFKalman::blowUpCovs(GFTrack* trk)
 {
   int nreps = trk->getNumReps();
   for (int irep = 0; irep < nreps; ++irep) {
@@ -182,8 +178,7 @@ genf::GFKalman::blowUpCovs(GFTrack* trk)
   }
 }
 
-void
-genf::GFKalman::fittingPass(GFTrack* trk, int direction)
+void genf::GFKalman::fittingPass(GFTrack* trk, int direction)
 {
   //loop over hits
 
@@ -229,11 +224,10 @@ genf::GFKalman::fittingPass(GFTrack* trk, int direction)
   //trk->printGFBookkeeping();
 }
 
-double
-genf::GFKalman::chi2Increment(const TMatrixT<Double_t>& r,
-                              const TMatrixT<Double_t>& H,
-                              const TMatrixT<Double_t>& cov,
-                              const TMatrixT<Double_t>& V)
+double genf::GFKalman::chi2Increment(const TMatrixT<Double_t>& r,
+                                     const TMatrixT<Double_t>& H,
+                                     const TMatrixT<Double_t>& cov,
+                                     const TMatrixT<Double_t>& V)
 {
 
   // residuals covariances:R=(V - HCH^T)
@@ -285,8 +279,7 @@ genf::GFKalman::chi2Increment(const TMatrixT<Double_t>& r,
   return chisq[0][0];
 }
 
-double
-genf::GFKalman::getChi2Hit(GFAbsRecoHit* hit, GFAbsTrackRep* rep)
+double genf::GFKalman::getChi2Hit(GFAbsRecoHit* hit, GFAbsTrackRep* rep)
 {
   // get prototypes for matrices
   int repDim = rep->getDim();
@@ -311,8 +304,7 @@ genf::GFKalman::getChi2Hit(GFAbsRecoHit* hit, GFAbsTrackRep* rep)
   return chi2 / r.GetNrows();
 }
 
-void
-genf::GFKalman::processHit(GFTrack* tr, int ihit, int irep, int direction)
+void genf::GFKalman::processHit(GFTrack* tr, int ihit, int irep, int direction)
 {
   GFAbsRecoHit* hit = tr->getHit(ihit);
   GFAbsTrackRep* rep = tr->getTrackRep(irep);
@@ -673,8 +665,8 @@ genf::GFKalman::processHit(GFTrack* tr, int ihit, int irep, int direction)
   tr->setRepAtHit(irep, ihit);
 }
 
-TMatrixT<Double_t>
-genf::GFKalman::calcCov7x7(const TMatrixT<Double_t>& cov, const GFDetPlane& plane)
+TMatrixT<Double_t> genf::GFKalman::calcCov7x7(const TMatrixT<Double_t>& cov,
+                                              const GFDetPlane& plane)
 {
   // This ends up, confusingly, as: 7 columns, 5 rows!
   TMatrixT<Double_t> jac(7, 5); // X,Y,Z,UX,UY,UZ,Theta in detector coords
@@ -736,10 +728,9 @@ genf::GFKalman::calcCov7x7(const TMatrixT<Double_t>& cov, const GFDetPlane& plan
   return c7x7;
 }
 
-TMatrixT<Double_t>
-genf::GFKalman::calcGain(const TMatrixT<Double_t>& cov,
-                         const TMatrixT<Double_t>& HitCov,
-                         const TMatrixT<Double_t>& H)
+TMatrixT<Double_t> genf::GFKalman::calcGain(const TMatrixT<Double_t>& cov,
+                                            const TMatrixT<Double_t>& HitCov,
+                                            const TMatrixT<Double_t>& H)
 {
 
   // calculate covsum (V + HCH^T)

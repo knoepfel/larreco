@@ -101,11 +101,7 @@ namespace lar_cluster3d {
      */
     KdTreeNode BuildKdTree(const reco::HitPairListPtr&, KdTreeNodeList&) const;
 
-    float
-    getTimeToExecute() const
-    {
-      return fTimeToBuild;
-    }
+    float getTimeToExecute() const { return fTimeToBuild; }
 
   private:
     /**
@@ -156,42 +152,14 @@ namespace lar_cluster3d {
       , m_rightTree(*this)
     {}
 
-    bool
-    isLeafNode() const
-    {
-      return m_splitAxis == SplitAxis::leaf;
-    }
-    bool
-    isNullNode() const
-    {
-      return m_splitAxis == SplitAxis::null;
-    }
+    bool isLeafNode() const { return m_splitAxis == SplitAxis::leaf; }
+    bool isNullNode() const { return m_splitAxis == SplitAxis::null; }
 
-    SplitAxis
-    getSplitAxis() const
-    {
-      return m_splitAxis;
-    }
-    float
-    getAxisValue() const
-    {
-      return m_axisValue;
-    }
-    const reco::ClusterHit3D*
-    getClusterHit3D() const
-    {
-      return m_clusterHit3D;
-    }
-    const KdTreeNode&
-    leftTree() const
-    {
-      return m_leftTree;
-    }
-    const KdTreeNode&
-    rightTree() const
-    {
-      return m_rightTree;
-    }
+    SplitAxis getSplitAxis() const { return m_splitAxis; }
+    float getAxisValue() const { return m_axisValue; }
+    const reco::ClusterHit3D* getClusterHit3D() const { return m_clusterHit3D; }
+    const KdTreeNode& leftTree() const { return m_leftTree; }
+    const KdTreeNode& rightTree() const { return m_rightTree; }
 
   private:
     SplitAxis m_splitAxis;

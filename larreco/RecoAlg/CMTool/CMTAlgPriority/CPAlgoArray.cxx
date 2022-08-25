@@ -11,8 +11,7 @@ namespace cmtool {
   }
 
   //----------------------------------------------------------------------------------------------
-  float
-  CPAlgoArray::Priority(const cluster::ClusterParamsAlg& cluster)
+  float CPAlgoArray::Priority(const cluster::ClusterParamsAlg& cluster)
   //----------------------------------------------------------------------------------------------
   {
 

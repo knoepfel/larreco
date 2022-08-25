@@ -24,8 +24,7 @@
 namespace {
 
   template <typename T>
-  inline T
-  sqr(T v)
+  inline T sqr(T v)
   {
     return v * v;
   }
@@ -42,8 +41,7 @@ namespace hit {
   } // GausFitCache::~GausFitCache()
 
   //----------------------------------------------------------------------------
-  TF1*
-  GausFitCache::Get(size_t nFunc)
+  TF1* GausFitCache::Get(size_t nFunc)
   {
 
     // expand the list if needed
@@ -58,15 +56,10 @@ namespace hit {
   } // GausFitCache::Get()
 
   //----------------------------------------------------------------------------
-  TF1*
-  GausFitCache::GetClone(size_t nFunc)
-  {
-    return static_cast<TF1*>(Get(nFunc)->Clone());
-  }
+  TF1* GausFitCache::GetClone(size_t nFunc) { return static_cast<TF1*>(Get(nFunc)->Clone()); }
 
   //----------------------------------------------------------------------------
-  TF1*
-  GausFitCache::CreateFunction(size_t nFunc) const
+  TF1* GausFitCache::CreateFunction(size_t nFunc) const
   {
 
     std::string func_name = FunctionName(nFunc);
@@ -84,8 +77,7 @@ namespace hit {
   } // GausFitCache::CreateFunction()
 
   //----------------------------------------------------------------------------
-  std::string
-  GausFitCache::FunctionName(size_t nFunc) const
+  std::string GausFitCache::FunctionName(size_t nFunc) const
   {
     std::ostringstream sstr;
     sstr << name << "_" << nFunc;
@@ -95,21 +87,18 @@ namespace hit {
   //----------------------------------------------------------------------------
   //--- CompiledGausFitCacheBaseStruct
   //---
-  Double_t
-  details::CompiledGausFitCacheBaseStruct::gaus(Double_t const* x, Double_t const* params)
+  Double_t details::CompiledGausFitCacheBaseStruct::gaus(Double_t const* x, Double_t const* params)
   {
     return params[0] * std::exp(-0.5 * sqr((x[0] - params[1]) / params[2]));
   } // details::CompiledGausFitCacheBaseStruct::gaus()
 
-  TF1*
-  details::CompiledGausFitCacheBaseStruct::GetClone(size_t nFunc)
+  TF1* details::CompiledGausFitCacheBaseStruct::GetClone(size_t nFunc)
   {
     throw art::Exception(art::errors::LogicError)
       << "CompiledGausFitCacheBaseStruct: compiled functions can't be cloned";
   } // CompiledGausFitCacheBaseStruct::GetClone()
 
-  void
-  details::CompiledGausFitCacheBaseStruct::CannotCreateFunction(size_t nFunc) const
+  void details::CompiledGausFitCacheBaseStruct::CannotCreateFunction(size_t nFunc) const
   {
     throw art::Exception(art::errors::LogicError)
       << name << " function cache can't create functions at run-time; " << nFunc

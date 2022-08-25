@@ -70,8 +70,7 @@ namespace cluster {
 
   //-----------------------------------------------------------------------------
 
-  void
-  EndPointModule::produce(art::Event& evt)
+  void EndPointModule::produce(art::Event& evt)
   {
 
     art::Handle<std::vector<recob::Cluster>> clusterListHandle;

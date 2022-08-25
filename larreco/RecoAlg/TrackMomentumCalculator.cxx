@@ -38,8 +38,7 @@ using std::endl;
 
 namespace {
 
-  constexpr auto
-  range_gramper_cm()
+  constexpr auto range_gramper_cm()
   {
     std::array<float, 29> Range_grampercm{
       {9.833E-1, 1.786E0, 3.321E0, 6.598E0, 1.058E1, 3.084E1, 4.250E1, 6.732E1, 1.063E2, 1.725E2,
@@ -72,8 +71,7 @@ namespace {
       : xmeas_{xmeas}, ymeas_{ymeas}, eymeas_{eymeas}
     {}
 
-    double
-    my_mcs_chi2(double const* x) const
+    double my_mcs_chi2(double const* x) const
     {
       double result = 0.0;
 
@@ -134,8 +132,7 @@ namespace trkf {
     }
   }
 
-  double
-  TrackMomentumCalculator::GetTrackMomentum(double trkrange, int pdg) const
+  double TrackMomentumCalculator::GetTrackMomentum(double trkrange, int pdg) const
   {
     /* Muon range-momentum tables from CSDA (Argon density = 1.4 g/cm^3)
        website:
@@ -242,8 +239,7 @@ namespace trkf {
 
   // email: kalousis@vt.edu
 
-  double
-  TrackMomentumCalculator::GetMomentumMultiScatterLLHD(const art::Ptr<recob::Track>& trk)
+  double TrackMomentumCalculator::GetMomentumMultiScatterLLHD(const art::Ptr<recob::Track>& trk)
   {
     std::vector<float> recoX;
     std::vector<float> recoY;
@@ -304,8 +300,7 @@ namespace trkf {
     return bf;
   }
 
-  TVector3
-  TrackMomentumCalculator::GetMultiScatterStartingPoint(const art::Ptr<recob::Track>& trk)
+  TVector3 TrackMomentumCalculator::GetMultiScatterStartingPoint(const art::Ptr<recob::Track>& trk)
   {
     double const LLHDp = GetMuMultiScatterLLHD3(trk, true);
     double const LLHDm = GetMuMultiScatterLLHD3(trk, false);
@@ -322,8 +317,8 @@ namespace trkf {
     return TVector3{};
   }
 
-  double
-  TrackMomentumCalculator::GetMuMultiScatterLLHD3(art::Ptr<recob::Track> const& trk, bool const dir)
+  double TrackMomentumCalculator::GetMuMultiScatterLLHD3(art::Ptr<recob::Track> const& trk,
+                                                         bool const dir)
   {
     std::vector<float> recoX;
     std::vector<float> recoY;
@@ -364,13 +359,12 @@ namespace trkf {
     return logL;
   }
 
-  int
-  TrackMomentumCalculator::getDeltaThetaij_(std::vector<float>& ei,
-                                            std::vector<float>& ej,
-                                            std::vector<float>& th,
-                                            std::vector<float>& ind,
-                                            Segments const& segments,
-                                            double const thick) const
+  int TrackMomentumCalculator::getDeltaThetaij_(std::vector<float>& ei,
+                                                std::vector<float>& ej,
+                                                std::vector<float>& th,
+                                                std::vector<float>& ind,
+                                                Segments const& segments,
+                                                double const thick) const
   {
     int const a1 = segments.x.size();
     int const a2 = segments.y.size();
@@ -466,9 +460,8 @@ namespace trkf {
     return 0;
   }
 
-  double
-  TrackMomentumCalculator::GetMomentumMultiScatterChi2(const art::Ptr<recob::Track>& trk,
-                                                       const bool checkValidPoints)
+  double TrackMomentumCalculator::GetMomentumMultiScatterChi2(const art::Ptr<recob::Track>& trk,
+                                                              const bool checkValidPoints)
   {
     std::vector<float> recoX;
     std::vector<float> recoY;
@@ -578,10 +571,9 @@ namespace trkf {
     return mstatus ? p_mcs : -1.0;
   }
 
-  bool
-  TrackMomentumCalculator::plotRecoTracks_(std::vector<float> const& xxx,
-                                           std::vector<float> const& yyy,
-                                           std::vector<float> const& zzz)
+  bool TrackMomentumCalculator::plotRecoTracks_(std::vector<float> const& xxx,
+                                                std::vector<float> const& yyy,
+                                                std::vector<float> const& zzz)
   {
     auto const n = xxx.size();
     auto const y_size = yyy.size();
@@ -609,11 +601,11 @@ namespace trkf {
     return true;
   }
 
-  std::optional<TrackMomentumCalculator::Segments>
-  TrackMomentumCalculator::getSegTracks_(std::vector<float> const& xxx,
-                                         std::vector<float> const& yyy,
-                                         std::vector<float> const& zzz,
-                                         double const seg_size)
+  std::optional<TrackMomentumCalculator::Segments> TrackMomentumCalculator::getSegTracks_(
+    std::vector<float> const& xxx,
+    std::vector<float> const& yyy,
+    std::vector<float> const& zzz,
+    double const seg_size)
   {
     double stag = 0.0;
 
@@ -1013,8 +1005,9 @@ namespace trkf {
     return std::make_optional<Segments>(Segments{segx, segnx, segy, segny, segz, segnz, segL});
   }
 
-  std::tuple<double, double, double>
-  TrackMomentumCalculator::getDeltaThetaRMS_(Segments const& segments, double const thick) const
+  std::tuple<double, double, double> TrackMomentumCalculator::getDeltaThetaRMS_(
+    Segments const& segments,
+    double const thick) const
   {
     auto const& segnx = segments.nx;
     auto const& segny = segments.ny;
@@ -1138,8 +1131,7 @@ namespace trkf {
     return std::make_tuple(mean, rms, rmse);
   }
 
-  double
-  TrackMomentumCalculator::find_angle(double vz, double vy) const
+  double TrackMomentumCalculator::find_angle(double vz, double vy) const
   {
     double thetayz = -999.0;
 
@@ -1179,8 +1171,7 @@ namespace trkf {
     return 1000.0 * thetayz;
   }
 
-  double
-  TrackMomentumCalculator::my_g(double xx, double Q, double s) const
+  double TrackMomentumCalculator::my_g(double xx, double Q, double s) const
   {
     if (s == 0.) {
       cout << " Error : The code tries to divide by zero ! " << endl;
@@ -1197,13 +1188,12 @@ namespace trkf {
     return result;
   }
 
-  double
-  TrackMomentumCalculator::my_mcs_llhd(std::vector<float> const& dEi,
-                                       std::vector<float> const& dEj,
-                                       std::vector<float> const& dthij,
-                                       std::vector<float> const& ind,
-                                       double const x0,
-                                       double const x1) const
+  double TrackMomentumCalculator::my_mcs_llhd(std::vector<float> const& dEi,
+                                              std::vector<float> const& dEj,
+                                              std::vector<float> const& dthij,
+                                              std::vector<float> const& ind,
+                                              double const x0,
+                                              double const x1) const
   {
     double p = x0;
     double theta0x = x1;

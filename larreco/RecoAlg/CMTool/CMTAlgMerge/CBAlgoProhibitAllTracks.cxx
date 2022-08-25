@@ -10,8 +10,7 @@ namespace cmtool {
   }
 
   //-----------------------------
-  void
-  CBAlgoProhibitAllTracks::Reset()
+  void CBAlgoProhibitAllTracks::Reset()
   //-----------------------------
   {}
 
@@ -44,9 +43,8 @@ namespace cmtool {
   //}
 
   //----------------------------------------------------------------
-  bool
-  CBAlgoProhibitAllTracks::Bool(const ::cluster::ClusterParamsAlg& cluster1,
-                                const ::cluster::ClusterParamsAlg& cluster2)
+  bool CBAlgoProhibitAllTracks::Bool(const ::cluster::ClusterParamsAlg& cluster1,
+                                     const ::cluster::ClusterParamsAlg& cluster2)
   //----------------------------------------------------------------
   {
     //return true means don't prohibit these two clusters
@@ -62,8 +60,7 @@ namespace cmtool {
   }
 
   //------------------------------
-  void
-  CBAlgoProhibitAllTracks::Report()
+  void CBAlgoProhibitAllTracks::Report()
   //------------------------------
   {}
 

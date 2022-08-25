@@ -51,8 +51,7 @@ namespace hit {
     this->reconfigure(pset);
   }
 
-  void
-  CCHitFinderAlg::reconfigure(fhicl::ParameterSet const& pset)
+  void CCHitFinderAlg::reconfigure(fhicl::ParameterSet const& pset)
   {
     if (pset.has_key("MinSigInd"))
       throw art::Exception(art::errors::Configuration)
@@ -114,8 +113,7 @@ namespace hit {
   {}
 
   //------------------------------------------------------------------------------
-  void
-  CCHitFinderAlg::RunCCHitFinder(std::vector<recob::Wire> const& Wires)
+  void CCHitFinderAlg::RunCCHitFinder(std::vector<recob::Wire> const& Wires)
   {
 
     allhits.clear();
@@ -271,13 +269,12 @@ namespace hit {
   } //RunCCHitFinder
 
   /////////////////////////////////////////
-  bool
-  CCHitFinderAlg::FastGaussianFit(unsigned short npt,
-                                  float const* ticks,
-                                  float const* signl,
-                                  std::array<double, 3>& params,
-                                  std::array<double, 3>& paramerrors,
-                                  float& chidof)
+  bool CCHitFinderAlg::FastGaussianFit(unsigned short npt,
+                                       float const* ticks,
+                                       float const* signl,
+                                       std::array<double, 3>& params,
+                                       std::array<double, 3>& paramerrors,
+                                       float& chidof)
   {
     // parameters: amplitude, mean, sigma
 
@@ -322,8 +319,7 @@ namespace hit {
   } // FastGaussianFit()
 
   /////////////////////////////////////////
-  void
-  CCHitFinderAlg::FitNG(unsigned short nGaus, unsigned short npt, float* ticks, float* signl)
+  void CCHitFinderAlg::FitNG(unsigned short nGaus, unsigned short npt, float* ticks, float* signl)
   {
     // Fit the signal to n Gaussians
 
@@ -544,8 +540,7 @@ namespace hit {
   } // FitNG
 
   /////////////////////////////////////////
-  void
-  CCHitFinderAlg::MakeCrudeHit(unsigned short npt, float* ticks, float* signl)
+  void CCHitFinderAlg::MakeCrudeHit(unsigned short npt, float* ticks, float* signl)
   {
     // make a single crude hit if fitting failed
     float sumS = 0.;
@@ -587,11 +582,10 @@ namespace hit {
   } // MakeCrudeHit
 
   /////////////////////////////////////////
-  void
-  CCHitFinderAlg::StoreHits(unsigned short TStart,
-                            unsigned short npt,
-                            HitChannelInfo_t info,
-                            float adcsum)
+  void CCHitFinderAlg::StoreHits(unsigned short TStart,
+                                 unsigned short npt,
+                                 HitChannelInfo_t info,
+                                 float adcsum)
   {
     // store the hits in the struct
     size_t nhits = par.size() / 3;
@@ -658,12 +652,11 @@ namespace hit {
   }   // StoreHits
 
   //////////////////////////////////////////////////
-  void
-  CCHitFinderAlg::StudyHits(unsigned short flag,
-                            unsigned short npt,
-                            float* ticks,
-                            float* signl,
-                            unsigned short tstart)
+  void CCHitFinderAlg::StudyHits(unsigned short flag,
+                                 unsigned short npt,
+                                 float* ticks,
+                                 float* signl,
+                                 unsigned short tstart)
   {
     // study hits in user-selected ranges of wires and ticks in each plane. The user should identify
     // a shallow-angle isolated track, e.g. using the event display, to determine the wire/tick ranges.
@@ -837,8 +830,7 @@ namespace hit {
   } // StudyHits
 
   //////////////////////////////////////////////////
-  void
-  CCHitFinderAlg::FitStats_t::Reset(unsigned int nGaus)
+  void CCHitFinderAlg::FitStats_t::Reset(unsigned int nGaus)
   {
     if (nGaus == 0) return;
     MultiGausFits.resize(nGaus);
@@ -846,8 +838,7 @@ namespace hit {
     FastFits = 0;
   } // CCHitFinderAlg::FitStats_t::Reset()
 
-  void
-  CCHitFinderAlg::FitStats_t::AddMultiGaus(unsigned int nGaus)
+  void CCHitFinderAlg::FitStats_t::AddMultiGaus(unsigned int nGaus)
   {
     ++MultiGausFits[std::min(nGaus, (unsigned int)MultiGausFits.size()) - 1];
   } // CCHitFinderAlg::FitStats_t::AddMultiGaus()

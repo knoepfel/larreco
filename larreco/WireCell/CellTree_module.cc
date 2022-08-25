@@ -79,11 +79,7 @@ namespace wc {
     void reset();
     void InitProcessMap();
 
-    bool
-    IsPrimary(int i)
-    {
-      return mc_mother[i] == 0;
-    }
+    bool IsPrimary(int i) { return mc_mother[i] == 0; }
     bool KeepMC(int i);
     double KE(float* momentum); // KE
     TString PDGName(int pdg);
@@ -240,8 +236,7 @@ namespace wc {
   }
 
   //-----------------------------------------------------------------------
-  void
-  CellTree::initOutput()
+  void CellTree::initOutput()
   {
     TDirectory* tmpDir = gDirectory;
 
@@ -362,8 +357,7 @@ namespace wc {
   }
 
   //-----------------------------------------------------------------------
-  void
-  CellTree::endJob()
+  void CellTree::endJob()
   {
     // Write fEventTree to file
     TDirectory* tmpDir = gDirectory;
@@ -383,15 +377,10 @@ namespace wc {
   }
 
   //-----------------------------------------------------------------------
-  void
-  CellTree::beginRun(const art::Run& /*run*/)
-  {
-    mf::LogInfo("CellTree") << "begin run";
-  }
+  void CellTree::beginRun(const art::Run& /*run*/) { mf::LogInfo("CellTree") << "begin run"; }
 
   //-----------------------------------------------------------------------
-  void
-  CellTree::analyze(const art::Event& event)
+  void CellTree::analyze(const art::Event& event)
   {
     reset();
     fEvent = event.id().event();
@@ -442,8 +431,7 @@ namespace wc {
   }
 
   //-----------------------------------------------------------------------
-  void
-  CellTree::reset()
+  void CellTree::reset()
   {
 
     fRaw_channelId.clear();
@@ -514,8 +502,7 @@ namespace wc {
   }
 
   //-----------------------------------------------------------------------
-  void
-  CellTree::processRaw(const art::Event& event)
+  void CellTree::processRaw(const art::Event& event)
   {
     art::Handle<std::vector<raw::RawDigit>> rawdigit;
     if (!event.getByLabel(fRawDigitLabel, rawdigit)) {
@@ -546,8 +533,7 @@ namespace wc {
   }
 
   //-----------------------------------------------------------------------
-  void
-  CellTree::processCalib(const art::Event& event)
+  void CellTree::processCalib(const art::Event& event)
   {
 
     art::Handle<std::vector<recob::Wire>> wires_handle;
@@ -578,8 +564,7 @@ namespace wc {
   }
 
   //----------------------------------------------------------------------
-  void
-  CellTree::processOpHit(const art::Event& event)
+  void CellTree::processOpHit(const art::Event& event)
   {
     art::Handle<std::vector<recob::OpHit>> ophit_handle;
     if (!event.getByLabel(fOpHitLabel, ophit_handle)) {
@@ -599,8 +584,7 @@ namespace wc {
   }
 
   //----------------------------------------------------------------------
-  void
-  CellTree::processOpFlash(const art::Event& event)
+  void CellTree::processOpFlash(const art::Event& event)
   {
     art::Handle<std::vector<recob::OpFlash>> flash_handle;
     if (!event.getByLabel(fOpFlashLabel, flash_handle)) {
@@ -630,8 +614,7 @@ namespace wc {
   }
 
   //-----------------------------------------------------------------------
-  void
-  CellTree::processSimChannel(const art::Event& event)
+  void CellTree::processSimChannel(const art::Event& event)
   {
     art::Handle<std::vector<sim::SimChannel>> simChannelHandle;
     // event.getByLabel("largeant", simChannelHandle);
@@ -670,8 +653,7 @@ namespace wc {
   }
 
   //-----------------------------------------------------------------------
-  void
-  CellTree::processMC(const art::Event& event)
+  void CellTree::processMC(const art::Event& event)
   {
     art::Handle<std::vector<simb::MCParticle>> particleHandle;
     if (!event.getByLabel("largeant", particleHandle)) return;
@@ -791,8 +773,7 @@ namespace wc {
   }
 
   //-----------------------------------------------------------------------
-  void
-  CellTree::processSpacePoint(const art::Event& event, TString option, ostream& out)
+  void CellTree::processSpacePoint(const art::Event& event, TString option, ostream& out)
   {
 
     art::Handle<std::vector<recob::SpacePoint>> sp_handle;
@@ -868,8 +849,7 @@ namespace wc {
   }
 
   //-----------------------------------------------------------------------
-  void
-  CellTree::processSpacePointTruthDepo(const art::Event& event, TString option, ostream& out)
+  void CellTree::processSpacePointTruthDepo(const art::Event& event, TString option, ostream& out)
   {
 
     art::Handle<std::vector<sim::SimEnergyDeposit>> sed_handle;
@@ -935,8 +915,7 @@ namespace wc {
   }
 
   //-----------------------------------------------------------------------
-  void
-  CellTree::print_vector(ostream& out, vector<double>& v, TString desc, bool end)
+  void CellTree::print_vector(ostream& out, vector<double>& v, TString desc, bool end)
   {
     int N = v.size();
 
@@ -951,8 +930,7 @@ namespace wc {
   }
 
   //-----------------------------------------------------------------------
-  void
-  CellTree::processMCTracks()
+  void CellTree::processMCTracks()
   {
     // map track id to track index in the array
     for (int i = 0; i < mc_Ntrack; i++) {
@@ -996,8 +974,7 @@ namespace wc {
   }
 
   //-----------------------------------------------------------------------
-  void
-  CellTree::processTrigger(const art::Event& event)
+  void CellTree::processTrigger(const art::Event& event)
   {
     art::Handle<std::vector<raw::Trigger>> triggerListHandle;
     std::vector<art::Ptr<raw::Trigger>> triggerlist;
@@ -1022,8 +999,7 @@ namespace wc {
   }
 
   //-----------------------------------------------------------------------
-  bool
-  CellTree::DumpMCJSON(int id, ostream& out)
+  bool CellTree::DumpMCJSON(int id, ostream& out)
   {
     int i = trackIndex[id];
     if (!KeepMC(i)) return false;
@@ -1089,8 +1065,7 @@ namespace wc {
   }
 
   //-----------------------------------------------------------------------
-  void
-  CellTree::DumpMCJSON(ostream& out)
+  void CellTree::DumpMCJSON(ostream& out)
   {
     out << "[";
     vector<int> primaries;
@@ -1111,16 +1086,14 @@ namespace wc {
   }
 
   //-----------------------------------------------------------------------
-  double
-  CellTree::KE(float* momentum)
+  double CellTree::KE(float* momentum)
   {
     TLorentzVector particle(momentum);
     return particle.E() - particle.M();
   }
 
   //-----------------------------------------------------------------------
-  bool
-  CellTree::KeepMC(int i)
+  bool CellTree::KeepMC(int i)
   {
     double e = KE(mc_startMomentum[i]) * 1000;
     double thresh_KE_em = 5.; // MeV
@@ -1149,8 +1122,7 @@ namespace wc {
   }
 
   //-----------------------------------------------------------------------
-  TString
-  CellTree::PDGName(int pdg)
+  TString CellTree::PDGName(int pdg)
   {
     TParticlePDG* p = dbPDG->GetParticle(pdg);
     if (p == 0) {
@@ -1188,8 +1160,7 @@ namespace wc {
   }
 
   //-----------------------------------------------------------------------
-  void
-  CellTree::printEvent()
+  void CellTree::printEvent()
   {
     cout << " Run/SubRun/Event: " << fRun << "/" << fSubRun << "/" << fEvent << endl;
     cout << "      Ntracks:" << mc_Ntrack << endl;
@@ -1213,8 +1184,7 @@ namespace wc {
   }
 
   //-----------------------------------------------------------------------
-  void
-  CellTree::InitProcessMap()
+  void CellTree::InitProcessMap()
   {
     processMap["unknown"] = 0;
     processMap["primary"] = 1;

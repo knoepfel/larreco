@@ -25,8 +25,7 @@
 
 const std::string genf::GFSpacepointHitPolicy::fPolicyName = "GFSpacepointHitPolicy";
 
-TMatrixT<Double_t>
-genf::GFSpacepointHitPolicy::hitCoord(GFAbsRecoHit* hit, const GFDetPlane& plane)
+TMatrixT<Double_t> genf::GFSpacepointHitPolicy::hitCoord(GFAbsRecoHit* hit, const GFDetPlane& plane)
 {
   TMatrixT<Double_t> returnMat(2, 1);
 
@@ -52,10 +51,9 @@ genf::GFSpacepointHitPolicy::hitCoord(GFAbsRecoHit* hit, const GFDetPlane& plane
   return returnMat;
 }
 
-TMatrixT<Double_t>
-genf::GFSpacepointHitPolicy::hitCoord(GFAbsRecoHit* hit,
-                                      const GFDetPlane& plane,
-                                      const GFDetPlane& /* planePrev */)
+TMatrixT<Double_t> genf::GFSpacepointHitPolicy::hitCoord(GFAbsRecoHit* hit,
+                                                         const GFDetPlane& plane,
+                                                         const GFDetPlane& /* planePrev */)
 {
   TMatrixT<Double_t> returnMat(
     5, 1); // Just return last 2 elements. Will calculate the rest in GFKalman.cxx.
@@ -82,8 +80,7 @@ genf::GFSpacepointHitPolicy::hitCoord(GFAbsRecoHit* hit,
   return returnMat;
 }
 
-TMatrixT<Double_t>
-genf::GFSpacepointHitPolicy::hitCov(GFAbsRecoHit* hit, const GFDetPlane& plane)
+TMatrixT<Double_t> genf::GFSpacepointHitPolicy::hitCov(GFAbsRecoHit* hit, const GFDetPlane& plane)
 {
   TVector3 _U;
   TVector3 _V;
@@ -113,12 +110,11 @@ genf::GFSpacepointHitPolicy::hitCov(GFAbsRecoHit* hit, const GFDetPlane& plane)
   return result;
 }
 
-TMatrixT<Double_t>
-genf::GFSpacepointHitPolicy::hitCov(GFAbsRecoHit* hit,
-                                    const GFDetPlane& plane,
-                                    const GFDetPlane& planePrev,
-                                    const TMatrixT<Double_t>& state,
-                                    const Double_t& mass)
+TMatrixT<Double_t> genf::GFSpacepointHitPolicy::hitCov(GFAbsRecoHit* hit,
+                                                       const GFDetPlane& plane,
+                                                       const GFDetPlane& planePrev,
+                                                       const TMatrixT<Double_t>& state,
+                                                       const Double_t& mass)
 {
   TVector3 _U;
   TVector3 _V;
@@ -372,8 +368,7 @@ genf::GFSpacepointHitPolicy::hitCov(GFAbsRecoHit* hit,
   return result;
 }
 
-const genf::GFDetPlane&
-genf::GFSpacepointHitPolicy::detPlane(GFAbsRecoHit* hit, GFAbsTrackRep* rep)
+const genf::GFDetPlane& genf::GFSpacepointHitPolicy::detPlane(GFAbsRecoHit* hit, GFAbsTrackRep* rep)
 {
   TMatrixT<Double_t> rawcoord = hit->getRawHitCoord();
   TVector3 point(rawcoord[0][0], rawcoord[1][0], rawcoord[2][0]);

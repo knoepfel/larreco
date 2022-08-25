@@ -60,31 +60,30 @@
 #include "lardata/Utilities/AssociationUtil.h"
 #include "nusimdata/SimulationBase/MCTruth.h"
 
-static bool
-sp_sort_3dz(const art::Ptr<recob::SpacePoint>& h1, const art::Ptr<recob::SpacePoint>& h2)
+static bool sp_sort_3dz(const art::Ptr<recob::SpacePoint>& h1,
+                        const art::Ptr<recob::SpacePoint>& h2)
 {
   const double* xyz1 = h1->XYZ();
   const double* xyz2 = h2->XYZ();
   return xyz1[2] < xyz2[2];
 }
-static bool
-sp_sort_3dy(const art::Ptr<recob::SpacePoint>& h1, const art::Ptr<recob::SpacePoint>& h2)
+static bool sp_sort_3dy(const art::Ptr<recob::SpacePoint>& h1,
+                        const art::Ptr<recob::SpacePoint>& h2)
 {
   const double* xyz1 = h1->XYZ();
   const double* xyz2 = h2->XYZ();
   return xyz1[1] < xyz2[1];
 }
-static bool
-sp_sort_3dx(const art::Ptr<recob::SpacePoint>& h1, const art::Ptr<recob::SpacePoint>& h2)
+static bool sp_sort_3dx(const art::Ptr<recob::SpacePoint>& h1,
+                        const art::Ptr<recob::SpacePoint>& h2)
 {
   const double* xyz1 = h1->XYZ();
   const double* xyz2 = h2->XYZ();
   return xyz1[0] < xyz2[0];
 }
 
-static bool
-sp_sort_nsppts(const art::PtrVector<recob::SpacePoint>& h1,
-               const art::PtrVector<recob::SpacePoint>& h2)
+static bool sp_sort_nsppts(const art::PtrVector<recob::SpacePoint>& h1,
+                           const art::PtrVector<recob::SpacePoint>& h2)
 {
   const unsigned int s1 = h1.size();
   const unsigned int s2 = h2.size();
@@ -262,8 +261,7 @@ namespace trkf {
 
   //-------------------------------------------------
   // stolen, mostly, from GFMaterialEffects.
-  double
-  Track3DKalmanSPS::energyLossBetheBloch(const double& mass, const double p = 1.5)
+  double Track3DKalmanSPS::energyLossBetheBloch(const double& mass, const double p = 1.5)
   {
     const double charge(1.0);
     const double mEE(188.); // eV
@@ -292,8 +290,7 @@ namespace trkf {
     return dedx;
   }
 
-  void
-  Track3DKalmanSPS::rotationCov(TMatrixT<Double_t>& cov, const TVector3& u, const TVector3& v)
+  void Track3DKalmanSPS::rotationCov(TMatrixT<Double_t>& cov, const TVector3& u, const TVector3& v)
   {
     TVector3 xhat(1.0, 0.0, 0.0);
     TVector3 yhat(0.0, 1.0, 0.0);
@@ -325,11 +322,10 @@ namespace trkf {
     cov = rot * cov;
   }
 
-  std::vector<double>
-  Track3DKalmanSPS::dQdxCalc(const art::FindManyP<recob::Hit>& h,
-                             const art::PtrVector<recob::SpacePoint>& s,
-                             const TVector3& dir,
-                             const TVector3& loc)
+  std::vector<double> Track3DKalmanSPS::dQdxCalc(const art::FindManyP<recob::Hit>& h,
+                                                 const art::PtrVector<recob::SpacePoint>& s,
+                                                 const TVector3& dir,
+                                                 const TVector3& loc)
   {
     // For now just Collection plane.
     // We should loop over all views, more generally.
@@ -392,8 +388,7 @@ namespace trkf {
   }
 
   //-------------------------------------------------
-  void
-  Track3DKalmanSPS::beginJob()
+  void Track3DKalmanSPS::beginJob()
   {
 
     art::ServiceHandle<art::TFileService const> tfs;
@@ -497,8 +492,7 @@ namespace trkf {
   }
 
   //-------------------------------------------------
-  void
-  Track3DKalmanSPS::endJob()
+  void Track3DKalmanSPS::endJob()
   {
     if (!rep) delete rep;
     if (!repMC) delete repMC;
@@ -543,8 +537,7 @@ namespace trkf {
   }
 
   //------------------------------------------------------------------------------------//
-  void
-  Track3DKalmanSPS::produce(art::Event& evt)
+  void Track3DKalmanSPS::produce(art::Event& evt)
   {
 
     rep = 0;

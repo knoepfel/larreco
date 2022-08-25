@@ -70,11 +70,7 @@ namespace cmtool {
     /// Function to reset the algorithm instance ... maybe implemented via child class
     virtual void Reset();
 
-    void
-    SetMinEP(double value)
-    {
-      _min_EP = value;
-    }
+    void SetMinEP(double value) { _min_EP = value; }
 
   protected:
     double _min_EP;

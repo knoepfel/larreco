@@ -169,8 +169,7 @@ calo::GnocchiCalorimetry::GnocchiCalorimetry(Parameters const& param)
   produces<art::Assns<recob::Track, anab::Calorimetry>>();
 }
 
-void
-calo::GnocchiCalorimetry::produce(art::Event& evt)
+void calo::GnocchiCalorimetry::produce(art::Event& evt)
 {
   // Get services
   art::ServiceHandle<geo::Geometry const> geom;
@@ -354,11 +353,11 @@ calo::GnocchiCalorimetry::produce(art::Event& evt)
   return;
 }
 
-std::vector<std::vector<unsigned>>
-calo::GnocchiCalorimetry::OrganizeHits(const std::vector<art::Ptr<recob::Hit>>& hits,
-                                       const std::vector<const recob::TrackHitMeta*>& thms,
-                                       const recob::Track& track,
-                                       unsigned nplanes)
+std::vector<std::vector<unsigned>> calo::GnocchiCalorimetry::OrganizeHits(
+  const std::vector<art::Ptr<recob::Hit>>& hits,
+  const std::vector<const recob::TrackHitMeta*>& thms,
+  const recob::Track& track,
+  unsigned nplanes)
 {
   // charge is computed per hit -- we organize hits indivudally
   if (fConfig.ChargeMethod() == calo::GnocchiCalorimetry::Config::cmIntegral ||
@@ -371,8 +370,7 @@ calo::GnocchiCalorimetry::OrganizeHits(const std::vector<art::Ptr<recob::Hit>>& 
   }
 }
 
-std::vector<std::vector<unsigned>>
-calo::GnocchiCalorimetry::OrganizeHitsIndividual(
+std::vector<std::vector<unsigned>> calo::GnocchiCalorimetry::OrganizeHitsIndividual(
   const std::vector<art::Ptr<recob::Hit>>& hits,
   const std::vector<const recob::TrackHitMeta*>& thms,
   const recob::Track& track,
@@ -386,11 +384,11 @@ calo::GnocchiCalorimetry::OrganizeHitsIndividual(
   return ret;
 }
 
-std::vector<std::vector<unsigned>>
-calo::GnocchiCalorimetry::OrganizeHitsSnippets(const std::vector<art::Ptr<recob::Hit>>& hits,
-                                               const std::vector<const recob::TrackHitMeta*>& thms,
-                                               const recob::Track& track,
-                                               unsigned nplanes)
+std::vector<std::vector<unsigned>> calo::GnocchiCalorimetry::OrganizeHitsSnippets(
+  const std::vector<art::Ptr<recob::Hit>>& hits,
+  const std::vector<const recob::TrackHitMeta*>& thms,
+  const recob::Track& track,
+  unsigned nplanes)
 {
   // In this case, we need to only accept one hit in each snippet
   // Snippets are counted by the Start, End, and Wire. If all these are the same for a hit, then they are on the same snippet.
@@ -412,18 +410,13 @@ calo::GnocchiCalorimetry::OrganizeHitsSnippets(const std::vector<art::Ptr<recob:
     {}
 
     // Defines whether two hits are on the same snippet
-    inline bool
-    operator==(const HitIdentifier& rhs) const
+    inline bool operator==(const HitIdentifier& rhs) const
     {
       return startTick == rhs.startTick && endTick == rhs.endTick && wire == rhs.wire;
     }
 
     // Defines which hit to pick between two both on the same snippet
-    inline bool
-    operator>(const HitIdentifier& rhs) const
-    {
-      return integral > rhs.integral;
-    }
+    inline bool operator>(const HitIdentifier& rhs) const { return integral > rhs.integral; }
   };
 
   std::vector<std::vector<unsigned>> ret(nplanes);
@@ -453,28 +446,26 @@ calo::GnocchiCalorimetry::OrganizeHitsSnippets(const std::vector<art::Ptr<recob:
   return ret;
 }
 
-bool
-calo::GnocchiCalorimetry::HitIsValid(const art::Ptr<recob::Hit> hit,
-                                     const recob::TrackHitMeta* thm,
-                                     const recob::Track& track)
+bool calo::GnocchiCalorimetry::HitIsValid(const art::Ptr<recob::Hit> hit,
+                                          const recob::TrackHitMeta* thm,
+                                          const recob::Track& track)
 {
   if (thm->Index() == int_max_as_unsigned_int) return false;
   if (!track.HasValidPoint(thm->Index())) return false;
   return true;
 }
 
-geo::Point_t
-calo::GnocchiCalorimetry::GetLocation(const recob::Track& track,
-                                      const art::Ptr<recob::Hit> hit,
-                                      const recob::TrackHitMeta* meta)
+geo::Point_t calo::GnocchiCalorimetry::GetLocation(const recob::Track& track,
+                                                   const art::Ptr<recob::Hit> hit,
+                                                   const recob::TrackHitMeta* meta)
 {
   geo::Point_t loc = track.LocationAtPoint(meta->Index());
   return !fConfig.TrackIsFieldDistortionCorrected() ? WireToTrajectoryPosition(loc, hit->WireID()) :
                                                       loc;
 }
 
-geo::Point_t
-calo::GnocchiCalorimetry::WireToTrajectoryPosition(const geo::Point_t& loc, const geo::TPCID& tpc)
+geo::Point_t calo::GnocchiCalorimetry::WireToTrajectoryPosition(const geo::Point_t& loc,
+                                                                const geo::TPCID& tpc)
 {
   auto const* sce = lar::providerFrom<spacecharge::SpaceChargeService>();
 
@@ -491,18 +482,17 @@ calo::GnocchiCalorimetry::WireToTrajectoryPosition(const geo::Point_t& loc, cons
   return ret;
 }
 
-geo::Point_t
-calo::GnocchiCalorimetry::GetLocationAtWires(const recob::Track& track,
-                                             const art::Ptr<recob::Hit> hit,
-                                             const recob::TrackHitMeta* meta)
+geo::Point_t calo::GnocchiCalorimetry::GetLocationAtWires(const recob::Track& track,
+                                                          const art::Ptr<recob::Hit> hit,
+                                                          const recob::TrackHitMeta* meta)
 {
   geo::Point_t loc = track.LocationAtPoint(meta->Index());
   return fConfig.TrackIsFieldDistortionCorrected() ? TrajectoryToWirePosition(loc, hit->WireID()) :
                                                      loc;
 }
 
-geo::Point_t
-calo::GnocchiCalorimetry::TrajectoryToWirePosition(const geo::Point_t& loc, const geo::TPCID& tpc)
+geo::Point_t calo::GnocchiCalorimetry::TrajectoryToWirePosition(const geo::Point_t& loc,
+                                                                const geo::TPCID& tpc)
 {
   auto const* sce = lar::providerFrom<spacecharge::SpaceChargeService>();
   art::ServiceHandle<geo::Geometry const> geom;
@@ -523,10 +513,9 @@ calo::GnocchiCalorimetry::TrajectoryToWirePosition(const geo::Point_t& loc, cons
   return ret;
 }
 
-double
-calo::GnocchiCalorimetry::GetPitch(const recob::Track& track,
-                                   const art::Ptr<recob::Hit> hit,
-                                   const recob::TrackHitMeta* meta)
+double calo::GnocchiCalorimetry::GetPitch(const recob::Track& track,
+                                          const art::Ptr<recob::Hit> hit,
+                                          const recob::TrackHitMeta* meta)
 {
   art::ServiceHandle<geo::Geometry const> geom;
   auto const* sce = lar::providerFrom<spacecharge::SpaceChargeService>();
@@ -579,8 +568,7 @@ calo::GnocchiCalorimetry::GetPitch(const recob::Track& track,
   return pitch;
 }
 
-double
-calo::GnocchiCalorimetry::GetCharge(const art::Ptr<recob::Hit> hit)
+double calo::GnocchiCalorimetry::GetCharge(const art::Ptr<recob::Hit> hit)
 {
   switch (fConfig.ChargeMethod()) {
   case calo::GnocchiCalorimetry::Config::cmIntegral: return hit->Integral();
@@ -591,11 +579,10 @@ calo::GnocchiCalorimetry::GetCharge(const art::Ptr<recob::Hit> hit)
   return 0.;
 }
 
-double
-calo::GnocchiCalorimetry::GetEfield(const detinfo::DetectorPropertiesData& dprop,
-                                    const recob::Track& track,
-                                    const art::Ptr<recob::Hit> hit,
-                                    const recob::TrackHitMeta* meta)
+double calo::GnocchiCalorimetry::GetEfield(const detinfo::DetectorPropertiesData& dprop,
+                                           const recob::Track& track,
+                                           const art::Ptr<recob::Hit> hit,
+                                           const recob::TrackHitMeta* meta)
 {
   auto const* sce = lar::providerFrom<spacecharge::SpaceChargeService>();
 

@@ -56,8 +56,7 @@ namespace event {
   }
 
   //--------------------------------------------------------------------
-  void
-  EventCheater::produce(art::Event& evt)
+  void EventCheater::produce(art::Event& evt)
   {
 
     art::View<simb::MCParticle> pcol;

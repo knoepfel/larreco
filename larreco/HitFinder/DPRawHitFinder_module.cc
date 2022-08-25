@@ -154,16 +154,8 @@ namespace hit {
       // important: we need two overloads, because the comparison
       // needs to be done both ways to check for equality
 
-      bool
-      operator()(std::tuple<int, int, int, int> p, int s) const
-      {
-        return std::get<0>(p) < s;
-      }
-      bool
-      operator()(int s, std::tuple<int, int, int, int> p) const
-      {
-        return s < std::get<0>(p);
-      }
+      bool operator()(std::tuple<int, int, int, int> p, int s) const { return std::get<0>(p) < s; }
+      bool operator()(int s, std::tuple<int, int, int, int> p) const { return s < std::get<0>(p); }
     };
 
     std::string fCalDataModuleLabel;
@@ -265,9 +257,8 @@ namespace hit {
 
   //-------------------------------------------------
   //-------------------------------------------------
-  void
-  DPRawHitFinder::FillOutHitParameterVector(const std::vector<double>& input,
-                                            std::vector<double>& output)
+  void DPRawHitFinder::FillOutHitParameterVector(const std::vector<double>& input,
+                                                 std::vector<double>& output)
   {
     if (input.size() == 0)
       throw std::runtime_error(
@@ -287,8 +278,7 @@ namespace hit {
 
   //-------------------------------------------------
   //-------------------------------------------------
-  void
-  DPRawHitFinder::beginJob()
+  void DPRawHitFinder::beginJob()
   {
     // get access to the TFile service
     art::ServiceHandle<art::TFileService const> tfs;
@@ -300,8 +290,7 @@ namespace hit {
   }
 
   //-------------------------------------------------
-  void
-  DPRawHitFinder::produce(art::Event& evt)
+  void DPRawHitFinder::produce(art::Event& evt)
   {
     //==================================================================================================
     TH1::AddDirectory(kFALSE);
@@ -1073,12 +1062,11 @@ namespace hit {
   // --------------------------------------------------------------------------------------------
   // Initial finding of candidate peaks
   // --------------------------------------------------------------------------------------------
-  void
-  hit::DPRawHitFinder::findCandidatePeaks(std::vector<float>::const_iterator startItr,
-                                          std::vector<float>::const_iterator stopItr,
-                                          std::vector<std::tuple<int, int, int>>& timeValsVec,
-                                          float& PeakMin,
-                                          int firstTick) const
+  void hit::DPRawHitFinder::findCandidatePeaks(std::vector<float>::const_iterator startItr,
+                                               std::vector<float>::const_iterator stopItr,
+                                               std::vector<std::tuple<int, int, int>>& timeValsVec,
+                                               float& PeakMin,
+                                               int firstTick) const
   {
     // Need a minimum number of ticks to do any work here
     if (std::distance(startItr, stopItr) > 4) {
@@ -1150,10 +1138,9 @@ namespace hit {
   // Merging of nearby candidate peaks
   // --------------------------------------------------------------------------------------------
 
-  void
-  hit::DPRawHitFinder::mergeCandidatePeaks(const std::vector<float> signalVec,
-                                           TimeValsVec timeValsVec,
-                                           MergedTimeWidVec& mergedVec)
+  void hit::DPRawHitFinder::mergeCandidatePeaks(const std::vector<float> signalVec,
+                                                TimeValsVec timeValsVec,
+                                                MergedTimeWidVec& mergedVec)
   {
     // ################################################################
     // ### Lets loop over the candidate pulses we found in this ROI ###
@@ -1278,11 +1265,10 @@ namespace hit {
   // ----------------------------------------------------------------------------------------------
   // Estimate fluctuations for a group of peaks to identify hits from particles in drift direction
   // ----------------------------------------------------------------------------------------------
-  int
-  hit::DPRawHitFinder::EstimateFluctuations(const std::vector<float> fsignalVec,
-                                            int peakStart,
-                                            int peakMean,
-                                            int peakEnd)
+  int hit::DPRawHitFinder::EstimateFluctuations(const std::vector<float> fsignalVec,
+                                                int peakStart,
+                                                int peakMean,
+                                                int peakEnd)
   {
     int NFluctuations = 0;
 
@@ -1306,15 +1292,14 @@ namespace hit {
   // --------------------------------------------------------------------------------------------
   // Fit Exponentials
   // --------------------------------------------------------------------------------------------
-  void
-  hit::DPRawHitFinder::FitExponentials(const std::vector<float> fSignalVector,
-                                       const PeakTimeWidVec fPeakVals,
-                                       int fStartTime,
-                                       int fEndTime,
-                                       ParameterVec& fparamVec,
-                                       double& fchi2PerNDF,
-                                       int& fNDF,
-                                       bool fSameShape)
+  void hit::DPRawHitFinder::FitExponentials(const std::vector<float> fSignalVector,
+                                            const PeakTimeWidVec fPeakVals,
+                                            int fStartTime,
+                                            int fEndTime,
+                                            ParameterVec& fparamVec,
+                                            double& fchi2PerNDF,
+                                            int& fNDF,
+                                            bool fSameShape)
   {
     int size = fEndTime - fStartTime + 1;
     int NPeaks = fPeakVals.size();
@@ -1526,15 +1511,14 @@ namespace hit {
   } //<----End FitExponentials
 
   //---------------------------------------------------------------------------------------------
-  void
-  hit::DPRawHitFinder::FindPeakWithMaxDeviation(const std::vector<float> fSignalVector,
-                                                int fNPeaks,
-                                                int fStartTime,
-                                                int fEndTime,
-                                                bool fSameShape,
-                                                ParameterVec fparamVec,
-                                                PeakTimeWidVec fpeakVals,
-                                                PeakDevVec& fPeakDev)
+  void hit::DPRawHitFinder::FindPeakWithMaxDeviation(const std::vector<float> fSignalVector,
+                                                     int fNPeaks,
+                                                     int fStartTime,
+                                                     int fEndTime,
+                                                     bool fSameShape,
+                                                     ParameterVec fparamVec,
+                                                     PeakTimeWidVec fpeakVals,
+                                                     PeakDevVec& fPeakDev)
   {
     //   int size = fEndTime - fStartTime + 1;
     //    if(fEndTime - fStartTime < 0){size = 0;}
@@ -1595,8 +1579,7 @@ namespace hit {
   }
 
   //---------------------------------------------------------------------------------------------
-  std::string
-  hit::DPRawHitFinder::CreateFitFunction(int fNPeaks, bool fSameShape)
+  std::string hit::DPRawHitFinder::CreateFitFunction(int fNPeaks, bool fSameShape)
   {
     std::string feqn = ""; // string holding fit formula
     std::stringstream numConv;
@@ -1655,9 +1638,8 @@ namespace hit {
   }
 
   //---------------------------------------------------------------------------------------------
-  void
-  hit::DPRawHitFinder::AddPeak(std::tuple<double, int, int, int> fPeakDevCand,
-                               PeakTimeWidVec& fpeakValsTemp)
+  void hit::DPRawHitFinder::AddPeak(std::tuple<double, int, int, int> fPeakDevCand,
+                                    PeakTimeWidVec& fpeakValsTemp)
   {
     int PeakNumberWithNewPeak = std::get<1>(fPeakDevCand);
     int NewPeakMax = std::get<2>(fPeakDevCand);
@@ -1705,9 +1687,8 @@ namespace hit {
   }
 
   //---------------------------------------------------------------------------------------------
-  void
-  hit::DPRawHitFinder::SplitPeak(std::tuple<double, int, int, int> fPeakDevCand,
-                                 PeakTimeWidVec& fpeakValsTemp)
+  void hit::DPRawHitFinder::SplitPeak(std::tuple<double, int, int, int> fPeakDevCand,
+                                      PeakTimeWidVec& fpeakValsTemp)
   {
     int PeakNumberWithNewPeak = std::get<1>(fPeakDevCand);
     int OldPeakOldStart = std::get<2>(fpeakValsTemp.at(PeakNumberWithNewPeak));
@@ -1749,14 +1730,13 @@ namespace hit {
   }
 
   //---------------------------------------------------------------------------------------------
-  double
-  hit::DPRawHitFinder::WidthFunc(double fPeakMean,
-                                 double fPeakAmp,
-                                 double fPeakTau1,
-                                 double fPeakTau2,
-                                 double fStartTime,
-                                 double fEndTime,
-                                 double fPeakMeanTrue)
+  double hit::DPRawHitFinder::WidthFunc(double fPeakMean,
+                                        double fPeakAmp,
+                                        double fPeakTau1,
+                                        double fPeakTau2,
+                                        double fStartTime,
+                                        double fEndTime,
+                                        double fPeakMeanTrue)
   {
     double MaxValue = (fPeakAmp * exp(0.4 * (fPeakMeanTrue - fPeakMean) / fPeakTau1)) /
                       (1 + exp(0.4 * (fPeakMeanTrue - fPeakMean) / fPeakTau2));
@@ -1826,13 +1806,12 @@ namespace hit {
   }
 
   //---------------------------------------------------------------------------------------------
-  double
-  hit::DPRawHitFinder::ChargeFunc(double fPeakMean,
-                                  double fPeakAmp,
-                                  double fPeakTau1,
-                                  double fPeakTau2,
-                                  double fChargeNormFactor,
-                                  double fPeakMeanTrue)
+  double hit::DPRawHitFinder::ChargeFunc(double fPeakMean,
+                                         double fPeakAmp,
+                                         double fPeakTau1,
+                                         double fPeakTau2,
+                                         double fChargeNormFactor,
+                                         double fPeakMeanTrue)
 
   {
     double ChargeSum = 0.;
@@ -1864,10 +1843,9 @@ namespace hit {
   }
 
   //---------------------------------------------------------------------------------------------
-  void
-  hit::DPRawHitFinder::doBinAverage(const std::vector<float>& inputVec,
-                                    std::vector<float>& outputVec,
-                                    size_t binsToAverage) const
+  void hit::DPRawHitFinder::doBinAverage(const std::vector<float>& inputVec,
+                                         std::vector<float>& outputVec,
+                                         size_t binsToAverage) const
   {
     size_t halfBinsToAverage(binsToAverage / 2);
 
@@ -1898,10 +1876,9 @@ namespace hit {
   }
 
   //---------------------------------------------------------------------------------------------
-  void
-  hit::DPRawHitFinder::reBin(const std::vector<float>& inputVec,
-                             std::vector<float>& outputVec,
-                             size_t nBinsToCombine) const
+  void hit::DPRawHitFinder::reBin(const std::vector<float>& inputVec,
+                                  std::vector<float>& outputVec,
+                                  size_t nBinsToCombine) const
   {
     size_t nNewBins = inputVec.size() / nBinsToCombine;
 

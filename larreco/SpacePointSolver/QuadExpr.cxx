@@ -5,16 +5,14 @@
 #include <ostream>
 #include <string>
 
-QuadExpr
-QuadExpr::X()
+QuadExpr QuadExpr::X()
 {
   QuadExpr ret(0);
   ret.b = 1;
   return ret;
 }
 
-QuadExpr&
-QuadExpr::operator+=(const QuadExpr& e)
+QuadExpr& QuadExpr::operator+=(const QuadExpr& e)
 {
   a += e.a;
   b += e.b;
@@ -22,16 +20,14 @@ QuadExpr::operator+=(const QuadExpr& e)
   return *this;
 }
 
-QuadExpr
-QuadExpr::operator+(const QuadExpr& e) const
+QuadExpr QuadExpr::operator+(const QuadExpr& e) const
 {
   QuadExpr ret = *this;
   ret += e;
   return ret;
 }
 
-QuadExpr&
-QuadExpr::operator-=(const QuadExpr& e)
+QuadExpr& QuadExpr::operator-=(const QuadExpr& e)
 {
   a -= e.a;
   b -= e.b;
@@ -39,8 +35,7 @@ QuadExpr::operator-=(const QuadExpr& e)
   return *this;
 }
 
-QuadExpr
-QuadExpr::operator-(const QuadExpr& e) const
+QuadExpr QuadExpr::operator-(const QuadExpr& e) const
 {
   QuadExpr ret = *this;
   ret -= e;
@@ -63,21 +58,18 @@ QuadExpr QuadExpr::operator*(const QuadExpr& e) const
   return ret;
 }
 
-QuadExpr&
-QuadExpr::operator*=(const QuadExpr& e)
+QuadExpr& QuadExpr::operator*=(const QuadExpr& e)
 {
   *this = *this * e;
   return *this;
 }
 
-double
-QuadExpr::Eval(double x) const
+double QuadExpr::Eval(double x) const
 {
   return a * x * x + b * x + c;
 }
 
-std::ostream&
-operator<<(std::ostream& os, const QuadExpr& e)
+std::ostream& operator<<(std::ostream& os, const QuadExpr& e)
 {
   os << e.Quadratic() << "*x^2 + " << e.Linear() << "*x + " << e.Constant();
   return os;

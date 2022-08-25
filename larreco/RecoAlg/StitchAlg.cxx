@@ -33,16 +33,15 @@ trkf::StitchAlg::StitchAlg(fhicl::ParameterSet const& pset)
 //----------------------------------------------------------
 
 //----------------------------------------------------------
-void
-trkf::StitchAlg::reconfigure(fhicl::ParameterSet const& pset)
+void trkf::StitchAlg::reconfigure(fhicl::ParameterSet const& pset)
 {
 
   fCosAngTol = pset.get<double>("CosAngTolerance", 0.95);
   fSepTol = pset.get<double>("SpptSepTolerance", 10.0); //cm
 }
 
-void
-trkf::StitchAlg::FindHeadsAndTails(const art::Event& EvtArg, const std::string& trackModuleLabelArg)
+void trkf::StitchAlg::FindHeadsAndTails(const art::Event& EvtArg,
+                                        const std::string& trackModuleLabelArg)
 {
 
   fTrackVec.clear();
@@ -257,9 +256,8 @@ trkf::StitchAlg::FindHeadsAndTails(const art::Event& EvtArg, const std::string& 
   //    std::cout << "fh.size, ft.size are " << fh.size() << ", " << ft.size() << std::endl;
 }
 
-void
-trkf::StitchAlg::FirstStitch(const std::vector<art::PtrVector<recob::Track>>::iterator itvvArg,
-                             const std::vector<recob::Track>::iterator itvArg)
+void trkf::StitchAlg::FirstStitch(const std::vector<art::PtrVector<recob::Track>>::iterator itvvArg,
+                                  const std::vector<recob::Track>::iterator itvArg)
 {
   // take the vector of tracks, walk through each track's vectors of xyz, dxdydz, etc
   // and concatenate them into longer vectors. Use those to instantiate one new
@@ -333,8 +331,7 @@ trkf::StitchAlg::FirstStitch(const std::vector<art::PtrVector<recob::Track>>::it
   fTrackVec.insert(itvArg, t);
 }
 
-void
-trkf::StitchAlg::WalkStitch()
+void trkf::StitchAlg::WalkStitch()
 {
 
   art::PtrVector<recob::Track> compTrack;
@@ -472,8 +469,7 @@ trkf::StitchAlg::WalkStitch()
 // and by its tail in another. This can happen if the common component has a higher track index than either of
 // the the two it is separately stitched to. e.g., ____(1) -------(4) ___________(3).
 //
-bool
-trkf::StitchAlg::CommonComponentStitch()
+bool trkf::StitchAlg::CommonComponentStitch()
 {
   // "os" for outer scope.
   int osciit(-12), oscjit(-12);

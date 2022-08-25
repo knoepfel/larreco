@@ -59,18 +59,10 @@ namespace cmtool {
     virtual ~CPAlgoArray(){};
 
     /// Setter to add a new algorithm
-    void
-    AddAlgo(CPriorityAlgoBase* algo)
-    {
-      _algo_array.push_back(algo);
-    }
+    void AddAlgo(CPriorityAlgoBase* algo) { _algo_array.push_back(algo); }
 
     /// Setter for an evaluation
-    void
-    SetMode(EvaluationMode_t mode)
-    {
-      _mode = mode;
-    }
+    void SetMode(EvaluationMode_t mode) { _mode = mode; }
 
     /**
        Core function: given a set of CPANs, return a float which indicates
@@ -82,16 +74,14 @@ namespace cmtool {
        Optional function: called after each iterative approach if a manager class is
        run with verbosity level <= kPerIteration. Maybe useful for debugging.
     */
-    virtual void
-    Report()
+    virtual void Report()
     {
       for (auto const& algo : _algo_array)
         algo->Report();
     }
 
     /// Function to reset the algorithm instance, called together with manager's Reset()
-    virtual void
-    Reset()
+    virtual void Reset()
     {
       for (auto const& algo : _algo_array)
         algo->Reset();
@@ -100,8 +90,7 @@ namespace cmtool {
     /**
        Optional function: called at the beginning of 1st iteration. This is called per event.
      */
-    virtual void
-    EventBegin(const std::vector<cluster::ClusterParamsAlg>& clusters)
+    virtual void EventBegin(const std::vector<cluster::ClusterParamsAlg>& clusters)
     {
       for (auto const& algo : _algo_array)
         algo->EventBegin(clusters);
@@ -110,8 +99,7 @@ namespace cmtool {
     /**
        Optional function: called at the end of event ... after the last merging iteration is over.
      */
-    virtual void
-    EventEnd()
+    virtual void EventEnd()
     {
       for (auto const& algo : _algo_array)
         algo->EventEnd();
@@ -122,8 +110,7 @@ namespace cmtool {
        This provides all clusters' information in case the algorithm need them. Note this
        is called per iteration which may be more than once per event.
      */
-    virtual void
-    IterationBegin(const std::vector<cluster::ClusterParamsAlg>& clusters)
+    virtual void IterationBegin(const std::vector<cluster::ClusterParamsAlg>& clusters)
     {
       for (auto const& algo : _algo_array)
         algo->IterationBegin(clusters);
@@ -132,8 +119,7 @@ namespace cmtool {
     /**
        Optional function: called at the end of each iterative loop.
      */
-    virtual void
-    IterationEnd()
+    virtual void IterationEnd()
     {
       for (auto const& algo : _algo_array)
         algo->IterationEnd();

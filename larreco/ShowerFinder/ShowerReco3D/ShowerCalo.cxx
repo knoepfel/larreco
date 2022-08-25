@@ -6,8 +6,9 @@
 
 namespace showerreco {
 
-  std::pair<double, double>
-  ShowerCalo::ShowerEnergy(double energy, ::showerreco::energy::RecoType_t type, bool mc)
+  std::pair<double, double> ShowerCalo::ShowerEnergy(double energy,
+                                                     ::showerreco::energy::RecoType_t type,
+                                                     bool mc)
   {
     double result = -1;
     double result_err = -1;

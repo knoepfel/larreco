@@ -48,8 +48,7 @@ namespace hit {
     if (fMakeMCWire) produces<std::vector<sim::MCWireCollection>>();
   }
 
-  void
-  MCHitFinder::produce(art::Event& e)
+  void MCHitFinder::produce(art::Event& e)
   {
 
     art::ServiceHandle<geo::Geometry const> geo;

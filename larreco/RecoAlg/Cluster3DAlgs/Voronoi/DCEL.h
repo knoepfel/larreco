@@ -59,36 +59,19 @@ namespace dcel2d {
 
     Vertex(const Coords& coords, HalfEdge* half) : fCoords(coords), fHalfEdge(half) {}
 
-    const Coords&
-    getCoords() const
-    {
-      return fCoords;
-    }
-    const HalfEdge*
-    getHalfEdge() const
-    {
-      return fHalfEdge;
-    }
+    const Coords& getCoords() const { return fCoords; }
+    const HalfEdge* getHalfEdge() const { return fHalfEdge; }
 
-    void
-    setCoords(const double* coords)
+    void setCoords(const double* coords)
     {
       fCoords[0] = coords[0];
       fCoords[1] = coords[1];
       fCoords[2] = coords[2];
     }
 
-    void
-    setCoords(const Coords& coords)
-    {
-      fCoords = coords;
-    }
+    void setCoords(const Coords& coords) { fCoords = coords; }
 
-    void
-    setHalfEdge(HalfEdge* half)
-    {
-      fHalfEdge = half;
-    }
+    void setHalfEdge(HalfEdge* half) { fHalfEdge = half; }
 
   private:
     Coords fCoords;      // x,y coordinates of this vertex
@@ -116,47 +99,15 @@ namespace dcel2d {
       , fClusterHit3D(clusterHit3D)
     {}
 
-    const HalfEdge*
-    getHalfEdge() const
-    {
-      return fHalfEdge;
-    }
-    const bool
-    onConvexHull() const
-    {
-      return fConvexHull;
-    }
-    const Coords&
-    getCoords() const
-    {
-      return fCoords;
-    }
-    const double
-    getFaceArea() const
-    {
-      return fFaceArea;
-    }
-    const reco::ClusterHit3D*
-    getClusterHit3D() const
-    {
-      return fClusterHit3D;
-    }
+    const HalfEdge* getHalfEdge() const { return fHalfEdge; }
+    const bool onConvexHull() const { return fConvexHull; }
+    const Coords& getCoords() const { return fCoords; }
+    const double getFaceArea() const { return fFaceArea; }
+    const reco::ClusterHit3D* getClusterHit3D() const { return fClusterHit3D; }
 
-    void
-    setHalfEdge(HalfEdge* half)
-    {
-      fHalfEdge = half;
-    }
-    void
-    setOnConvexHull()
-    {
-      fConvexHull = true;
-    }
-    void
-    setFaceArea(double area)
-    {
-      fFaceArea = area;
-    }
+    void setHalfEdge(HalfEdge* half) { fHalfEdge = half; }
+    void setOnConvexHull() { fConvexHull = true; }
+    void setFaceArea(double area) { fFaceArea = area; }
 
   private:
     HalfEdge* fHalfEdge;                     // pointer to one of the half edges
@@ -194,57 +145,17 @@ namespace dcel2d {
       , m_lastHalfEdge(last)
     {}
 
-    Vertex*
-    getTargetVertex() const
-    {
-      return m_targetVertex;
-    }
-    Face*
-    getFace() const
-    {
-      return m_face;
-    }
-    HalfEdge*
-    getTwinHalfEdge() const
-    {
-      return m_twinHalfEdge;
-    }
-    HalfEdge*
-    getNextHalfEdge() const
-    {
-      return m_nextHalfEdge;
-    }
-    HalfEdge*
-    getLastHalfEdge() const
-    {
-      return m_lastHalfEdge;
-    }
+    Vertex* getTargetVertex() const { return m_targetVertex; }
+    Face* getFace() const { return m_face; }
+    HalfEdge* getTwinHalfEdge() const { return m_twinHalfEdge; }
+    HalfEdge* getNextHalfEdge() const { return m_nextHalfEdge; }
+    HalfEdge* getLastHalfEdge() const { return m_lastHalfEdge; }
 
-    void
-    setTargetVertex(Vertex* vertex)
-    {
-      m_targetVertex = vertex;
-    }
-    void
-    setFace(Face* face)
-    {
-      m_face = face;
-    }
-    void
-    setTwinHalfEdge(HalfEdge* twin)
-    {
-      m_twinHalfEdge = twin;
-    }
-    void
-    setNextHalfEdge(HalfEdge* next)
-    {
-      m_nextHalfEdge = next;
-    }
-    void
-    setLastHalfEdge(HalfEdge* last)
-    {
-      m_lastHalfEdge = last;
-    }
+    void setTargetVertex(Vertex* vertex) { m_targetVertex = vertex; }
+    void setFace(Face* face) { m_face = face; }
+    void setTwinHalfEdge(HalfEdge* twin) { m_twinHalfEdge = twin; }
+    void setNextHalfEdge(HalfEdge* next) { m_nextHalfEdge = next; }
+    void setLastHalfEdge(HalfEdge* last) { m_lastHalfEdge = last; }
 
   private:
     Vertex* m_targetVertex;   // Pointer to the vertex we point to

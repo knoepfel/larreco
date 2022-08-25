@@ -22,15 +22,13 @@ pma::SortedObjectBase::SortedObjectBase(pma::SortedObjectBase* prevElement,
   if (nextElement) AddNext(nextElement);
 }
 
-void
-pma::SortedObjectBase::Disconnect(void)
+void pma::SortedObjectBase::Disconnect(void)
 {
   if (prev) prev->RemoveNext(this);
   if (next) RemoveNext(next);
 }
 
-bool
-pma::SortedObjectBase::AddNext(pma::SortedObjectBase* nextElement)
+bool pma::SortedObjectBase::AddNext(pma::SortedObjectBase* nextElement)
 {
   if (!nextElement || (nextElement == this)) return false;
 
@@ -43,8 +41,7 @@ pma::SortedObjectBase::AddNext(pma::SortedObjectBase* nextElement)
   return true;
 }
 
-int
-pma::SortedObjectBase::RemoveNext(pma::SortedObjectBase* nextElement)
+int pma::SortedObjectBase::RemoveNext(pma::SortedObjectBase* nextElement)
 {
   if (nextElement && (next == nextElement)) {
     if (next->prev == this)
@@ -62,16 +59,14 @@ pma::SortedObjectBase::RemoveNext(pma::SortedObjectBase* nextElement)
 //******************************************************************
 
 //***********************  SortedBranchBase  ***********************
-void
-pma::SortedBranchBase::Disconnect(void)
+void pma::SortedBranchBase::Disconnect(void)
 {
   while (next_vector.size())
     RemoveNext(next_vector.front());
   if (prev) prev->RemoveNext(this);
 }
 
-bool
-pma::SortedBranchBase::AddNext(pma::SortedObjectBase* nextElement)
+bool pma::SortedBranchBase::AddNext(pma::SortedObjectBase* nextElement)
 {
   if (!nextElement) {
     mf::LogError("pma::SortedBranchBase") << "Next == 0.";
@@ -104,8 +99,7 @@ pma::SortedBranchBase::AddNext(pma::SortedObjectBase* nextElement)
     return false;
 }
 
-int
-pma::SortedBranchBase::RemoveNext(pma::SortedObjectBase* nextElement)
+int pma::SortedBranchBase::RemoveNext(pma::SortedObjectBase* nextElement)
 {
   if (!nextElement || (nextElement == this)) return -1;
 

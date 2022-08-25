@@ -74,21 +74,9 @@ namespace genf {
     GFDetPlane(const genf::GFDetPlane&);
     GFDetPlane& operator=(const genf::GFDetPlane&);
     // Accessors -----------------------
-    TVector3
-    getO() const
-    {
-      return fO;
-    }
-    TVector3
-    getU() const
-    {
-      return fU;
-    }
-    TVector3
-    getV() const
-    {
-      return fV;
-    }
+    TVector3 getO() const { return fO; }
+    TVector3 getU() const { return fU; }
+    TVector3 getV() const { return fV; }
 
     // Modifiers -----------------------
     void set(const TVector3& o, const TVector3& u, const TVector3& v);
@@ -105,11 +93,7 @@ namespace genf {
     //! Optionally, set the finite plane definition. This is most important for
     //! avoiding fake intersection points in fitting of loopers. This should
     //! be implemented for silicon detectors most importantly.
-    void
-    setFinitePlane(genf::GFAbsFinitePlane* finite)
-    {
-      fFinitePlane = finite;
-    }
+    void setFinitePlane(genf::GFAbsFinitePlane* finite) { fFinitePlane = finite; }
 
     // Operations ----------------------
     TVector3 getNormal() const;
@@ -149,26 +133,20 @@ namespace genf {
     double distance(double, double, double) const;
 
     //! intersect in the active area? C.f. GFAbsFinitePlane
-    bool
-    inActive(const TVector3& point, const TVector3& dir) const
+    bool inActive(const TVector3& point, const TVector3& dir) const
     {
       return this->inActive(this->straightLineToPlane(point, dir));
     }
 
     //! inActive methods refer to finite plane. C.f. GFAbsFinitePlane
-    bool
-    inActive(double u, double v) const
+    bool inActive(double u, double v) const
     {
       if (fFinitePlane == NULL) return true;
       return fFinitePlane->inActive(u, v);
     }
 
     //! inActive methods refer to finite plane. C.f. GFAbsFinitePlane
-    bool
-    inActive(const TVector2& v) const
-    {
-      return inActive(v.X(), v.Y());
-    }
+    bool inActive(const TVector2& v) const { return inActive(v.X(), v.Y()); }
 
     //private:
 
@@ -186,8 +164,7 @@ namespace genf {
     void sane(); // ensures orthnormal coordinates
 
   private:
-    virtual void
-    Print(Option_t*) const
+    virtual void Print(Option_t*) const
     {
       throw std::logic_error(std::string(__func__) + "::Print(Option_t*) not available");
     }

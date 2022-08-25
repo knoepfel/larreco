@@ -10,8 +10,7 @@ namespace cmtool {
   }
 
   //------------------------------------------------------------------------------
-  float
-  CPAlgoPolyArea::Priority(const ::cluster::ClusterParamsAlg& cluster)
+  float CPAlgoPolyArea::Priority(const ::cluster::ClusterParamsAlg& cluster)
   //------------------------------------------------------------------------------
   {
 

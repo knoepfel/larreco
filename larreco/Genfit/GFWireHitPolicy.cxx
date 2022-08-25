@@ -40,8 +40,7 @@ genf::GFWireHitPolicy::GFWireHitPolicy() : fMaxdistance(1.E50)
   ;
 }
 
-TMatrixT<Double_t>
-genf::GFWireHitPolicy::hitCoord(GFAbsRecoHit* hit, const GFDetPlane& plane)
+TMatrixT<Double_t> genf::GFWireHitPolicy::hitCoord(GFAbsRecoHit* hit, const GFDetPlane& plane)
 {
   TMatrixT<Double_t> returnMat(1, 1);
 
@@ -54,8 +53,7 @@ genf::GFWireHitPolicy::hitCoord(GFAbsRecoHit* hit, const GFDetPlane& plane)
   return returnMat;
 }
 
-TMatrixT<Double_t>
-genf::GFWireHitPolicy::hitCov(GFAbsRecoHit* hit, const GFDetPlane& plane)
+TMatrixT<Double_t> genf::GFWireHitPolicy::hitCov(GFAbsRecoHit* hit, const GFDetPlane& plane)
 {
   checkPlane(hit, plane);
 
@@ -67,8 +65,7 @@ genf::GFWireHitPolicy::hitCov(GFAbsRecoHit* hit, const GFDetPlane& plane)
   return returnCov;
 }
 
-void
-genf::GFWireHitPolicy::checkPlane(GFAbsRecoHit* hit, const GFDetPlane& plane)
+void genf::GFWireHitPolicy::checkPlane(GFAbsRecoHit* hit, const GFDetPlane& plane)
 {
   // raw x1, y1, z1, x2, y2, z2, rdrift, zreco
   TMatrixT<Double_t> rC = hit->getRawHitCoord();
@@ -89,8 +86,7 @@ genf::GFWireHitPolicy::checkPlane(GFAbsRecoHit* hit, const GFDetPlane& plane)
   }
 }
 
-const genf::GFDetPlane&
-genf::GFWireHitPolicy::detPlane(GFAbsRecoHit* hit, GFAbsTrackRep* rep)
+const genf::GFDetPlane& genf::GFWireHitPolicy::detPlane(GFAbsRecoHit* hit, GFAbsTrackRep* rep)
 {
 
   TMatrixT<Double_t> x = hit->getRawHitCoord();

@@ -39,41 +39,17 @@ namespace cmtool {
     virtual bool Bool(const ::cluster::ClusterParamsAlg& cluster1,
                       const ::cluster::ClusterParamsAlg& cluster2);
 
-    void
-    SetAllow180Ambig(bool on)
-    {
-      _allow_180_ambig = on;
-    }
+    void SetAllow180Ambig(bool on) { _allow_180_ambig = on; }
 
-    void
-    SetAngleCut(double angle)
-    {
-      _max_allowed_2D_angle_diff = angle;
-    }
+    void SetAngleCut(double angle) { _max_allowed_2D_angle_diff = angle; }
 
-    void
-    SetUseOpeningAngle(bool on)
-    {
-      _use_opening_angle = on;
-    }
+    void SetUseOpeningAngle(bool on) { _use_opening_angle = on; }
 
-    void
-    SetMinHits(int n)
-    {
-      _minHits = n;
-    }
+    void SetMinHits(int n) { _minHits = n; }
 
-    void
-    SetMinLength(double l)
-    {
-      _min_length = l;
-    }
+    void SetMinLength(double l) { _min_length = l; }
 
-    void
-    SetDebug(bool on)
-    {
-      _debug = on;
-    }
+    void SetDebug(bool on) { _debug = on; }
 
   protected:
     bool _debug;

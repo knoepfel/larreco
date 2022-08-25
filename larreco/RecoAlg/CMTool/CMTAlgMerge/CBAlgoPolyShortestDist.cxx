@@ -15,14 +15,12 @@ namespace cmtool {
   }
 
   //-----------------------------
-  void
-  CBAlgoPolyShortestDist::Reset()
+  void CBAlgoPolyShortestDist::Reset()
   //-----------------------------
   {}
 
   //------------------------------------------------------------------------------------------
-  void
-  CBAlgoPolyShortestDist::EventBegin(const std::vector<cluster::ClusterParamsAlg>& clusters)
+  void CBAlgoPolyShortestDist::EventBegin(const std::vector<cluster::ClusterParamsAlg>& clusters)
   //------------------------------------------------------------------------------------------
   {
     if (clusters.size()) tmp_min_dist = 99999;
@@ -50,9 +48,8 @@ namespace cmtool {
   //}
 
   //----------------------------------------------------------------
-  bool
-  CBAlgoPolyShortestDist::Bool(const ::cluster::ClusterParamsAlg& cluster1,
-                               const ::cluster::ClusterParamsAlg& cluster2)
+  bool CBAlgoPolyShortestDist::Bool(const ::cluster::ClusterParamsAlg& cluster1,
+                                    const ::cluster::ClusterParamsAlg& cluster2)
   //----------------------------------------------------------------
   {
     if ((cluster1.GetHitVector().size() < _min_hits) ||
@@ -100,8 +97,7 @@ namespace cmtool {
   }
 
   //------------------------------
-  void
-  CBAlgoPolyShortestDist::Report()
+  void CBAlgoPolyShortestDist::Report()
   //------------------------------
   {}
 

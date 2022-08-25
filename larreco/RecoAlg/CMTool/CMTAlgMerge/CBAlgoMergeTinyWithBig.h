@@ -82,41 +82,17 @@ namespace cmtool {
     //virtual void IterationEnd();
 
     //both clusters must have > this # of hits to be considered for merging
-    void
-    SetMinHitsBig(size_t nhits)
-    {
-      _min_hits_big = nhits;
-    }
+    void SetMinHitsBig(size_t nhits) { _min_hits_big = nhits; }
 
-    void
-    SetMaxHitsBig(size_t nhits)
-    {
-      _max_hits_big = nhits;
-    }
+    void SetMaxHitsBig(size_t nhits) { _max_hits_big = nhits; }
 
-    void
-    SetMinHitsSmall(size_t nhits)
-    {
-      _min_hits_small = nhits;
-    }
+    void SetMinHitsSmall(size_t nhits) { _min_hits_small = nhits; }
 
-    void
-    SetMaxHitsSmall(size_t nhits)
-    {
-      _max_hits_small = nhits;
-    }
+    void SetMaxHitsSmall(size_t nhits) { _max_hits_small = nhits; }
 
-    void
-    SetMinDistSquared(double dist)
-    {
-      _dist_sqrd_cut = dist;
-    }
+    void SetMinDistSquared(double dist) { _dist_sqrd_cut = dist; }
 
-    void
-    SetDebug(bool flag)
-    {
-      _debug = flag;
-    }
+    void SetDebug(bool flag) { _debug = flag; }
 
   private:
     size_t _min_hits_small, _max_hits_small, _min_hits_big, _max_hits_big;

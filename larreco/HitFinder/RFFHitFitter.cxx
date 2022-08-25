@@ -29,8 +29,7 @@ hit::RFFHitFitter::RFFHitFitter(float max_mean,
   SetFitterParams(max_mean, min_multi, threshold);
 }
 
-void
-hit::RFFHitFitter::SetFitterParams(float max_mean, unsigned int min_multi, float threshold)
+void hit::RFFHitFitter::SetFitterParams(float max_mean, unsigned int min_multi, float threshold)
 {
   fMeanMatchThreshold = max_mean;
   fMinMergeMultiplicity = min_multi;
@@ -42,8 +41,7 @@ hit::RFFHitFitter::SetFitterParams(float max_mean, unsigned int min_multi, float
   ClearResults();
 }
 
-void
-hit::RFFHitFitter::RunFitter(const std::vector<float>& signal)
+void hit::RFFHitFitter::RunFitter(const std::vector<float>& signal)
 {
   ClearResults();
   CalculateAllMeansAndSigmas(signal);
@@ -52,8 +50,7 @@ hit::RFFHitFitter::RunFitter(const std::vector<float>& signal)
   CalculateAmplitudes(signal);
 }
 
-void
-hit::RFFHitFitter::CalculateAllMeansAndSigmas(const std::vector<float>& signal)
+void hit::RFFHitFitter::CalculateAllMeansAndSigmas(const std::vector<float>& signal)
 {
   if (signal.size() <= 2) return;
 
@@ -80,8 +77,7 @@ hit::RFFHitFitter::CalculateAllMeansAndSigmas(const std::vector<float>& signal)
   }
 }
 
-void
-hit::RFFHitFitter::CreateMergeVector()
+void hit::RFFHitFitter::CreateMergeVector()
 {
   fMergeVector.clear();
   fMergeVector.reserve(fSignalSet.size());
@@ -97,8 +93,7 @@ hit::RFFHitFitter::CreateMergeVector()
   }
 }
 
-void
-hit::RFFHitFitter::CalculateMergedMeansAndSigmas(size_t signal_size)
+void hit::RFFHitFitter::CalculateMergedMeansAndSigmas(size_t signal_size)
 {
   fMeanVector.reserve(fMergeVector.size());
   fSigmaVector.reserve(fMergeVector.size());
@@ -140,8 +135,7 @@ hit::RFFHitFitter::CalculateMergedMeansAndSigmas(size_t signal_size)
   }
 }
 
-void
-hit::RFFHitFitter::CalculateAmplitudes(const std::vector<float>& signal)
+void hit::RFFHitFitter::CalculateAmplitudes(const std::vector<float>& signal)
 {
   std::vector<float> heightVector(fMeanVector.size());
   size_t bin = 0;
@@ -182,16 +176,14 @@ hit::RFFHitFitter::CalculateAmplitudes(const std::vector<float>& signal)
   fAmpErrorVector.resize(fAmpVector.size(), 0.0);
 }
 
-bool
-hit::RFFHitFitter::HitsBelowThreshold()
+bool hit::RFFHitFitter::HitsBelowThreshold()
 {
   for (auto const& amp : fAmpVector)
     if (amp < fFinalAmpThreshold) return true;
   return false;
 }
 
-void
-hit::RFFHitFitter::ClearResults()
+void hit::RFFHitFitter::ClearResults()
 {
   fMeanVector.clear();
   fSigmaVector.clear();
@@ -203,8 +195,7 @@ hit::RFFHitFitter::ClearResults()
   fMergeVector.clear();
 }
 
-void
-hit::RFFHitFitter::PrintResults()
+void hit::RFFHitFitter::PrintResults()
 {
   std::cout << "InitialSignalSet" << std::endl;
 

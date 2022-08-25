@@ -29,8 +29,7 @@ namespace lar_cluster3d {
 
   //------------------------------------------------------------------------------------------------------------------------------------------
 
-  void
-  kdTree::configure(fhicl::ParameterSet const& pset)
+  void kdTree::configure(fhicl::ParameterSet const& pset)
   {
     fEnableMonitoring = pset.get<bool>("EnableMonitoring", true);
     fPairSigmaPeakTime = pset.get<float>("PairSigmaPeakTime", 3.);
@@ -43,9 +42,8 @@ namespace lar_cluster3d {
   }
 
   //------------------------------------------------------------------------------------------------------------------------------------------
-  kdTree::KdTreeNode
-  kdTree::BuildKdTree(const reco::HitPairList& hitPairList,
-                      KdTreeNodeList& kdTreeNodeContainer) const
+  kdTree::KdTreeNode kdTree::BuildKdTree(const reco::HitPairList& hitPairList,
+                                         KdTreeNodeList& kdTreeNodeContainer) const
   {
     // The first task is to build the kd tree
     cet::cpu_timer theClockBuildNeighborhood;
@@ -71,9 +69,8 @@ namespace lar_cluster3d {
   }
 
   //------------------------------------------------------------------------------------------------------------------------------------------
-  kdTree::KdTreeNode
-  kdTree::BuildKdTree(const reco::HitPairListPtr& hitPairList,
-                      KdTreeNodeList& kdTreeNodeContainer) const
+  kdTree::KdTreeNode kdTree::BuildKdTree(const reco::HitPairListPtr& hitPairList,
+                                         KdTreeNodeList& kdTreeNodeContainer) const
   {
 
     // The first task is to build the kd tree
@@ -106,11 +103,10 @@ namespace lar_cluster3d {
     return topNode;
   }
 
-  kdTree::KdTreeNode&
-  kdTree::BuildKdTree(Hit3DVec::iterator first,
-                      Hit3DVec::iterator last,
-                      KdTreeNodeList& kdTreeNodeContainer,
-                      int depth) const
+  kdTree::KdTreeNode& kdTree::BuildKdTree(Hit3DVec::iterator first,
+                                          Hit3DVec::iterator last,
+                                          KdTreeNodeList& kdTreeNodeContainer,
+                                          int depth) const
   {
     // Ok, so if the input list is more than one element then we have work to do... but if less then handle end condition
     if (std::distance(first, last) < 2) {
@@ -181,11 +177,10 @@ namespace lar_cluster3d {
     return kdTreeNodeContainer.back();
   }
 
-  size_t
-  kdTree::FindNearestNeighbors(const reco::ClusterHit3D* refHit,
-                               const KdTreeNode& node,
-                               CandPairList& CandPairList,
-                               float& bestDist) const
+  size_t kdTree::FindNearestNeighbors(const reco::ClusterHit3D* refHit,
+                                      const KdTreeNode& node,
+                                      CandPairList& CandPairList,
+                                      float& bestDist) const
   {
     // If at a leaf then time to decide to add hit or not
     if (node.isLeafNode()) {
@@ -223,13 +218,12 @@ namespace lar_cluster3d {
     return CandPairList.size();
   }
 
-  bool
-  kdTree::FindEntry(const reco::ClusterHit3D* refHit,
-                    const KdTreeNode& node,
-                    CandPairList& CandPairList,
-                    float& bestDist,
-                    bool& selfNotFound,
-                    int depth) const
+  bool kdTree::FindEntry(const reco::ClusterHit3D* refHit,
+                         const KdTreeNode& node,
+                         CandPairList& CandPairList,
+                         float& bestDist,
+                         bool& selfNotFound,
+                         int depth) const
   {
     bool foundEntry(false);
 
@@ -277,8 +271,9 @@ namespace lar_cluster3d {
     return foundEntry;
   }
 
-  bool
-  kdTree::FindEntryBrute(const reco::ClusterHit3D* refHit, const KdTreeNode& node, int depth) const
+  bool kdTree::FindEntryBrute(const reco::ClusterHit3D* refHit,
+                              const KdTreeNode& node,
+                              int depth) const
   {
     // If at a leaf then time to decide to add hit or not
     if (node.isLeafNode()) {
@@ -296,10 +291,9 @@ namespace lar_cluster3d {
 
   //------------------------------------------------------------------------------------------------------------------------------------------
 
-  bool
-  kdTree::consistentPairs(const reco::ClusterHit3D* pair1,
-                          const reco::ClusterHit3D* pair2,
-                          float& bestDist) const
+  bool kdTree::consistentPairs(const reco::ClusterHit3D* pair1,
+                               const reco::ClusterHit3D* pair2,
+                               float& bestDist) const
   {
     // Strategy: We consider comparing "hit pairs" which may consist of 2 or 3 actual hits.
     //           Also, if only pairs, they can be U-V, U-W or V-W so we can't assume which views we have
@@ -342,9 +336,8 @@ namespace lar_cluster3d {
     return consistent;
   }
 
-  float
-  kdTree::DistanceBetweenNodesYZ(const reco::ClusterHit3D* node1,
-                                 const reco::ClusterHit3D* node2) const
+  float kdTree::DistanceBetweenNodesYZ(const reco::ClusterHit3D* node1,
+                                       const reco::ClusterHit3D* node2) const
   {
     const Eigen::Vector3f& node1Pos = node1->getPosition();
     const Eigen::Vector3f& node2Pos = node2->getPosition();
@@ -356,9 +349,8 @@ namespace lar_cluster3d {
     return std::sqrt(yzDist2);
   }
 
-  float
-  kdTree::DistanceBetweenNodes(const reco::ClusterHit3D* node1,
-                               const reco::ClusterHit3D* node2) const
+  float kdTree::DistanceBetweenNodes(const reco::ClusterHit3D* node1,
+                                     const reco::ClusterHit3D* node2) const
   {
     const Eigen::Vector3f& node1Pos = node1->getPosition();
     const Eigen::Vector3f& node2Pos = node2->getPosition();

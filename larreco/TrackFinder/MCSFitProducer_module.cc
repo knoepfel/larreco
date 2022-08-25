@@ -76,8 +76,7 @@ trkf::MCSFitProducer::MCSFitProducer(trkf::MCSFitProducer::Parameters const& p)
 
 trkf::MCSFitProducer::~MCSFitProducer() {}
 
-void
-trkf::MCSFitProducer::produce(art::Event& e)
+void trkf::MCSFitProducer::produce(art::Event& e)
 {
   //
   auto output = std::make_unique<std::vector<recob::MCSFitResult>>();

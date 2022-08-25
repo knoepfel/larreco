@@ -11,8 +11,7 @@
 
 namespace tca {
 
-  void
-  SaveTjInfo(TCSlice& slc, std::vector<std::vector<int>>& tjList, std::string stageName)
+  void SaveTjInfo(TCSlice& slc, std::vector<std::vector<int>>& tjList, std::string stageName)
   {
     if (!tcc.modes[kSaveShowerTree]) return;
     if (tjList.empty()) return;
@@ -54,8 +53,7 @@ namespace tca {
 
   } // SaveTjInfo (tjlist)
 
-  void
-  SaveTjInfo(TCSlice& slc, const ShowerStruct& ss, std::string stageName)
+  void SaveTjInfo(TCSlice& slc, const ShowerStruct& ss, std::string stageName)
   {
     if (!tcc.modes[kSaveShowerTree]) return;
     int stageNum = GetStageNum(stv, stageName);
@@ -143,8 +141,7 @@ namespace tca {
 
   } // SaveTjInfo (cots)
 
-  void
-  SaveTjInfoStuff(TCSlice& slc, Trajectory& tj, int stageNum, std::string stageName)
+  void SaveTjInfoStuff(TCSlice& slc, Trajectory& tj, int stageNum, std::string stageName)
   {
     if (!tcc.modes[kSaveShowerTree]) return;
 
@@ -179,8 +176,7 @@ namespace tca {
   } // SaveTjInfoStuff
 
   ////////////////////////////////////////////////
-  void
-  SaveAllCots(TCSlice& slc, const CTP_t& inCTP, std::string someText)
+  void SaveAllCots(TCSlice& slc, const CTP_t& inCTP, std::string someText)
   {
     if (!tcc.modes[kSaveShowerTree]) return;
     for (unsigned short cotIndex = 0; cotIndex < slc.cots.size(); ++cotIndex) {
@@ -191,8 +187,7 @@ namespace tca {
     } // cotIndex
   }   // SaveAllCots
 
-  void
-  SaveAllCots(TCSlice& slc, std::string someText)
+  void SaveAllCots(TCSlice& slc, std::string someText)
   {
     if (!tcc.modes[kSaveShowerTree]) return;
     for (unsigned short cotIndex = 0; cotIndex < slc.cots.size(); ++cotIndex) {
@@ -202,8 +197,7 @@ namespace tca {
     } // cotIndex
   }
 
-  int
-  GetStageNum(ShowerTreeVars& stv, std::string stageName)
+  int GetStageNum(ShowerTreeVars& stv, std::string stageName)
   {
     int stageNum;
     bool existingStage = false;
@@ -222,8 +216,7 @@ namespace tca {
     return stageNum;
   }
 
-  void
-  ClearShowerTree(ShowerTreeVars& stv)
+  void ClearShowerTree(ShowerTreeVars& stv)
   {
     stv.BeginWir.clear();
     stv.BeginTim.clear();

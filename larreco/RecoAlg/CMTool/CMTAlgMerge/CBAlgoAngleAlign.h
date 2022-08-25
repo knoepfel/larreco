@@ -37,31 +37,15 @@ namespace cmtool {
                       const ::cluster::ClusterParamsAlg& cluster2);
 
     /// Method to set debug mode
-    void
-    SetDebug(bool on)
-    {
-      _debug = on;
-    }
+    void SetDebug(bool on) { _debug = on; }
 
     /// Method to set whether you allow angles to match with +/- 180 deg difference
-    void
-    SetAllow180Ambig(bool on)
-    {
-      _allow_180_ambig = on;
-    }
+    void SetAllow180Ambig(bool on) { _allow_180_ambig = on; }
 
     /// Method to set cut value in degrees for angle compatibility test
-    void
-    SetAngleCut(double angle)
-    {
-      _MaxAngleSep = angle;
-    }
+    void SetAngleCut(double angle) { _MaxAngleSep = angle; }
 
-    void
-    SetMinNHits(size_t n)
-    {
-      _MinNHits = n;
-    }
+    void SetMinNHits(size_t n) { _MinNHits = n; }
 
   protected:
     bool _debug;

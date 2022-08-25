@@ -163,30 +163,22 @@ namespace trkf {
                             p().applySCEcorr())
     {}
     //
-    recob::MCSFitResult
-    fitMcs(const recob::TrackTrajectory& traj) const
+    recob::MCSFitResult fitMcs(const recob::TrackTrajectory& traj) const
     {
       return fitMcs(traj, pIdHyp_);
     }
-    recob::MCSFitResult
-    fitMcs(const recob::Track& track) const
-    {
-      return fitMcs(track, pIdHyp_);
-    }
-    recob::MCSFitResult
-    fitMcs(const recob::Trajectory& traj) const
+    recob::MCSFitResult fitMcs(const recob::Track& track) const { return fitMcs(track, pIdHyp_); }
+    recob::MCSFitResult fitMcs(const recob::Trajectory& traj) const
     {
       return fitMcs(traj, pIdHyp_);
     }
     //
     recob::MCSFitResult fitMcs(const recob::TrackTrajectory& traj, int pid) const;
-    recob::MCSFitResult
-    fitMcs(const recob::Track& track, int pid) const
+    recob::MCSFitResult fitMcs(const recob::Track& track, int pid) const
     {
       return fitMcs(track.Trajectory(), pid);
     }
-    recob::MCSFitResult
-    fitMcs(const recob::Trajectory& traj, int pid) const
+    recob::MCSFitResult fitMcs(const recob::Trajectory& traj, int pid) const
     {
       recob::TrackTrajectory::Flags_t flags(traj.NPoints());
       const recob::TrackTrajectory tt(traj, std::move(flags));
@@ -231,20 +223,17 @@ namespace trkf {
                                       float pstep,
                                       float detAngResol) const;
     //
-    inline double
-    HighlandFirstTerm(const double p) const
+    inline double HighlandFirstTerm(const double p) const
     {
       return hlParams_[0] / (p * p) + hlParams_[1] / p + hlParams_[2] + hlParams_[3] * p +
              hlParams_[4] * p * p;
     }
-    inline double
-    DetectorAngularResolution(const double uz) const
+    inline double DetectorAngularResolution(const double uz) const
     {
       return angResol_[0] / (uz * uz) + angResol_[1] / uz + angResol_[2] + angResol_[3] * uz +
              angResol_[4] * uz * uz;
     }
-    double
-    mass(int pid) const
+    double mass(int pid) const
     {
       if (abs(pid) == 13) { return mumass; }
       if (abs(pid) == 211) { return pimass; }
@@ -257,21 +246,9 @@ namespace trkf {
     //
     double GetE(const double initial_E, const double length_travelled, const double mass) const;
     //
-    int
-    minNSegs() const
-    {
-      return minNSegs_;
-    }
-    double
-    segLen() const
-    {
-      return segLen_;
-    }
-    double
-    segLenTolerance() const
-    {
-      return segLenTolerance_;
-    }
+    int minNSegs() const { return minNSegs_; }
+    double segLen() const { return segLen_; }
+    double segLenTolerance() const { return segLenTolerance_; }
     //
   private:
     int pIdHyp_;

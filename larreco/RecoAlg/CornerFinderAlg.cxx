@@ -68,8 +68,7 @@ corner::CornerFinderAlg::CornerFinderAlg(fhicl::ParameterSet const& pset)
 }
 
 //-----------------------------------------------------------------------------
-void
-corner::CornerFinderAlg::InitializeGeometry(geo::Geometry const& my_geometry)
+void corner::CornerFinderAlg::InitializeGeometry(geo::Geometry const& my_geometry)
 {
   // Reset containers
   WireData_histos.clear();
@@ -95,9 +94,8 @@ corner::CornerFinderAlg::InitializeGeometry(geo::Geometry const& my_geometry)
 }
 
 //-----------------------------------------------------------------------------
-void
-corner::CornerFinderAlg::GrabWires(std::vector<recob::Wire> const& wireVec,
-                                   geo::Geometry const& my_geometry)
+void corner::CornerFinderAlg::GrabWires(std::vector<recob::Wire> const& wireVec,
+                                        geo::Geometry const& my_geometry)
 {
 
   InitializeGeometry(my_geometry);
@@ -161,9 +159,8 @@ corner::CornerFinderAlg::GrabWires(std::vector<recob::Wire> const& wireVec,
 
 //-----------------------------------------------------------------------------------
 // This gives us a vecotr of EndPoint2D objects that correspond to possible corners
-void
-corner::CornerFinderAlg::get_feature_points(std::vector<recob::EndPoint2D>& corner_vector,
-                                            geo::Geometry const& my_geometry)
+void corner::CornerFinderAlg::get_feature_points(std::vector<recob::EndPoint2D>& corner_vector,
+                                                 geo::Geometry const& my_geometry)
 {
   for (auto const& pid : my_geometry.IteratePlaneIDs()) {
     attach_feature_points(WireData_histos.at(pid.Plane),
@@ -175,9 +172,8 @@ corner::CornerFinderAlg::get_feature_points(std::vector<recob::EndPoint2D>& corn
 
 //-----------------------------------------------------------------------------------
 // This gives us a vector of EndPoint2D objects that correspond to possible corners, but quickly!
-void
-corner::CornerFinderAlg::get_feature_points_fast(std::vector<recob::EndPoint2D>& corner_vector,
-                                                 geo::Geometry const& my_geometry)
+void corner::CornerFinderAlg::get_feature_points_fast(std::vector<recob::EndPoint2D>& corner_vector,
+                                                      geo::Geometry const& my_geometry)
 {
   create_smaller_histos(my_geometry);
 
@@ -208,8 +204,7 @@ corner::CornerFinderAlg::get_feature_points_fast(std::vector<recob::EndPoint2D>&
 //-----------------------------------------------------------------------------------
 // This gives us a vecotr of EndPoint2D objects that correspond to possible corners
 // Uses line integral score as corner strength
-void
-corner::CornerFinderAlg::get_feature_points_LineIntegralScore(
+void corner::CornerFinderAlg::get_feature_points_LineIntegralScore(
   std::vector<recob::EndPoint2D>& corner_vector,
   geo::Geometry const& my_geometry)
 {
@@ -224,11 +219,7 @@ corner::CornerFinderAlg::get_feature_points_LineIntegralScore(
 struct compare_to_value {
 
   compare_to_value(int b) { this->b = b; }
-  bool
-  operator()(int i, int j)
-  {
-    return std::abs(b - i) < std::abs(b - j);
-  }
+  bool operator()(int i, int j) { return std::abs(b - i) < std::abs(b - j); }
 
   int b;
 };
@@ -240,8 +231,7 @@ struct compare_to_range {
     this->a = a;
     this->b = b;
   }
-  bool
-  operator()(int i, int j)
+  bool operator()(int i, int j)
   {
 
     int mid = (b - a) / 2 + a;
@@ -264,8 +254,7 @@ struct compare_to_range {
 
 //-----------------------------------------------------------------------------
 // This looks for areas of the wires that are non-noise, to speed up evaluation
-void
-corner::CornerFinderAlg::create_smaller_histos(geo::Geometry const& my_geometry)
+void corner::CornerFinderAlg::create_smaller_histos(geo::Geometry const& my_geometry)
 {
 
   for (auto const& pid : my_geometry.IteratePlaneIDs()) {
@@ -446,13 +435,12 @@ corner::CornerFinderAlg::create_smaller_histos(geo::Geometry const& my_geometry)
 
 //-----------------------------------------------------------------------------
 // This puts on all the feature points in a given view, using a given data histogram
-void
-corner::CornerFinderAlg::attach_feature_points(TH2F const& h_wire_data,
-                                               std::vector<geo::WireID> const& wireIDs,
-                                               geo::View_t view,
-                                               std::vector<recob::EndPoint2D>& corner_vector,
-                                               int startx,
-                                               int starty)
+void corner::CornerFinderAlg::attach_feature_points(TH2F const& h_wire_data,
+                                                    std::vector<geo::WireID> const& wireIDs,
+                                                    geo::View_t view,
+                                                    std::vector<recob::EndPoint2D>& corner_vector,
+                                                    int startx,
+                                                    int starty)
 {
 
   const int x_bins = h_wire_data.GetNbinsX();
@@ -531,8 +519,7 @@ corner::CornerFinderAlg::attach_feature_points(TH2F const& h_wire_data,
 
 //-----------------------------------------------------------------------------
 // This puts on all the feature points in a given view, using a given data histogram
-void
-corner::CornerFinderAlg::attach_feature_points_LineIntegralScore(
+void corner::CornerFinderAlg::attach_feature_points_LineIntegralScore(
   TH2F const& h_wire_data,
   std::vector<geo::WireID> const& wireIDs,
   geo::View_t view,
@@ -616,8 +603,7 @@ corner::CornerFinderAlg::attach_feature_points_LineIntegralScore(
 
 //-----------------------------------------------------------------------------
 // Convert to pixel
-void
-corner::CornerFinderAlg::create_image_histo(TH2F const& h_wire_data, TH2F& h_conversion) const
+void corner::CornerFinderAlg::create_image_histo(TH2F const& h_wire_data, TH2F& h_conversion) const
 {
 
   double temp_integral = 0;
@@ -685,10 +671,9 @@ corner::CornerFinderAlg::create_image_histo(TH2F const& h_wire_data, TH2F& h_con
 //-----------------------------------------------------------------------------
 // Derivative
 
-void
-corner::CornerFinderAlg::create_derivative_histograms(TH2F const& h_conversion,
-                                                      TH2F& h_derivative_x,
-                                                      TH2F& h_derivative_y)
+void corner::CornerFinderAlg::create_derivative_histograms(TH2F const& h_conversion,
+                                                           TH2F& h_derivative_x,
+                                                           TH2F& h_derivative_y)
 {
 
   const int x_bins = h_conversion.GetNbinsX();
@@ -968,10 +953,9 @@ corner::CornerFinderAlg::create_derivative_histograms(TH2F const& h_conversion,
 //-----------------------------------------------------------------------------
 // Corner Score
 
-void
-corner::CornerFinderAlg::create_cornerScore_histogram(TH2F const& h_derivative_x,
-                                                      TH2F const& h_derivative_y,
-                                                      TH2D& h_cornerScore)
+void corner::CornerFinderAlg::create_cornerScore_histogram(TH2F const& h_derivative_x,
+                                                           TH2F const& h_derivative_y,
+                                                           TH2D& h_cornerScore)
 {
 
   const int x_bins = h_derivative_x.GetNbinsX();
@@ -1042,13 +1026,13 @@ corner::CornerFinderAlg::create_cornerScore_histogram(TH2F const& h_derivative_x
 
 //-----------------------------------------------------------------------------
 // Max Supress
-std::vector<recob::EndPoint2D>
-corner::CornerFinderAlg::perform_maximum_suppression(TH2D const& h_cornerScore,
-                                                     std::vector<geo::WireID> wireIDs,
-                                                     geo::View_t view,
-                                                     TH2D& h_maxSuppress,
-                                                     int startx,
-                                                     int starty) const
+std::vector<recob::EndPoint2D> corner::CornerFinderAlg::perform_maximum_suppression(
+  TH2D const& h_cornerScore,
+  std::vector<geo::WireID> wireIDs,
+  geo::View_t view,
+  TH2D& h_maxSuppress,
+  int startx,
+  int starty) const
 {
   std::vector<recob::EndPoint2D> corner_vector;
   const int x_bins = h_cornerScore.GetNbinsX();
@@ -1094,13 +1078,12 @@ corner::CornerFinderAlg::perform_maximum_suppression(TH2D const& h_cornerScore,
 }
 
 /* Silly little function for doing a line integral type thing. Needs improvement. */
-float
-corner::CornerFinderAlg::line_integral(TH2F const& hist,
-                                       int begin_x,
-                                       float begin_y,
-                                       int end_x,
-                                       float end_y,
-                                       float threshold) const
+float corner::CornerFinderAlg::line_integral(TH2F const& hist,
+                                             int begin_x,
+                                             float begin_y,
+                                             int end_x,
+                                             float end_y,
+                                             float threshold) const
 {
 
   int x1 = hist.GetXaxis()->FindBin(begin_x);
@@ -1156,8 +1139,7 @@ corner::CornerFinderAlg::line_integral(TH2F const& hist,
 
 //-----------------------------------------------------------------------------
 // Do the silly little line integral score thing
-void
-corner::CornerFinderAlg::calculate_line_integral_score(
+void corner::CornerFinderAlg::calculate_line_integral_score(
   TH2F const& h_wire_data,
   std::vector<recob::EndPoint2D> const& corner_vector,
   std::vector<recob::EndPoint2D>& corner_lineIntegralScore_vector,
@@ -1195,8 +1177,7 @@ corner::CornerFinderAlg::calculate_line_integral_score(
   }
 }
 
-TH2F const&
-corner::CornerFinderAlg::GetWireDataHist(unsigned int i_plane) const
+TH2F const& corner::CornerFinderAlg::GetWireDataHist(unsigned int i_plane) const
 {
   return WireData_histos.at(i_plane);
 }

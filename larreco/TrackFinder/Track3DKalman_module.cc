@@ -107,8 +107,7 @@ namespace trkf {
 } // end namespace
 
 namespace {
-  bool
-  sp_sort_3dz(const art::Ptr<recob::SpacePoint>& h1, const art::Ptr<recob::SpacePoint>& h2)
+  bool sp_sort_3dz(const art::Ptr<recob::SpacePoint>& h1, const art::Ptr<recob::SpacePoint>& h2)
   {
     const double* xyz1 = h1->XYZ();
     const double* xyz2 = h2->XYZ();
@@ -140,8 +139,7 @@ namespace trkf {
   }
 
   //-------------------------------------------------
-  void
-  Track3DKalman::beginJob()
+  void Track3DKalman::beginJob()
   {
     art::ServiceHandle<art::TFileService const> tfs;
 
@@ -190,16 +188,14 @@ namespace trkf {
   }
 
   //-------------------------------------------------
-  void
-  Track3DKalman::endJob()
+  void Track3DKalman::endJob()
   {
     if (!rep) delete rep;
     if (!repMC) delete repMC;
   }
 
   //------------------------------------------------------------------------------------//
-  void
-  Track3DKalman::produce(art::Event& evt)
+  void Track3DKalman::produce(art::Event& evt)
   {
     rep = 0;
     repMC = 0;

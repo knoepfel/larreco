@@ -41,8 +41,7 @@ namespace genf {
     static GFAbsBField* fField;
 
   public:
-    GFAbsBField*
-    getField()
+    GFAbsBField* getField()
     {
       if (fField == NULL) {
         std::cerr << "Appareantly GFFieldManager hasnt been initialized with a correct GFAbsBField "
@@ -53,8 +52,7 @@ namespace genf {
       return fField;
     }
 
-    static TVector3
-    getFieldVal(const TVector3& x)
+    static TVector3 getFieldVal(const TVector3& x)
     {
       if (fInstance == NULL) {
         std::cerr << "Appareantly GFFieldManager hasnt been instantiated yet, call getInstance() "
@@ -72,14 +70,9 @@ namespace genf {
     }
 
     //! set the magntic field here. Magnetic field classes must be derived from GFAbsBField
-    void
-    init(GFAbsBField* b)
-    {
-      fField = b;
-    }
+    void init(GFAbsBField* b) { fField = b; }
 
-    static GFFieldManager*
-    getInstance()
+    static GFFieldManager* getInstance()
     {
       if (fInstance == NULL) { fInstance = new GFFieldManager(); }
       return fInstance;

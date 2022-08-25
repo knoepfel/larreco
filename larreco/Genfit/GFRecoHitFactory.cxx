@@ -28,8 +28,7 @@ genf::GFRecoHitFactory::~GFRecoHitFactory()
   clear();
 }
 
-void
-genf::GFRecoHitFactory::addProducer(int detID, GFAbsRecoHitProducer* hitProd)
+void genf::GFRecoHitFactory::addProducer(int detID, GFAbsRecoHitProducer* hitProd)
 {
   if (fHitProdMap[detID] != NULL) {
     GFException exc("GFRecoHitFactory: detID already in use", __LINE__, __FILE__);
@@ -44,8 +43,7 @@ genf::GFRecoHitFactory::addProducer(int detID, GFAbsRecoHitProducer* hitProd)
   }
 }
 
-void
-genf::GFRecoHitFactory::clear()
+void genf::GFRecoHitFactory::clear()
 {
   std::map<int, GFAbsRecoHitProducer*>::iterator it = fHitProdMap.begin();
   while (it != fHitProdMap.end()) {
@@ -55,8 +53,7 @@ genf::GFRecoHitFactory::clear()
   fHitProdMap.clear();
 }
 
-genf::GFAbsRecoHit*
-genf::GFRecoHitFactory::createOne(int detID, int index)
+genf::GFAbsRecoHit* genf::GFRecoHitFactory::createOne(int detID, int index)
 {
   if (fHitProdMap[detID] != NULL) {
     return (genf::GFAbsRecoHit*)(fHitProdMap[detID]->produce(index));
@@ -73,8 +70,7 @@ genf::GFRecoHitFactory::createOne(int detID, int index)
   }
 }
 
-std::vector<genf::GFAbsRecoHit*>
-genf::GFRecoHitFactory::createMany(const GFTrackCand& cand)
+std::vector<genf::GFAbsRecoHit*> genf::GFRecoHitFactory::createMany(const GFTrackCand& cand)
 {
   std::vector<genf::GFAbsRecoHit*> hitVec;
   unsigned int nHits = cand.getNHits();

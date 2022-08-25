@@ -12,8 +12,7 @@
 #include "larreco/RecoAlg/PMAlg/Utilities.h"
 #include "messagefacility/MessageLogger/MessageLogger.h"
 
-void
-tss::Segmentation2D::reconfigure(const fhicl::ParameterSet& p)
+void tss::Segmentation2D::reconfigure(const fhicl::ParameterSet& p)
 {
   fRadiusMin = p.get<double>("RadiusMin");
   fRadiusMax = p.get<double>("RadiusMax");
@@ -26,8 +25,7 @@ tss::Segmentation2D::reconfigure(const fhicl::ParameterSet& p)
   fDenseMinH = p.get<unsigned int>("DenseMinNHits");
 }
 
-std::vector<tss::Cluster2D>
-tss::Segmentation2D::run(tss::Cluster2D& inp) const
+std::vector<tss::Cluster2D> tss::Segmentation2D::run(tss::Cluster2D& inp) const
 {
   std::vector<tss::Cluster2D> result;
   while (inp.size() > 1) {
@@ -50,10 +48,9 @@ tss::Segmentation2D::run(tss::Cluster2D& inp) const
 }
 // ------------------------------------------------------
 
-void
-tss::Segmentation2D::run(tss::Cluster2D& inp,
-                         std::vector<tss::Cluster2D>& result,
-                         std::vector<TVector2>& centers) const
+void tss::Segmentation2D::run(tss::Cluster2D& inp,
+                              std::vector<tss::Cluster2D>& result,
+                              std::vector<TVector2>& centers) const
 {
   if (!centers.size()) return;
 
@@ -102,8 +99,9 @@ tss::Segmentation2D::run(tss::Cluster2D& inp,
 }
 // ------------------------------------------------------
 
-tss::Cluster2D
-tss::Segmentation2D::buildSegment(tss::Cluster2D& inp, TVector2 center, TVector2 end) const
+tss::Cluster2D tss::Segmentation2D::buildSegment(tss::Cluster2D& inp,
+                                                 TVector2 center,
+                                                 TVector2 end) const
 {
   const double max_d2 = fMaxLineDist * fMaxLineDist;
   TVector2 segDir = end - center;
@@ -153,8 +151,7 @@ tss::Segmentation2D::buildSegment(tss::Cluster2D& inp, TVector2 center, TVector2
 }
 // ------------------------------------------------------
 
-tss::Cluster2D
-tss::Segmentation2D::selectRing(const tss::Cluster2D& inp, TVector2 center) const
+tss::Cluster2D tss::Segmentation2D::selectRing(const tss::Cluster2D& inp, TVector2 center) const
 {
   double d2_min = fRadiusMin * fRadiusMin;
   double d2_max = fRadiusMax * fRadiusMax;
@@ -168,8 +165,7 @@ tss::Segmentation2D::selectRing(const tss::Cluster2D& inp, TVector2 center) cons
 }
 // ------------------------------------------------------
 
-void
-tss::Segmentation2D::tagDenseEnds(std::vector<tss::Cluster2D>& group) const
+void tss::Segmentation2D::tagDenseEnds(std::vector<tss::Cluster2D>& group) const
 {
   const double rad2 = fDenseVtxRadius * fDenseVtxRadius;
 
@@ -212,8 +208,7 @@ tss::Segmentation2D::tagDenseEnds(std::vector<tss::Cluster2D>& group) const
 }
 // ------------------------------------------------------
 
-void
-tss::Segmentation2D::mergeDenseParts(std::vector<tss::Cluster2D>& group) const
+void tss::Segmentation2D::mergeDenseParts(std::vector<tss::Cluster2D>& group) const
 {
   const double rad2 = fDenseVtxRadius * fDenseVtxRadius;
 
@@ -309,9 +304,8 @@ tss::Segmentation2D::mergeDenseParts(std::vector<tss::Cluster2D>& group) const
 }
 // ------------------------------------------------------
 
-int
-tss::Segmentation2D::mergeClusters(std::vector<tss::Cluster2D>& group,
-                                   const std::vector<size_t>& idxs) const
+int tss::Segmentation2D::mergeClusters(std::vector<tss::Cluster2D>& group,
+                                       const std::vector<size_t>& idxs) const
 {
   if (idxs.size() < 2) return 0;
 
@@ -339,10 +333,9 @@ tss::Segmentation2D::mergeClusters(std::vector<tss::Cluster2D>& group,
 }
 // ------------------------------------------------------
 
-void
-tss::Segmentation2D::splitHits(const std::vector<tss::Cluster2D>& inp,
-                               std::vector<const tss::Hit2D*>& trackHits,
-                               std::vector<const tss::Hit2D*>& emHits) const
+void tss::Segmentation2D::splitHits(const std::vector<tss::Cluster2D>& inp,
+                                    std::vector<const tss::Hit2D*>& trackHits,
+                                    std::vector<const tss::Hit2D*>& emHits) const
 {
 
   trackHits.clear();
@@ -363,10 +356,9 @@ tss::Segmentation2D::splitHits(const std::vector<tss::Cluster2D>& inp,
 }
 // ------------------------------------------------------
 
-void
-tss::Segmentation2D::splitHitsNaive(const tss::Cluster2D& inp,
-                                    std::vector<const tss::Hit2D*>& trackHits,
-                                    std::vector<const tss::Hit2D*>& emHits) const
+void tss::Segmentation2D::splitHitsNaive(const tss::Cluster2D& inp,
+                                         std::vector<const tss::Hit2D*>& trackHits,
+                                         std::vector<const tss::Hit2D*>& emHits) const
 {
   const double rad2 = fDenseHitRadius * fDenseHitRadius;
 
@@ -389,10 +381,9 @@ tss::Segmentation2D::splitHitsNaive(const tss::Cluster2D& inp,
 }
 // ------------------------------------------------------
 
-void
-tss::Segmentation2D::splitHitsNaive(const std::vector<tss::Cluster2D>& inp,
-                                    std::vector<const tss::Hit2D*>& trackHits,
-                                    std::vector<const tss::Hit2D*>& emHits) const
+void tss::Segmentation2D::splitHitsNaive(const std::vector<tss::Cluster2D>& inp,
+                                         std::vector<const tss::Hit2D*>& trackHits,
+                                         std::vector<const tss::Hit2D*>& emHits) const
 {
   const double rad2 = fDenseHitRadius * fDenseHitRadius;
 
@@ -425,8 +416,7 @@ tss::Segmentation2D::splitHitsNaive(const std::vector<tss::Cluster2D>& inp,
 
 // ------------------------------------------------------
 
-bool
-tss::Segmentation2D::Cl2InsideCl1(tss::Cluster2D& cl1, tss::Cluster2D& cl2) const
+bool tss::Segmentation2D::Cl2InsideCl1(tss::Cluster2D& cl1, tss::Cluster2D& cl2) const
 {
   bool clover = false;
   bool clunder = false;

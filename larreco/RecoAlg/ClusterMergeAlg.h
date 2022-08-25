@@ -81,28 +81,16 @@ namespace cluster {
     ClusterMergeAlg(fhicl::ParameterSet const& pset);
 
     /// Method to set verbose mode
-    void
-    VerboseMode(bool on)
-    {
-      _verbose = on;
-    }
+    void VerboseMode(bool on) { _verbose = on; }
 
     /// Method to report the current configuration
     void ReportConfig() const;
 
     /// Method to set cut value in degrees for angle compatibility test
-    void
-    SetAngleCut(double angle)
-    {
-      _max_allowed_2D_angle_diff = angle;
-    }
+    void SetAngleCut(double angle) { _max_allowed_2D_angle_diff = angle; }
 
     /// Method to set cut value in cm^2 for distance compatibility test
-    void
-    SetSquaredDistanceCut(double d)
-    {
-      _max_2D_dist2 = d;
-    }
+    void SetSquaredDistanceCut(double d) { _max_2D_dist2 = d; }
 
     /// Method to add a cluster information for processing
     void AppendClusterInfo(const recob::Cluster& in_cluster,
@@ -123,11 +111,7 @@ namespace cluster {
     void ProcessMergeAlg();
 
     /// Method to extract resulting set of cluster IDs for merging computed by ProcessMergeAlg() function.
-    const std::vector<std::vector<unsigned int>>
-    GetClusterSets() const
-    {
-      return _cluster_sets_v;
-    };
+    const std::vector<std::vector<unsigned int>> GetClusterSets() const { return _cluster_sets_v; };
 
     /// Method to compare a compatibility between two clusters
     bool CompareClusters(const cluster_merge_info& clus_info_A,
@@ -176,18 +160,10 @@ namespace cluster {
 
   protected:
     /// Method to set a conversion factor from wire to cm scale
-    void
-    SetWire2Cm(double f)
-    {
-      _wire_2_cm = f;
-    }
+    void SetWire2Cm(double f) { _wire_2_cm = f; }
 
     /// Method to set a conversion factor from time to cm scale
-    void
-    SetTime2Cm(double f)
-    {
-      _time_2_cm = f;
-    }
+    void SetTime2Cm(double f) { _time_2_cm = f; }
 
     /// Method to clear output merged cluster sets (_cluster_sets_v)
     void ClearOutputInfo();

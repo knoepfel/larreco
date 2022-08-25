@@ -115,8 +115,7 @@ sce::SCECorrection::SCECorrection(fhicl::ParameterSet const& p)
   produces<art::Assns<recob::Cluster, recob::Hit>>();
 }
 
-void
-sce::SCECorrection::produce(art::Event& evt)
+void sce::SCECorrection::produce(art::Event& evt)
 {
   // Implementation of required member function here.
   // auto const* sce = lar::providerFrom<spacecharge::SpaceChargeService>();
@@ -383,8 +382,8 @@ sce::SCECorrection::produce(art::Event& evt)
   evt.put(std::move(pfpMetaAssn));
 }
 
-geo::Vector_t
-sce::SCECorrection::applyT0Shift(const double& t0Offset, const geo::TPCID& tpcId) const
+geo::Vector_t sce::SCECorrection::applyT0Shift(const double& t0Offset,
+                                               const geo::TPCID& tpcId) const
 {
 
   const geo::TPCGeo& tpcGeo = fGeom->GetElement(tpcId);
@@ -400,12 +399,12 @@ sce::SCECorrection::applyT0Shift(const double& t0Offset, const geo::TPCID& tpcId
   }
 }
 
-std::map<art::Ptr<anab::T0>, bool>
-sce::SCECorrection::getSliceT0s(const art::Event& evt,
-                                const std::vector<art::Ptr<recob::PFParticle>>& slicePFPs,
-                                const art::Handle<std::vector<recob::PFParticle>>& pfpHandle,
-                                const art::Handle<std::vector<recob::Track>>& trackHandle,
-                                const art::FindManyP<recob::Track>& fmPFPTrack) const
+std::map<art::Ptr<anab::T0>, bool> sce::SCECorrection::getSliceT0s(
+  const art::Event& evt,
+  const std::vector<art::Ptr<recob::PFParticle>>& slicePFPs,
+  const art::Handle<std::vector<recob::PFParticle>>& pfpHandle,
+  const art::Handle<std::vector<recob::Track>>& trackHandle,
+  const art::FindManyP<recob::Track>& fmPFPTrack) const
 {
 
   std::map<art::Ptr<anab::T0>, bool> pfpT0CorrectMap;
@@ -446,8 +445,7 @@ sce::SCECorrection::getSliceT0s(const art::Event& evt,
   return pfpT0CorrectMap;
 }
 
-std::pair<art::Ptr<anab::T0>, bool>
-sce::SCECorrection::getSliceBestT0(
+std::pair<art::Ptr<anab::T0>, bool> sce::SCECorrection::getSliceBestT0(
   const std::map<art::Ptr<anab::T0>, bool>& sliceT0CorrectMap) const
 {
 

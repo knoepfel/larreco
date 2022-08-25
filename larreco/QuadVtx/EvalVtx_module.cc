@@ -65,8 +65,7 @@ namespace quad {
   }
 
   // ---------------------------------------------------------------------------
-  recob::Vertex
-  GetFirstVertex(const std::string& label, const art::Event& evt)
+  recob::Vertex GetFirstVertex(const std::string& label, const art::Event& evt)
   {
     const auto& vtxs = *evt.getValidHandle<std::vector<recob::Vertex>>(label);
 
@@ -76,8 +75,7 @@ namespace quad {
   }
 
   // ---------------------------------------------------------------------------
-  recob::Vertex
-  GetVtxByAssns(const std::string& label, const art::Event& evt)
+  recob::Vertex GetVtxByAssns(const std::string& label, const art::Event& evt)
   {
     art::Handle<std::vector<recob::Vertex>> vtxs;
     evt.getByLabel(label, vtxs);
@@ -106,8 +104,7 @@ namespace quad {
   }
 
   // ---------------------------------------------------------------------------
-  void
-  EvalVtx::analyze(const art::Event& evt)
+  void EvalVtx::analyze(const art::Event& evt)
   {
     const auto& truths = *evt.getValidHandle<std::vector<simb::MCTruth>>(fTruthLabel);
     if (truths.empty()) return;

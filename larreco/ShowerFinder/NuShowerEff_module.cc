@@ -163,7 +163,7 @@ private:
 NuShowerEff::NuShowerEff(fhicl::ParameterSet const& p)
   : EDAnalyzer(p)
   , // ,
-    // More initializers here.
+  // More initializers here.
   //fMCTruthModuleLabel (p.get< std::string >("MCTruthModuleLabel", "generator")),
   fMCTruthModuleLabel(p.get<std::string>("MCTruthModuleLabel"))
   , // get parameter from fcl file
@@ -184,8 +184,7 @@ NuShowerEff::NuShowerEff(fhicl::ParameterSet const& p)
 }
 
 //============================================================================
-void
-NuShowerEff::beginJob()
+void NuShowerEff::beginJob()
 {
   //cout << "\n===== function: beginJob() ====\n" << endl;
 
@@ -289,24 +288,21 @@ NuShowerEff::beginJob()
 }
 
 //============================================================================
-void
-NuShowerEff::endJob()
+void NuShowerEff::endJob()
 {
   //cout << "\n===== function: endJob() =====\n" << endl;
   doEfficiencies();
 }
 
 //============================================================================
-void
-NuShowerEff::beginRun(art::Run const& run)
+void NuShowerEff::beginRun(art::Run const& run)
 {
   //cout << "\n===== function: beginRun() =====\n" << endl;
   mf::LogInfo("ShowerEff") << "==== begin run ... ====" << endl;
 }
 
 //============================================================================
-void
-NuShowerEff::analyze(art::Event const& e)
+void NuShowerEff::analyze(art::Event const& e)
 {
   // Implementation of required member function here.
   //cout << "\n===== function: analyze() =====\n" << endl;
@@ -695,8 +691,7 @@ NuShowerEff::analyze(art::Event const& e)
 }
 
 // ====================================================================================
-void
-NuShowerEff::doEfficiencies()
+void NuShowerEff::doEfficiencies()
 {
   //cout << "\n==== function: doEfficiencies() ====" << endl;
 
@@ -718,8 +713,7 @@ NuShowerEff::doEfficiencies()
 }
 
 // ====================================================================================
-bool
-NuShowerEff::insideFV(double vertex[4])
+bool NuShowerEff::insideFV(double vertex[4])
 {
   //cout << "\n==== function: insideFV() ====" << endl;
   double x = vertex[0];
@@ -736,8 +730,7 @@ NuShowerEff::insideFV(double vertex[4])
 }
 
 // ====================================================================================
-void
-NuShowerEff::reset()
+void NuShowerEff::reset()
 {
   //cout << "\n===== function: reset() =====\n" << endl;
 

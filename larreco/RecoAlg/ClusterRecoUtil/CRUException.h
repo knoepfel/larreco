@@ -27,11 +27,7 @@ namespace cluster {
   public:
     CRUException(std::string msg = "") : _msg(msg) {}
 
-    const char*
-    what() const noexcept override
-    {
-      return _msg.c_str();
-    }
+    const char* what() const noexcept override { return _msg.c_str(); }
 
   private:
     std::string _msg;

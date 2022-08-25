@@ -62,8 +62,7 @@ calo::CaloChecker::CaloChecker(fhicl::ParameterSet const& config)
   assert(fCaloLabels.size() >= 2);
 }
 
-void
-calo::CaloChecker::analyze(const art::Event& evt)
+void calo::CaloChecker::analyze(const art::Event& evt)
 {
   art::Handle<std::vector<recob::Track>> trackListHandle;
   std::vector<art::Ptr<recob::Track>> tracklist;

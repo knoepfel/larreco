@@ -38,11 +38,7 @@ namespace cmtool {
     virtual float Priority(const ::cluster::ClusterParamsAlg& cluster);
 
     /// Setter for minimum # hits
-    void
-    SetMinHits(size_t n)
-    {
-      _min_hits = n;
-    }
+    void SetMinHits(size_t n) { _min_hits = n; }
 
   protected:
     size_t _min_hits;

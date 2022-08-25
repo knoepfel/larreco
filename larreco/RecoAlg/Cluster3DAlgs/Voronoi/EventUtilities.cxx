@@ -19,8 +19,7 @@
 
 namespace voronoi2d {
 
-  double
-  EventUtilities::computeArcVal(double beachPos, double yPos, const IEvent* arc) const
+  double EventUtilities::computeArcVal(double beachPos, double yPos, const IEvent* arc) const
   {
     // Note that if the input arc site point lies on the beach line then the arc position is infinite
     double arcVal = std::numeric_limits<double>::max();
@@ -36,11 +35,10 @@ namespace voronoi2d {
     return arcVal;
   }
 
-  double
-  EventUtilities::computeBreak(const double beachLinePos,
-                               const IEvent* leftArc,
-                               const IEvent* rightArc,
-                               RootsPair& roots) const
+  double EventUtilities::computeBreak(const double beachLinePos,
+                                      const IEvent* leftArc,
+                                      const IEvent* rightArc,
+                                      RootsPair& roots) const
   {
     // Given arcs to the left and right of this node (meaning we are a breakpoint), compute the
     // current coordinates of the breakpoint based on the input beachline position
@@ -87,10 +85,9 @@ namespace voronoi2d {
     return breakPoint;
   }
 
-  bool
-  EventUtilities::newSiteToLeft(const IEvent* newSite,
-                                const IEvent* leftArc,
-                                const IEvent* rightArc) const
+  bool EventUtilities::newSiteToLeft(const IEvent* newSite,
+                                     const IEvent* leftArc,
+                                     const IEvent* rightArc) const
   {
     // Note that the input site is used to give us the position of the sweep line
     // Using the coordinates of the beach line then recover the current breakpoint between the two

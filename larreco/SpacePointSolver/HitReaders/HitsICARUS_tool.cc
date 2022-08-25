@@ -58,8 +58,7 @@ namespace reco3d {
 
   //------------------------------------------------------------------------------------------------------------------------------------------
 
-  void
-  HitsICARUS::configure(fhicl::ParameterSet const& pset)
+  void HitsICARUS::configure(fhicl::ParameterSet const& pset)
   {
     //    m_enableMonitoring   = pset.get<bool>  ("EnableMonitoring",  true  );
 

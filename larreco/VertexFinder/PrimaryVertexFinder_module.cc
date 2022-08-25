@@ -80,9 +80,8 @@ namespace vertex {
 }
 
 //------------------------------------------------------------------------------
-bool
-sort_pred2(const std::pair<art::Ptr<recob::Track>, double>& left,
-           const std::pair<art::Ptr<recob::Track>, double>& right)
+bool sort_pred2(const std::pair<art::Ptr<recob::Track>, double>& left,
+                const std::pair<art::Ptr<recob::Track>, double>& right)
 {
   return left.second < right.second;
 }
@@ -102,8 +101,7 @@ namespace vertex {
   }
 
   //-------------------------------------------------------------------------
-  void
-  PrimaryVertexFinder::beginJob()
+  void PrimaryVertexFinder::beginJob()
   {
     // get access to the TFile service
     art::ServiceHandle<art::TFileService const> tfs;
@@ -118,8 +116,7 @@ namespace vertex {
   }
 
   // //-----------------------------------------------------------------------------
-  void
-  PrimaryVertexFinder::produce(art::Event& evt)
+  void PrimaryVertexFinder::produce(art::Event& evt)
   {
 
     mf::LogInfo("PrimaryVertexFinder")
@@ -392,8 +389,8 @@ namespace vertex {
 } // end of vertex namespace
 
 // //-----------------------------------------------------------------------------
-double
-vertex::PrimaryVertexFinder::StartPointSeperation(recob::SpacePoint sp1, recob::SpacePoint sp2)
+double vertex::PrimaryVertexFinder::StartPointSeperation(recob::SpacePoint sp1,
+                                                         recob::SpacePoint sp2)
 {
   double x = (sp2.XYZ()[0]) - (sp1.XYZ()[0]);
   double y = (sp2.XYZ()[1]) - (sp1.XYZ()[1]);
@@ -402,9 +399,9 @@ vertex::PrimaryVertexFinder::StartPointSeperation(recob::SpacePoint sp1, recob::
   return distance;
 }
 // //---------------------------------------------------------------------------------
-bool
-vertex::PrimaryVertexFinder::IsInVertexCollection(int a,
-                                                  std::vector<std::vector<int>> vertex_collection)
+bool vertex::PrimaryVertexFinder::IsInVertexCollection(
+  int a,
+  std::vector<std::vector<int>> vertex_collection)
 {
   int flag = 0;
 
@@ -422,8 +419,7 @@ vertex::PrimaryVertexFinder::IsInVertexCollection(int a,
   return false;
 }
 // //------------------------------------------------------------------------------
-int
-vertex::PrimaryVertexFinder::IndexInVertexCollection(
+int vertex::PrimaryVertexFinder::IndexInVertexCollection(
   int a,
   int b,
   std::vector<std::vector<int>> vertex_collection)
@@ -439,8 +435,7 @@ vertex::PrimaryVertexFinder::IndexInVertexCollection(
   return index;
 }
 // //------------------------------------------------------------------------------
-bool
-vertex::PrimaryVertexFinder::IsInNewVertex(int a, std::vector<int> newvertex)
+bool vertex::PrimaryVertexFinder::IsInNewVertex(int a, std::vector<int> newvertex)
 {
   int flag = 0;
   for (unsigned int i = 0; i < newvertex.size(); i++) {
@@ -454,11 +449,10 @@ vertex::PrimaryVertexFinder::IsInNewVertex(int a, std::vector<int> newvertex)
   return false;
 }
 // //------------------------------------------------------------------------------
-double
-vertex::PrimaryVertexFinder::gammavalue(TVector3 startpoint1,
-                                        TVector3 startpoint2,
-                                        TVector3 dircos1,
-                                        TVector3 dircos2)
+double vertex::PrimaryVertexFinder::gammavalue(TVector3 startpoint1,
+                                               TVector3 startpoint2,
+                                               TVector3 dircos1,
+                                               TVector3 dircos2)
 {
   double gamma = ((startpoint1 * dircos2) - (startpoint2 * dircos2) +
                   ((dircos1 * dircos2) * (startpoint2 * dircos1)) -
@@ -468,35 +462,32 @@ vertex::PrimaryVertexFinder::gammavalue(TVector3 startpoint1,
   return gamma;
 }
 // //------------------------------------------------------------------------------
-double
-vertex::PrimaryVertexFinder::alphavalue(double gamma,
-                                        TVector3 startpoint1,
-                                        TVector3 startpoint2,
-                                        TVector3 dircos1,
-                                        TVector3 dircos2)
+double vertex::PrimaryVertexFinder::alphavalue(double gamma,
+                                               TVector3 startpoint1,
+                                               TVector3 startpoint2,
+                                               TVector3 dircos1,
+                                               TVector3 dircos2)
 {
   double alpha = (gamma * (dircos1 * dircos2)) + (startpoint2 * dircos1) - (startpoint1 * dircos1);
 
   return alpha;
 }
 // //------------------------------------------------------------------------------
-double
-vertex::PrimaryVertexFinder::MinDist(double alpha,
-                                     double gamma,
-                                     TVector3 startpoint1,
-                                     TVector3 startpoint2,
-                                     TVector3 dircos1,
-                                     TVector3 dircos2)
+double vertex::PrimaryVertexFinder::MinDist(double alpha,
+                                            double gamma,
+                                            TVector3 startpoint1,
+                                            TVector3 startpoint2,
+                                            TVector3 dircos1,
+                                            TVector3 dircos2)
 {
   TVector3 mindis_vector = startpoint1 - startpoint2 + alpha * dircos1 - gamma * dircos2;
   double mindis = mindis_vector.Mag();
   return mindis;
 }
 // //------------------------------------------------------------------------------
-TVector3
-vertex::PrimaryVertexFinder::PointOnExtendedTrack(double alphagamma,
-                                                  TVector3 startpoint,
-                                                  TVector3 dircos)
+TVector3 vertex::PrimaryVertexFinder::PointOnExtendedTrack(double alphagamma,
+                                                           TVector3 startpoint,
+                                                           TVector3 dircos)
 {
   TVector3 PointOnExtendedTrack = startpoint + (alphagamma * dircos);
   return PointOnExtendedTrack;

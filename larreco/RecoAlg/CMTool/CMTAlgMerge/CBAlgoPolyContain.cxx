@@ -8,17 +8,15 @@ namespace cmtool {
     this->reconfigure();
   }
 
-  void
-  CBAlgoPolyContain::reconfigure()
+  void CBAlgoPolyContain::reconfigure()
   {
 
     //not sure what needs to be reset/reconfigured for this algo
 
   } //end reconfigure function
 
-  bool
-  CBAlgoPolyContain::Bool(const ::cluster::ClusterParamsAlg& cluster1,
-                          const ::cluster::ClusterParamsAlg& cluster2)
+  bool CBAlgoPolyContain::Bool(const ::cluster::ClusterParamsAlg& cluster1,
+                               const ::cluster::ClusterParamsAlg& cluster2)
   {
 
     if ((cluster1.GetParams().PolyObject.Size() < 3) or

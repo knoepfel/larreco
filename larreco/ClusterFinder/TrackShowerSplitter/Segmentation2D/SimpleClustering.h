@@ -23,8 +23,7 @@ struct tss::bDistToPointLess
   : public std::binary_function<const tss::Hit2D*, const tss::Hit2D*, bool> {
   bDistToPointLess(const TVector2& point) : p0(point) {}
 
-  bool
-  operator()(const tss::Hit2D* h1, const tss::Hit2D* h2)
+  bool operator()(const tss::Hit2D* h1, const tss::Hit2D* h2)
   {
     if (h1 && h2)
       return pma::Dist2(h1->Point2D(), p0) < pma::Dist2(h2->Point2D(), p0);
@@ -41,29 +40,16 @@ public:
   Cluster2D(void) : fTag(false), fDenseStart(false), fDenseEnd(false), fIsEM(false) {}
   Cluster2D(const std::vector<const tss::Hit2D*>& hits);
 
-  size_t
-  size(void) const
-  {
-    return fHits.size();
-  }
+  size_t size(void) const { return fHits.size(); }
 
   const Hit2D& operator[](size_t index) const { return *(fHits[index]); }
 
-  const std::vector<const tss::Hit2D*>&
-  hits(void) const
-  {
-    return fHits;
-  }
-  std::vector<const tss::Hit2D*>&
-  hits(void)
-  {
-    return fHits;
-  }
+  const std::vector<const tss::Hit2D*>& hits(void) const { return fHits; }
+  std::vector<const tss::Hit2D*>& hits(void) { return fHits; }
 
   bool has(const tss::Hit2D* hit) const;
 
-  double
-  length2(void) const
+  double length2(void) const
   {
     if (size() > 1)
       return pma::Dist2(fHits.front()->Point2D(), fHits.back()->Point2D());
@@ -78,90 +64,49 @@ public:
   const Hit2D* release_at(size_t idx);
   bool release(const tss::Hit2D* hit);
 
-  void
-  push_back(const tss::Hit2D* hit)
-  {
-    fHits.push_back(hit);
-  }
-  void
-  take_from(tss::Cluster2D& clu, size_t idx)
+  void push_back(const tss::Hit2D* hit) { fHits.push_back(hit); }
+  void take_from(tss::Cluster2D& clu, size_t idx)
   {
     const tss::Hit2D* hit = clu.release_at(idx);
     if (hit) push_back(hit);
   }
-  void
-  merge(tss::Cluster2D& clu)
+  void merge(tss::Cluster2D& clu)
   {
     for (const auto h : clu.hits())
       fHits.push_back(h);
     clu.hits().clear();
   }
 
-  const tss::Hit2D*
-  start(void) const
+  const tss::Hit2D* start(void) const
   {
     if (fHits.size())
       return fHits.front();
     else
       return 0;
   }
-  const tss::Hit2D*
-  end(void) const
+  const tss::Hit2D* end(void) const
   {
     if (fHits.size())
       return fHits.back();
     else
       return 0;
   }
-  void
-  sort(void)
+  void sort(void)
   {
     if (fHits.size() > 2)
       std::sort(fHits.begin() + 1, fHits.end(), tss::bDistToPointLess(fHits.front()->Point2D()));
   }
 
-  bool
-  isTagged(void) const
-  {
-    return fTag;
-  }
-  void
-  setTag(bool b)
-  {
-    fTag = b;
-  }
+  bool isTagged(void) const { return fTag; }
+  void setTag(bool b) { fTag = b; }
 
-  bool
-  isDenseStart(void) const
-  {
-    return fDenseStart;
-  }
-  void
-  tagDenseStart(bool b)
-  {
-    fDenseStart = b;
-  }
-  bool
-  isDenseEnd(void) const
-  {
-    return fDenseEnd;
-  }
-  void
-  tagDenseEnd(bool b)
-  {
-    fDenseEnd = b;
-  }
+  bool isDenseStart(void) const { return fDenseStart; }
+  void tagDenseStart(bool b) { fDenseStart = b; }
+  bool isDenseEnd(void) const { return fDenseEnd; }
+  void tagDenseEnd(bool b) { fDenseEnd = b; }
 
-  bool
-  isEM(void) const
-  {
-    return fIsEM;
-  }
-  void
-  tagEM(bool b)
-  {
-    fIsEM = b;
-  }
+  bool isEM(void) const { return fIsEM; }
+  void tagEM(bool b) { fIsEM = b; }
 
   const Hit2D* closest(const TVector2& p2d, size_t& idx) const;
   const Hit2D* outermost(size_t& idx) const;

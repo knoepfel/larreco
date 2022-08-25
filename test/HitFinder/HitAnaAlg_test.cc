@@ -7,47 +7,25 @@ namespace hit {
 
   class HitAnaAlgTest {
   public:
-    WireROIInfo const&
-    GetWireDataStruct() const
-    {
-      return alg.wireData;
-    }
-    std::vector<std::string> const&
-    GetHitModuleLabels() const
-    {
-      return alg.HitModuleLabels;
-    }
-    std::vector<HitAnaAlg::HitAssocPair> const&
-    GetHitProcessingQueue() const
+    WireROIInfo const& GetWireDataStruct() const { return alg.wireData; }
+    std::vector<std::string> const& GetHitModuleLabels() const { return alg.HitModuleLabels; }
+    std::vector<HitAnaAlg::HitAssocPair> const& GetHitProcessingQueue() const
     {
       return alg.HitProcessingQueue;
     }
 
-    void
-    LoadHitAssocPair(std::vector<recob::Hit> const& HitVector,
-                     std::vector<std::vector<int>> const& AssocVector,
-                     std::string const& HitModuleLabel)
+    void LoadHitAssocPair(std::vector<recob::Hit> const& HitVector,
+                          std::vector<std::vector<int>> const& AssocVector,
+                          std::string const& HitModuleLabel)
     {
       alg.LoadHitAssocPair(HitVector, AssocVector, HitModuleLabel);
     }
 
-    void
-    InitWireData(unsigned int e, unsigned int r)
-    {
-      alg.InitWireData(e, r);
-    }
+    void InitWireData(unsigned int e, unsigned int r) { alg.InitWireData(e, r); }
 
-    void
-    ClearWireDataHitInfo()
-    {
-      alg.ClearWireDataHitInfo();
-    }
+    void ClearWireDataHitInfo() { alg.ClearWireDataHitInfo(); }
 
-    void
-    AddHitModuleLabel(std::string str)
-    {
-      alg.HitModuleLabels.push_back(str);
-    }
+    void AddHitModuleLabel(std::string str) { alg.HitModuleLabels.push_back(str); }
 
   private:
     HitAnaAlg alg;

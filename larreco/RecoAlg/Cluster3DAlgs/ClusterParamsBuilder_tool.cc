@@ -107,8 +107,7 @@ namespace lar_cluster3d {
 
   //------------------------------------------------------------------------------------------------------------------------------------------
 
-  void
-  ClusterParamsBuilder::configure(fhicl::ParameterSet const& pset)
+  void ClusterParamsBuilder::configure(fhicl::ParameterSet const& pset)
   {
     m_clusterMinHits = pset.get<size_t>("ClusterMinHits", 3);
     m_clusterMinUniqueFraction = pset.get<double>("ClusterMinUniqueFraction", 0.5);
@@ -117,8 +116,8 @@ namespace lar_cluster3d {
     return;
   }
 
-  void
-  ClusterParamsBuilder::BuildClusterInfo(reco::ClusterParametersList& clusterParametersList) const
+  void ClusterParamsBuilder::BuildClusterInfo(
+    reco::ClusterParametersList& clusterParametersList) const
   {
     /**
      *  @brief Given a list of a list of candidate cluster hits, build these out into the intermediate
@@ -199,9 +198,8 @@ namespace lar_cluster3d {
     return;
   }
 
-  bool
-  ClusterParamsBuilder::keepThisCluster(reco::ClusterParameters& clusterParams,
-                                        const reco::Hit2DToClusterMap& hit2DToClusterMap) const
+  bool ClusterParamsBuilder::keepThisCluster(reco::ClusterParameters& clusterParams,
+                                             const reco::Hit2DToClusterMap& hit2DToClusterMap) const
   {
     // Try to keep simple by looking at the 2D hits associated to the cluster and checking to see how many, by plane, are already
     // in use. Reject clusters where too many hits are shared.
@@ -254,9 +252,8 @@ namespace lar_cluster3d {
     return keepThisCluster;
   }
 
-  void
-  ClusterParamsBuilder::storeThisCluster(reco::ClusterParameters& clusterParams,
-                                         reco::Hit2DToClusterMap& hit2DToClusterMap) const
+  void ClusterParamsBuilder::storeThisCluster(reco::ClusterParameters& clusterParams,
+                                              reco::Hit2DToClusterMap& hit2DToClusterMap) const
   {
     // See if we can avoid duplicates by temporarily transferring to a set
     std::unordered_set<const reco::ClusterHit2D*> hitSet;
@@ -289,11 +286,10 @@ namespace lar_cluster3d {
     return;
   }
 
-  void
-  ClusterParamsBuilder::FillClusterParams(reco::ClusterParameters& clusterParams,
-                                          reco::Hit2DToClusterMap& hit2DToClusterMap,
-                                          double minUniqueFrac,
-                                          double maxLostFrac) const
+  void ClusterParamsBuilder::FillClusterParams(reco::ClusterParameters& clusterParams,
+                                               reco::Hit2DToClusterMap& hit2DToClusterMap,
+                                               double minUniqueFrac,
+                                               double maxLostFrac) const
   {
     /**
      *  @brief Given a list of hits fill out the remaining parameters for this cluster and evaluate the
@@ -534,10 +530,9 @@ namespace lar_cluster3d {
     return;
   }
 
-  void
-  ClusterParamsBuilder::removeUsedHitsFromMap(reco::ClusterParameters& clusterParams,
-                                              reco::HitPairListPtr& usedHitPairList,
-                                              reco::Hit2DToClusterMap& hit2DToClusterMap) const
+  void ClusterParamsBuilder::removeUsedHitsFromMap(reco::ClusterParameters& clusterParams,
+                                                   reco::HitPairListPtr& usedHitPairList,
+                                                   reco::Hit2DToClusterMap& hit2DToClusterMap) const
   {
     // Clean up our hit to cluster map
     for (const auto& hit3D : usedHitPairList) {

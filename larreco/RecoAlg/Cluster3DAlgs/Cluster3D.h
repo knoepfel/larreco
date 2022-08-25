@@ -67,68 +67,20 @@ namespace reco {
 
     ClusterHit2D(const ClusterHit2D&);
 
-    unsigned
-    getStatusBits() const
-    {
-      return m_statusBits;
-    }
-    float
-    getDocaToAxis() const
-    {
-      return m_docaToAxis;
-    }
-    float
-    getArcLenToPoca() const
-    {
-      return m_arcLenToPoca;
-    }
-    float
-    getXPosition() const
-    {
-      return m_xPosition;
-    }
-    float
-    getTimeTicks() const
-    {
-      return m_timeTicks;
-    }
-    const geo::WireID&
-    WireID() const
-    {
-      return m_wireID;
-    }
-    const recob::Hit*
-    getHit() const
-    {
-      return m_hit;
-    }
+    unsigned getStatusBits() const { return m_statusBits; }
+    float getDocaToAxis() const { return m_docaToAxis; }
+    float getArcLenToPoca() const { return m_arcLenToPoca; }
+    float getXPosition() const { return m_xPosition; }
+    float getTimeTicks() const { return m_timeTicks; }
+    const geo::WireID& WireID() const { return m_wireID; }
+    const recob::Hit* getHit() const { return m_hit; }
 
-    void
-    setStatusBit(unsigned bits) const
-    {
-      m_statusBits |= bits;
-    }
-    void
-    clearStatusBits(unsigned bits) const
-    {
-      m_statusBits &= ~bits;
-    }
-    void
-    setDocaToAxis(float doca) const
-    {
-      m_docaToAxis = doca;
-    }
-    void
-    setArcLenToPoca(float poca) const
-    {
-      m_arcLenToPoca = poca;
-    }
+    void setStatusBit(unsigned bits) const { m_statusBits |= bits; }
+    void clearStatusBits(unsigned bits) const { m_statusBits &= ~bits; }
+    void setDocaToAxis(float doca) const { m_docaToAxis = doca; }
+    void setArcLenToPoca(float poca) const { m_arcLenToPoca = poca; }
 
-    void
-    setHit(const recob::Hit* hit)
-    {
-      m_hit = hit;
-    }
+    void setHit(const recob::Hit* hit) { m_hit = hit; }
 
     friend std::ostream& operator<<(std::ostream& o, const ClusterHit2D& c);
     friend bool operator<(const ClusterHit2D& a, const ClusterHit2D& b);
@@ -196,144 +148,39 @@ namespace reco {
                     const std::vector<float>& hitDelTSigVec,
                     const std::vector<geo::WireID>& wireIDVec);
 
-    size_t
-    getID() const
-    {
-      return fID;
-    }
-    unsigned int
-    getStatusBits() const
-    {
-      return fStatusBits;
-    }
-    const Eigen::Vector3f
-    getPosition() const
-    {
-      return fPosition;
-    }
-    float
-    getX() const
-    {
-      return fPosition[0];
-    }
-    float
-    getY() const
-    {
-      return fPosition[1];
-    }
-    float
-    getZ() const
-    {
-      return fPosition[2];
-    }
-    float
-    getTotalCharge() const
-    {
-      return fTotalCharge;
-    }
-    float
-    getAvePeakTime() const
-    {
-      return fAvePeakTime;
-    }
-    float
-    getDeltaPeakTime() const
-    {
-      return fDeltaPeakTime;
-    }
-    float
-    getSigmaPeakTime() const
-    {
-      return fSigmaPeakTime;
-    }
-    float
-    getHitChiSquare() const
-    {
-      return fHitChiSquare;
-    }
-    float
-    getOverlapFraction() const
-    {
-      return fOverlapFraction;
-    }
-    float
-    getChargeAsymmetry() const
-    {
-      return fChargeAsymmetry;
-    }
-    float
-    getDocaToAxis() const
-    {
-      return fDocaToAxis;
-    }
-    float
-    getArclenToPoca() const
-    {
-      return fArclenToPoca;
-    }
-    const ClusterHit2DVec&
-    getHits() const
-    {
-      return fHitVector;
-    }
-    const std::vector<float>
-    getHitDelTSigVec() const
-    {
-      return fHitDelTSigVec;
-    }
-    const std::vector<geo::WireID>&
-    getWireIDs() const
-    {
-      return fWireIDVector;
-    }
+    size_t getID() const { return fID; }
+    unsigned int getStatusBits() const { return fStatusBits; }
+    const Eigen::Vector3f getPosition() const { return fPosition; }
+    float getX() const { return fPosition[0]; }
+    float getY() const { return fPosition[1]; }
+    float getZ() const { return fPosition[2]; }
+    float getTotalCharge() const { return fTotalCharge; }
+    float getAvePeakTime() const { return fAvePeakTime; }
+    float getDeltaPeakTime() const { return fDeltaPeakTime; }
+    float getSigmaPeakTime() const { return fSigmaPeakTime; }
+    float getHitChiSquare() const { return fHitChiSquare; }
+    float getOverlapFraction() const { return fOverlapFraction; }
+    float getChargeAsymmetry() const { return fChargeAsymmetry; }
+    float getDocaToAxis() const { return fDocaToAxis; }
+    float getArclenToPoca() const { return fArclenToPoca; }
+    const ClusterHit2DVec& getHits() const { return fHitVector; }
+    const std::vector<float> getHitDelTSigVec() const { return fHitDelTSigVec; }
+    const std::vector<geo::WireID>& getWireIDs() const { return fWireIDVector; }
 
-    ClusterHit2DVec&
-    getHits()
-    {
-      return fHitVector;
-    }
+    ClusterHit2DVec& getHits() { return fHitVector; }
 
-    bool
-    bitsAreSet(const unsigned int& bitsToCheck) const
-    {
-      return fStatusBits & bitsToCheck;
-    }
+    bool bitsAreSet(const unsigned int& bitsToCheck) const { return fStatusBits & bitsToCheck; }
 
-    void
-    setID(const size_t& id) const
-    {
-      fID = id;
-    }
-    void
-    setStatusBit(unsigned bits) const
-    {
-      fStatusBits |= bits;
-    }
-    void
-    clearStatusBits(unsigned bits) const
-    {
-      fStatusBits &= ~bits;
-    }
-    void
-    setDocaToAxis(double doca) const
-    {
-      fDocaToAxis = doca;
-    }
-    void
-    setArclenToPoca(double poca) const
-    {
-      fArclenToPoca = poca;
-    }
+    void setID(const size_t& id) const { fID = id; }
+    void setStatusBit(unsigned bits) const { fStatusBits |= bits; }
+    void clearStatusBits(unsigned bits) const { fStatusBits &= ~bits; }
+    void setDocaToAxis(double doca) const { fDocaToAxis = doca; }
+    void setArclenToPoca(double poca) const { fArclenToPoca = poca; }
     void setWireID(const geo::WireID& wid) const;
 
-    void
-    setPosition(const Eigen::Vector3f& pos) const
-    {
-      fPosition = pos;
-    }
+    void setPosition(const Eigen::Vector3f& pos) const { fPosition = pos; }
 
-    const bool
-    operator<(const reco::ClusterHit3D& other) const
+    const bool operator<(const reco::ClusterHit3D& other) const
     {
       if (fPosition[2] != other.fPosition[2])
         return fPosition[2] < other.fPosition[2];
@@ -341,11 +188,7 @@ namespace reco {
         return fPosition[0] < other.fPosition[0];
     }
 
-    const bool
-    operator==(const reco::ClusterHit3D& other) const
-    {
-      return fID == other.fID;
-    }
+    const bool operator==(const reco::ClusterHit3D& other) const { return fID == other.fID; }
 
     friend std::ostream& operator<<(std::ostream& o, const ClusterHit3D& c);
     //friend bool          operator <  (const ClusterHit3D & a, const ClusterHit3D & b);
@@ -392,43 +235,15 @@ namespace reco {
                         const Eigen::Vector3f& avePos,
                         const float aveHitDoca = 9999.);
 
-    bool
-    getSvdOK() const
-    {
-      return m_svdOK;
-    }
-    int
-    getNumHitsUsed() const
-    {
-      return m_numHitsUsed;
-    }
-    const EigenValues&
-    getEigenValues() const
-    {
-      return m_eigenValues;
-    }
-    const EigenVectors&
-    getEigenVectors() const
-    {
-      return m_eigenVectors;
-    }
-    const Eigen::Vector3f&
-    getAvePosition() const
-    {
-      return m_avePosition;
-    }
-    const float
-    getAveHitDoca() const
-    {
-      return m_aveHitDoca;
-    }
+    bool getSvdOK() const { return m_svdOK; }
+    int getNumHitsUsed() const { return m_numHitsUsed; }
+    const EigenValues& getEigenValues() const { return m_eigenValues; }
+    const EigenVectors& getEigenVectors() const { return m_eigenVectors; }
+    const Eigen::Vector3f& getAvePosition() const { return m_avePosition; }
+    const float getAveHitDoca() const { return m_aveHitDoca; }
 
     void flipAxis(size_t axis);
-    void
-    setAveHitDoca(double doca) const
-    {
-      m_aveHitDoca = doca;
-    }
+    void setAveHitDoca(double doca) const { m_aveHitDoca = doca; }
 
     friend std::ostream& operator<<(std::ostream& o, const PrincipalComponents& a);
     friend bool operator<(const PrincipalComponents& a, const PrincipalComponents& b);
@@ -454,47 +269,15 @@ namespace reco {
               const float* endPosition,
               int idx);
 
-    unsigned
-    getStatusBits() const
-    {
-      return m_statusBits;
-    }
-    const PrincipalComponents&
-    getPcaResults() const
-    {
-      return m_pcaResults;
-    }
-    float
-    getTotalCharge() const
-    {
-      return m_totalCharge;
-    }
-    const float*
-    getStartPosition() const
-    {
-      return m_startPosition;
-    }
-    const float*
-    getEndPosition() const
-    {
-      return m_endPosition;
-    }
-    int
-    getClusterIdx() const
-    {
-      return m_clusterIdx;
-    }
+    unsigned getStatusBits() const { return m_statusBits; }
+    const PrincipalComponents& getPcaResults() const { return m_pcaResults; }
+    float getTotalCharge() const { return m_totalCharge; }
+    const float* getStartPosition() const { return m_startPosition; }
+    const float* getEndPosition() const { return m_endPosition; }
+    int getClusterIdx() const { return m_clusterIdx; }
 
-    void
-    setStatusBit(unsigned bits) const
-    {
-      m_statusBits |= bits;
-    }
-    void
-    clearStatusBits(unsigned bits) const
-    {
-      m_statusBits &= ~bits;
-    }
+    void setStatusBit(unsigned bits) const { m_statusBits |= bits; }
+    void clearStatusBits(unsigned bits) const { m_statusBits &= ~bits; }
 
     Cluster3D operator+(Cluster3D);
     friend std::ostream& operator<<(std::ostream& o, const Cluster3D& c);
@@ -575,44 +358,19 @@ namespace reco {
         fConvexHullKinkPoints.clear();
     }
 
-    void
-    clear()
+    void clear()
     {
       fProjectedPointList.clear(), fConvexHullPointList.clear(), fConvexHullEdgeMap.clear(),
         fConvexHullEdgeList.clear(), fConvexHullExtremePoints.clear(),
         fConvexHullKinkPoints.clear();
     }
 
-    reco::ProjectedPointList&
-    getProjectedPointList()
-    {
-      return fProjectedPointList;
-    }
-    reco::ProjectedPointList&
-    getConvexHullPointList()
-    {
-      return fConvexHullPointList;
-    }
-    reco::Hit3DToEdgeMap&
-    getConvexHullEdgeMap()
-    {
-      return fConvexHullEdgeMap;
-    }
-    reco::EdgeList&
-    getConvexHullEdgeList()
-    {
-      return fConvexHullEdgeList;
-    }
-    reco::ProjectedPointList&
-    getConvexHullExtremePoints()
-    {
-      return fConvexHullExtremePoints;
-    }
-    reco::ConvexHullKinkTupleList&
-    getConvexHullKinkPoints()
-    {
-      return fConvexHullKinkPoints;
-    }
+    reco::ProjectedPointList& getProjectedPointList() { return fProjectedPointList; }
+    reco::ProjectedPointList& getConvexHullPointList() { return fConvexHullPointList; }
+    reco::Hit3DToEdgeMap& getConvexHullEdgeMap() { return fConvexHullEdgeMap; }
+    reco::EdgeList& getConvexHullEdgeList() { return fConvexHullEdgeList; }
+    reco::ProjectedPointList& getConvexHullExtremePoints() { return fConvexHullExtremePoints; }
+    reco::ConvexHullKinkTupleList& getConvexHullKinkPoints() { return fConvexHullKinkPoints; }
 
   private:
     reco::ProjectedPointList
@@ -675,20 +433,14 @@ namespace reco {
       fHalfEdgeList.clear();
     }
 
-    ClusterParametersList&
-    daughterList()
-    {
-      return fClusterParameters;
-    }
+    ClusterParametersList& daughterList() { return fClusterParameters; }
 
-    void
-    UpdateParameters(const reco::ClusterHit2D* hit)
+    void UpdateParameters(const reco::ClusterHit2D* hit)
     {
       fClusterParams[hit->WireID().Plane].UpdateParameters(hit);
     }
 
-    void
-    addHit3D(const reco::ClusterHit3D* hit3D)
+    void addHit3D(const reco::ClusterHit3D* hit3D)
     {
       fHitPairListPtr.emplace_back(hit3D);
 
@@ -696,8 +448,7 @@ namespace reco {
         if (hit2D) fHit2DToHit3DListMap[hit2D].emplace_back(hit3D);
     }
 
-    void
-    fillHit2DToHit3DListMap()
+    void fillHit2DToHit3DListMap()
     {
       for (const auto& hit3D : fHitPairListPtr) {
         for (const auto& hit2D : hit3D->getHits())
@@ -705,69 +456,20 @@ namespace reco {
       }
     }
 
-    reco::PlaneToClusterParamsMap&
-    getClusterParams()
-    {
-      return fClusterParams;
-    }
-    reco::Hit2DToHit3DListMap&
-    getHit2DToHit3DListMap()
-    {
-      return fHit2DToHit3DListMap;
-    }
-    reco::HitPairListPtr&
-    getHitPairListPtr()
-    {
-      return fHitPairListPtr;
-    }
-    reco::PrincipalComponents&
-    getFullPCA()
-    {
-      return fFullPCA;
-    }
-    reco::PrincipalComponents&
-    getSkeletonPCA()
-    {
-      return fSkeletonPCA;
-    }
-    reco::Hit3DToEdgeMap&
-    getHit3DToEdgeMap()
-    {
-      return fHit3DToEdgeMap;
-    }
-    reco::HitPairListPtr&
-    getBestHitPairListPtr()
-    {
-      return fBestHitPairListPtr;
-    }
-    reco::EdgeList&
-    getBestEdgeList()
-    {
-      return fBestEdgeList;
-    }
-    reco::ConvexHull&
-    getConvexHull()
-    {
-      return fConvexHull;
-    }
-    dcel2d::FaceList&
-    getFaceList()
-    {
-      return fFaceList;
-    }
-    dcel2d::VertexList&
-    getVertexList()
-    {
-      return fVertexList;
-    }
-    dcel2d::HalfEdgeList&
-    getHalfEdgeList()
-    {
-      return fHalfEdgeList;
-    }
+    reco::PlaneToClusterParamsMap& getClusterParams() { return fClusterParams; }
+    reco::Hit2DToHit3DListMap& getHit2DToHit3DListMap() { return fHit2DToHit3DListMap; }
+    reco::HitPairListPtr& getHitPairListPtr() { return fHitPairListPtr; }
+    reco::PrincipalComponents& getFullPCA() { return fFullPCA; }
+    reco::PrincipalComponents& getSkeletonPCA() { return fSkeletonPCA; }
+    reco::Hit3DToEdgeMap& getHit3DToEdgeMap() { return fHit3DToEdgeMap; }
+    reco::HitPairListPtr& getBestHitPairListPtr() { return fBestHitPairListPtr; }
+    reco::EdgeList& getBestEdgeList() { return fBestEdgeList; }
+    reco::ConvexHull& getConvexHull() { return fConvexHull; }
+    dcel2d::FaceList& getFaceList() { return fFaceList; }
+    dcel2d::VertexList& getVertexList() { return fVertexList; }
+    dcel2d::HalfEdgeList& getHalfEdgeList() { return fHalfEdgeList; }
 
-    friend bool
-    operator<(const ClusterParameters& a, const ClusterParameters& b)
+    friend bool operator<(const ClusterParameters& a, const ClusterParameters& b)
     {
       return a.fHitPairListPtr.size() > b.fHitPairListPtr.size();
     }

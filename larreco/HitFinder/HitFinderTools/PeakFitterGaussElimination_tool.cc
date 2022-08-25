@@ -44,8 +44,7 @@ namespace reco_tool {
   }
 
   // --------------------------------------------------------------------------------------------
-  void
-  PeakFitterGaussElimination::findPeakParameters(
+  void PeakFitterGaussElimination::findPeakParameters(
     const std::vector<float>& roiSignalVec,
     const ICandidateHitFinder::HitCandidateVec& hitCandidateVec,
     PeakParamsVec& peakParamsVec,

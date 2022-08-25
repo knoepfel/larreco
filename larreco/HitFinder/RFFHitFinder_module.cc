@@ -58,8 +58,7 @@ namespace hit {
     recob::HitCollectionCreator::declare_products(producesCollector());
   }
 
-  void
-  RFFHitFinder::produce(art::Event& e)
+  void RFFHitFinder::produce(art::Event& e)
   {
     art::ServiceHandle<geo::Geometry const> geoHandle;
 
@@ -76,8 +75,7 @@ namespace hit {
     //e.put(std::move(hitCollection));
   }
 
-  void
-  RFFHitFinder::beginJob()
+  void RFFHitFinder::beginJob()
   {
     art::ServiceHandle<geo::Geometry const> geoHandle;
     geo::Geometry const& geo(*geoHandle);

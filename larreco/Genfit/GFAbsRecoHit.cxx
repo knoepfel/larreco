@@ -31,8 +31,7 @@ genf::GFAbsRecoHit::~GFAbsRecoHit()
   ;
 }
 
-const std::string&
-genf::GFAbsRecoHit::getPolicyName()
+const std::string& genf::GFAbsRecoHit::getPolicyName()
 {
   std::cerr << "GFAbsRecoHit::getPolicyName() called for a reco hit, which wasnt derived from "
                "GFRecoHitIfc -> abort"

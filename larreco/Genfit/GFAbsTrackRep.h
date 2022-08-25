@@ -179,35 +179,15 @@ namespace genf {
     double extrapolate(const GFDetPlane& plane);
 
     //! returns dimension of state vector
-    unsigned int
-    getDim() const
-    {
-      return fDimension;
-    }
+    unsigned int getDim() const { return fDimension; }
 
     virtual void Print(std::ostream& out = std::cout) const;
 
-    const TMatrixT<Double_t>&
-    getState() const
-    {
-      return fState;
-    }
-    const TMatrixT<Double_t>&
-    getCov() const
-    {
-      return fCov;
-    }
+    const TMatrixT<Double_t>& getState() const { return fState; }
+    const TMatrixT<Double_t>& getCov() const { return fCov; }
 
-    double
-    getStateElem(int i) const
-    {
-      return fState(i, 0);
-    }
-    double
-    getCovElem(int i, int j) const
-    {
-      return fCov(i, j);
-    }
+    double getStateElem(int i) const { return fState(i, 0); }
+    double getCovElem(int i, int j) const { return fCov(i, j); }
 
     virtual TVector3 getPos(const GFDetPlane& pl) = 0;
     virtual TVector3 getMom(const GFDetPlane& pl) = 0;
@@ -226,174 +206,82 @@ namespace genf {
 
     virtual double getCharge() const = 0;
 
-    TVector3
-    getPos()
-    {
-      return getPos(fRefPlane);
-    }
-    TVector3
-    getMom()
-    {
-      return getMom(fRefPlane);
-    }
+    TVector3 getPos() { return getPos(fRefPlane); }
+    TVector3 getMom() { return getMom(fRefPlane); }
 
-    void
-    getPosMomCov(TVector3& pos, TVector3& mom, TMatrixT<Double_t>& c)
+    void getPosMomCov(TVector3& pos, TVector3& mom, TMatrixT<Double_t>& c)
     {
       getPosMomCov(fRefPlane, pos, mom, c);
     }
 
-    inline TMatrixT<Double_t>
-    getFirstState() const
-    {
-      return fFirstState;
-    }
-    inline TMatrixT<Double_t>
-    getFirstCov() const
-    {
-      return fFirstCov;
-    }
-    inline GFDetPlane
-    getFirstPlane() const
-    {
-      return fFirstPlane;
-    }
-    inline TMatrixT<Double_t>
-    getLastState() const
-    {
-      return fLastState;
-    }
-    inline TMatrixT<Double_t>
-    getLastCov() const
-    {
-      return fLastCov;
-    }
-    inline GFDetPlane
-    getLastPlane() const
-    {
-      return fLastPlane;
-    }
-    inline double
-    getChiSqu() const
-    {
-      return fChiSqu;
-    }
+    inline TMatrixT<Double_t> getFirstState() const { return fFirstState; }
+    inline TMatrixT<Double_t> getFirstCov() const { return fFirstCov; }
+    inline GFDetPlane getFirstPlane() const { return fFirstPlane; }
+    inline TMatrixT<Double_t> getLastState() const { return fLastState; }
+    inline TMatrixT<Double_t> getLastCov() const { return fLastCov; }
+    inline GFDetPlane getLastPlane() const { return fLastPlane; }
+    inline double getChiSqu() const { return fChiSqu; }
     //! returns chi2/ndf
-    inline double
-    getRedChiSqu() const
+    inline double getRedChiSqu() const
     {
       if (getNDF() > 0) return getChiSqu() / getNDF();
       return 0;
     }
-    inline unsigned int
-    getNDF() const
+    inline unsigned int getNDF() const
     {
       if (fNdf > getDim()) return fNdf - getDim();
       return 0;
     }
 
-    virtual void
-    setData(const TMatrixT<Double_t>& st,
-            const GFDetPlane& pl,
-            const TMatrixT<Double_t>* cov = NULL)
+    virtual void setData(const TMatrixT<Double_t>& st,
+                         const GFDetPlane& pl,
+                         const TMatrixT<Double_t>* cov = NULL)
     {
       fState = st;
       fRefPlane = pl;
       if (cov != NULL) fCov = *cov;
     }
-    inline void
-    setCov(const TMatrixT<Double_t>& aCov)
-    {
-      fCov = aCov;
-    }
-    inline void
-    setFirstState(const TMatrixT<Double_t>& aState)
-    {
-      fFirstState = aState;
-    }
-    inline void
-    setFirstCov(const TMatrixT<Double_t>& aCov)
-    {
-      fFirstCov = aCov;
-    }
-    inline void
-    setFirstPlane(const GFDetPlane& aPlane)
+    inline void setCov(const TMatrixT<Double_t>& aCov) { fCov = aCov; }
+    inline void setFirstState(const TMatrixT<Double_t>& aState) { fFirstState = aState; }
+    inline void setFirstCov(const TMatrixT<Double_t>& aCov) { fFirstCov = aCov; }
+    inline void setFirstPlane(const GFDetPlane& aPlane)
     {
       fFirstPlane = aPlane;
       ;
     }
-    inline void
-    setLastState(const TMatrixT<Double_t>& aState)
-    {
-      fLastState = aState;
-    }
-    inline void
-    setLastCov(const TMatrixT<Double_t>& aCov)
-    {
-      fLastCov = aCov;
-    }
-    inline void
-    setLastPlane(const GFDetPlane& aPlane)
+    inline void setLastState(const TMatrixT<Double_t>& aState) { fLastState = aState; }
+    inline void setLastCov(const TMatrixT<Double_t>& aCov) { fLastCov = aCov; }
+    inline void setLastPlane(const GFDetPlane& aPlane)
     {
       fLastPlane = aPlane;
       ;
     }
 
-    const GFDetPlane&
-    getReferencePlane() const
-    {
-      return fRefPlane;
-    }
+    const GFDetPlane& getReferencePlane() const { return fRefPlane; }
 
-    inline void
-    setChiSqu(double aChiSqu)
-    {
-      fChiSqu = aChiSqu;
-    }
-    inline void
-    setNDF(unsigned int n)
-    {
-      fNdf = n;
-    }
-    inline void
-    addChiSqu(double aChiSqu)
-    {
-      fChiSqu += aChiSqu;
-    }
-    inline void
-    addNDF(unsigned int n)
-    {
-      fNdf += n;
-    }
-    inline void
-    setStatusFlag(int _val)
-    {
-      fStatusFlag = _val;
-    }
+    inline void setChiSqu(double aChiSqu) { fChiSqu = aChiSqu; }
+    inline void setNDF(unsigned int n) { fNdf = n; }
+    inline void addChiSqu(double aChiSqu) { fChiSqu += aChiSqu; }
+    inline void addNDF(unsigned int n) { fNdf += n; }
+    inline void setStatusFlag(int _val) { fStatusFlag = _val; }
 
     virtual void switchDirection() = 0;
 
     //! Deprecated. Should be removed soon.
-    bool
-    setInverted(bool f = true)
+    bool setInverted(bool f = true)
     {
       fInverted = f;
       return true;
     }
 
-    inline bool
-    getStatusFlag()
-    {
-      return fStatusFlag;
-    }
+    inline bool getStatusFlag() { return fStatusFlag; }
 
     virtual void reset();
 
   private:
     void Abort(std::string method);
 
-    virtual void
-    Print(Option_t*) const
+    virtual void Print(Option_t*) const
     {
       throw std::logic_error(std::string(__func__) + "::Print(Option_t*) not available");
     }

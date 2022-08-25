@@ -25,20 +25,19 @@
 
 genf::GFEnergyLossBrems::~GFEnergyLossBrems() {}
 
-double
-genf::GFEnergyLossBrems::energyLoss(const double& step,
-                                    const double& mom,
-                                    const int& pdg,
-                                    const double& matDensity,
-                                    const double& matZ,
-                                    const double& matA,
-                                    const double& radiationLength,
-                                    const double& /* meanExcitationEnergy */,
-                                    const bool& doNoise,
-                                    TMatrixT<Double_t>* noise,
-                                    const TMatrixT<Double_t>* /* jacobian */,
-                                    const TVector3* /* directionBefore */,
-                                    const TVector3* /* directionAfter */)
+double genf::GFEnergyLossBrems::energyLoss(const double& step,
+                                           const double& mom,
+                                           const int& pdg,
+                                           const double& matDensity,
+                                           const double& matZ,
+                                           const double& matA,
+                                           const double& radiationLength,
+                                           const double& /* meanExcitationEnergy */,
+                                           const bool& doNoise,
+                                           TMatrixT<Double_t>* noise,
+                                           const TMatrixT<Double_t>* /* jacobian */,
+                                           const TVector3* /* directionBefore */,
+                                           const TVector3* /* directionAfter */)
 {
 
   if (fabs(pdg == 11)) { // only for electrons and positrons

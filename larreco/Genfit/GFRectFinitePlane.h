@@ -50,17 +50,12 @@ namespace genf {
 
     virtual ~GFRectFinitePlane();
 
-    GFAbsFinitePlane*
-    clone() const
-    {
-      return new GFRectFinitePlane(*this);
-    }
+    GFAbsFinitePlane* clone() const { return new GFRectFinitePlane(*this); }
 
   private:
     double fUmin, fUmax, fVmin, fVmax;
 
-    virtual void
-    Print(Option_t*) const
+    virtual void Print(Option_t*) const
     {
       throw std::logic_error(std::string(__func__) + "::Print(Option_t*) not available");
     }

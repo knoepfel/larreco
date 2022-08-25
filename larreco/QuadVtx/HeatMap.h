@@ -13,26 +13,10 @@ namespace quad {
 
     std::unique_ptr<TH2F> AsTH2() const;
 
-    double
-    ZBinCenter(int iz) const
-    {
-      return minz + (iz + .5) * (maxz - minz) / Nz;
-    }
-    double
-    XBinCenter(int ix) const
-    {
-      return minx + (ix + .5) * (maxx - minx) / Nx;
-    }
-    int
-    ZToBin(double z) const
-    {
-      return fast_floor((z - minz) / (maxz - minz) * Nz);
-    }
-    int
-    XToBin(double x) const
-    {
-      return fast_floor((x - minx) / (maxx - minx) * Nx);
-    }
+    double ZBinCenter(int iz) const { return minz + (iz + .5) * (maxz - minz) / Nz; }
+    double XBinCenter(int ix) const { return minx + (ix + .5) * (maxx - minx) / Nx; }
+    int ZToBin(double z) const { return fast_floor((z - minz) / (maxz - minz) * Nz); }
+    int XToBin(double x) const { return fast_floor((x - minx) / (maxx - minx) * Nx); }
 
     const double minz, minx, maxz, maxx;
     const int Nx, Nz;
@@ -41,11 +25,7 @@ namespace quad {
 
   private:
     // The rounding functions in std:: are surprisingly slow
-    inline int
-    fast_floor(double x) const
-    {
-      return int(x + 100000) - 100000;
-    }
+    inline int fast_floor(double x) const { return int(x + 100000) - 100000; }
   };
 }
 

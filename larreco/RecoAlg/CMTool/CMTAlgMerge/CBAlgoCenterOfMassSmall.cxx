@@ -19,9 +19,8 @@ namespace cmtool {
   }
 
   //---------------------------------------------------------------------------
-  bool
-  CBAlgoCenterOfMassSmall::Bool(const ::cluster::ClusterParamsAlg& cluster1,
-                                const ::cluster::ClusterParamsAlg& cluster2)
+  bool CBAlgoCenterOfMassSmall::Bool(const ::cluster::ClusterParamsAlg& cluster1,
+                                     const ::cluster::ClusterParamsAlg& cluster2)
   //---------------------------------------------------------------------------
   {
 
@@ -134,18 +133,16 @@ namespace cmtool {
   }
 
   //-----------------------
-  void
-  CBAlgoCenterOfMassSmall::Report()
+  void CBAlgoCenterOfMassSmall::Report()
   //-----------------------
   {}
 
-  double
-  CBAlgoCenterOfMassSmall::ShortestDistanceSquared(double point_x,
-                                                   double point_y,
-                                                   double start_x,
-                                                   double start_y,
-                                                   double end_x,
-                                                   double end_y) const
+  double CBAlgoCenterOfMassSmall::ShortestDistanceSquared(double point_x,
+                                                          double point_y,
+                                                          double start_x,
+                                                          double start_y,
+                                                          double end_x,
+                                                          double end_y) const
   {
 
     //This code finds the shortest distance between a point and a line segment.

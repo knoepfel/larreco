@@ -29,20 +29,18 @@ namespace lar_cluster3d {
 
   //------------------------------------------------------------------------------------------------------------------------------------------
 
-  void
-  SkeletonAlg::reconfigure(fhicl::ParameterSet const& pset)
+  void SkeletonAlg::reconfigure(fhicl::ParameterSet const& pset)
   {
     m_minimumDeltaTicks = pset.get<double>("MinimumDeltaTicks", 0.05);
     m_maximumDeltaTicks = pset.get<double>("MaximumDeltaTicks", 10.0);
   }
 
-  double
-  SkeletonAlg::FindFirstAndLastWires(std::vector<const reco::ClusterHit3D*>& hitVec,
-                                     int planeToCheck,
-                                     int referenceWire,
-                                     double referenceTicks,
-                                     int& firstWire,
-                                     int& lastWire) const
+  double SkeletonAlg::FindFirstAndLastWires(std::vector<const reco::ClusterHit3D*>& hitVec,
+                                            int planeToCheck,
+                                            int referenceWire,
+                                            double referenceTicks,
+                                            int& firstWire,
+                                            int& lastWire) const
   {
     // In the simple case the first and last wires are simply the front and back of the input vector
     firstWire = hitVec.front()->getHits()[planeToCheck]->WireID().Wire;
@@ -110,8 +108,7 @@ namespace lar_cluster3d {
   public:
     OrderHitsAlongWire(int plane = 0) : m_plane(plane) {}
 
-    bool
-    operator()(const reco::ClusterHit3D* left, const reco::ClusterHit3D* right)
+    bool operator()(const reco::ClusterHit3D* left, const reco::ClusterHit3D* right)
     {
       for (const auto leftHit : left->getHits()) {
         if (leftHit->WireID().Plane == m_plane) {
@@ -131,15 +128,13 @@ namespace lar_cluster3d {
   };
 
   struct OrderBestPlanes {
-    bool
-    operator()(const std::pair<size_t, size_t>& left, const std::pair<size_t, size_t>& right)
+    bool operator()(const std::pair<size_t, size_t>& left, const std::pair<size_t, size_t>& right)
     {
       return left.second < right.second;
     }
   };
 
-  int
-  SkeletonAlg::FindMedialSkeleton(reco::HitPairListPtr& hitPairList) const
+  int SkeletonAlg::FindMedialSkeleton(reco::HitPairListPtr& hitPairList) const
   {
     // Our mission is to try to find the medial skeletion of the input list of hits
     // We define that as the set of hit pairs where the pairs share the same hit in a given direction
@@ -299,9 +294,8 @@ namespace lar_cluster3d {
     return nSkeletonPoints;
   }
 
-  void
-  SkeletonAlg::GetSkeletonHits(const reco::HitPairListPtr& inputHitList,
-                               reco::HitPairListPtr& skeletonHitList) const
+  void SkeletonAlg::GetSkeletonHits(const reco::HitPairListPtr& inputHitList,
+                                    reco::HitPairListPtr& skeletonHitList) const
   {
     for (const auto& hit3D : inputHitList)
       if (hit3D->bitsAreSet(reco::ClusterHit3D::SKELETONHIT)) skeletonHitList.emplace_back(hit3D);
@@ -309,8 +303,7 @@ namespace lar_cluster3d {
     return;
   }
 
-  void
-  SkeletonAlg::AverageSkeletonPositions(reco::HitPairListPtr& skeletonHitList) const
+  void SkeletonAlg::AverageSkeletonPositions(reco::HitPairListPtr& skeletonHitList) const
   {
     // NOTE: This method assumes the list being given to it is comprised of skeleton hits
     //       YMMV if you send in a complete hit collection!

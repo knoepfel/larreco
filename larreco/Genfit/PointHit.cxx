@@ -48,16 +48,14 @@ genf::PointHit::PointHit(TVector3 point, std::vector<double>& res) : SpacepointR
   fHitCoord[2][0] = point.Z();
 }
 
-genf::GFAbsRecoHit*
-genf::PointHit::clone()
+genf::GFAbsRecoHit* genf::PointHit::clone()
 {
   return new PointHit(*this);
 }
 
-TMatrixT<Double_t>
-genf::PointHit::getHMatrix(const GFAbsTrackRep* stateVector,
-                           const Double_t& betac,
-                           const Double_t& dist)
+TMatrixT<Double_t> genf::PointHit::getHMatrix(const GFAbsTrackRep* stateVector,
+                                              const Double_t& betac,
+                                              const Double_t& dist)
 {
   if (dynamic_cast<const genf::RKTrackRep*>(stateVector) != nullptr) {
     //I know, since this is the same everytime, it could be done in the
@@ -127,8 +125,7 @@ genf::PointHit::getHMatrix(const GFAbsTrackRep* stateVector,
   }
 }
 
-TMatrixT<Double_t>
-genf::PointHit::getHMatrix(const GFAbsTrackRep* stateVector)
+TMatrixT<Double_t> genf::PointHit::getHMatrix(const GFAbsTrackRep* stateVector)
 {
   if (dynamic_cast<const genf::RKTrackRep*>(stateVector) != nullptr) {
     //I know, since this is the same everytime, it could be done in the

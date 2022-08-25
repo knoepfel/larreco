@@ -56,38 +56,22 @@ namespace voronoi2d {
     /**
      *  @brief Recover the list of faces
      */
-    const dcel2d::FaceList&
-    getFaceList() const
-    {
-      return fFaceList;
-    }
+    const dcel2d::FaceList& getFaceList() const { return fFaceList; }
 
     /**
      *  @brief Recover the list of vertices
      */
-    const dcel2d::VertexList&
-    getVertexList() const
-    {
-      return fVertexList;
-    }
+    const dcel2d::VertexList& getVertexList() const { return fVertexList; }
 
     /**
      *  @brief recover the area of the convex hull
      */
-    double
-    getVoronoiDiagramArea() const
-    {
-      return fVoronoiDiagramArea;
-    }
+    double getVoronoiDiagramArea() const { return fVoronoiDiagramArea; }
 
     /**
      *  @brief recover the point list representing the convex hull
      */
-    const dcel2d::PointList&
-    getConvexHull() const
-    {
-      return fConvexHullList;
-    }
+    const dcel2d::PointList& getConvexHull() const { return fConvexHullList; }
 
     /**
      *  @brief Given an input Point, find the nearest edge

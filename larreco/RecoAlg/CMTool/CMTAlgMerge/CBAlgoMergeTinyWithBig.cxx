@@ -18,15 +18,13 @@ namespace cmtool {
   }
 
   //-----------------------------
-  void
-  CBAlgoMergeTinyWithBig::Reset()
+  void CBAlgoMergeTinyWithBig::Reset()
   //-----------------------------
   {}
 
   //----------------------------------------------------------------
-  bool
-  CBAlgoMergeTinyWithBig::Bool(const ::cluster::ClusterParamsAlg& cluster1,
-                               const ::cluster::ClusterParamsAlg& cluster2)
+  bool CBAlgoMergeTinyWithBig::Bool(const ::cluster::ClusterParamsAlg& cluster1,
+                                    const ::cluster::ClusterParamsAlg& cluster2)
   //----------------------------------------------------------------
   {
 
@@ -92,8 +90,7 @@ namespace cmtool {
   }
 
   //------------------------------
-  void
-  CBAlgoMergeTinyWithBig::Report()
+  void CBAlgoMergeTinyWithBig::Report()
   //------------------------------
   {}
 

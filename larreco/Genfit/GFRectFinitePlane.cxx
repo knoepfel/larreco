@@ -38,15 +38,13 @@ genf::GFRectFinitePlane::GFRectFinitePlane()
 
 genf::GFRectFinitePlane::~GFRectFinitePlane() {}
 
-bool
-genf::GFRectFinitePlane::inActive(const double& u, const double& v) const
+bool genf::GFRectFinitePlane::inActive(const double& u, const double& v) const
 {
   if (u >= fUmin && u <= fUmax && v >= fVmin && v <= fVmax) return true;
   return false;
 }
 
-void
-genf::GFRectFinitePlane::Print(std::ostream& out /* = std::cout */) const
+void genf::GFRectFinitePlane::Print(std::ostream& out /* = std::cout */) const
 {
   out << "Rectangular Finite Plane Umin=" << fUmin << ", Umax=" << fUmax << ", Vmin=" << fVmin
       << ", Vmax=" << fVmax << std::endl;

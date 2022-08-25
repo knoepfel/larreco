@@ -29,8 +29,7 @@ pma::Element3D::Element3D() : fTPC(-1), fCryo(-1), fFrozen(false), fHitsRadius(0
   }
 }
 
-size_t
-pma::Element3D::NEnabledHits(unsigned int view) const
+size_t pma::Element3D::NEnabledHits(unsigned int view) const
 {
   size_t n = 0;
   for (size_t i = 0; i < fAssignedHits.size(); i++)
@@ -40,22 +39,19 @@ pma::Element3D::NEnabledHits(unsigned int view) const
   return n;
 }
 
-void
-pma::Element3D::SortHits(void)
+void pma::Element3D::SortHits(void)
 {
   std::sort(fAssignedHits.begin(), fAssignedHits.end(), pma::bTrajectory3DOrderLess());
 }
 
-void
-pma::Element3D::ClearAssigned(pma::Track3D* trk)
+void pma::Element3D::ClearAssigned(pma::Track3D* trk)
 {
   fAssignedPoints.clear();
   fAssignedHits.clear();
   fHitsRadius = 0.0;
 }
 
-void
-pma::Element3D::UpdateHitParams(void)
+void pma::Element3D::UpdateHitParams(void)
 {
   std::vector<pma::Hit3D*> hitsColl, hitsInd1, hitsInd2;
   for (size_t i = 0; i < 3; ++i)
@@ -163,8 +159,7 @@ pma::Element3D::UpdateHitParams(void)
   }
 }
 
-double
-pma::Element3D::SumDist2(void) const
+double pma::Element3D::SumDist2(void) const
 {
   if (fTPC < 0) {
     if (!fAssignedHits.empty())
@@ -187,8 +182,7 @@ pma::Element3D::SumDist2(void) const
   return hit_sum;
 }
 
-double
-pma::Element3D::SumDist2(unsigned int view) const
+double pma::Element3D::SumDist2(unsigned int view) const
 {
   if (fTPC < 0) {
     if (!fAssignedHits.empty())
@@ -210,8 +204,7 @@ pma::Element3D::SumDist2(unsigned int view) const
   return hit_sum;
 }
 
-double
-pma::Element3D::HitsRadius3D(unsigned int view) const
+double pma::Element3D::HitsRadius3D(unsigned int view) const
 {
   if (fTPC < 0) {
     if (!fAssignedHits.empty())
@@ -238,8 +231,7 @@ pma::Element3D::HitsRadius3D(unsigned int view) const
   return sqrt(maxR2);
 }
 
-bool
-pma::Element3D::SelectRndHits(size_t nmax_per_view)
+bool pma::Element3D::SelectRndHits(size_t nmax_per_view)
 {
   if (!nmax_per_view) { return SelectAllHits(); }
 
@@ -287,8 +279,7 @@ pma::Element3D::SelectRndHits(size_t nmax_per_view)
   return changed;
 }
 
-bool
-pma::Element3D::SelectAllHits(void)
+bool pma::Element3D::SelectAllHits(void)
 {
   bool changed = false;
   for (auto h : fAssignedHits) {

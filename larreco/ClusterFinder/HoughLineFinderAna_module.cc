@@ -106,8 +106,7 @@ namespace cluster {
   }
 
   //-------------------------------------------------
-  void
-  HoughLineFinderAna::beginJob()
+  void HoughLineFinderAna::beginJob()
   {
 
     // get access to the TFile service
@@ -137,8 +136,7 @@ namespace cluster {
     ftree->Branch("widthZ", fm_widthZ, "widthZ[numberHits]/F");
   }
 
-  void
-  HoughLineFinderAna::analyze(const art::Event& evt)
+  void HoughLineFinderAna::analyze(const art::Event& evt)
   {
 
     art::Handle<std::vector<recob::Cluster>> hlfListHandle;

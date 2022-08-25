@@ -53,8 +53,7 @@ genf::SlTrackRep::SlTrackRep(const TMatrixT<double>& _state,
 }
 
 genf::SlTrackRep::~SlTrackRep() {}
-double
-genf::SlTrackRep::extrapolate(const GFDetPlane& pl, TMatrixT<double>& statePred)
+double genf::SlTrackRep::extrapolate(const GFDetPlane& pl, TMatrixT<double>& statePred)
 {
   statePred.ResizeTo(fDimension, 1);
   TVector3 o = pl.getO();
@@ -92,10 +91,9 @@ genf::SlTrackRep::extrapolate(const GFDetPlane& pl, TMatrixT<double>& statePred)
   statePred[3].Assign(state3);
   return dist;
 }
-double
-genf::SlTrackRep::extrapolate(const GFDetPlane& pl,
-                              TMatrixT<double>& statePred,
-                              TMatrixT<double>& covPred)
+double genf::SlTrackRep::extrapolate(const GFDetPlane& pl,
+                                     TMatrixT<double>& statePred,
+                                     TMatrixT<double>& covPred)
 {
   //std::cout<<std::endl<<std::endl<<"extrapolate to plane with state and cov"<<std::endl<<std::endl;
   statePred.ResizeTo(fDimension, 1);
@@ -330,8 +328,7 @@ genf::SlTrackRep::extrapolate(const GFDetPlane& pl,
   statePred[3].Assign(state3);
   return dist;
 }
-void
-genf::SlTrackRep::extrapolateToPoint(const TVector3& pos, TVector3& poca, TVector3& dirInPoca)
+void genf::SlTrackRep::extrapolateToPoint(const TVector3& pos, TVector3& poca, TVector3& dirInPoca)
 {
 
   TVector3 ofrom = fRefPlane.getO();
@@ -348,12 +345,11 @@ genf::SlTrackRep::extrapolateToPoint(const TVector3& pos, TVector3& poca, TVecto
   poca = pfrom + t * dir;
   dirInPoca = dir.Unit();
 }
-void
-genf::SlTrackRep::extrapolateToLine(const TVector3& point1,
-                                    const TVector3& point2,
-                                    TVector3& poca,
-                                    TVector3& dirInPoca,
-                                    TVector3& poca_onwire)
+void genf::SlTrackRep::extrapolateToLine(const TVector3& point1,
+                                         const TVector3& point2,
+                                         TVector3& poca,
+                                         TVector3& dirInPoca,
+                                         TVector3& poca_onwire)
 {
 
   TVector3 ofrom = fRefPlane.getO();
@@ -377,15 +373,13 @@ genf::SlTrackRep::extrapolateToLine(const TVector3& point1,
   poca_onwire = point1 + lineDir * t2;
   dirInPoca = dir;
 }
-TVector3
-genf::SlTrackRep::getPos(const GFDetPlane& pl)
+TVector3 genf::SlTrackRep::getPos(const GFDetPlane& pl)
 {
   TMatrixT<double> statePred(fState);
   if (pl != fRefPlane) { extrapolate(pl, statePred); }
   return pl.getO() + (statePred[0][0] * pl.getU()) + (statePred[1][0] * pl.getV());
 }
-TVector3
-genf::SlTrackRep::getMom(const GFDetPlane& pl)
+TVector3 genf::SlTrackRep::getMom(const GFDetPlane& pl)
 {
   TMatrixT<double> statePred(fState);
   if (pl != fRefPlane) { extrapolate(pl, statePred); }
@@ -393,8 +387,7 @@ genf::SlTrackRep::getMom(const GFDetPlane& pl)
   ret.SetMag(1.);
   return ret;
 }
-void
-genf::SlTrackRep::getPosMom(const GFDetPlane& pl, TVector3& pos, TVector3& mom)
+void genf::SlTrackRep::getPosMom(const GFDetPlane& pl, TVector3& pos, TVector3& mom)
 {
   pos = getPos(pl);
   mom = getMom(pl);

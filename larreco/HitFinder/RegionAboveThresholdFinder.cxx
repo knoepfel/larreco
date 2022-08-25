@@ -12,10 +12,9 @@
 #include "RegionAboveThresholdFinder.h"
 #include <stdexcept>
 
-void
-hit::RegionAboveThresholdFinder::FillStartAndEndTicks(const std::vector<float>& signal,
-                                                      std::vector<unsigned int>& start_ticks,
-                                                      std::vector<unsigned int>& end_ticks)
+void hit::RegionAboveThresholdFinder::FillStartAndEndTicks(const std::vector<float>& signal,
+                                                           std::vector<unsigned int>& start_ticks,
+                                                           std::vector<unsigned int>& end_ticks)
 {
 
   start_ticks.clear();

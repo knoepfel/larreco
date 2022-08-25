@@ -58,11 +58,7 @@ namespace genf {
 
     /** @brief Set the blowup factor (see blowUpCovs() )
    */
-    void
-    setBlowUpFactor(double f)
-    {
-      fBlowUpFactor = f;
-    }
+    void setBlowUpFactor(double f) { fBlowUpFactor = f; }
 
     /** @brief Set the probabilty cut for the weight calculation for the hits. Currently
    * supported are the values 0.01 0.005, and 0.001. The corresponding chi2 cuts for

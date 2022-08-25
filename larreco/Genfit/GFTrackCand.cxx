@@ -71,8 +71,10 @@ genf::GFTrackCand::GFTrackCand(double curv,
       .setFatal();
 }
 
-void
-genf::GFTrackCand::addHit(unsigned int detId, unsigned int hitId, double rho, unsigned int planeId)
+void genf::GFTrackCand::addHit(unsigned int detId,
+                               unsigned int hitId,
+                               double rho,
+                               unsigned int planeId)
 {
   fDetId.push_back(detId);
   fHitId.push_back(hitId);
@@ -80,8 +82,7 @@ genf::GFTrackCand::addHit(unsigned int detId, unsigned int hitId, double rho, un
   fRho.push_back(rho);
 }
 
-std::vector<unsigned int>
-genf::GFTrackCand::GetHitIDs(int detId)
+std::vector<unsigned int> genf::GFTrackCand::GetHitIDs(int detId)
 {
   if (detId < 0) { // return hits from all detectors
     return fHitId;
@@ -96,15 +97,13 @@ genf::GFTrackCand::GetHitIDs(int detId)
   }
 }
 
-void
-genf::GFTrackCand::reset()
+void genf::GFTrackCand::reset()
 {
   fDetId.clear();
   fHitId.clear();
 }
 
-bool
-genf::GFTrackCand::HitInTrack(unsigned int detId, unsigned int hitId)
+bool genf::GFTrackCand::HitInTrack(unsigned int detId, unsigned int hitId)
 {
   for (unsigned int i = 0; i < fDetId.size(); i++) {
     if (detId == fDetId[i])
@@ -113,8 +112,7 @@ genf::GFTrackCand::HitInTrack(unsigned int detId, unsigned int hitId)
   return false;
 }
 
-bool
-genf::operator==(const GFTrackCand& lhs, const GFTrackCand& rhs)
+bool genf::operator==(const GFTrackCand& lhs, const GFTrackCand& rhs)
 {
   if (lhs.getNHits() != rhs.getNHits()) return false;
   bool result = std::equal(lhs.fDetId.begin(), lhs.fDetId.end(), rhs.fDetId.begin());
@@ -122,8 +120,7 @@ genf::operator==(const GFTrackCand& lhs, const GFTrackCand& rhs)
   return result;
 }
 
-void
-genf::GFTrackCand::Print(std::ostream& out /* = std::cout */) const
+void genf::GFTrackCand::Print(std::ostream& out /* = std::cout */) const
 {
   out << "======== GFTrackCand::print ========";
   if (fMcTrackId >= 0) out << "\nmcTrackId=" << fMcTrackId;
@@ -139,8 +136,7 @@ genf::GFTrackCand::Print(std::ostream& out /* = std::cout */) const
   out << std::endl;
 }
 
-void
-genf::GFTrackCand::append(const GFTrackCand& rhs)
+void genf::GFTrackCand::append(const GFTrackCand& rhs)
 {
   unsigned int detId, hitId;
   double rho;

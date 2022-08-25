@@ -50,8 +50,7 @@ genf::GFAbsTrackRep::GFAbsTrackRep(int dim)
 
 genf::GFAbsTrackRep::~GFAbsTrackRep() {}
 
-double
-genf::GFAbsTrackRep::extrapolate(const GFDetPlane& plane)
+double genf::GFAbsTrackRep::extrapolate(const GFDetPlane& plane)
 {
   TMatrixT<Double_t> statePred(fDimension, 1);
   TMatrixT<Double_t> covPred(fDimension, fDimension);
@@ -61,15 +60,13 @@ genf::GFAbsTrackRep::extrapolate(const GFDetPlane& plane)
 }
 
 //default implentation might be overwritten, please see the doxy docu
-double
-genf::GFAbsTrackRep::extrapolate(const GFDetPlane& plane, TMatrixT<Double_t>& statePred)
+double genf::GFAbsTrackRep::extrapolate(const GFDetPlane& plane, TMatrixT<Double_t>& statePred)
 {
   TMatrixT<Double_t> cov(fDimension, fDimension);
   return extrapolate(plane, statePred, cov);
 }
 
-void
-genf::GFAbsTrackRep::Abort(std::string method)
+void genf::GFAbsTrackRep::Abort(std::string method)
 {
   std::cerr << method << " as implemented in " << __FILE__
             << " was called. This means that this feature was used "
@@ -80,41 +77,36 @@ genf::GFAbsTrackRep::Abort(std::string method)
     .setFatal();
 }
 
-void
-genf::GFAbsTrackRep::extrapolateToPoint(const TVector3& /* point */,
-                                        TVector3& /* poca */,
-                                        TVector3& /* normVec */)
+void genf::GFAbsTrackRep::extrapolateToPoint(const TVector3& /* point */,
+                                             TVector3& /* poca */,
+                                             TVector3& /* normVec */)
 {
   Abort("extrapolateToPoca()");
 }
 
-void
-genf::GFAbsTrackRep::extrapolateToLine(const TVector3& /* point1 */,
-                                       const TVector3& /* point2 */,
-                                       TVector3& /* poca */,
-                                       TVector3& /* normVec */,
-                                       TVector3& /* poca_onwire */)
+void genf::GFAbsTrackRep::extrapolateToLine(const TVector3& /* point1 */,
+                                            const TVector3& /* point2 */,
+                                            TVector3& /* poca */,
+                                            TVector3& /* normVec */,
+                                            TVector3& /* poca_onwire */)
 {
   Abort("extrapolateToLine()");
 }
 
-void
-genf::GFAbsTrackRep::stepalong(double /* h */)
+void genf::GFAbsTrackRep::stepalong(double /* h */)
 {
   Abort("stepalong()");
 }
 
-void
-genf::GFAbsTrackRep::getPosMomCov(const GFDetPlane& /* pl */,
-                                  TVector3& /* pos */,
-                                  TVector3& /* mom */,
-                                  TMatrixT<Double_t>& /* cov */)
+void genf::GFAbsTrackRep::getPosMomCov(const GFDetPlane& /* pl */,
+                                       TVector3& /* pos */,
+                                       TVector3& /* mom */,
+                                       TMatrixT<Double_t>& /* cov */)
 {
   Abort("getPosMomCov()");
 }
 
-void
-genf::GFAbsTrackRep::reset()
+void genf::GFAbsTrackRep::reset()
 {
   std::cout << "GFAbsTrackRep::reset" << std::endl;
   TVector3 nullVec(0., 0., 0.);
@@ -127,8 +119,7 @@ genf::GFAbsTrackRep::reset()
   fLastCov.Zero();
 }
 
-void
-genf::GFAbsTrackRep::Print(std::ostream& out /* = std::cout */) const
+void genf::GFAbsTrackRep::Print(std::ostream& out /* = std::cout */) const
 {
   out << "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
   out << "GFAbsTrackRep::Parameters at reference plane ";

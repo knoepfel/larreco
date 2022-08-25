@@ -105,8 +105,7 @@ namespace lar_cluster3d {
     /**
      *  @brief If monitoring, recover the time to execute a particular function
      */
-    virtual float
-    getTimeToExecute(IHit3DBuilder::TimeValues index) const override
+    virtual float getTimeToExecute(IHit3DBuilder::TimeValues index) const override
     {
       return m_timeVector[index];
     }
@@ -328,8 +327,7 @@ namespace lar_cluster3d {
 
   //------------------------------------------------------------------------------------------------------------------------------------------
 
-  void
-  SnippetHit3DBuilder::produces(art::ProducesCollector& collector)
+  void SnippetHit3DBuilder::produces(art::ProducesCollector& collector)
   {
     collector.produces<std::vector<recob::Hit>>();
     collector.produces<art::Assns<recob::Wire, recob::Hit>>();
@@ -338,8 +336,7 @@ namespace lar_cluster3d {
 
   //------------------------------------------------------------------------------------------------------------------------------------------
 
-  void
-  SnippetHit3DBuilder::configure(fhicl::ParameterSet const& pset)
+  void SnippetHit3DBuilder::configure(fhicl::ParameterSet const& pset)
   {
     m_hitFinderTagVec = pset.get<std::vector<art::InputTag>>(
       "HitFinderTagVec", std::vector<art::InputTag>() = {"gaushit"});
@@ -390,8 +387,7 @@ namespace lar_cluster3d {
     return;
   }
 
-  void
-  SnippetHit3DBuilder::clear()
+  void SnippetHit3DBuilder::clear()
   {
     m_deltaTimeVec.clear();
     m_chiSquare3DVec.clear();
@@ -410,8 +406,8 @@ namespace lar_cluster3d {
     return;
   }
 
-  void
-  SnippetHit3DBuilder::BuildChannelStatusVec(PlaneToWireToHitSetMap& planeToWireToHitSetMap) const
+  void SnippetHit3DBuilder::BuildChannelStatusVec(
+    PlaneToWireToHitSetMap& planeToWireToHitSetMap) const
   {
     // This is called each event, clear out the previous version and start over
     m_channelStatus.clear();
@@ -439,17 +435,15 @@ namespace lar_cluster3d {
     return;
   }
 
-  bool
-  SetPeakHitPairIteratorOrder(const reco::HitPairList::iterator& left,
-                              const reco::HitPairList::iterator& right)
+  bool SetPeakHitPairIteratorOrder(const reco::HitPairList::iterator& left,
+                                   const reco::HitPairList::iterator& right)
   {
     return (*left).getAvePeakTime() < (*right).getAvePeakTime();
   }
 
   struct HitPairClusterOrder {
-    bool
-    operator()(const reco::HitPairClusterMap::iterator& left,
-               const reco::HitPairClusterMap::iterator& right)
+    bool operator()(const reco::HitPairClusterMap::iterator& left,
+                    const reco::HitPairClusterMap::iterator& right)
     {
       // Watch out for the case where two clusters can have the same number of hits!
       if (left->second.size() == right->second.size()) return left->first < right->first;
@@ -458,10 +452,9 @@ namespace lar_cluster3d {
     }
   };
 
-  void
-  SnippetHit3DBuilder::Hit3DBuilder(art::Event& evt,
-                                    reco::HitPairList& hitPairList,
-                                    RecobHitToPtrMap& clusterHitToArtPtrMap)
+  void SnippetHit3DBuilder::Hit3DBuilder(art::Event& evt,
+                                         reco::HitPairList& hitPairList,
+                                         RecobHitToPtrMap& clusterHitToArtPtrMap)
   {
     // Clear the internal data structures
     m_clusterHit2DMasterList.clear();
@@ -515,8 +508,7 @@ namespace lar_cluster3d {
     return;
   }
 
-  void
-  SnippetHit3DBuilder::BuildHit3D(reco::HitPairList& hitPairList) const
+  void SnippetHit3DBuilder::BuildHit3D(reco::HitPairList& hitPairList) const
   {
     /**
      *  @brief Driver for processing input 2D hits, transforming to 3D hits and building lists
@@ -549,8 +541,7 @@ namespace lar_cluster3d {
   public:
     SetStartTimeOrder() {}
 
-    bool
-    operator()(const SnippetHitMapItrPair& left, const SnippetHitMapItrPair& right) const
+    bool operator()(const SnippetHitMapItrPair& left, const SnippetHitMapItrPair& right) const
     {
       // Special case handling, there is nothing to compare for the left or right
       if (left.first == left.second) return false;
@@ -563,8 +554,7 @@ namespace lar_cluster3d {
   private:
   };
 
-  bool
-  SetPairStartTimeOrder(const reco::ClusterHit3D& left, const reco::ClusterHit3D& right)
+  bool SetPairStartTimeOrder(const reco::ClusterHit3D& left, const reco::ClusterHit3D& right)
   {
     // Sort by "modified start time" of pulse
     return left.getAvePeakTime() - left.getSigmaPeakTime() <
@@ -573,9 +563,8 @@ namespace lar_cluster3d {
 
   //------------------------------------------------------------------------------------------------------------------------------------------
 
-  size_t
-  SnippetHit3DBuilder::BuildHitPairMap(PlaneToSnippetHitMap& planeToSnippetHitMap,
-                                       reco::HitPairList& hitPairList) const
+  size_t SnippetHit3DBuilder::BuildHitPairMap(PlaneToSnippetHitMap& planeToSnippetHitMap,
+                                              reco::HitPairList& hitPairList) const
   {
     /**
      *  @brief Given input 2D hits, build out the lists of possible 3D hits
@@ -639,9 +628,9 @@ namespace lar_cluster3d {
     return hitPairList.size();
   }
 
-  size_t
-  SnippetHit3DBuilder::BuildHitPairMapByTPC(PlaneSnippetHitMapItrPairVec& snippetHitMapItrVec,
-                                            reco::HitPairList& hitPairList) const
+  size_t SnippetHit3DBuilder::BuildHitPairMapByTPC(
+    PlaneSnippetHitMapItrPairVec& snippetHitMapItrVec,
+    reco::HitPairList& hitPairList) const
   {
     /**
      *  @brief Given input 2D hits, build out the lists of possible 3D hits
@@ -735,11 +724,10 @@ namespace lar_cluster3d {
     return hitPairList.size();
   }
 
-  int
-  SnippetHit3DBuilder::findGoodHitPairs(SnippetHitMap::iterator& firstSnippetItr,
-                                        SnippetHitMap::iterator& startItr,
-                                        SnippetHitMap::iterator& endItr,
-                                        HitMatchTripletVecMap& hitMatchMap) const
+  int SnippetHit3DBuilder::findGoodHitPairs(SnippetHitMap::iterator& firstSnippetItr,
+                                            SnippetHitMap::iterator& startItr,
+                                            SnippetHitMap::iterator& endItr,
+                                            HitMatchTripletVecMap& hitMatchMap) const
   {
     int numPairs(0);
 
@@ -806,11 +794,10 @@ namespace lar_cluster3d {
     return numPairs;
   }
 
-  void
-  SnippetHit3DBuilder::findGoodTriplets(HitMatchTripletVecMap& pair12Map,
-                                        HitMatchTripletVecMap& pair13Map,
-                                        reco::HitPairList& hitPairList,
-                                        bool tagged) const
+  void SnippetHit3DBuilder::findGoodTriplets(HitMatchTripletVecMap& pair12Map,
+                                             HitMatchTripletVecMap& pair13Map,
+                                             reco::HitPairList& hitPairList,
+                                             bool tagged) const
   {
     // Build triplets from the two lists of hit pairs
     if (!pair12Map.empty()) {
@@ -928,12 +915,11 @@ namespace lar_cluster3d {
     return;
   }
 
-  bool
-  SnippetHit3DBuilder::makeHitPair(reco::ClusterHit3D& hitPair,
-                                   const reco::ClusterHit2D* hit1,
-                                   const reco::ClusterHit2D* hit2,
-                                   float hitWidthSclFctr,
-                                   size_t hitPairCntr) const
+  bool SnippetHit3DBuilder::makeHitPair(reco::ClusterHit3D& hitPair,
+                                        const reco::ClusterHit2D* hit1,
+                                        const reco::ClusterHit2D* hit2,
+                                        float hitWidthSclFctr,
+                                        size_t hitPairCntr) const
   {
     // Assume failure
     bool result(false);
@@ -1057,10 +1043,9 @@ namespace lar_cluster3d {
     return result;
   }
 
-  bool
-  SnippetHit3DBuilder::makeHitTriplet(reco::ClusterHit3D& hitTriplet,
-                                      const reco::ClusterHit3D& pair,
-                                      const reco::ClusterHit2D* hit) const
+  bool SnippetHit3DBuilder::makeHitTriplet(reco::ClusterHit3D& hitTriplet,
+                                           const reco::ClusterHit3D& pair,
+                                           const reco::ClusterHit2D* hit) const
   {
     // Assume failure
     bool result(false);
@@ -1315,10 +1300,9 @@ namespace lar_cluster3d {
     return result;
   }
 
-  bool
-  SnippetHit3DBuilder::WireIDsIntersect(const geo::WireID& wireID0,
-                                        const geo::WireID& wireID1,
-                                        geo::WireIDIntersection& widIntersection) const
+  bool SnippetHit3DBuilder::WireIDsIntersect(const geo::WireID& wireID0,
+                                             const geo::WireID& wireID1,
+                                             geo::WireIDIntersection& widIntersection) const
   {
     bool success(false);
 
@@ -1373,13 +1357,12 @@ namespace lar_cluster3d {
     return success;
   }
 
-  float
-  SnippetHit3DBuilder::closestApproach(const Eigen::Vector3f& P0,
-                                       const Eigen::Vector3f& u0,
-                                       const Eigen::Vector3f& P1,
-                                       const Eigen::Vector3f& u1,
-                                       float& arcLen0,
-                                       float& arcLen1) const
+  float SnippetHit3DBuilder::closestApproach(const Eigen::Vector3f& P0,
+                                             const Eigen::Vector3f& u0,
+                                             const Eigen::Vector3f& P1,
+                                             const Eigen::Vector3f& u1,
+                                             float& arcLen0,
+                                             float& arcLen1) const
   {
     // Technique is to compute the arclength to each point of closest approach
     Eigen::Vector3f w0 = P0 - P1;
@@ -1399,13 +1382,12 @@ namespace lar_cluster3d {
     return (poca0 - poca1).norm();
   }
 
-  float
-  SnippetHit3DBuilder::chargeIntegral(float peakMean,
-                                      float peakAmp,
-                                      float peakSigma,
-                                      float areaNorm,
-                                      int low,
-                                      int hi) const
+  float SnippetHit3DBuilder::chargeIntegral(float peakMean,
+                                            float peakAmp,
+                                            float peakSigma,
+                                            float areaNorm,
+                                            int low,
+                                            int hi) const
   {
     float integral(0);
 
@@ -1417,12 +1399,11 @@ namespace lar_cluster3d {
     return integral;
   }
 
-  bool
-  SnippetHit3DBuilder::makeDeadChannelPair(reco::ClusterHit3D& pairOut,
-                                           const reco::ClusterHit3D& pair,
-                                           size_t maxChanStatus,
-                                           size_t minChanStatus,
-                                           float minOverlap) const
+  bool SnippetHit3DBuilder::makeDeadChannelPair(reco::ClusterHit3D& pairOut,
+                                                const reco::ClusterHit3D& pair,
+                                                size_t maxChanStatus,
+                                                size_t minChanStatus,
+                                                float minOverlap) const
   {
     // Assume failure (most common result)
     bool result(false);
@@ -1496,10 +1477,10 @@ namespace lar_cluster3d {
     return result;
   }
 
-  const reco::ClusterHit2D*
-  SnippetHit3DBuilder::FindBestMatchingHit(const Hit2DSet& hit2DSet,
-                                           const reco::ClusterHit3D& pair,
-                                           float pairDeltaTimeLimits) const
+  const reco::ClusterHit2D* SnippetHit3DBuilder::FindBestMatchingHit(
+    const Hit2DSet& hit2DSet,
+    const reco::ClusterHit3D& pair,
+    float pairDeltaTimeLimits) const
   {
     static const float minCharge(0.);
 
@@ -1525,10 +1506,9 @@ namespace lar_cluster3d {
     return bestVHit;
   }
 
-  int
-  SnippetHit3DBuilder::FindNumberInRange(const Hit2DSet& hit2DSet,
-                                         const reco::ClusterHit3D& pair,
-                                         float range) const
+  int SnippetHit3DBuilder::FindNumberInRange(const Hit2DSet& hit2DSet,
+                                             const reco::ClusterHit3D& pair,
+                                             float range) const
   {
     static const float minCharge(0.);
 
@@ -1552,9 +1532,8 @@ namespace lar_cluster3d {
     return numberInRange;
   }
 
-  geo::WireID
-  SnippetHit3DBuilder::NearestWireID(const Eigen::Vector3f& position,
-                                     const geo::WireID& wireIDIn) const
+  geo::WireID SnippetHit3DBuilder::NearestWireID(const Eigen::Vector3f& position,
+                                                 const geo::WireID& wireIDIn) const
   {
     geo::WireID wireID = wireIDIn;
 
@@ -1580,9 +1559,8 @@ namespace lar_cluster3d {
     return wireID;
   }
 
-  float
-  SnippetHit3DBuilder::DistanceFromPointToHitWire(const Eigen::Vector3f& position,
-                                                  const geo::WireID& wireIDIn) const
+  float SnippetHit3DBuilder::DistanceFromPointToHitWire(const Eigen::Vector3f& position,
+                                                        const geo::WireID& wireIDIn) const
   {
     float distance = std::numeric_limits<float>::max();
 
@@ -1629,22 +1607,20 @@ namespace lar_cluster3d {
   }
 
   //------------------------------------------------------------------------------------------------------------------------------------------
-  bool
-  SetHitTimeOrder(const reco::ClusterHit2D* left, const reco::ClusterHit2D* right)
+  bool SetHitTimeOrder(const reco::ClusterHit2D* left, const reco::ClusterHit2D* right)
   {
     // Sort by "modified start time" of pulse
     return left->getHit()->PeakTime() < right->getHit()->PeakTime();
   }
 
-  bool
-  Hit2DSetCompare::operator()(const reco::ClusterHit2D* left, const reco::ClusterHit2D* right) const
+  bool Hit2DSetCompare::operator()(const reco::ClusterHit2D* left,
+                                   const reco::ClusterHit2D* right) const
   {
     return left->getHit()->PeakTime() < right->getHit()->PeakTime();
   }
 
   //------------------------------------------------------------------------------------------------------------------------------------------
-  void
-  SnippetHit3DBuilder::CollectArtHits(const art::Event& evt) const
+  void SnippetHit3DBuilder::CollectArtHits(const art::Event& evt) const
   {
     /**
      *  @brief Recover the 2D hits from art and fill out the local data structures for the 3D clustering
@@ -1795,11 +1771,10 @@ namespace lar_cluster3d {
 
   //------------------------------------------------------------------------------------------------------------------------------------------
 
-  void
-  SnippetHit3DBuilder::CreateNewRecobHitCollection(art::Event& event,
-                                                   reco::HitPairList& hitPairList,
-                                                   std::vector<recob::Hit>& hitPtrVec,
-                                                   RecobHitToPtrMap& recobHitToPtrMap)
+  void SnippetHit3DBuilder::CreateNewRecobHitCollection(art::Event& event,
+                                                        reco::HitPairList& hitPairList,
+                                                        std::vector<recob::Hit>& hitPtrVec,
+                                                        RecobHitToPtrMap& recobHitToPtrMap)
   {
     // Set up the timing
     cet::cpu_timer theClockBuildNewHits;
@@ -1860,10 +1835,9 @@ namespace lar_cluster3d {
     return;
   }
 
-  void
-  SnippetHit3DBuilder::makeWireAssns(const art::Event& evt,
-                                     art::Assns<recob::Wire, recob::Hit>& wireAssns,
-                                     RecobHitToPtrMap& recobHitPtrMap) const
+  void SnippetHit3DBuilder::makeWireAssns(const art::Event& evt,
+                                          art::Assns<recob::Wire, recob::Hit>& wireAssns,
+                                          RecobHitToPtrMap& recobHitPtrMap) const
   {
     // Let's make sure the input associations container is empty
     wireAssns = art::Assns<recob::Wire, recob::Hit>();
@@ -1906,10 +1880,9 @@ namespace lar_cluster3d {
     return;
   }
 
-  void
-  SnippetHit3DBuilder::makeRawDigitAssns(const art::Event& evt,
-                                         art::Assns<raw::RawDigit, recob::Hit>& rawDigitAssns,
-                                         RecobHitToPtrMap& recobHitPtrMap) const
+  void SnippetHit3DBuilder::makeRawDigitAssns(const art::Event& evt,
+                                              art::Assns<raw::RawDigit, recob::Hit>& rawDigitAssns,
+                                              RecobHitToPtrMap& recobHitPtrMap) const
   {
     // Let's make sure the input associations container is empty
     rawDigitAssns = art::Assns<raw::RawDigit, recob::Hit>();

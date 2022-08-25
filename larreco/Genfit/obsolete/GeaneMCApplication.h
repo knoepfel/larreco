@@ -18,56 +18,16 @@ namespace genf {
 
     //Geant action methods need to be overridden
     virtual void ConstructGeometry();
-    virtual void
-    FinishEvent()
-    {
-      ;
-    }
-    virtual void
-    FinishPrimary()
-    {
-      ;
-    }
-    virtual void
-    FinishRun()
-    {
-      ;
-    }
-    virtual void
-    GeneratePrimaries()
-    {
-      ;
-    }
-    virtual void
-    InitGeometry()
-    {
-      ;
-    }
-    virtual void
-    PostTrack()
-    {
-      ;
-    }
-    virtual void
-    PreTrack()
-    {
-      ;
-    }
-    virtual void
-    BeginEvent()
-    {
-      ;
-    }
-    virtual void
-    BeginPrimary()
-    {
-      ;
-    }
-    virtual void
-    Stepping()
-    {
-      ;
-    }
+    virtual void FinishEvent() { ; }
+    virtual void FinishPrimary() { ; }
+    virtual void FinishRun() { ; }
+    virtual void GeneratePrimaries() { ; }
+    virtual void InitGeometry() { ; }
+    virtual void PostTrack() { ; }
+    virtual void PreTrack() { ; }
+    virtual void BeginEvent() { ; }
+    virtual void BeginPrimary() { ; }
+    virtual void Stepping() { ; }
     //private:
     //public:
     //ClassDef(GeaneMCApplication,1)

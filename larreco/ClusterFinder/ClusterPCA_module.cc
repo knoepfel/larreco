@@ -81,8 +81,7 @@ namespace cluster {
 
   //-------------------------------------------------
   // Set up analysis tree
-  void
-  ClusterPCA::beginJob()
+  void ClusterPCA::beginJob()
   {
     art::ServiceHandle<art::TFileService const> tfs;
     fTree = tfs->make<TTree>("PCATree", "PCATree");
@@ -95,8 +94,7 @@ namespace cluster {
   }
 
   //------------------------------------------------------------------------------------//
-  void
-  ClusterPCA::analyze(art::Event const& evt)
+  void ClusterPCA::analyze(art::Event const& evt)
   {
     // Get a Handle for the input Cluster object(s).
     art::Handle<std::vector<recob::Cluster>> clusterVecHandle;
@@ -168,12 +166,11 @@ namespace cluster {
   // For NormPC=true direction finding is not properly handled yet (easy to fix later)
   // It is not clear yet whether true or false is more effective for cluster showeriness studies.
 
-  void
-  ClusterPCA::PerformClusterPCA(const std::vector<art::Ptr<recob::Hit>>& HitsThisCluster,
-                                double* PrincipalDirection,
-                                double& PrincipalEigenvalue,
-                                double& TotalCharge,
-                                bool NormPC)
+  void ClusterPCA::PerformClusterPCA(const std::vector<art::Ptr<recob::Hit>>& HitsThisCluster,
+                                     double* PrincipalDirection,
+                                     double& PrincipalEigenvalue,
+                                     double& TotalCharge,
+                                     bool NormPC)
   {
 
     double Center[2] = {0, 0};

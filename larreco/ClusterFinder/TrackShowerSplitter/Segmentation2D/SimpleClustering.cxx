@@ -17,8 +17,7 @@ tss::Cluster2D::Cluster2D(const std::vector<const tss::Hit2D*>& hits)
 }
 // ------------------------------------------------------
 
-const tss::Hit2D*
-tss::Cluster2D::release_at(size_t idx)
+const tss::Hit2D* tss::Cluster2D::release_at(size_t idx)
 {
   const tss::Hit2D* hit = 0;
   if (idx < fHits.size()) {
@@ -29,8 +28,7 @@ tss::Cluster2D::release_at(size_t idx)
 }
 // ------------------------------------------------------
 
-bool
-tss::Cluster2D::release(const tss::Hit2D* hit)
+bool tss::Cluster2D::release(const tss::Hit2D* hit)
 {
   for (size_t h = 0; h < fHits.size(); ++h)
     if (fHits[h] == hit) {
@@ -40,8 +38,7 @@ tss::Cluster2D::release(const tss::Hit2D* hit)
   return false;
 }
 
-const tss::Hit2D*
-tss::Cluster2D::closest(const TVector2& p2d, size_t& idx) const
+const tss::Hit2D* tss::Cluster2D::closest(const TVector2& p2d, size_t& idx) const
 {
   idx = 0;
   if (!fHits.size()) return 0;
@@ -60,8 +57,7 @@ tss::Cluster2D::closest(const TVector2& p2d, size_t& idx) const
 }
 // ------------------------------------------------------
 
-const tss::Hit2D*
-tss::Cluster2D::outermost(size_t& idx) const
+const tss::Hit2D* tss::Cluster2D::outermost(size_t& idx) const
 {
   idx = 0;
   if (!fHits.size()) return 0;
@@ -86,8 +82,7 @@ tss::Cluster2D::outermost(size_t& idx) const
 }
 // ------------------------------------------------------
 
-const TVector2
-tss::Cluster2D::min(void) const
+const TVector2 tss::Cluster2D::min(void) const
 {
 
   TVector2 minimum = fHits[0]->Point2D();
@@ -104,8 +99,7 @@ tss::Cluster2D::min(void) const
 
 // ------------------------------------------------------
 
-const TVector2
-tss::Cluster2D::max(void) const
+const TVector2 tss::Cluster2D::max(void) const
 {
 
   TVector2 maximum = fHits[0]->Point2D();
@@ -122,8 +116,7 @@ tss::Cluster2D::max(void) const
 
 // ------------------------------------------------------
 
-bool
-tss::Cluster2D::has(const tss::Hit2D* hit) const
+bool tss::Cluster2D::has(const tss::Hit2D* hit) const
 {
   for (size_t i = 0; i < fHits.size(); ++i)
     if (fHits[i] == hit) return true;
@@ -131,8 +124,7 @@ tss::Cluster2D::has(const tss::Hit2D* hit) const
 }
 // ------------------------------------------------------
 
-double
-tss::Cluster2D::dist2(const TVector2& p2d) const
+double tss::Cluster2D::dist2(const TVector2& p2d) const
 {
   if (fHits.size()) {
     double d2, min_d2 = pma::Dist2(fHits.front()->Point2D(), p2d);
@@ -147,8 +139,7 @@ tss::Cluster2D::dist2(const TVector2& p2d) const
 }
 // ------------------------------------------------------
 
-double
-tss::Cluster2D::dist2(const TVector2& p2d, size_t& hIdx) const
+double tss::Cluster2D::dist2(const TVector2& p2d, size_t& hIdx) const
 {
   hIdx = 0;
   if (fHits.size()) {
@@ -167,8 +158,7 @@ tss::Cluster2D::dist2(const TVector2& p2d, size_t& hIdx) const
 }
 // ------------------------------------------------------
 
-double
-tss::Cluster2D::dist2(const tss::Cluster2D& clu) const
+double tss::Cluster2D::dist2(const tss::Cluster2D& clu) const
 {
   if (fHits.size()) {
     double d2, min_d2 = clu.dist2(fHits.front()->Point2D());
@@ -187,8 +177,7 @@ tss::Cluster2D::dist2(const tss::Cluster2D& clu) const
 // ------------------------------------------------------
 // ------------------------------------------------------
 
-bool
-tss::SimpleClustering::hitsTouching(const tss::Hit2D& h1, const tss::Hit2D& h2) const
+bool tss::SimpleClustering::hitsTouching(const tss::Hit2D& h1, const tss::Hit2D& h2) const
 {
   if ((h1.Wire() == h2.Wire()) && (h1.PeakTime() == h2.PeakTime())) return false;
 
@@ -204,8 +193,7 @@ tss::SimpleClustering::hitsTouching(const tss::Hit2D& h1, const tss::Hit2D& h2) 
 }
 // ------------------------------------------------------
 
-bool
-tss::SimpleClustering::hitsTouching(const tss::Cluster2D& c1, const tss::Hit2D& h2) const
+bool tss::SimpleClustering::hitsTouching(const tss::Cluster2D& c1, const tss::Hit2D& h2) const
 {
   for (size_t i = 0; i < c1.size(); i++) {
     if (hitsTouching(c1[i], h2)) return true;
@@ -214,8 +202,7 @@ tss::SimpleClustering::hitsTouching(const tss::Cluster2D& c1, const tss::Hit2D& 
 }
 // ------------------------------------------------------
 
-bool
-tss::SimpleClustering::hitsTouching(const tss::Cluster2D& c1, const tss::Cluster2D& c2) const
+bool tss::SimpleClustering::hitsTouching(const tss::Cluster2D& c1, const tss::Cluster2D& c2) const
 {
   for (unsigned int i = 0; i < c1.size(); i++) {
     if (hitsTouching(c2, c1[i])) return true;
@@ -224,8 +211,7 @@ tss::SimpleClustering::hitsTouching(const tss::Cluster2D& c1, const tss::Cluster
 }
 // ------------------------------------------------------
 
-void
-tss::SimpleClustering::merge(std::vector<tss::Cluster2D>& clusters) const
+void tss::SimpleClustering::merge(std::vector<tss::Cluster2D>& clusters) const
 {
   bool merged = true;
   while (merged) {
@@ -251,8 +237,7 @@ tss::SimpleClustering::merge(std::vector<tss::Cluster2D>& clusters) const
 }
 // ------------------------------------------------------
 
-std::vector<tss::Cluster2D>
-tss::SimpleClustering::run(const std::vector<tss::Hit2D>& inp) const
+std::vector<tss::Cluster2D> tss::SimpleClustering::run(const std::vector<tss::Hit2D>& inp) const
 {
   std::vector<tss::Cluster2D> result;
   for (size_t h = 0; h < inp.size(); ++h) {
@@ -274,8 +259,7 @@ tss::SimpleClustering::run(const std::vector<tss::Hit2D>& inp) const
 }
 // ------------------------------------------------------
 
-std::vector<tss::Cluster2D>
-tss::SimpleClustering::run(const tss::Cluster2D& inp) const
+std::vector<tss::Cluster2D> tss::SimpleClustering::run(const tss::Cluster2D& inp) const
 {
   std::vector<tss::Cluster2D> result;
   for (size_t h = 0; h < inp.size(); ++h) {

@@ -40,16 +40,11 @@ namespace trkf {
     void WalkStitch();
     bool CommonComponentStitch();
 
-    void
-    GetTrackComposites(std::vector<art::PtrVector<recob::Track>>& c) const
+    void GetTrackComposites(std::vector<art::PtrVector<recob::Track>>& c) const
     {
       c = fTrackComposite;
     }
-    void
-    GetTracks(std::vector<recob::Track>& t) const
-    {
-      t = fTrackVec;
-    }
+    void GetTracks(std::vector<recob::Track>& t) const { t = fTrackVec; }
 
     art::Handle<std::vector<recob::Track>> ftListHandle;
 

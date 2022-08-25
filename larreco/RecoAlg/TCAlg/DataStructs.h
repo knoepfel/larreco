@@ -48,18 +48,15 @@ namespace tca {
   constexpr unsigned int Tpad = 10;    // alignment for CTP sub-items - TPC
   constexpr unsigned int Cpad = 10000; // alignment for CTP sub-items - Cryostat
 
-  inline CTP_t
-  EncodeCTP(unsigned int cryo, unsigned int tpc, unsigned int plane)
+  inline CTP_t EncodeCTP(unsigned int cryo, unsigned int tpc, unsigned int plane)
   {
     return cryo * Cpad + tpc * Tpad + plane;
   }
-  inline CTP_t
-  EncodeCTP(const geo::PlaneID& planeID)
+  inline CTP_t EncodeCTP(const geo::PlaneID& planeID)
   {
     return EncodeCTP(planeID.Cryostat, planeID.TPC, planeID.Plane);
   }
-  inline CTP_t
-  EncodeCTP(const geo::WireID& wireID)
+  inline CTP_t EncodeCTP(const geo::WireID& wireID)
   {
     return EncodeCTP(wireID.Cryostat, wireID.TPC, wireID.Plane);
   }

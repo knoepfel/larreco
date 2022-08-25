@@ -66,11 +66,7 @@ namespace lar_cluster3d {
     /**
      *  @brief If monitoring, recover the time to execute a particular function
      */
-    float
-    getTimeToExecute() const override
-    {
-      return fTimeToProcess;
-    }
+    float getTimeToExecute() const override { return fTimeToProcess; }
 
   private:
     bool linearClusters(reco::ClusterParameters&, reco::ClusterParameters&) const;
@@ -148,8 +144,7 @@ namespace lar_cluster3d {
 
   //------------------------------------------------------------------------------------------------------------------------------------------
 
-  void
-  ClusterMergeAlg::configure(fhicl::ParameterSet const& pset)
+  void ClusterMergeAlg::configure(fhicl::ParameterSet const& pset)
   {
     fEnableMonitoring = pset.get<bool>("EnableMonitoring", true);
     fMinTransEigenVal = pset.get<float>("MinTransEigenVal", 0.09);
@@ -215,14 +210,9 @@ namespace lar_cluster3d {
     return;
   }
 
-  void
-  ClusterMergeAlg::initializeHistograms(art::TFileDirectory&)
-  {
-    return;
-  }
+  void ClusterMergeAlg::initializeHistograms(art::TFileDirectory&) { return; }
 
-  void
-  ClusterMergeAlg::ModifyClusters(reco::ClusterParametersList& clusterParametersList) const
+  void ClusterMergeAlg::ModifyClusters(reco::ClusterParametersList& clusterParametersList) const
   {
     /**
      *  @brief Top level interface for algorithm to consider pairs of clusters from the input
@@ -342,9 +332,8 @@ namespace lar_cluster3d {
     return;
   }
 
-  bool
-  ClusterMergeAlg::linearClusters(reco::ClusterParameters& firstCluster,
-                                  reco::ClusterParameters& nextCluster) const
+  bool ClusterMergeAlg::linearClusters(reco::ClusterParameters& firstCluster,
+                                       reco::ClusterParameters& nextCluster) const
   {
     // Assume failure
     bool consistent(false);
@@ -570,9 +559,8 @@ namespace lar_cluster3d {
     return consistent;
   }
 
-  bool
-  ClusterMergeAlg::mergeClusters(reco::ClusterParameters& firstClusterParams,
-                                 reco::ClusterParameters& nextClusterParams) const
+  bool ClusterMergeAlg::mergeClusters(reco::ClusterParameters& firstClusterParams,
+                                      reco::ClusterParameters& nextClusterParams) const
   {
     bool merged(false);
 
@@ -612,14 +600,13 @@ namespace lar_cluster3d {
     return merged;
   }
 
-  float
-  ClusterMergeAlg::closestApproach(const Eigen::Vector3f& P0,
-                                   const Eigen::Vector3f& u0,
-                                   const Eigen::Vector3f& P1,
-                                   const Eigen::Vector3f& u1,
-                                   Eigen::Vector3f& poca0,
-                                   Eigen::Vector3f& poca1,
-                                   Eigen::Vector3f& firstNextUnit) const
+  float ClusterMergeAlg::closestApproach(const Eigen::Vector3f& P0,
+                                         const Eigen::Vector3f& u0,
+                                         const Eigen::Vector3f& P1,
+                                         const Eigen::Vector3f& u1,
+                                         Eigen::Vector3f& poca0,
+                                         Eigen::Vector3f& poca1,
+                                         Eigen::Vector3f& firstNextUnit) const
   {
     // Technique is to compute the arclength to each point of closest approach
     Eigen::Vector3f w0 = P0 - P1;
@@ -655,10 +642,10 @@ namespace lar_cluster3d {
     return docaDist;
   }
 
-  const reco::ClusterHit3D*
-  ClusterMergeAlg::findClosestHit3D(const Eigen::Vector3f& refPoint,
-                                    const Eigen::Vector3f& refVector,
-                                    const reco::HitPairListPtr& hitList) const
+  const reco::ClusterHit3D* ClusterMergeAlg::findClosestHit3D(
+    const Eigen::Vector3f& refPoint,
+    const Eigen::Vector3f& refVector,
+    const reco::HitPairListPtr& hitList) const
   {
     const reco::ClusterHit3D* nearestHit3D(hitList.front());
     float closest(std::numeric_limits<float>::max());
@@ -676,10 +663,10 @@ namespace lar_cluster3d {
     return nearestHit3D;
   }
 
-  const reco::ClusterHit3D*
-  ClusterMergeAlg::findFurthestHit3D(const Eigen::Vector3f& refPoint,
-                                     const Eigen::Vector3f& refVector,
-                                     const reco::HitPairListPtr& hitList) const
+  const reco::ClusterHit3D* ClusterMergeAlg::findFurthestHit3D(
+    const Eigen::Vector3f& refPoint,
+    const Eigen::Vector3f& refVector,
+    const reco::HitPairListPtr& hitList) const
   {
     const reco::ClusterHit3D* nearestHit3D(hitList.front());
     float furthest(-std::numeric_limits<float>::max());

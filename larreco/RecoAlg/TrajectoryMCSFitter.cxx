@@ -13,8 +13,7 @@ using namespace std;
 using namespace trkf;
 using namespace recob::tracking;
 
-recob::MCSFitResult
-TrajectoryMCSFitter::fitMcs(const recob::TrackTrajectory& traj, int pid) const
+recob::MCSFitResult TrajectoryMCSFitter::fitMcs(const recob::TrackTrajectory& traj, int pid) const
 {
   //
   // Break the trajectory in segments of length approximately equal to segLen_
@@ -71,11 +70,10 @@ TrajectoryMCSFitter::fitMcs(const recob::TrackTrajectory& traj, int pid) const
                              dtheta);
 }
 
-void
-TrajectoryMCSFitter::breakTrajInSegments(const recob::TrackTrajectory& traj,
-                                         vector<size_t>& breakpoints,
-                                         vector<float>& segradlengths,
-                                         vector<float>& cumseglens) const
+void TrajectoryMCSFitter::breakTrajInSegments(const recob::TrackTrajectory& traj,
+                                              vector<size_t>& breakpoints,
+                                              vector<float>& segradlengths,
+                                              vector<float>& cumseglens) const
 {
   //
   art::ServiceHandle<geo::Geometry const> geom;
@@ -160,16 +158,16 @@ TrajectoryMCSFitter::breakTrajInSegments(const recob::TrackTrajectory& traj,
   return;
 }
 
-const TrajectoryMCSFitter::ScanResult
-TrajectoryMCSFitter::doLikelihoodScan(std::vector<float>& dtheta,
-                                      std::vector<float>& seg_nradlengths,
-                                      std::vector<float>& cumLen,
-                                      bool fwdFit,
-                                      int pid,
-                                      float pmin,
-                                      float pmax,
-                                      float pstep,
-                                      float detAngResol) const
+const TrajectoryMCSFitter::ScanResult TrajectoryMCSFitter::doLikelihoodScan(
+  std::vector<float>& dtheta,
+  std::vector<float>& seg_nradlengths,
+  std::vector<float>& cumLen,
+  bool fwdFit,
+  int pid,
+  float pmin,
+  float pmax,
+  float pstep,
+  float detAngResol) const
 {
   int best_idx = -1;
   float best_logL = std::numeric_limits<float>::max();
@@ -210,13 +208,13 @@ TrajectoryMCSFitter::doLikelihoodScan(std::vector<float>& dtheta,
   return ScanResult(best_p, std::max(lunc, runc), best_logL);
 }
 
-const TrajectoryMCSFitter::ScanResult
-TrajectoryMCSFitter::doLikelihoodScan(std::vector<float>& dtheta,
-                                      std::vector<float>& seg_nradlengths,
-                                      std::vector<float>& cumLen,
-                                      bool fwdFit,
-                                      int pid,
-                                      float detAngResol) const
+const TrajectoryMCSFitter::ScanResult TrajectoryMCSFitter::doLikelihoodScan(
+  std::vector<float>& dtheta,
+  std::vector<float>& seg_nradlengths,
+  std::vector<float>& cumLen,
+  bool fwdFit,
+  int pid,
+  float detAngResol) const
 {
 
   //do a first, coarse scan
@@ -237,11 +235,10 @@ TrajectoryMCSFitter::doLikelihoodScan(std::vector<float>& dtheta,
   return refineRes;
 }
 
-void
-TrajectoryMCSFitter::linearRegression(const recob::TrackTrajectory& traj,
-                                      const size_t firstPoint,
-                                      const size_t lastPoint,
-                                      Vector_t& pcdir) const
+void TrajectoryMCSFitter::linearRegression(const recob::TrackTrajectory& traj,
+                                           const size_t firstPoint,
+                                           const size_t lastPoint,
+                                           Vector_t& pcdir) const
 {
   //
   art::ServiceHandle<geo::Geometry const> geom;
@@ -325,14 +322,13 @@ TrajectoryMCSFitter::linearRegression(const recob::TrackTrajectory& traj,
   //
 }
 
-double
-TrajectoryMCSFitter::mcsLikelihood(double p,
-                                   double theta0x,
-                                   std::vector<float>& dthetaij,
-                                   std::vector<float>& seg_nradl,
-                                   std::vector<float>& cumLen,
-                                   bool fwd,
-                                   int pid) const
+double TrajectoryMCSFitter::mcsLikelihood(double p,
+                                          double theta0x,
+                                          std::vector<float>& dthetaij,
+                                          std::vector<float>& seg_nradl,
+                                          std::vector<float>& cumLen,
+                                          bool fwd,
+                                          int pid) const
 {
   //
   const int beg = (fwd ? 0 : (dthetaij.size() - 1));
@@ -377,8 +373,9 @@ TrajectoryMCSFitter::mcsLikelihood(double p,
   return result;
 }
 
-double
-TrajectoryMCSFitter::energyLossLandau(const double mass2, const double e2, const double x) const
+double TrajectoryMCSFitter::energyLossLandau(const double mass2,
+                                             const double e2,
+                                             const double x) const
 {
   //
   // eq. (33.11) in http://pdg.lbl.gov/2016/reviews/rpp2016-rev-passage-particles-matter.pdf (except density correction is ignored)
@@ -397,8 +394,7 @@ TrajectoryMCSFitter::energyLossLandau(const double mass2, const double e2, const
   return 0.001 * epsilon * (log(2. * me * beta2 * gamma2 * epsilon * Iinv2) + j - beta2);
 }
 //
-double
-TrajectoryMCSFitter::energyLossBetheBloch(const double mass, const double e2) const
+double TrajectoryMCSFitter::energyLossBetheBloch(const double mass, const double e2) const
 {
   // stolen, mostly, from GFMaterialEffects.
   constexpr double Iinv = 1. / 188.E-6;
@@ -423,10 +419,9 @@ TrajectoryMCSFitter::energyLossBetheBloch(const double mass, const double e2) co
   return dedx;
 }
 //
-double
-TrajectoryMCSFitter::GetE(const double initial_E,
-                          const double length_travelled,
-                          const double m) const
+double TrajectoryMCSFitter::GetE(const double initial_E,
+                                 const double length_travelled,
+                                 const double m) const
 {
   //
   if (eLossMode_ == 1) {

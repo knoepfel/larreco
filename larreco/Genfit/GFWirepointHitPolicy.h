@@ -73,22 +73,10 @@ namespace genf {
 
     virtual ~GFWirepointHitPolicy() { ; }
 
-    double
-    getMaxDistance()
-    {
-      return fMaxdistance;
-    }
-    void
-    setMaxDistance(double d)
-    {
-      fMaxdistance = d;
-    }
+    double getMaxDistance() { return fMaxdistance; }
+    void setMaxDistance(double d) { fMaxdistance = d; }
 
-    const std::string&
-    getName()
-    {
-      return fPolicyName;
-    }
+    const std::string& getName() { return fPolicyName; }
 
   private:
     static const std::string fPolicyName;

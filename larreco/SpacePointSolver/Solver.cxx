@@ -7,8 +7,7 @@
 #include <string>
 
 template <class T>
-T
-sqr(T x)
+T sqr(T x)
 {
   return x * x;
 }
@@ -30,8 +29,7 @@ SpaceCharge::SpaceCharge(double x,
 {}
 
 // ---------------------------------------------------------------------------
-void
-SpaceCharge::AddCharge(double dq)
+void SpaceCharge::AddCharge(double dq)
 {
   fPred += dq;
 
@@ -69,22 +67,19 @@ CollectionWireHit::~CollectionWireHit()
 }
 
 // ---------------------------------------------------------------------------
-double
-Metric(double q, double p)
+double Metric(double q, double p)
 {
   return sqr(q - p);
 }
 
 // ---------------------------------------------------------------------------
-QuadExpr
-Metric(double q, QuadExpr p)
+QuadExpr Metric(double q, QuadExpr p)
 {
   return sqr(q - p);
 }
 
 // ---------------------------------------------------------------------------
-double
-Metric(const std::vector<SpaceCharge*>& scs, double alpha)
+double Metric(const std::vector<SpaceCharge*>& scs, double alpha)
 {
   double ret = 0;
 
@@ -109,8 +104,7 @@ Metric(const std::vector<SpaceCharge*>& scs, double alpha)
 }
 
 // ---------------------------------------------------------------------------
-double
-Metric(const std::vector<CollectionWireHit*>& cwires, double alpha)
+double Metric(const std::vector<CollectionWireHit*>& cwires, double alpha)
 {
   std::vector<SpaceCharge*> scs;
   for (CollectionWireHit* cwire : cwires)
@@ -119,8 +113,7 @@ Metric(const std::vector<CollectionWireHit*>& cwires, double alpha)
 }
 
 // ---------------------------------------------------------------------------
-QuadExpr
-Metric(const SpaceCharge* sci, const SpaceCharge* scj, double alpha)
+QuadExpr Metric(const SpaceCharge* sci, const SpaceCharge* scj, double alpha)
 {
   QuadExpr ret = 0;
 
@@ -193,8 +186,7 @@ Metric(const SpaceCharge* sci, const SpaceCharge* scj, double alpha)
 }
 
 // ---------------------------------------------------------------------------
-QuadExpr
-Metric(const SpaceCharge* sc, double alpha)
+QuadExpr Metric(const SpaceCharge* sc, double alpha)
 {
   QuadExpr ret = 0;
 
@@ -220,8 +212,7 @@ Metric(const SpaceCharge* sc, double alpha)
 }
 
 // ---------------------------------------------------------------------------
-double
-SolvePair(CollectionWireHit* cwire, SpaceCharge* sci, SpaceCharge* scj, double alpha)
+double SolvePair(CollectionWireHit* cwire, SpaceCharge* sci, SpaceCharge* scj, double alpha)
 {
   const QuadExpr chisq = Metric(sci, scj, alpha);
   const double chisq0 = chisq.Eval(0);
@@ -266,8 +257,7 @@ SolvePair(CollectionWireHit* cwire, SpaceCharge* sci, SpaceCharge* scj, double a
 }
 
 // ---------------------------------------------------------------------------
-void
-Iterate(CollectionWireHit* cwire, double alpha)
+void Iterate(CollectionWireHit* cwire, double alpha)
 {
   // Consider all pairs of crossings
   const unsigned int N = cwire->fCrossings.size();
@@ -290,8 +280,7 @@ Iterate(CollectionWireHit* cwire, double alpha)
 }
 
 // ---------------------------------------------------------------------------
-void
-Iterate(SpaceCharge* sc, double alpha)
+void Iterate(SpaceCharge* sc, double alpha)
 {
   const QuadExpr chisq = Metric(sc, alpha);
 
@@ -318,10 +307,9 @@ Iterate(SpaceCharge* sc, double alpha)
 }
 
 // ---------------------------------------------------------------------------
-void
-Iterate(const std::vector<CollectionWireHit*>& cwires,
-        const std::vector<SpaceCharge*>& orphanSCs,
-        double alpha)
+void Iterate(const std::vector<CollectionWireHit*>& cwires,
+             const std::vector<SpaceCharge*>& orphanSCs,
+             double alpha)
 {
   // Visiting in a "random" order helps prevent local artefacts that are slow
   // to break up.

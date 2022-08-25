@@ -15,22 +15,10 @@ namespace genf {
 
     virtual ~SlTrackRep();
 
-    virtual GFAbsTrackRep*
-    clone() const
-    {
-      return new SlTrackRep(*this);
-    }
-    virtual GFAbsTrackRep*
-    prototype() const
-    {
-      return new SlTrackRep();
-    }
+    virtual GFAbsTrackRep* clone() const { return new SlTrackRep(*this); }
+    virtual GFAbsTrackRep* prototype() const { return new SlTrackRep(); }
 
-    void
-    setReferencePlane(const GFDetPlane& pl)
-    {
-      fRefPlane = pl;
-    }
+    void setReferencePlane(const GFDetPlane& pl) { fRefPlane = pl; }
 
     // Operations ----------------------
 
@@ -51,17 +39,9 @@ namespace genf {
     virtual TVector3 getMom(const GFDetPlane&);
 
     virtual void getPosMom(const GFDetPlane&, TVector3& pos, TVector3& mom);
-    virtual double
-    getCharge() const
-    {
-      return 0;
-    }
+    virtual double getCharge() const { return 0; }
 
-    void
-    switchDirection()
-    {
-      _backw = -_backw;
-    }
+    void switchDirection() { _backw = -_backw; }
 
   private:
     // Private Data Members ------------

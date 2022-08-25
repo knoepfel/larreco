@@ -96,8 +96,7 @@ showertree::showertree(TTree* tree) : fChain(0)
   Init(tree);
 }
 
-void
-showertree::Init(TTree* tree)
+void showertree::Init(TTree* tree)
 {
   // Set object pointer
   BeginWir = 0;

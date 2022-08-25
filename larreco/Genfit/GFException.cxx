@@ -31,25 +31,22 @@ GFException::GFException(std::string _excString, int _line, std::string _file)
 
 GFException::~GFException() throw() {}
 
-GFException&
-GFException::setNumbers(std::string _numbersLabel, const std::vector<double>& _numbers)
+GFException& GFException::setNumbers(std::string _numbersLabel, const std::vector<double>& _numbers)
 {
   fNumbersLabel = _numbersLabel;
   fNumbers = _numbers;
   return *this;
 }
 
-GFException&
-GFException::setMatrices(std::string _matricesLabel,
-                         const std::vector<TMatrixT<Double_t>>& _matrices)
+GFException& GFException::setMatrices(std::string _matricesLabel,
+                                      const std::vector<TMatrixT<Double_t>>& _matrices)
 {
   fMatricesLabel = _matricesLabel;
   fMatrices = _matrices;
   return *this;
 }
 
-const char*
-GFException::what() const throw()
+const char* GFException::what() const throw()
 {
   if (fQuiet) return "";
   std::ostringstream returnStream;
@@ -60,8 +57,7 @@ GFException::what() const throw()
   return returnStream.str().c_str();
 }
 
-void
-GFException::info()
+void GFException::info()
 {
   if (fQuiet) return;
   if (fNumbers.size() == 0 && fMatrices.size() == 0) return; //do nothing
@@ -93,8 +89,7 @@ GFException::info()
 
 //------------------------------------------------------------------------------
 template <>
-void
-genf::PrintROOTobject(std::ostream& out, const TVector3& v)
+void genf::PrintROOTobject(std::ostream& out, const TVector3& v)
 {
   out << "(x,y,z)=(" << v.X() << "," << v.Y() << "," << v.Z()
       << ")"

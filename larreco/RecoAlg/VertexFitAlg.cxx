@@ -24,8 +24,7 @@ namespace trkf {
   VertexFitMinuitStruct VertexFitAlg::fVtxFitMinStr;
 
   /////////////////////////////////////////
-  void
-  VertexFitAlg::fcnVtxPos(Int_t&, Double_t*, Double_t& fval, double* par, Int_t flag)
+  void VertexFitAlg::fcnVtxPos(Int_t&, Double_t*, Double_t& fval, double* par, Int_t flag)
   {
     // Minuit function for fitting the vertex position and vertex track directions
 
@@ -86,15 +85,14 @@ namespace trkf {
 
   /////////////////////////////////////////
 
-  void
-  VertexFitAlg::VertexFit(std::vector<std::vector<geo::WireID>> const& hitWID,
-                          std::vector<std::vector<double>> const& hitX,
-                          std::vector<std::vector<double>> const& hitXErr,
-                          TVector3& VtxPos,
-                          TVector3& VtxPosErr,
-                          std::vector<TVector3>& TrkDir,
-                          std::vector<TVector3>& TrkDirErr,
-                          float& ChiDOF) const
+  void VertexFitAlg::VertexFit(std::vector<std::vector<geo::WireID>> const& hitWID,
+                               std::vector<std::vector<double>> const& hitX,
+                               std::vector<std::vector<double>> const& hitXErr,
+                               TVector3& VtxPos,
+                               TVector3& VtxPosErr,
+                               std::vector<TVector3>& TrkDir,
+                               std::vector<TVector3>& TrkDirErr,
+                               float& ChiDOF) const
   {
     // The passed set of hit WireIDs, X positions and X errors associated with a Track
     // are fitted to a vertex position VtxPos. The fitted track direction vectors trkDir, TrkDirErr

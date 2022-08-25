@@ -33,33 +33,13 @@ namespace calib {
     {}
 
     // Override base class functions
-    double
-    PE(double adcs, int opchannel) const override
-    {
-      return adcs / fSPESize + fSPEShift;
-    }
-    bool
-    UseArea() const override
-    {
-      return fUseArea;
-    }
+    double PE(double adcs, int opchannel) const override { return adcs / fSPESize + fSPEShift; }
+    bool UseArea() const override { return fUseArea; }
 
     // Setters for this implementation
-    void
-    SetSPESize(float size)
-    {
-      fSPESize = size;
-    }
-    void
-    SetSPEShift(float shift)
-    {
-      fSPEShift = shift;
-    }
-    void
-    SetUseArea(bool useArea)
-    {
-      fUseArea = useArea;
-    }
+    void SetSPESize(float size) { fSPESize = size; }
+    void SetSPEShift(float shift) { fSPEShift = shift; }
+    void SetUseArea(bool useArea) { fUseArea = useArea; }
 
     /// Need a 3D position because result depends on position along length of
     /// bar. This is going to be pretty imprecise even so.

@@ -13,9 +13,8 @@ namespace cmtool {
   }
 
   //--------------------------------------------------------
-  bool
-  CBAlgoStartNearEnd::Bool(const ::cluster::ClusterParamsAlg& cluster1,
-                           const ::cluster::ClusterParamsAlg& cluster2)
+  bool CBAlgoStartNearEnd::Bool(const ::cluster::ClusterParamsAlg& cluster1,
+                                const ::cluster::ClusterParamsAlg& cluster2)
   //--------------------------------------------------------
   {
 
@@ -53,8 +52,7 @@ namespace cmtool {
   }
 
   //-----------------------
-  void
-  CBAlgoStartNearEnd::Report()
+  void CBAlgoStartNearEnd::Report()
   //-----------------------
   {}
 

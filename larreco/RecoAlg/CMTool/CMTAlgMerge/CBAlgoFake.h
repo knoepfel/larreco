@@ -41,9 +41,7 @@ namespace cmtool {
                       const ::cluster::ClusterParamsAlg& cluster2);
 
     /// Function to reset the algorithm instance ... maybe implemented via child class
-    virtual void
-    Reset()
-    {}
+    virtual void Reset() {}
 
   protected:
     bool _flip;

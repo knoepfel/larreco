@@ -146,10 +146,9 @@ namespace genf {
    * @sa setHMatrix
    * @sa getGFDetPlane
    */
-    virtual TMatrixT<Double_t>
-    residualVector(const GFAbsTrackRep* stateVector,
-                   const TMatrixT<Double_t>& state,
-                   const GFDetPlane& d)
+    virtual TMatrixT<Double_t> residualVector(const GFAbsTrackRep* stateVector,
+                                              const TMatrixT<Double_t>& state,
+                                              const GFDetPlane& d)
     {
       std::cout << "GFAbsRecoHit::residualVector(3args) Not correctly Using theta -- multiple "
                    "scattering -- information !!! Fix this if you really want to use getChi2Hit"
@@ -158,12 +157,11 @@ namespace genf {
       return (getHitCoord(d) - (H * state));
     }
 
-    virtual TMatrixT<Double_t>
-    residualVector(const GFAbsTrackRep* stateVector,
-                   const TMatrixT<Double_t>& state,
-                   const GFDetPlane& d,
-                   const GFDetPlane& dPrev,
-                   const double& mass)
+    virtual TMatrixT<Double_t> residualVector(const GFAbsTrackRep* stateVector,
+                                              const TMatrixT<Double_t>& state,
+                                              const GFDetPlane& d,
+                                              const GFDetPlane& dPrev,
+                                              const double& mass)
     {
       Double_t dist = (d.getO() - dPrev.getO()).Mag();
       //    Double_t mass = 0.104; // close enough for muons, pions, I think.
@@ -179,20 +177,12 @@ namespace genf {
     /** @brief Get raw hit covariances.
    *
    */
-    TMatrixT<Double_t>
-    getRawHitCov() const
-    {
-      return fHitCov;
-    }
+    TMatrixT<Double_t> getRawHitCov() const { return fHitCov; }
 
     /** @brief Get raw hit coordinates.
    *
    */
-    TMatrixT<Double_t>
-    getRawHitCoord() const
-    {
-      return fHitCoord;
-    }
+    TMatrixT<Double_t> getRawHitCoord() const { return fHitCoord; }
 
     /** @brief Get hit covariances in a specific detector plane
    *
@@ -243,26 +233,17 @@ namespace genf {
 
     /** @brief Print raw hit coordinates.
    */
-    virtual void
-    Print(std::ostream& out = std::cout) const
-    {
-      PrintROOTobject(out, fHitCoord);
-    }
+    virtual void Print(std::ostream& out = std::cout) const { PrintROOTobject(out, fHitCoord); }
 
     virtual const std::string& getPolicyName();
 
-    int
-    getNparHit()
-    {
-      return fNparHit;
-    }
+    int getNparHit() { return fNparHit; }
 
     // public:
     //ClassDef(GFAbsRecoHit,3)
 
   private:
-    virtual void
-    Print(Option_t*) const
+    virtual void Print(Option_t*) const
     {
       throw std::logic_error(std::string(__func__) + "::Print(Option_t*) not available");
     }

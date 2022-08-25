@@ -136,8 +136,7 @@ namespace reco_tool {
   // Constructor.
   WaveformTools::WaveformTools(const fhicl::ParameterSet& pset) { configure(pset); }
 
-  void
-  WaveformTools::configure(const fhicl::ParameterSet& pset)
+  void WaveformTools::configure(const fhicl::ParameterSet& pset)
   {
     // Start by recovering the parameters
     //    fThisPlane       = pset.get<size_t>("Plane");
@@ -145,20 +144,18 @@ namespace reco_tool {
     return;
   }
 
-  void
-  WaveformTools::triangleSmooth(const std::vector<double>& inputVec,
-                                std::vector<double>& smoothVec,
-                                size_t lowestBin) const
+  void WaveformTools::triangleSmooth(const std::vector<double>& inputVec,
+                                     std::vector<double>& smoothVec,
+                                     size_t lowestBin) const
   {
     triangleSmooth<double>(inputVec, smoothVec, lowestBin);
 
     return;
   }
 
-  void
-  WaveformTools::triangleSmooth(const std::vector<float>& inputVec,
-                                std::vector<float>& smoothVec,
-                                size_t lowestBin) const
+  void WaveformTools::triangleSmooth(const std::vector<float>& inputVec,
+                                     std::vector<float>& smoothVec,
+                                     size_t lowestBin) const
   {
     triangleSmooth<float>(inputVec, smoothVec, lowestBin);
 
@@ -166,10 +163,9 @@ namespace reco_tool {
   }
 
   template <typename T>
-  void
-  WaveformTools::triangleSmooth(const std::vector<T>& inputVec,
-                                std::vector<T>& smoothVec,
-                                size_t lowestBin) const
+  void WaveformTools::triangleSmooth(const std::vector<T>& inputVec,
+                                     std::vector<T>& smoothVec,
+                                     size_t lowestBin) const
   {
     if (inputVec.size() != smoothVec.size()) smoothVec.resize(inputVec.size());
 
@@ -197,20 +193,18 @@ namespace reco_tool {
     return;
   }
 
-  void
-  WaveformTools::medianSmooth(const std::vector<float>& inputVec,
-                              std::vector<float>& smoothVec,
-                              size_t nBins) const
+  void WaveformTools::medianSmooth(const std::vector<float>& inputVec,
+                                   std::vector<float>& smoothVec,
+                                   size_t nBins) const
   {
     medianSmooth<float>(inputVec, smoothVec, nBins);
 
     return;
   }
 
-  void
-  WaveformTools::medianSmooth(const std::vector<double>& inputVec,
-                              std::vector<double>& smoothVec,
-                              size_t nBins) const
+  void WaveformTools::medianSmooth(const std::vector<double>& inputVec,
+                                   std::vector<double>& smoothVec,
+                                   size_t nBins) const
   {
     medianSmooth<double>(inputVec, smoothVec, nBins);
 
@@ -218,10 +212,9 @@ namespace reco_tool {
   }
 
   template <typename T>
-  void
-  WaveformTools::medianSmooth(const std::vector<T>& inputVec,
-                              std::vector<T>& smoothVec,
-                              size_t nBins) const
+  void WaveformTools::medianSmooth(const std::vector<T>& inputVec,
+                                   std::vector<T>& smoothVec,
+                                   size_t nBins) const
   {
     // For our purposes, nBins must be odd
     if (nBins % 2 == 0) nBins++;
@@ -259,33 +252,30 @@ namespace reco_tool {
     return;
   }
 
-  void
-  WaveformTools::getTruncatedMeanRMS(const std::vector<double>& waveform,
-                                     double& mean,
-                                     double& rmsFull,
-                                     double& rmsTrunc,
-                                     int& nTrunc) const
+  void WaveformTools::getTruncatedMeanRMS(const std::vector<double>& waveform,
+                                          double& mean,
+                                          double& rmsFull,
+                                          double& rmsTrunc,
+                                          int& nTrunc) const
   {
     getTruncatedMeanRMS<double>(waveform, mean, rmsFull, rmsTrunc, nTrunc);
   }
 
-  void
-  WaveformTools::getTruncatedMeanRMS(const std::vector<float>& waveform,
-                                     float& mean,
-                                     float& rmsFull,
-                                     float& rmsTrunc,
-                                     int& nTrunc) const
+  void WaveformTools::getTruncatedMeanRMS(const std::vector<float>& waveform,
+                                          float& mean,
+                                          float& rmsFull,
+                                          float& rmsTrunc,
+                                          int& nTrunc) const
   {
     getTruncatedMeanRMS<float>(waveform, mean, rmsFull, rmsTrunc, nTrunc);
   }
 
   template <typename T>
-  void
-  WaveformTools::getTruncatedMeanRMS(const std::vector<T>& waveform,
-                                     T& mean,
-                                     T& rmsFull,
-                                     T& rmsTrunc,
-                                     int& nTrunc) const
+  void WaveformTools::getTruncatedMeanRMS(const std::vector<T>& waveform,
+                                          T& mean,
+                                          T& rmsFull,
+                                          T& rmsTrunc,
+                                          int& nTrunc) const
   {
     // We need to get a reliable estimate of the mean and can't assume the input waveform will be ~zero mean...
     // Basic idea is to find the most probable value in the ROI presented to us
@@ -348,18 +338,16 @@ namespace reco_tool {
     return;
   }
 
-  void
-  WaveformTools::firstDerivative(const std::vector<double>& inputVec,
-                                 std::vector<double>& derivVec) const
+  void WaveformTools::firstDerivative(const std::vector<double>& inputVec,
+                                      std::vector<double>& derivVec) const
   {
     firstDerivative<double>(inputVec, derivVec);
 
     return;
   }
 
-  void
-  WaveformTools::firstDerivative(const std::vector<float>& inputVec,
-                                 std::vector<float>& derivVec) const
+  void WaveformTools::firstDerivative(const std::vector<float>& inputVec,
+                                      std::vector<float>& derivVec) const
   {
     firstDerivative<float>(inputVec, derivVec);
 
@@ -367,8 +355,8 @@ namespace reco_tool {
   }
 
   template <typename T>
-  void
-  WaveformTools::firstDerivative(const std::vector<T>& inputVec, std::vector<T>& derivVec) const
+  void WaveformTools::firstDerivative(const std::vector<T>& inputVec,
+                                      std::vector<T>& derivVec) const
   {
     derivVec.resize(inputVec.size(), 0.);
 
@@ -378,24 +366,22 @@ namespace reco_tool {
     return;
   }
 
-  void
-  WaveformTools::findPeaks(std::vector<double>::iterator startItr,
-                           std::vector<double>::iterator stopItr,
-                           PeakTupleVec& peakTupleVec,
-                           double threshold,
-                           size_t firstTick) const
+  void WaveformTools::findPeaks(std::vector<double>::iterator startItr,
+                                std::vector<double>::iterator stopItr,
+                                PeakTupleVec& peakTupleVec,
+                                double threshold,
+                                size_t firstTick) const
   {
     findPeaks<double>(startItr, stopItr, peakTupleVec, threshold, firstTick);
 
     return;
   }
 
-  void
-  WaveformTools::findPeaks(std::vector<float>::iterator startItr,
-                           std::vector<float>::iterator stopItr,
-                           PeakTupleVec& peakTupleVec,
-                           float threshold,
-                           size_t firstTick) const
+  void WaveformTools::findPeaks(std::vector<float>::iterator startItr,
+                                std::vector<float>::iterator stopItr,
+                                PeakTupleVec& peakTupleVec,
+                                float threshold,
+                                size_t firstTick) const
   {
     findPeaks<float>(startItr, stopItr, peakTupleVec, threshold, firstTick);
 
@@ -403,12 +389,11 @@ namespace reco_tool {
   }
 
   template <typename T>
-  void
-  WaveformTools::findPeaks(typename std::vector<T>::iterator startItr,
-                           typename std::vector<T>::iterator stopItr,
-                           PeakTupleVec& peakTupleVec,
-                           T threshold,
-                           size_t firstTick) const
+  void WaveformTools::findPeaks(typename std::vector<T>::iterator startItr,
+                                typename std::vector<T>::iterator stopItr,
+                                PeakTupleVec& peakTupleVec,
+                                T threshold,
+                                size_t firstTick) const
   {
     // Need a minimum distance or else nothing to do
     if (std::distance(startItr, stopItr) > 4) {
@@ -489,9 +474,8 @@ namespace reco_tool {
     return;
   }
 
-  void
-  WaveformTools::getFFTPower(const std::vector<float>& inputVec,
-                             std::vector<float>& outputPowerVec) const
+  void WaveformTools::getFFTPower(const std::vector<float>& inputVec,
+                                  std::vector<float>& outputPowerVec) const
   {
     std::vector<double> inputDoubleVec(inputVec.size());
     std::vector<double> outputDoubleVec(inputVec.size() / 2);
@@ -508,9 +492,8 @@ namespace reco_tool {
     return;
   }
 
-  void
-  WaveformTools::getFFTPower(const std::vector<double>& inputVec,
-                             std::vector<double>& outputPowerVec) const
+  void WaveformTools::getFFTPower(const std::vector<double>& inputVec,
+                                  std::vector<double>& outputPowerVec) const
   {
     // Get the FFT of the response
     int fftDataSize = inputVec.size();
@@ -541,14 +524,13 @@ namespace reco_tool {
     return;
   }
 
-  void
-  WaveformTools::getErosionDilationAverageDifference(const Waveform<short>& waveform,
-                                                     int structuringElement,
-                                                     HistogramMap& histogramMap,
-                                                     Waveform<short>& erosionVec,
-                                                     Waveform<short>& dilationVec,
-                                                     Waveform<short>& averageVec,
-                                                     Waveform<short>& differenceVec) const
+  void WaveformTools::getErosionDilationAverageDifference(const Waveform<short>& waveform,
+                                                          int structuringElement,
+                                                          HistogramMap& histogramMap,
+                                                          Waveform<short>& erosionVec,
+                                                          Waveform<short>& dilationVec,
+                                                          Waveform<short>& averageVec,
+                                                          Waveform<short>& differenceVec) const
   {
     getErosionDilationAverageDifference<short>(waveform,
                                                structuringElement,
@@ -561,14 +543,13 @@ namespace reco_tool {
     return;
   }
 
-  void
-  WaveformTools::getErosionDilationAverageDifference(const Waveform<float>& waveform,
-                                                     int structuringElement,
-                                                     HistogramMap& histogramMap,
-                                                     Waveform<float>& erosionVec,
-                                                     Waveform<float>& dilationVec,
-                                                     Waveform<float>& averageVec,
-                                                     Waveform<float>& differenceVec) const
+  void WaveformTools::getErosionDilationAverageDifference(const Waveform<float>& waveform,
+                                                          int structuringElement,
+                                                          HistogramMap& histogramMap,
+                                                          Waveform<float>& erosionVec,
+                                                          Waveform<float>& dilationVec,
+                                                          Waveform<float>& averageVec,
+                                                          Waveform<float>& differenceVec) const
   {
     getErosionDilationAverageDifference<float>(waveform,
                                                structuringElement,
@@ -581,14 +562,13 @@ namespace reco_tool {
     return;
   }
 
-  void
-  WaveformTools::getErosionDilationAverageDifference(const Waveform<double>& waveform,
-                                                     int structuringElement,
-                                                     HistogramMap& histogramMap,
-                                                     Waveform<double>& erosionVec,
-                                                     Waveform<double>& dilationVec,
-                                                     Waveform<double>& averageVec,
-                                                     Waveform<double>& differenceVec) const
+  void WaveformTools::getErosionDilationAverageDifference(const Waveform<double>& waveform,
+                                                          int structuringElement,
+                                                          HistogramMap& histogramMap,
+                                                          Waveform<double>& erosionVec,
+                                                          Waveform<double>& dilationVec,
+                                                          Waveform<double>& averageVec,
+                                                          Waveform<double>& differenceVec) const
   {
     getErosionDilationAverageDifference<double>(waveform,
                                                 structuringElement,
@@ -602,14 +582,13 @@ namespace reco_tool {
   }
 
   template <typename T>
-  void
-  WaveformTools::getErosionDilationAverageDifference(const Waveform<T>& inputWaveform,
-                                                     int structuringElement,
-                                                     HistogramMap& histogramMap,
-                                                     Waveform<T>& erosionVec,
-                                                     Waveform<T>& dilationVec,
-                                                     Waveform<T>& averageVec,
-                                                     Waveform<T>& differenceVec) const
+  void WaveformTools::getErosionDilationAverageDifference(const Waveform<T>& inputWaveform,
+                                                          int structuringElement,
+                                                          HistogramMap& histogramMap,
+                                                          Waveform<T>& erosionVec,
+                                                          Waveform<T>& dilationVec,
+                                                          Waveform<T>& averageVec,
+                                                          Waveform<T>& differenceVec) const
   {
     // Set the window size
     int halfWindowSize(structuringElement / 2);
@@ -676,13 +655,12 @@ namespace reco_tool {
     return;
   }
 
-  void
-  WaveformTools::getOpeningAndClosing(const Waveform<short>& erosionVec,
-                                      const Waveform<short>& dilationVec,
-                                      int structuringElement,
-                                      HistogramMap& histogramMap,
-                                      Waveform<short>& openingVec,
-                                      Waveform<short>& closingVec) const
+  void WaveformTools::getOpeningAndClosing(const Waveform<short>& erosionVec,
+                                           const Waveform<short>& dilationVec,
+                                           int structuringElement,
+                                           HistogramMap& histogramMap,
+                                           Waveform<short>& openingVec,
+                                           Waveform<short>& closingVec) const
   {
     getOpeningAndClosing<short>(
       erosionVec, dilationVec, structuringElement, histogramMap, openingVec, closingVec);
@@ -690,13 +668,12 @@ namespace reco_tool {
     return;
   }
 
-  void
-  WaveformTools::getOpeningAndClosing(const Waveform<float>& erosionVec,
-                                      const Waveform<float>& dilationVec,
-                                      int structuringElement,
-                                      HistogramMap& histogramMap,
-                                      Waveform<float>& openingVec,
-                                      Waveform<float>& closingVec) const
+  void WaveformTools::getOpeningAndClosing(const Waveform<float>& erosionVec,
+                                           const Waveform<float>& dilationVec,
+                                           int structuringElement,
+                                           HistogramMap& histogramMap,
+                                           Waveform<float>& openingVec,
+                                           Waveform<float>& closingVec) const
   {
     getOpeningAndClosing<float>(
       erosionVec, dilationVec, structuringElement, histogramMap, openingVec, closingVec);
@@ -704,13 +681,12 @@ namespace reco_tool {
     return;
   }
 
-  void
-  WaveformTools::getOpeningAndClosing(const Waveform<double>& erosionVec,
-                                      const Waveform<double>& dilationVec,
-                                      int structuringElement,
-                                      HistogramMap& histogramMap,
-                                      Waveform<double>& openingVec,
-                                      Waveform<double>& closingVec) const
+  void WaveformTools::getOpeningAndClosing(const Waveform<double>& erosionVec,
+                                           const Waveform<double>& dilationVec,
+                                           int structuringElement,
+                                           HistogramMap& histogramMap,
+                                           Waveform<double>& openingVec,
+                                           Waveform<double>& closingVec) const
   {
     getOpeningAndClosing<double>(
       erosionVec, dilationVec, structuringElement, histogramMap, openingVec, closingVec);
@@ -719,13 +695,12 @@ namespace reco_tool {
   }
 
   template <typename T>
-  void
-  WaveformTools::getOpeningAndClosing(const Waveform<T>& erosionVec,
-                                      const Waveform<T>& dilationVec,
-                                      int structuringElement,
-                                      HistogramMap& histogramMap,
-                                      Waveform<T>& openingVec,
-                                      Waveform<T>& closingVec) const
+  void WaveformTools::getOpeningAndClosing(const Waveform<T>& erosionVec,
+                                           const Waveform<T>& dilationVec,
+                                           int structuringElement,
+                                           HistogramMap& histogramMap,
+                                           Waveform<T>& openingVec,
+                                           Waveform<T>& closingVec) const
   {
     // Set the window size
     int halfWindowSize(structuringElement / 2);
